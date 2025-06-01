@@ -6,7 +6,7 @@
 
 **Your Professional Portfolio, Made Simple**
 
-[![Website](https://img.shields.io/badge/Website-foliozone.com-6366F1?style=for-the-badge)](https://foliozone.com)
+[![Website](https://img.shields.io/badge/Website-foliozone.com-6366F1?style=for-the-badge)]([https://foliozone.com](https://foliozone.github.io/FolioZone))
 [![Status](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)]()
 [![Support](https://img.shields.io/badge/Support-24/7-blue?style=for-the-badge)]()
 
