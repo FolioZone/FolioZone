@@ -642,10 +642,6 @@
   </div>
 </footer>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script> 
-src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js" 
--->
-
 <script >
   // Mobile menu toggle
   const mobileMenuButton = document.getElementById('mobileMenuButton');
@@ -897,9 +893,6 @@ src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
     demoProfession.textContent = selected || (isEnglish ? 'Your Profession' : 'مهنتك');
   });
 
-
-  emailjs.init('cp63z32jakqJ83_lH');
-
   document.getElementById('portfolioRequestForm').addEventListener('submit', e => {
     e.preventDefault();
     const name = nameInput.value.trim();
@@ -919,22 +912,6 @@ src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
       package: packageSelect,
     };
 
-    emailjs.send('service_foliozone', 'template_kvgqn3a', templateParams)
-      .then(() => {
-        alert(isEnglish
-          ? `Thank you, ${name}! Your portfolio request has been submitted. We'll contact you soon.`
-          : `شكرًا لك، ${name}! تم تقديم طلب المحفظة الخاص بك. سنتواصل معك قريبًا.`);
-        e.target.reset();
-        sampleUrl.textContent = isEnglish ? 'your-name' : 'اسمك';
-        demoName.textContent = isEnglish ? 'Your Name' : 'اسمك';
-        demoProfession.textContent = isEnglish ? 'Your Profession' : 'مهنتك';
-      }, (error) => {
-        alert(isEnglish
-          ? 'There was an error sending your request. Please try again later.'
-          : 'حدث خطأ أثناء إرسال الطلب. الرجاء المحاولة مرة أخرى لاحقًا.');
-        console.error('EmailJS Error:', error);
-      });
-  });
 
   // // Form submit handling
   // document.getElementById('portfolioRequestForm').addEventListener('submit', e => {
