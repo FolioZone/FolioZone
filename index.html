@@ -1,901 +1,980 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portori - Professional Portfolio Creation Service</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Custom CSS for RTL support and animations */
-        [dir="rtl"] {
-            direction: rtl;
-            text-align: right;
-        }
-        
-        .flip-card {
-            perspective: 1000px;
-        }
-        
-        .flip-card-inner {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        
-        .flip-card-front, .flip-card-back {
-            backface-visibility: hidden;
-        }
-        
-        .flip-card-back {
-            transform: rotateY(180deg);
-        }
-        
-        .language-switch {
-            transition: all 0.3s ease;
-        }
-        
-        .language-switch:hover {
-            transform: scale(1.1);
-        }
-        
-        .profession-icon {
-            transition: all 0.3s ease;
-        }
-        
-        .profession-icon:hover {
-            transform: translateY(-5px);
-        }
-        
-        .cta-button {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-        
-        .pricing-card {
-            transition: all 0.3s ease;
-        }
-        
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FolioZone - Professional Portfolio Creation Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* Floating animation */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .floating {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* Flip card animations */
+    .flip-card {
+      perspective: 1000px;
+    }
+
+    .flip-card-inner {
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      backface-visibility: hidden;
+      border-radius: 1rem;
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Smooth shadow and hover for cards */
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .transition-smooth {
+      transition: all 0.4s ease;
+    }
+  </style>
 </head>
-<body class="font-sans bg-gray-50">
-    <!-- Language Switch -->
-    <div class="fixed top-4 right-4 z-50">
-        <button id="languageSwitch" class="language-switch bg-indigo-600 text-white px-4 py-2 rounded-full shadow-md flex items-center">
-            <span id="currentLang">English</span>
-            
-        </button>
+
+<div class="fixed top-4 right-4 rtl:right-auto rtl:left-4 z-50">
+  <button id="languageSwitch"
+    class="language-switch bg-indigo-600 text-white px-5 py-2 rounded-full shadow-md flex items-center gap-2 rtl:flex-row-reverse"
+    aria-label="Switch Language">
+    <i class="fas fa-globe transform rtl:scale-x-[-1]"></i>
+    <span id="currentLang">English</span>
+  </button>
+</div>
+
+<!-- Navigation -->
+<nav class="bg-white shadow-md py-5 sticky top-0 z-40 backdrop-blur-md bg-opacity-90" id="nav">
+  <div class="container mx-auto px-6 flex justify-between items-center max-w-7xl">
+    <a href="#" class="text-3xl font-extrabold text-indigo-600 tracking-wide">FolioZone</a>
+    <div class="hidden md:flex space-x-12 rtl:space-x-reverse text-gray-700 font-semibold text-lg" id="navLinks">
+      <a href="#features" id="navFeatures" class="hover:text-indigo-600 transition duration-300">Features</a>
+      <a href="#how-it-works" id="navHowItWorks" class="hover:text-indigo-600 transition duration-300">How It Works</a>
+      <a href="#pricing" id="navPricing" class="hover:text-indigo-600 transition duration-300">Pricing</a>
+      <a href="#contact" class="hover:text-indigo-600 transition duration-300">Contact</a>
+    </div>
+    <button class="md:hidden text-gray-700 hover:text-indigo-600 transition duration-300" id="mobileMenuButton"
+      aria-label="Toggle Mobile Menu">
+      <i class="fas fa-bars text-3xl"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="hidden bg-white shadow-xl absolute w-full z-50 border-b border-gray-200">
+  <div class="container mx-auto px-6 py-6 flex flex-col space-y-6 max-w-7xl text-lg font-medium text-gray-700">
+    <a href="#features" class="hover:text-indigo-600 transition">Features</a>
+    <a href="#how-it-works" class="hover:text-indigo-600 transition">How It Works</a>
+    <a href="#pricing" class="hover:text-indigo-600 transition">Pricing</a>
+    <a href="#contact" class="hover:text-indigo-600 transition">Contact</a>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-24" id="hero">
+  <div class="container mx-auto px-6 flex flex-col-reverse md:flex-row items-center max-w-7xl">
+    <div class="md:w-1/2 space-y-8 text-center md:text-left">
+      <h1 class="text-5xl font-extrabold tracking-tight drop-shadow-lg" id="heroTitle">
+        Your Professional Portfolio, Made Simple
+      </h1>
+      <p class="text-xl font-light max-w-xl mx-auto md:mx-0" id="heroSubtitle">
+        Send us your CV and get a beautiful, personalized portfolio page in no
+        time. Perfect for professionals in any field.
+      </p>
+      <div
+        class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-6 rtl:space-x-reverse mt-8">
+        <a href="#contact" id="heroCtaRequest"
+          class="cta-button bg-white text-indigo-700 font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-xl hover:bg-indigo-50 transition">
+          Request Your Portfolio
+        </a>
+
+        <a href="#how-it-works" id="heroCtaHowItWorks"
+          class="cta-button border-2 border-white font-semibold py-3 px-10 rounded-full hover:bg-white hover:text-indigo-700 transition">
+          How It Works
+        </a>
+      </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm py-4 sticky top-0 z-40" id="nav">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-indigo-600">Portori</a>
-            <div class="hidden md:flex space-x-8" id="navLinks">
-                <a href="#features" class="text-gray-700 hover:text-indigo-600 transition">Features</a>
-                <a href="#how-it-works" class="text-gray-700 hover:text-indigo-600 transition">How It Works</a>
-                <a href="#pricing" class="text-gray-700 hover:text-indigo-600 transition">Pricing</a>
-                <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition">Contact</a>
-            </div>
-            <button class="md:hidden text-gray-700" id="mobileMenuButton">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+    <div class="md:w-1/2 flex justify-center">
+      <div class="relative w-full max-w-md floating bg-white p-8 rounded-3xl shadow-2xl border border-indigo-200">
+        <div class="flex justify-between items-center mb-6 select-none">
+          <div class="text-gray-800 font-semibold text-lg">foliozone.com/</div>
+          <div class="text-indigo-600 font-extrabold text-lg truncate max-w-[130px]" id="sampleUrl">your-name</div>
         </div>
+        <div class="bg-gray-100 rounded-2xl p-6 h-72 flex flex-col justify-between">
+          <div class="flex items-center space-x-4 rtl:space-x-reverse">
+            <div class="w-14 h-14 rounded-full bg-indigo-100 flex items-center justify-center">
+              <i class="fas fa-user text-indigo-600 text-2xl"></i>
+            </div>
+            <div>
+              <div class="font-bold text-gray-800 text-xl" id="demoName">
+                Your Name
+              </div>
+              <div class="text-gray-600 font-medium text-sm" id="demoProfession">
+                Your Profession
+              </div>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="h-5 bg-gray-200 rounded-full w-full animate-pulse"></div>
+            <div class="h-5 bg-gray-200 rounded-full w-3/4 animate-pulse"></div>
+            <div class="h-5 bg-gray-200 rounded-full w-5/6 animate-pulse"></div>
+            <div class="h-5 bg-gray-200 rounded-full w-2/3 animate-pulse"></div>
+          </div>
+          <div class="mt-8 flex space-x-4 rtl:space-x-reverse">
+            <div class="w-20 h-10 bg-indigo-100 rounded-full"></div>
+            <div class="w-20 h-10 bg-indigo-100 rounded-full"></div>
+            <div class="w-20 h-10 bg-indigo-100 rounded-full"></div>
+          </div>
+        </div>
+        <div class="absolute -bottom-10 -left-10 w-28 h-28 bg-yellow-400 rounded-full opacity-20 filter blur-3xl">
+        </div>
+        <div class="absolute -top-10 -right-10 w-24 h-24 bg-pink-400 rounded-full opacity-20 filter blur-3xl"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 bg-white" id="features" aria-labelledby="featuresTitle">
+  <div class="container mx-auto px-6 max-w-7xl">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-6 text-left rtl:text-right" id="featuresTitle">
+      Why Choose FolioZone?
+    </h2>
+    <p class="text-xl text-gray-600 max-w-4xl mb-16 text-left rtl:text-right" id="featuresSubtitle">
+      We create professional portfolios that help you stand out, without the hassle of building it yourself.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <article class="bg-gray-50 rounded-3xl p-10 shadow-md text-center card-hover transition-smooth">
+        <div
+          class="feature-icon bg-indigo-100 text-indigo-600 mx-auto mb-5 inline-flex items-center justify-center rounded-full w-16 h-16 text-3xl">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2" id="feature1Title">
+          Fast Turnaround
+        </h3>
+        <p class="text-gray-600" id="feature1Text">
+          Get your portfolio ready in as little as 24 hours after submitting your details.
+        </p>
+      </article>
+
+      <article class="bg-gray-50 rounded-3xl p-10 shadow-md text-center card-hover transition-smooth">
+        <div
+          class="feature-icon bg-green-100 text-green-600 mx-auto mb-5 inline-flex items-center justify-center rounded-full w-16 h-16 text-3xl">
+          <i class="fas fa-paint-brush"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2" id="feature2Title">
+          Custom Designs
+        </h3>
+        <p class="text-gray-600" id="feature2Text">
+          Each portfolio is uniquely designed to match your profession and personal brand.
+        </p>
+      </article>
+
+      <article class="bg-gray-50 rounded-3xl p-10 shadow-md text-center card-hover transition-smooth">
+        <div
+          class="feature-icon bg-blue-100 text-blue-600 mx-auto mb-5 inline-flex items-center justify-center rounded-full w-16 h-16 text-3xl">
+          <i class="fas fa-link"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2" id="feature3Title">
+          Simple Sharing
+        </h3>
+        <p class="text-gray-600" id="feature3Text">
+          A clean, professional URL that's easy to share anywhere - LinkedIn, resumes, or social media.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Professions Section -->
+<section class="py-16 bg-gray-50" id="professions" aria-labelledby="professionsTitle">
+  <div class="container mx-auto px-6 max-w-7xl">
+    <h2 class="text-3xl font-extrabold text-indigo-700 mb-6 text-left rtl:text-right" id="professionsTitle">
+      Perfect for All Professions
+    </h2>
+    <p class="text-xl text-gray-600 max-w-4xl mb-14 text-left rtl:text-right" id="professionsSubtitle">
+      We create portfolios tailored to your specific field and needs.
+    </p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 text-center">
+      <div class="profession-icon bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer"
+        tabindex="0" role="button" aria-label="Developers">
+        <i class="fas fa-code text-5xl text-indigo-600 mb-4"></i>
+        <div class="font-semibold" id="profession1">Developers</div>
+      </div>
+
+      <div class="profession-icon bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer"
+        tabindex="0" role="button" aria-label="Designers">
+        <i class="fas fa-pencil-ruler text-5xl text-pink-600 mb-4"></i>
+        <div class="font-semibold" id="profession2">Designers</div>
+      </div>
+
+      <div class="profession-icon bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer"
+        tabindex="0" role="button" aria-label="Marketers">
+        <i class="fas fa-bullhorn text-5xl text-blue-600 mb-4"></i>
+        <div class="font-semibold" id="profession3">Marketers</div>
+      </div>
+
+      <div class="profession-icon bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer"
+        tabindex="0" role="button" aria-label="Writers">
+        <i class="fas fa-pen-fancy text-5xl text-green-600 mb-4"></i>
+        <div class="font-semibold" id="profession4">Writers</div>
+      </div>
+
+      <div class="profession-icon bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer"
+        tabindex="0" role="button" aria-label="Photographers">
+        <i class="fas fa-camera text-5xl text-purple-600 mb-4"></i>
+        <div class="font-semibold" id="profession5">Photographers</div>
+      </div>
+
+      <div class="profession-icon bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer"
+        tabindex="0" role="button" aria-label="Consultants">
+        <i class="fas fa-chart-line text-5xl text-yellow-600 mb-4"></i>
+        <div class="font-semibold" id="profession6">Consultants</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-20 bg-white" id="how-it-works" aria-labelledby="howItWorksTitle">
+  <div class="container mx-auto px-6 max-w-7xl">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-6 text-left rtl:text-right" id="howItWorksTitle">
+      How It Works
+    </h2>
+    <p class="text-xl text-gray-600 max-w-4xl mb-16 text-left rtl:text-right" id="howItWorksSubtitle">
+      Getting your professional portfolio is quick and easy
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <article class="bg-gray-50 rounded-3xl p-10 shadow-md card-hover transition-smooth">
+        <div class="flex items-center mb-6 text-indigo-700 font-extrabold text-2xl justify-center" aria-hidden="true">
+          <div class="rounded-full border-4 border-indigo-600 w-14 h-14 flex items-center justify-center">
+            1
+          </div>
+        </div>
+        <h3 class="text-xl font-semibold mb-2" id="step1Title">
+          Submit Your Details
+        </h3>
+        <p class="text-gray-600" id="step1Text">
+          Send us your CV, LinkedIn profile, or any professional information
+          you'd like to include via email or our contact form.
+        </p>
+      </article>
+
+      <article class="bg-gray-50 rounded-3xl p-10 shadow-md card-hover transition-smooth">
+        <div class="flex items-center mb-6 text-indigo-700 font-extrabold text-2xl justify-center" aria-hidden="true">
+          <div class="rounded-full border-4 border-indigo-600 w-14 h-14 flex items-center justify-center">
+            2
+          </div>
+        </div>
+        <h3 class="text-xl font-semibold mb-2" id="step2Title">
+          We Design Your Portfolio
+        </h3>
+        <p class="text-gray-600" id="step2Text">
+          Our team creates a custom, professional portfolio page tailored to
+          your profession and personal brand.
+        </p>
+      </article>
+
+      <article class="bg-gray-50 rounded-3xl p-10 shadow-md card-hover transition-smooth">
+        <div class="flex items-center mb-6 text-indigo-700 font-extrabold text-2xl justify-center" aria-hidden="true">
+          <div class="rounded-full border-4 border-indigo-600 w-14 h-14 flex items-center justify-center">
+            3
+          </div>
+        </div>
+        <h3 class="text-xl font-semibold mb-2" id="step3Title">
+          Get Your Live Link
+        </h3>
+        <p class="text-gray-600" id="step3Text">
+          Receive a clean, professional URL (like foliozone.com/your-name) that you can share anywhere to showcase
+          your work.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="py-20 bg-gray-50" id="pricing" aria-labelledby="pricingTitle">
+  <div class="container mx-auto px-6 max-w-7xl">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-6 text-left rtl:text-right" id="pricingTitle">
+      Simple, Transparent Pricing
+    </h2>
+    <p class="text-xl text-gray-600 max-w-4xl mb-16 text-left rtl:text-right" id="pricingSubtitle">
+      Choose the package that fits your needs
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+      <!-- Starter -->
+      <article
+        class="pricing-card bg-white p-10 rounded-3xl shadow-md border border-gray-300 card-hover transition-smooth">
+        <h3 class="text-2xl font-bold mb-4 text-indigo-700" id="starterTitle">
+          Starter
+        </h3>
+        <div class="text-5xl font-extrabold mb-8 text-indigo-600">$19</div>
+        <ul class="space-y-4 mb-8 text-gray-700">
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="starterFeature1">Basic portfolio design</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="starterFeature2">1 revision included</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="starterFeature3">Standard sections</span>
+          </li>
+          <li class="flex items-center text-gray-400">
+            <i class="fas fa-times mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="starterFeature4">No custom branding</span>
+          </li>
+        </ul>
+        <a href="#contact"
+          class="block bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-center hover:bg-indigo-700 transition">Get
+          Started</a>
+      </article>
+
+      <!-- Pro -->
+      <article
+        class="pricing-card bg-white p-10 rounded-3xl shadow-lg border-4 border-indigo-500 transform scale-105 card-hover transition-smooth relative">
+        <div
+          class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white text-xs font-semibold uppercase rounded-full px-5 py-1 shadow-lg select-none"
+          id="popularLabel">
+          Most Popular
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-indigo-700" id="proTitle">
+          Pro
+        </h3>
+        <div class="text-5xl font-extrabold mb-8 text-indigo-600">$39</div>
+        <ul class="space-y-4 mb-8 text-gray-700">
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="proFeature1">Custom portfolio design</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="proFeature2">3 revisions included</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="proFeature3">Extended sections</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="proFeature4">Basic branding</span>
+          </li>
+        </ul>
+        <a href="#contact"
+          class="block bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-center hover:bg-indigo-700 transition">Get
+          Started</a>
+      </article>
+
+      <!-- Premium -->
+      <article
+        class="pricing-card bg-white p-10 rounded-3xl shadow-md border border-gray-300 card-hover transition-smooth">
+        <h3 class="text-2xl font-bold mb-4 text-indigo-700" id="premiumTitle">
+          Premium
+        </h3>
+        <div class="text-5xl font-extrabold mb-8 text-indigo-600">$79</div>
+        <ul class="space-y-4 mb-8 text-gray-700">
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="premiumFeature1">Fully custom design</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="premiumFeature2">Unlimited revisions</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="premiumFeature3">Multiple sections</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-check text-green-500 mr-3 rtl:mr-0 rtl:ml-3"></i>
+            <span id="premiumFeature4">Full branding package</span>
+          </li>
+        </ul>
+        <a href="#contact"
+          class="block bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-center hover:bg-indigo-700 transition">Get
+          Started</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-20 bg-indigo-600 text-white" id="contact" aria-labelledby="contactTitle">
+  <div class="container mx-auto px-6 max-w-7xl">
+    <h2 class="text-4xl font-extrabold mb-6 text-left rtl:text-right" id="contactTitle">
+      Ready for Your Professional Portfolio?
+    </h2>
+    <p class="text-xl max-w-4xl mb-16 opacity-90 text-left rtl:text-right" id="contactSubtitle">
+      Send us your details and we'll create your personalized portfolio page.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+      <!-- Contact Form -->
+      <div class="bg-white rounded-3xl shadow-xl p-10 text-gray-800" role="form" aria-label="Portfolio Request Form">
+        <h3 class="text-3xl font-bold mb-8" id="formTitle">
+          Send Us Your Details
+        </h3>
+        <form id="portfolioRequestForm" action="https://formsubmit.co/foliozonejo@gmail.com" method="POST">
+          <label for="name" class="block font-semibold mb-2" id="nameLabel">Your Name</label>
+          <input type="text" id="name" name="name"
+            class="w-full mb-6 px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            required />
+
+          <label for="email" class="block font-semibold mb-2" id="emailLabel">Email Address</label>
+          <input type="email" id="email" name="email"
+            class="w-full mb-6 px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            required />
+
+          <label for="profession" class="block font-semibold mb-2" id="professionLabel">Your Profession</label>
+          <select id="profession" name="profession"
+            class="w-full mb-6 px-5 py-3 border-2 border-indigo-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            required>
+            <option value="" id="selectDefault">Select your profession</option>
+            <option value="developer" id="selectDeveloper">Developer</option>
+            <option value="designer" id="selectDesigner">Designer</option>
+            <option value="marketer" id="selectMarketer">Marketer</option>
+            <option value="writer" id="selectWriter">Writer</option>
+            <option value="photographer" id="selectPhotographer">Photographer</option>
+            <option value="consultant" id="selectConsultant">Consultant</option>
+            <option value="other" id="selectOther">Other</option>
+          </select>
+
+          <label for="package" class="block font-semibold mb-2" id="packageLabel">Package</label>
+          <select id="package" name="package"
+            class="w-full mb-6 px-5 py-3 border-2 border-indigo-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            required>
+            <option value="starter" id="packageStarter">Starter ($19)</option>
+            <option value="pro" id="packagePro">Pro ($39)</option>
+            <option value="premium" id="packagePremium">Premium ($79)</option>
+          </select>
+
+          <label for="message" class="block font-semibold mb-2" id="messageLabel">Additional Details (or paste your
+            CV/LinkedIn)</label>
+          <textarea id="message" name="message" rows="5"
+            class="w-full mb-8 px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+
+          <button type="submit"
+            class="w-full bg-indigo-700 hover:bg-indigo-800 transition rounded-full py-4 text-white font-bold text-lg"
+            id="submitButton">
+            Request Portfolio
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="text-white space-y-10">
+        <div>
+          <h3 class="text-3xl font-extrabold mb-4" id="contactInfoTitle">
+            Other Ways to Reach Us
+          </h3>
+          <p class="opacity-90 mb-8 max-w-md" id="contactInfoText">
+            Prefer to contact us directly? Here are alternative ways to get in
+            touch.
+          </p>
+
+          <div class="flex items-center mb-6 cursor-pointer select-none">
+            <div
+              class="bg-white bg-opacity-20 rounded-full w-14 h-14 flex items-center justify-center mr-5 rtl:mr-0 rtl:ml-5"
+              aria-hidden="true">
+              <i class="fas fa-envelope text-xl"></i>
+            </div>
+            <div>
+              <div class="font-semibold">Email</div>
+              <div class="opacity-90">foliozonejo@gmail.com</div>
+            </div>
+          </div>
+
+          <div class="flex items-center mb-6 cursor-pointer select-none"
+            onclick="window.open('https://wa.me/00962797473575', '_blank')" role="button" tabindex="0"
+            aria-label="WhatsApp">
+            <div
+              class="bg-white bg-opacity-20 rounded-full w-14 h-14 flex items-center justify-center mr-5 rtl:mr-0 rtl:ml-5"
+              aria-hidden="true">
+              <i class="fab fa-whatsapp text-xl"></i>
+            </div>
+            <div>
+              <div class="font-semibold">WhatsApp</div>
+              <div class="opacity-90">+962 797473575</div>
+            </div>
+          </div>
+
+          <div class="flex items-center cursor-pointer select-none" onclick="window.location.href='tel:YOURNUMBER'"
+            role="button" tabindex="0" aria-label="Phone">
+            <div
+              class="bg-white bg-opacity-20 rounded-full w-14 h-14 flex items-center justify-center mr-5 rtl:mr-0 rtl:ml-5"
+              aria-hidden="true">
+              <i class="fas fa-phone-alt text-xl"></i>
+            </div>
+            <div>
+              <div class="font-semibold">Phone</div>
+              <div class="opacity-90">+962 797473575</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white bg-opacity-10 p-6 rounded-3xl max-w-md" role="region" aria-labelledby="faqTitle">
+          <h4 class="font-extrabold text-xl mb-6" id="faqTitle">
+            Frequently Asked Questions
+          </h4>
+
+          <dl class="space-y-4">
+            <div>
+              <dt class="font-semibold" id="faq1Question">
+                How long does it take to get my portfolio?
+              </dt>
+              <dd class="text-sm opacity-90" id="faq1Answer">
+                Typically 1-3 business days depending on the package you choose.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-semibold" id="faq2Question">
+                Can I update my portfolio later?
+              </dt>
+              <dd class="text-sm opacity-90" id="faq2Answer">
+                Yes, we offer update services for a small fee after your initial revisions.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-semibold" id="faq3Question">
+                Do you offer custom domain options?
+              </dt>
+              <dd class="text-sm opacity-90" id="faq3Answer">
+                Currently we only offer subdomains of foliozone.com, but custom domains are coming soon!
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-14">
+  <div class="container mx-auto px-6 max-w-7xl grid grid-cols-1 md:grid-cols-4 gap-12">
+    <div>
+      <h3 class="text-2xl font-extrabold mb-4">FolioZone</h3>
+      <p class="text-gray-400 max-w-sm">
+        Professional portfolio creation service for individuals across all professions.
+      </p>
+    </div>
+
+    <nav aria-label="Footer Quick Links">
+      <h4 class="font-semibold mb-4">Quick Links</h4>
+      <ul class="space-y-3 text-gray-400">
+        <li>
+          <a href="#features" class="hover:text-white transition">Features</a>
+        </li>
+        <li>
+          <a href="#how-it-works" class="hover:text-white transition">How It Works</a>
+        </li>
+        <li>
+          <a href="#pricing" class="hover:text-white transition">Pricing</a>
+        </li>
+        <li>
+          <a href="#contact" class="hover:text-white transition">Contact</a>
+        </li>
+      </ul>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden bg-white shadow-lg absolute w-full z-50">
-        <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <a href="#features" class="text-gray-700 hover:text-indigo-600 transition py-2 border-b">Features</a>
-            <a href="#how-it-works" class="text-gray-700 hover:text-indigo-600 transition py-2 border-b">How It Works</a>
-            <a href="#pricing" class="text-gray-700 hover:text-indigo-600 transition py-2 border-b">Pricing</a>
-            <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition py-2">Contact</a>
-        </div>
+    <nav aria-label="Footer Legal Links">
+      <h4 class="font-semibold mb-4">Legal</h4>
+      <ul class="space-y-3 text-gray-400">
+        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+        <li><a href="#" class="hover:text-white transition">Refund Policy</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <h4 class="font-semibold mb-4">Connect With Us</h4>
+      <div class="flex space-x-6 rtl:space-x-reverse mb-6">
+        <a href="https://twitter.com/YOURPROFILE" target="_blank" class="hover:text-white transition text-gray-400">
+          <i class="fab fa-twitter text-2xl"></i>
+        </a>
+        <a href="https://linkedin.com/in/YOURPROFILE" target="_blank" class="hover:text-white transition text-gray-400">
+          <i class="fab fa-linkedin text-2xl"></i>
+        </a>
+        <a href="https://instagram.com/YOURPROFILE" target="_blank" class="hover:text-white transition text-gray-400">
+          <i class="fab fa-instagram text-2xl"></i>
+        </a>
+        <a href="https://facebook.com/YOURPROFILE" target="_blank" class="hover:text-white transition text-gray-400">
+          <i class="fab fa-facebook text-2xl"></i>
+        </a>
+      </div>
+      <p class="text-gray-500 text-sm select-none">&copy; 2025 FolioZone. All rights reserved.</p>
     </div>
+  </div>
+</footer>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-20">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6" id="heroTitle">Your Professional Portfolio, Made Simple</h1>
-                <p class="text-xl mb-8" id="heroSubtitle">Send us your CV and get a beautiful, personalized portfolio page in no time. Perfect for professionals in any field.</p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#contact" class="cta-button bg-white text-indigo-600 font-bold py-3 px-8 rounded-full text-left rtl:text-right">Request Your Portfolio</a>
-                    <a href="#how-it-works" class="cta-button border-2 border-white text-white font-bold py-3 px-8 rounded-full text-left rtl:text-right">How It Works</a>
-                </div>
-            </div>
-            <div class="md:w-1/2 flex justify-center">
-                <div class="relative w-full max-w-md">
-                    <div class="floating bg-white p-6 rounded-2xl shadow-2xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="text-gray-800 font-bold">portori.com/</div>
-                            <div class="text-indigo-600 font-bold" id="sampleUrl">your-name</div>
-                        </div>
-                        <div class="bg-gray-100 rounded-lg p-4 h-64">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center">
-                                    <i class="fas fa-user text-indigo-600 text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <div class="font-bold text-gray-800">Your Name</div>
-                                    <div class="text-gray-600 text-sm">Your Profession</div>
-                                </div>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="h-4 bg-gray-200 rounded w-full"></div>
-                                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
-                                <div class="h-4 bg-gray-200 rounded w-5/6"></div>
-                                <div class="h-4 bg-gray-200 rounded w-2/3"></div>
-                            </div>
-                            <div class="mt-6 flex space-x-2">
-                                <div class="w-16 h-8 bg-indigo-100 rounded"></div>
-                                <div class="w-16 h-8 bg-indigo-100 rounded"></div>
-                                <div class="w-16 h-8 bg-indigo-100 rounded"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-yellow-400 rounded-full opacity-20"></div>
-                    <div class="absolute -top-6 -right-6 w-20 h-20 bg-pink-400 rounded-full opacity-20"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script> 
+src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js" 
+-->
 
-    <!-- Features Section -->
-    <section class="py-20 bg-white" id="features">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-left rtl:text-right mb-4" id="featuresTitle">Why Choose Portori?</h2>
-            <p class="text-xl text-left rtl:text-right text-gray-600 mb-16 max-w-3xl mx-auto" id="featuresSubtitle">We create professional portfolios that help you stand out, without the hassle of building it yourself.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition">
-                    <div class="feature-icon bg-indigo-100 text-indigo-600 mx-auto">
-                        <i class="fas fa-bolt text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-left rtl:text-right mb-3" id="feature1Title">Fast Turnaround</h3>
-                    <p class="text-gray-600 text-left rtl:text-right" id="feature1Text">Get your portfolio ready in as little as 24 hours after submitting your details.</p>
-                </div>
-                
-                <!-- Feature 2 -->
-                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition">
-                    <div class="feature-icon bg-green-100 text-green-600 mx-auto">
-                        <i class="fas fa-paint-brush text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-left rtl:text-right mb-3" id="feature2Title">Custom Designs</h3>
-                    <p class="text-gray-600 text-left rtl:text-right" id="feature2Text">Each portfolio is uniquely designed to match your profession and personal brand.</p>
-                </div>
-                
-                <!-- Feature 3 -->
-                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition">
-                    <div class="feature-icon bg-blue-100 text-blue-600 mx-auto">
-                        <i class="fas fa-link text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-left rtl:text-right mb-3" id="feature3Title">Simple Sharing</h3>
-                    <p class="text-gray-600 text-left rtl:text-right" id="feature3Text">A clean, professional URL that's easy to share anywhere - LinkedIn, resumes, or social media.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<script >
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobileMenuButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
 
-    <!-- Profession Icons Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-left rtl:text-right mb-4" id="professionsTitle">Perfect for All Professions</h2>
-            <p class="text-xl text-left rtl:text-right text-gray-600 mb-16 max-w-3xl mx-auto" id="professionsSubtitle">We create portfolios tailored to your specific field and needs.</p>
-            
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
-                <!-- Developer -->
-                <div class="profession-icon bg-white p-6 rounded-xl shadow-sm text-left rtl:text-right">
-                    <i class="fas fa-code text-4xl text-indigo-600 mb-3"></i>
-                    <div class="font-medium" id="profession1">Developers</div>
-                </div>
-                
-                <!-- Designer -->
-                <div class="profession-icon bg-white p-6 rounded-xl shadow-sm text-left rtl:text-right">
-                    <i class="fas fa-pencil-ruler text-4xl text-pink-600 mb-3"></i>
-                    <div class="font-medium" id="profession2">Designers</div>
-                </div>
-                
-                <!-- Marketer -->
-                <div class="profession-icon bg-white p-6 rounded-xl shadow-sm text-left rtl:text-right">
-                    <i class="fas fa-bullhorn text-4xl text-blue-600 mb-3"></i>
-                    <div class="font-medium" id="profession3">Marketers</div>
-                </div>
-                
-                <!-- Writer -->
-                <div class="profession-icon bg-white p-6 rounded-xl shadow-sm text-left rtl:text-right">
-                    <i class="fas fa-pen-fancy text-4xl text-green-600 mb-3"></i>
-                    <div class="font-medium" id="profession4">Writers</div>
-                </div>
-                
-                <!-- Photographer -->
-                <div class="profession-icon bg-white p-6 rounded-xl shadow-sm text-left rtl:text-right">
-                    <i class="fas fa-camera text-4xl text-purple-600 mb-3"></i>
-                    <div class="font-medium" id="profession5">Photographers</div>
-                </div>
-                
-                <!-- Consultant -->
-                <div class="profession-icon bg-white p-6 rounded-xl shadow-sm text-left rtl:text-right">
-                    <i class="fas fa-chart-line text-4xl text-yellow-600 mb-3"></i>
-                    <div class="font-medium" id="profession6">Consultants</div>
-                </div>
-            </div>
-        </div>
-    </section>
+  // Language switch and RTL toggle
+  const languageSwitch = document.getElementById('languageSwitch');
+  const currentLang = document.getElementById('currentLang');
+  let isEnglish = true;
 
-    <!-- How It Works Section -->
-    <section class="py-20 bg-white" id="how-it-works">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-left rtl:text-right mb-4" id="howItWorksTitle">How It Works</h2>
-            <p class="text-xl text-left rtl:text-right text-gray-600 mb-16 max-w-3xl mx-auto" id="howItWorksSubtitle">Getting your professional portfolio is quick and easy</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Step 1 -->
-                <div class="bg-gray-50 p-8 rounded-xl">
-                    <div class="flex items-center mb-6">
-                        <div class="bg-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">1</div>
-                        <h3 class="text-xl font-bold ml-4" id="step1Title">Submit Your Details</h3>
-                    </div>
-                    <p class="text-gray-600" id="step1Text">Send us your CV, LinkedIn profile, or any professional information you'd like to include via email or our contact form.</p>
-                </div>
-                
-                <!-- Step 2 -->
-                <div class="bg-gray-50 p-8 rounded-xl">
-                    <div class="flex items-center mb-6">
-                        <div class="bg-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">2</div>
-                        <h3 class="text-xl font-bold ml-4" id="step2Title">We Design Your Portfolio</h3>
-                    </div>
-                    <p class="text-gray-600" id="step2Text">Our team creates a custom, professional portfolio page tailored to your profession and personal brand.</p>
-                </div>
-                
-                <!-- Step 3 -->
-                <div class="bg-gray-50 p-8 rounded-xl">
-                    <div class="flex items-center mb-6">
-                        <div class="bg-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">3</div>
-                        <h3 class="text-xl font-bold ml-4" id="step3Title">Get Your Live Link</h3>
-                    </div>
-                    <p class="text-gray-600" id="step3Text">Receive a clean, professional URL (like portori.com/your-name) that you can share anywhere to showcase your work.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  // Text translations for English and Arabic
+  const translations = {
+    en: {
+      heroTitle: 'Your Professional Portfolio, Made Simple',
+      heroSubtitle: 'Send us your CV and get a beautiful, personalized portfolio page in no time. Perfect for professionals in any field.',
+      featuresTitle: 'Why Choose FolioZone?',
+      featuresSubtitle: 'We create professional portfolios that help you stand out, without the hassle of building it yourself.',
+      feature1Title: 'Fast Turnaround',
+      feature1Text: 'Get your portfolio ready in as little as 24 hours after submitting your details.',
+      feature2Title: 'Custom Designs',
+      feature2Text: 'Each portfolio is uniquely designed to match your profession and personal brand.',
+      feature3Title: 'Simple Sharing',
+      feature3Text: "A clean, professional URL that's easy to share anywhere - LinkedIn, resumes, or social media.",
+      professionsTitle: 'Perfect for All Professions',
+      professionsSubtitle: 'We create portfolios tailored to your specific field and needs.',
+      profession1: 'Developers',
+      profession2: 'Designers',
+      profession3: 'Marketers',
+      profession4: 'Writers',
+      profession5: 'Photographers',
+      profession6: 'Consultants',
+      howItWorksTitle: 'How It Works',
+      howItWorksSubtitle: 'Getting your professional portfolio is quick and easy',
+      step1Title: 'Submit Your Details',
+      step1Text: "Send us your CV, LinkedIn profile, or any professional information you'd like to include via email or our contact form.",
+      step2Title: 'We Design Your Portfolio',
+      step2Text: 'Our team creates a custom, professional portfolio page tailored to your profession and personal brand.',
+      step3Title: 'Get Your Live Link',
+      step3Text: 'Receive a clean, professional URL (like foliozone.com/your-name) that you can share anywhere to showcase your work.',
+      pricingTitle: 'Simple, Transparent Pricing',
+      pricingSubtitle: 'Choose the package that fits your needs',
+      starterTitle: 'Starter',
+      starterFeature1: 'Basic portfolio design',
+      starterFeature2: '1 revision included',
+      starterFeature3: 'Standard sections',
+      starterFeature4: 'No custom branding',
+      proTitle: 'Pro',
+      proFeature1: 'Custom portfolio design',
+      proFeature2: '3 revisions included',
+      proFeature3: 'Extended sections',
+      proFeature4: 'Basic branding',
+      premiumTitle: 'Premium',
+      premiumFeature1: 'Fully custom design',
+      premiumFeature2: 'Unlimited revisions',
+      premiumFeature3: 'Multiple sections',
+      premiumFeature4: 'Full branding package',
+      popularLabel: 'Most Popular',
+      contactTitle: 'Ready for Your Professional Portfolio?',
+      contactSubtitle: "Send us your details and we'll create your personalized portfolio page.",
+      formTitle: 'Send Us Your Details',
+      nameLabel: 'Your Name',
+      emailLabel: 'Email Address',
+      professionLabel: 'Your Profession',
+      selectDefault: 'Select your profession',
+      selectDeveloper: 'Developer',
+      selectDesigner: 'Designer',
+      selectMarketer: 'Marketer',
+      selectWriter: 'Writer',
+      selectPhotographer: 'Photographer',
+      selectConsultant: 'Consultant',
+      selectOther: 'Other',
+      packageLabel: 'Package',
+      packageStarter: 'Starter ($19)',
+      packagePro: 'Pro ($39)',
+      packagePremium: 'Premium ($79)',
+      messageLabel: 'Additional Details (or paste your CV/LinkedIn)',
+      submitButton: 'Request Portfolio',
+      contactInfoTitle: 'Other Ways to Reach Us',
+      contactInfoText: 'Prefer to contact us directly? Here are alternative ways to get in touch.',
+      faqTitle: 'Frequently Asked Questions',
+      faq1Question: 'How long does it take to get my portfolio?',
+      faq1Answer: 'Typically 1-3 business days depending on the package you choose.',
+      faq2Question: 'Can I update my portfolio later?',
+      faq2Answer: 'Yes, we offer update services for a small fee after your initial revisions.',
+      faq3Question: 'Do you offer custom domain options?',
+      faq3Answer: 'Currently we only offer subdomains of foliozone.com, but custom domains are coming soon!',
+      footerAbout: 'Professional portfolio creation service for individuals across all professions.',
+      footerLinksTitle: 'Quick Links',
+      footerLegalTitle: 'Legal',
+      footerConnectTitle: 'Connect With Us',
+      footerLink1: 'Features',
+      footerLink2: 'How It Works',
+      footerLink3: 'Pricing',
+      footerLink4: 'Contact',
+      footerLegal1: 'Terms of Service',
+      footerLegal2: 'Privacy Policy',
+      footerLegal3: 'Refund Policy',
+      footerCopyright: '© 2025 FolioZone. All rights reserved.',
+      navFeatures: 'Features',
+      navHowItWorks: 'How It Works',
+      navPricing: 'Pricing',
+      heroCtaRequest: 'Request Your Portfolio',
+      heroCtaHowItWorks: 'How It Works',
+    },
+    ar: {
+      heroTitle: 'حافظتك المهنية، بكل بساطة',
+      heroSubtitle: 'أرسل لنا سيرتك الذاتية واحصل على صفحة محفظة جميلة ومخصصة في أي وقت من الأوقات. مثالي للمحترفين في أي مجال.',
+      featuresTitle: 'لماذا تختار فوليوزون؟',
+      featuresSubtitle: 'نقوم بإنشاء محافظ احترافية تساعدك على التميز، دون عناء بنائها بنفسك.',
+      feature1Title: 'تسليم سريع',
+      feature1Text: 'احصل على محفظتك جاهزة في أقل من 24 ساعة بعد إرسال تفاصيلك.',
+      feature2Title: 'تصاميم مخصصة',
+      feature2Text: 'تم تصميم كل محفظة بشكل فريد لتتناسب مع مهنتك وعلامتك التجارية الشخصية.',
+      feature3Title: 'مشاركة بسيطة',
+      feature3Text: 'عنوان URL نظيف واحترافي يسهل مشاركته في أي مكان - LinkedIn أو السير الذاتية أو وسائل التواصل الاجتماعي.',
+      professionsTitle: 'مثالي لجميع المهن',
+      professionsSubtitle: 'نقوم بإنشاء محافظ مصممة خصيصًا لمجالك واحتياجاتك المحددة.',
+      profession1: 'المطورون',
+      profession2: 'المصممون',
+      profession3: 'مسوقون',
+      profession4: 'كتاب',
+      profession5: 'مصورون',
+      profession6: 'استشاريون',
+      howItWorksTitle: 'كيف يعمل',
+      howItWorksSubtitle: 'الحصول على محفظتك المهنية سريع وسهل',
+      step1Title: 'إرسال تفاصيلك',
+      step1Text: 'أرسل لنا سيرتك الذاتية أو ملف LinkedIn الخاص بك أو أي معلومات مهنية ترغب في تضمينها عبر البريد الإلكتروني أو نموذج الاتصال الخاص بنا.',
+      step2Title: 'نقوم بتصميم محفظتك',
+      step2Text: 'يقوم فريقنا بإنشاء صفحة محفظة احترافية مخصصة مصممة خصيصًا لمهنتك وعلامتك التجارية الشخصية.',
+      step3Title: 'احصل على رابطك المباشر',
+      step3Text: 'احصل على عنوان URL نظيف واحترافي (مثل foliozone.com/اسمك) يمكنك مشاركته في أي مكان لعرض عملك.',
+      pricingTitle: 'أسعار بسيطة وشفافة',
+      pricingSubtitle: 'اختر الباقة التي تناسب احتياجاتك',
+      starterTitle: 'البداية',
+      starterFeature1: 'تصميم محفظة أساسي',
+      starterFeature2: 'مراجعة واحدة متضمنة',
+      starterFeature3: 'أقسام قياسية',
+      starterFeature4: 'لا يوجد علامة تجارية مخصصة',
+      proTitle: 'المحترف',
+      proFeature1: 'تصميم محفظة مخصص',
+      proFeature2: '3 مراجعات متضمنة',
+      proFeature3: 'أقسام موسعة',
+      proFeature4: 'علامة تجارية أساسية',
+      premiumTitle: 'المتميز',
+      premiumFeature1: 'تصميم مخصص بالكامل',
+      premiumFeature2: 'مراجعات غير محدودة',
+      premiumFeature3: 'أقسام متعددة',
+      premiumFeature4: 'حزمة علامة تجارية كاملة',
+      popularLabel: 'الأكثر شعبية',
+      contactTitle: 'هل أنت مستعد لمحفظتك المهنية؟',
+      contactSubtitle: 'أرسل لنا تفاصيلك وسنقوم بإنشاء صفحة المحفظة المخصصة الخاصة بك.',
+      formTitle: 'أرسل لنا تفاصيلك',
+      nameLabel: 'اسمك',
+      emailLabel: 'عنوان البريد الإلكتروني',
+      professionLabel: 'مهنتك',
+      selectDefault: 'اختر مهنتك',
+      selectDeveloper: 'مطور',
+      selectDesigner: 'مصمم',
+      selectMarketer: 'مسوق',
+      selectWriter: 'كاتب',
+      selectPhotographer: 'مصور',
+      selectConsultant: 'استشاري',
+      selectOther: 'آخر',
+      packageLabel: 'الباقة',
+      packageStarter: 'البداية ($19)',
+      packagePro: 'المحترف ($39)',
+      packagePremium: 'المتميز ($79)',
+      messageLabel: 'تفاصيل إضافية (أو الصق سيرتك الذاتية/LinkedIn)',
+      submitButton: 'طلب المحفظة',
+      contactInfoTitle: 'طرق أخرى للوصول إلينا',
+      contactInfoText: 'تفضل الاتصال بنا مباشرة؟ إليك طرق بديلة للتواصل.',
+      faqTitle: 'أسئلة مكررة',
+      faq1Question: 'كم من الوقت يستغرق الحصول على محفظتي؟',
+      faq1Answer: 'عادةً من 1 إلى 3 أيام عمل حسب الباقة التي تختارها.',
+      faq2Question: 'هل يمكنني تحديث محفظتي لاحقًا؟',
+      faq2Answer: 'نعم، نقدم خدمات التحديث مقابل رسوم رمزية بعد المراجعات الأولية الخاصة بك.',
+      faq3Question: 'هل تقدمون خيارات نطاق مخصصة؟',
+      faq3Answer: 'حاليًا نقدم فقط نطاقات فرعية من foliozone.com، ولكن النطاقات المخصصة قريبًا!',
+      footerAbout: 'خدمة إنشاء محافظ احترافية للأفراد في جميع المهن.',
+      footerLinksTitle: 'روابط سريعة',
+      footerLegalTitle: 'قانوني',
+      footerConnectTitle: 'تواصل معنا',
+      footerLink1: 'الميزات',
+      footerLink2: 'كيف يعمل',
+      footerLink3: 'التسعير',
+      footerLink4: 'اتصل بنا',
+      footerLegal1: 'شروط الخدمة',
+      footerLegal2: 'سياسة الخصوصية',
+      footerLegal3: 'سياسة الاسترداد',
+      footerCopyright: '© 2025 فوليوزون. جميع الحقوق محفوظة.',
+      navFeatures: 'الميزات',
+      navHowItWorks: 'كيف نعمل',
+      navPricing: 'التسعير',
+      heroCtaRequest: 'اطلب محفظتك',
+      heroCtaHowItWorks: 'كيف يعمل',
+    }
+  };
 
-    <!-- Pricing Section -->
-    <section class="py-20 bg-gray-50" id="pricing">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-left rtl:text-right mb-4" id="pricingTitle">Simple, Transparent Pricing</h2>
-            <p class="text-xl text-left rtl:text-right text-gray-600 mb-16 max-w-3xl mx-auto" id="pricingSubtitle">Choose the package that fits your needs</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <!-- Starter -->
-                <div class="pricing-card bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-bold text-left rtl:text-right mb-2" id="starterTitle">Starter</h3>
-                    <div class="text-4xl font-bold text-left rtl:text-right mb-6">$19</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="starterFeature1">Basic portfolio design</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="starterFeature2">1 revision included</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="starterFeature3">Standard sections</span>
-                        </li>
-                        <li class="flex items-center text-gray-400">
-                            <i class="fas fa-times text-gray-400 mr-2"></i>
-                            <span id="starterFeature4">No custom branding</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="cta-button block text-left rtl:text-right bg-indigo-600 text-white font-bold py-3 px-6 rounded-full">Get Started</a>
-                </div>
-                
-                <!-- Pro -->
-                <div class="pricing-card bg-white p-8 rounded-xl shadow-lg border-2 border-indigo-500 transform scale-105">
-                    <div class="bg-indigo-600 text-white text-sm font-bold px-3 py-1 rounded-full inline-block absolute -top-3 left-1/2 transform -translate-x-1/2" id="popularLabel">MOST POPULAR</div>
-                    <h3 class="text-xl font-bold text-left rtl:text-right mb-2" id="proTitle">Pro</h3>
-                    <div class="text-4xl font-bold text-left rtl:text-right mb-6">$39</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="proFeature1">Custom portfolio design</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="proFeature2">3 revisions included</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="proFeature3">Extended sections</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="proFeature4">Basic branding</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="cta-button block text-left rtl:text-right bg-indigo-600 text-white font-bold py-3 px-6 rounded-full">Get Started</a>
-                </div>
-                
-                <!-- Premium -->
-                <div class="pricing-card bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-bold text-left rtl:text-right mb-2" id="premiumTitle">Premium</h3>
-                    <div class="text-4xl font-bold text-left rtl:text-right mb-6">$79</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="premiumFeature1">Fully custom design</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="premiumFeature2">Unlimited revisions</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="premiumFeature3">Multiple sections</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span id="premiumFeature4">Full branding package</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="cta-button block text-left rtl:text-right bg-indigo-600 text-white font-bold py-3 px-6 rounded-full">Get Started</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  // Update text content helper
+  function updateText(lang) {
+    const texts = translations[lang];
+    for (const id in texts) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = texts[id];
+      }
+    }
+  }
 
-    <!-- Testimonials Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-left rtl:text-right mb-4" id="testimonialsTitle">What Our Clients Say</h2>
-            <p class="text-xl text-left rtl:text-right text-gray-600 mb-16 max-w-3xl mx-auto" id="testimonialsSubtitle">Professionals who trusted Portori with their online presence</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Testimonial 1 -->
-                <div class="bg-gray-50 p-8 rounded-xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center">
-                            <i class="fas fa-user text-indigo-600 text-xl"></i>
-                        </div>
-                        <div class="ml-4">
-                            <div class="font-bold text-gray-800" id="testimonial1Name">Sarah K.</div>
-                            <div class="text-gray-600 text-sm" id="testimonial1Role">UX Designer</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600" id="testimonial1Text">"Portori created a stunning portfolio for me in just 2 days. The design perfectly captured my aesthetic and helped me land two new clients within a week!"</p>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="bg-gray-50 p-8 rounded-xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                            <i class="fas fa-user text-blue-600 text-xl"></i>
-                        </div>
-                        <div class="ml-4">
-                            <div class="font-bold text-gray-800" id="testimonial2Name">Ahmed R.</div>
-                            <div class="text-gray-600 text-sm" id="testimonial2Role">Software Engineer</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600" id="testimonial2Text">"As a developer, I wanted to showcase my projects professionally but didn't have time to build a portfolio. Portori delivered exactly what I needed."</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  // Toggle language & direction
+  languageSwitch.addEventListener('click', () => {
+    isEnglish = !isEnglish;
+    if (isEnglish) {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+      currentLang.textContent = 'English';
+      updateText('en');
+    } else {
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      currentLang.textContent = 'العربية';
+      updateText('ar');
+    }
+    // Close mobile menu if open on language switch
+    if (!mobileMenu.classList.contains('hidden')) {
+      mobileMenu.classList.add('hidden');
+    }
+  });
 
-    <!-- Contact Section -->
-    <section class="py-20 bg-indigo-600 text-white" id="contact">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-left rtl:text-right mb-4" id="contactTitle">Ready for Your Professional Portfolio?</h2>
-            <p class="text-xl text-left rtl:text-right mb-16 max-w-3xl mx-auto opacity-90" id="contactSubtitle">Send us your details and we'll create your personalized portfolio page.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                <!-- Contact Form -->
-                <div class="bg-white rounded-xl shadow-xl p-8 text-gray-800">
-                    <h3 class="text-2xl font-bold mb-6" id="formTitle">Send Us Your Details</h3>
-                    <form id="portfolioRequestForm">
-                        <div class="mb-4">
-                            <label for="name" class="block text-gray-700 mb-2" id="nameLabel">Your Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                        </div>
-                        <div class="mb-4">
-                            <label for="email" class="block text-gray-700 mb-2" id="emailLabel">Email Address</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                        </div>
-                        <div class="mb-4">
-                            <label for="profession" class="block text-gray-700 mb-2" id="professionLabel">Your Profession</label>
-                            <select id="profession" class="custom-picker w-full px-4 py-2 border-2 border-indigo-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                                <option value="" id="selectDefault">Select your profession</option>
-                                <option value="developer" id="selectDeveloper">Developer</option>
-                                <option value="designer" id="selectDesigner">Designer</option>
-                                <option value="marketer" id="selectMarketer">Marketer</option>
-                                <option value="writer" id="selectWriter">Writer</option>
-                                <option value="photographer" id="selectPhotographer">Photographer</option>
-                                <option value="consultant" id="selectConsultant">Consultant</option>
-                                <option value="other" id="selectOther">Other</option>
-                            </select>
-                        </div>
-                        <div class="mb-4">
-                            <label for="package" class="block text-gray-700 mb-2" id="packageLabel">Package</label>
-                            <select id="package" class="custom-picker w-full px-4 py-2 border-2 border-indigo-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                                <option value="starter" id="packageStarter">Starter ($19)</option>
-                                <option value="pro" id="packagePro">Pro ($39)</option>
-                                <option value="premium" id="packagePremium">Premium ($79)</option>
-                            </select>
-                        </div>
-                        <div class="mb-6">
-                            <label for="message" class="block text-gray-700 mb-2" id="messageLabel">Additional Details (or paste your CV/LinkedIn)</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-full hover:bg-indigo-700 transition" id="submitButton">Request Portfolio</button>
-                    </form>
-                </div>
-                
-                <!-- Contact Info -->
-                <div class="flex flex-col justify-center">
-                    <div class="mb-8">
-                        <h3 class="text-2xl font-bold mb-4" id="contactInfoTitle">Other Ways to Reach Us</h3>
-                        <p class="opacity-90 mb-6" id="contactInfoText">Prefer to contact us directly? Here are alternative ways to get in touch.</p>
-                        
-                        <div class="flex items-center mb-4">
-                            <div class="bg-white bg-opacity-20 rounded-full w-12 h-12 flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope text-xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-bold">Email</div>
-                                <div class="opacity-90">hello@portori.com</div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center mb-4">
-                            <div class="bg-white bg-opacity-20 rounded-full w-12 h-12 flex items-center justify-center mr-4">
-                                <i class="fab fa-whatsapp text-xl" onclick="window.open('https://wa.me/YOURNUMBER', '_blank')"></i>
-                            </div>
-                            <div>
-                                <div class="font-bold">WhatsApp</div>
-                                <div class="opacity-90">+1 (555) 123-4567</div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <div class="bg-white bg-opacity-20 rounded-full w-12 h-12 flex items-center justify-center mr-4">
-                                <i class="fas fa-phone-alt text-xl" onclick="window.location.href='tel:YOURNUMBER'"></i>
-                            </div>
-                            <div>
-                                <div class="font-bold">Phone</div>
-                                <div class="opacity-90">+1 (555) 123-4567</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white bg-opacity-10 p-6 rounded-xl">
-                        <h4 class="font-bold mb-3" id="faqTitle">Frequently Asked Questions</h4>
-                        
-                        <div class="mb-4 pb-4 border-b border-white border-opacity-20">
-                            <div class="font-medium mb-1" id="faq1Question">How long does it take to get my portfolio?</div>
-                            <div class="text-sm opacity-90" id="faq1Answer">Typically 1-3 business days depending on the package you choose.</div>
-                        </div>
-                        
-                        <div class="mb-4 pb-4 border-b border-white border-opacity-20">
-                            <div class="font-medium mb-1" id="faq2Question">Can I update my portfolio later?</div>
-                            <div class="text-sm opacity-90" id="faq2Answer">Yes, we offer update services for a small fee after your initial revisions.</div>
-                        </div>
-                        
-                        <div>
-                            <div class="font-medium mb-1" id="faq3Question">Do you offer custom domain options?</div>
-                            <div class="text-sm opacity-90" id="faq3Answer">Currently we only offer subdomains of portori.com, but custom domains are coming soon!</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  // Update sample URL based on name input
+  const nameInput = document.getElementById('name');
+  const sampleUrl = document.getElementById('sampleUrl');
+  const demoName = document.getElementById('demoName');
+  const demoProfession = document.getElementById('demoProfession');
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Portori</h3>
-                    <p class="text-gray-400" id="footerAbout">Professional portfolio creation service for individuals across all professions.</p>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4" id="footerLinksTitle">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#features" class="text-gray-400 hover:text-white transition" id="footerLink1">Features</a></li>
-                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition" id="footerLink2">How It Works</a></li>
-                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition" id="footerLink3">Pricing</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition" id="footerLink4">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4" id="footerLegalTitle">Legal</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" id="footerLegal1">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" id="footerLegal2">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" id="footerLegal3">Refund Policy</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4" id="footerConnectTitle">Connect With Us</h4>
-                    <div class="flex space-x-4 mb-4">
-                        <a href="https://twitter.com/YOURPROFILE" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-xl"></i></a>
-                        <a href="https://linkedin.com/in/YOURPROFILE" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin text-xl"></i></a>
-                        <a href="https://instagram.com/YOURPROFILE" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
-                        <a href="https://facebook.com/YOURPROFILE" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
-                    </div>
-                    <p class="text-gray-400 text-sm" id="footerCopyright">© 2023 Portori. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+  nameInput.addEventListener('input', () => {
+    const val = nameInput.value.trim().toLowerCase().replace(/\s+/g, '-');
+    sampleUrl.textContent = val || (isEnglish ? 'your-name' : 'اسمك');
+    demoName.textContent = nameInput.value || (isEnglish ? 'Your Name' : 'اسمك');
+  });
 
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobileMenuButton').addEventListener('click', function() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        });
+  // Optionally update profession demo text when profession select changes
+  const professionSelect = document.getElementById('profession');
+  professionSelect.addEventListener('change', () => {
+    const selected = professionSelect.options[professionSelect.selectedIndex].text;
+    demoProfession.textContent = selected || (isEnglish ? 'Your Profession' : 'مهنتك');
+  });
 
-        // Language switch functionality
-        const languageSwitch = document.getElementById('languageSwitch');
-        const currentLang = document.getElementById('currentLang');
-        let isEnglish = true;
 
-        // Arabic translations
-        const arabicTranslations = {
-            // Hero Section
-            'heroTitle': 'حافظتك المهنية، بكل بساطة',
-            'heroSubtitle': 'أرسل لنا سيرتك الذاتية واحصل على صفحة محفظة جميلة ومخصصة في أي وقت من الأوقات. مثالي للمحترفين في أي مجال.',
-            'sampleUrl': 'اسمك',
-            
-            // Features
-            'featuresTitle': 'لماذا تختار بوريتوري؟',
-            'featuresSubtitle': 'نقوم بإنشاء محافظ احترافية تساعدك على التميز، دون عناء بنائها بنفسك.',
-            'feature1Title': 'تسليم سريع',
-            'feature1Text': 'احصل على محفظتك جاهزة في أقل من 24 ساعة بعد إرسال تفاصيلك.',
-            'feature2Title': 'تصاميم مخصصة',
-            'feature2Text': 'تم تصميم كل محفظة بشكل فريد لتتناسب مع مهنتك وعلامتك التجارية الشخصية.',
-            'feature3Title': 'مشاركة بسيطة',
-            'feature3Text': 'عنوان URL نظيف واحترافي يسهل مشاركته في أي مكان - LinkedIn أو السير الذاتية أو وسائل التواصل الاجتماعي.',
-            
-            // Professions
-            'professionsTitle': 'مثالي لجميع المهن',
-            'professionsSubtitle': 'نقوم بإنشاء محافظ مصممة خصيصًا لمجالك واحتياجاتك المحددة.',
-            'profession1': 'المطورون',
-            'profession2': 'المصممون',
-            'profession3': 'مسوقون',
-            'profession4': 'كتاب',
-            'profession5': 'مصورون',
-            'profession6': 'استشاريون',
-            
-            // How It Works
-            'howItWorksTitle': 'كيف يعمل',
-            'howItWorksSubtitle': 'الحصول على محفظتك المهنية سريع وسهل',
-            'step1Title': 'إرسال تفاصيلك',
-            'step1Text': 'أرسل لنا سيرتك الذاتية أو ملف LinkedIn الخاص بك أو أي معلومات مهنية ترغب في تضمينها عبر البريد الإلكتروني أو نموذج الاتصال الخاص بنا.',
-            'step2Title': 'نقوم بتصميم محفظتك',
-            'step2Text': 'يقوم فريقنا بإنشاء صفحة محفظة احترافية مخصصة مصممة خصيصًا لمهنتك وعلامتك التجارية الشخصية.',
-            'step3Title': 'احصل على رابطك المباشر',
-            'step3Text': 'احصل على عنوان URL نظيف واحترافي (مثل portori.com/اسمك) يمكنك مشاركته في أي مكان لعرض عملك.',
-            
-            // Pricing
-            'pricingTitle': 'أسعار بسيطة وشفافة',
-            'pricingSubtitle': 'اختر الباقة التي تناسب احتياجاتك',
-            'starterTitle': 'البداية',
-            'starterFeature1': 'تصميم محفظة أساسي',
-            'starterFeature2': 'مراجعة واحدة متضمنة',
-            'starterFeature3': 'أقسام قياسية',
-            'starterFeature4': 'لا يوجد علامة تجارية مخصصة',
-            'proTitle': 'المحترف',
-            'proFeature1': 'تصميم محفظة مخصص',
-            'proFeature2': '3 مراجعات متضمنة',
-            'proFeature3': 'أقسام موسعة',
-            'proFeature4': 'علامة تجارية أساسية',
-            'premiumTitle': 'المتميز',
-            'premiumFeature1': 'تصميم مخصص بالكامل',
-            'premiumFeature2': 'مراجعات غير محدودة',
-            'premiumFeature3': 'أقسام متعددة',
-            'premiumFeature4': 'حزمة علامة تجارية كاملة',
-            'popularLabel': 'الأكثر شعبية',
-            
-            // Testimonials
-            'testimonialsTitle': 'ما يقوله عملاؤنا',
-            'testimonialsSubtitle': 'المحترفون الذين وثقوا في بوريتوري لوجودهم على الإنترنت',
-            'testimonial1Name': 'سارة ك.',
-            'testimonial1Role': 'مصممة واجهة المستخدم',
-            'testimonial1Text': '"قامت بوريتوري بإنشاء محفظة رائعة لي في يومين فقط. التصميم يعكس تمامًا ذوقي وساعدني في الحصول على عميلين جديدين في غضون أسبوع!"',
-            'testimonial2Name': 'أحمد ر.',
-            'testimonial2Role': 'مهندس برمجيات',
-            'testimonial2Text': '"كمطور، أردت عرض مشاريعي بشكل احترافي ولكن لم يكن لدي الوقت لبناء محفظة. قدمت بوريتوري بالضبط ما أحتاجه."',
-            
-            // Contact
-            'contactTitle': 'هل أنت مستعد لمحفظتك المهنية؟',
-            'contactSubtitle': 'أرسل لنا تفاصيلك وسنقوم بإنشاء صفحة المحفظة المخصصة الخاصة بك.',
-            'formTitle': 'أرسل لنا تفاصيلك',
-            'nameLabel': 'اسمك',
-            'emailLabel': 'عنوان البريد الإلكتروني',
-            'professionLabel': 'مهنتك',
-            'selectDefault': 'اختر مهنتك',
-            'selectDeveloper': 'مطور',
-            'selectDesigner': 'مصمم',
-            'selectMarketer': 'مسوق',
-            'selectWriter': 'كاتب',
-            'selectPhotographer': 'مصور',
-            'selectConsultant': 'استشاري',
-            'selectOther': 'آخر',
-            'packageLabel': 'الباقة',
-            'packageStarter': 'البداية ($19)',
-            'packagePro': 'المحترف ($39)',
-            'packagePremium': 'المتميز ($79)',
-            'messageLabel': 'تفاصيل إضافية (أو الصق سيرتك الذاتية/LinkedIn)',
-            'submitButton': 'طلب المحفظة',
-            'contactInfoTitle': 'طرق أخرى للوصول إلينا',
-            'contactInfoText': 'تفضل الاتصال بنا مباشرة؟ إليك طرق بديلة للتواصل.',
-            'faqTitle': 'أسئلة مكررة',
-            'faq1Question': 'كم من الوقت يستغرق الحصول على محفظتي؟',
-            'faq1Answer': 'عادةً من 1 إلى 3 أيام عمل حسب الباقة التي تختارها.',
-            'faq2Question': 'هل يمكنني تحديث محفظتي لاحقًا؟',
-            'faq2Answer': 'نعم، نقدم خدمات التحديث مقابل رسوم رمزية بعد المراجعات الأولية الخاصة بك.',
-            'faq3Question': 'هل تقدمون خيارات نطاق مخصصة؟',
-            'faq3Answer': 'حاليًا نقدم فقط نطاقات فرعية من portori.com، ولكن النطاقات المخصصة قريبًا!',
-            
-            // Footer
-            'footerAbout': 'خدمة إنشاء محافظ احترافية للأفراد في جميع المهن.',
-            'footerLinksTitle': 'روابط سريعة',
-            'footerLink1': 'الميزات',
-            'footerLink2': 'كيف يعمل',
-            'footerLink3': 'التسعير',
-            'footerLink4': 'اتصل بنا',
-            'footerLegalTitle': 'قانوني',
-            'footerLegal1': 'شروط الخدمة',
-            'footerLegal2': 'سياسة الخصوصية',
-            'footerLegal3': 'سياسة الاسترداد',
-            'footerConnectTitle': 'تواصل معنا',
-            'footerCopyright': '© 2023 بوريتوري. جميع الحقوق محفوظة.'
-        };
+  emailjs.init('cp63z32jakqJ83_lH');
 
-        // English translations
-        const englishTranslations = {
-            // Hero Section
-            'heroTitle': 'Your Professional Portfolio, Made Simple',
-            'heroSubtitle': 'Send us your CV and get a beautiful, personalized portfolio page in no time. Perfect for professionals in any field.',
-            'sampleUrl': 'your-name',
-            
-            // Features
-            'featuresTitle': 'Why Choose Portori?',
-            'featuresSubtitle': 'We create professional portfolios that help you stand out, without the hassle of building it yourself.',
-            'feature1Title': 'Fast Turnaround',
-            'feature1Text': 'Get your portfolio ready in as little as 24 hours after submitting your details.',
-            'feature2Title': 'Custom Designs',
-            'feature2Text': 'Each portfolio is uniquely designed to match your profession and personal brand.',
-            'feature3Title': 'Simple Sharing',
-            'feature3Text': 'A clean, professional URL that\'s easy to share anywhere - LinkedIn, resumes, or social media.',
-            
-            // Professions
-            'professionsTitle': 'Perfect for All Professions',
-            'professionsSubtitle': 'We create portfolios tailored to your specific field and needs.',
-            'profession1': 'Developers',
-            'profession2': 'Designers',
-            'profession3': 'Marketers',
-            'profession4': 'Writers',
-            'profession5': 'Photographers',
-            'profession6': 'Consultants',
-            
-            // How It Works
-            'howItWorksTitle': 'How It Works',
-            'howItWorksSubtitle': 'Getting your professional portfolio is quick and easy',
-            'step1Title': 'Submit Your Details',
-            'step1Text': 'Send us your CV, LinkedIn profile, or any professional information you\'d like to include via email or our contact form.',
-            'step2Title': 'We Design Your Portfolio',
-            'step2Text': 'Our team creates a custom, professional portfolio page tailored to your profession and personal brand.',
-            'step3Title': 'Get Your Live Link',
-            'step3Text': 'Receive a clean, professional URL (like portori.com/your-name) that you can share anywhere to showcase your work.',
-            
-            // Pricing
-            'pricingTitle': 'Simple, Transparent Pricing',
-            'pricingSubtitle': 'Choose the package that fits your needs',
-            'starterTitle': 'Starter',
-            'starterFeature1': 'Basic portfolio design',
-            'starterFeature2': '1 revision included',
-            'starterFeature3': 'Standard sections',
-            'starterFeature4': 'No custom branding',
-            'proTitle': 'Pro',
-            'proFeature1': 'Custom portfolio design',
-            'proFeature2': '3 revisions included',
-            'proFeature3': 'Extended sections',
-            'proFeature4': 'Basic branding',
-            'premiumTitle': 'Premium',
-            'premiumFeature1': 'Fully custom design',
-            'premiumFeature2': 'Unlimited revisions',
-            'premiumFeature3': 'Multiple sections',
-            'premiumFeature4': 'Full branding package',
-            'popularLabel': 'MOST POPULAR',
-            
-            // Testimonials
-            'testimonialsTitle': 'What Our Clients Say',
-            'testimonialsSubtitle': 'Professionals who trusted Portori with their online presence',
-            'testimonial1Name': 'Sarah K.',
-            'testimonial1Role': 'UX Designer',
-            'testimonial1Text': '"Portori created a stunning portfolio for me in just 2 days. The design perfectly captured my aesthetic and helped me land two new clients within a week!"',
-            'testimonial2Name': 'Ahmed R.',
-            'testimonial2Role': 'Software Engineer',
-            'testimonial2Text': '"As a developer, I wanted to showcase my projects professionally but didn\'t have time to build a portfolio. Portori delivered exactly what I needed."',
-            
-            // Contact
-            'contactTitle': 'Ready for Your Professional Portfolio?',
-            'contactSubtitle': 'Send us your details and we\'ll create your personalized portfolio page.',
-            'formTitle': 'Send Us Your Details',
-            'nameLabel': 'Your Name',
-            'emailLabel': 'Email Address',
-            'professionLabel': 'Your Profession',
-            'selectDefault': 'Select your profession',
-            'selectDeveloper': 'Developer',
-            'selectDesigner': 'Designer',
-            'selectMarketer': 'Marketer',
-            'selectWriter': 'Writer',
-            'selectPhotographer': 'Photographer',
-            'selectConsultant': 'Consultant',
-            'selectOther': 'Other',
-            'packageLabel': 'Package',
-            'packageStarter': 'Starter ($19)',
-            'packagePro': 'Pro ($39)',
-            'packagePremium': 'Premium ($79)',
-            'messageLabel': 'Additional Details (or paste your CV/LinkedIn)',
-            'submitButton': 'Request Portfolio',
-            'contactInfoTitle': 'Other Ways to Reach Us',
-            'contactInfoText': 'Prefer to contact us directly? Here are alternative ways to get in touch.',
-            'faqTitle': 'Frequently Asked Questions',
-            'faq1Question': 'How long does it take to get my portfolio?',
-            'faq1Answer': 'Typically 1-3 business days depending on the package you choose.',
-            'faq2Question': 'Can I update my portfolio later?',
-            'faq2Answer': 'Yes, we offer update services for a small fee after your initial revisions.',
-            'faq3Question': 'Do you offer custom domain options?',
-            'faq3Answer': 'Currently we only offer subdomains of portori.com, but custom domains are coming soon!',
-            
-            // Footer
-            'footerAbout': 'Professional portfolio creation service for individuals across all professions.',
-            'footerLinksTitle': 'Quick Links',
-            'footerLink1': 'Features',
-            'footerLink2': 'How It Works',
-            'footerLink3': 'Pricing',
-            'footerLink4': 'Contact',
-            'footerLegalTitle': 'Legal',
-            'footerLegal1': 'Terms of Service',
-            'footerLegal2': 'Privacy Policy',
-            'footerLegal3': 'Refund Policy',
-            'footerConnectTitle': 'Connect With Us',
-            'footerCopyright': '© 2023 Portori. All rights reserved.'
-        };
+  document.getElementById('portfolioRequestForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const name = nameInput.value.trim();
+    const email = document.getElementById('email').value.trim();
+    const profession = professionSelect.value;
+    const packageSelect = document.getElementById('package').value;
 
-        // Function to update text content
-        function updateTextContent(translations) {
-            for (const [id, text] of Object.entries(translations)) {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.textContent = text;
-                }
-            }
+    if (!name || !email || !profession || !packageSelect) {
+      alert(isEnglish ? 'Please fill in all required fields.' : 'يرجى ملء جميع الحقول المطلوبة.');
+      return;
+    }
+
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      profession: profession,
+      package: packageSelect,
+    };
+
+    emailjs.send('service_foliozone', 'template_kvgqn3a', templateParams)
+      .then(() => {
+        alert(isEnglish
+          ? `Thank you, ${name}! Your portfolio request has been submitted. We'll contact you soon.`
+          : `شكرًا لك، ${name}! تم تقديم طلب المحفظة الخاص بك. سنتواصل معك قريبًا.`);
+        e.target.reset();
+        sampleUrl.textContent = isEnglish ? 'your-name' : 'اسمك';
+        demoName.textContent = isEnglish ? 'Your Name' : 'اسمك';
+        demoProfession.textContent = isEnglish ? 'Your Profession' : 'مهنتك';
+      }, (error) => {
+        alert(isEnglish
+          ? 'There was an error sending your request. Please try again later.'
+          : 'حدث خطأ أثناء إرسال الطلب. الرجاء المحاولة مرة أخرى لاحقًا.');
+        console.error('EmailJS Error:', error);
+      });
+  });
+
+  // // Form submit handling
+  // document.getElementById('portfolioRequestForm').addEventListener('submit', e => {
+  //   e.preventDefault();
+  //   const name = nameInput.value.trim();
+  //   const email = document.getElementById('email').value.trim();
+  //   const profession = professionSelect.value;
+  //   const packageSelect = document.getElementById('package').value;
+
+  //   if (!name || !email || !profession || !packageSelect) {
+  //     alert(isEnglish ? 'Please fill in all required fields.' : 'يرجى ملء جميع الحقول المطلوبة.');
+  //     return;
+  //   }
+  //   alert(
+  //     isEnglish
+  //       ? `Thank you, ${name}! Your portfolio request has been submitted. We'll contact you soon.`
+  //       : `شكرًا لك، ${name}! تم تقديم طلب المحفظة الخاص بك. سنتواصل معك قريبًا.`
+  //   );
+  //   e.target.reset();
+  //   sampleUrl.textContent = isEnglish ? 'your-name' : 'اسمك';
+  //   demoName.textContent = isEnglish ? 'Your Name' : 'اسمك';
+  //   demoProfession.textContent = isEnglish ? 'Your Profession' : 'مهنتك';
+  // });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = anchor.getAttribute('href');
+      if (targetId === '#') return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
         }
-
-        // Function to toggle RTL
-        function toggleRTL(enableRTL) {
-            if (enableRTL) {
-                document.documentElement.setAttribute('dir', 'rtl');
-                document.documentElement.setAttribute('lang', 'ar');
-            } else {
-                document.documentElement.removeAttribute('dir');
-                document.documentElement.setAttribute('lang', 'en');
-            }
-        }
-
-        // Language switch event
-        languageSwitch.addEventListener('click', function() {
-            isEnglish = !isEnglish;
-            
-            if (isEnglish) {
-                currentLang.textContent = 'English';
-                updateTextContent(englishTranslations);
-                toggleRTL(false);
-            } else {
-                currentLang.textContent = 'العربية';
-                updateTextContent(arabicTranslations);
-                toggleRTL(true);
-            }
-        });
-
-        // Form submission
-        document.getElementById('portfolioRequestForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const profession = document.getElementById('profession').value;
-            const package = document.getElementById('package').value;
-            const message = document.getElementById('message').value;
-            
-            // Simple validation
-            if (!name || !email || !profession || !package) {
-                alert(isEnglish ? 'Please fill in all required fields.' : 'يرجى ملء جميع الحقول المطلوبة.');
-                return;
-            }
-            
-            // In a real application, you would send this data to your server
-            alert(isEnglish 
-                ? `Thank you, ${name}! Your portfolio request has been submitted. We'll contact you soon.` 
-                : `شكرًا لك، ${name}! تم تقديم طلب المحفظة الخاص بك. سنتواصل معك قريبًا.`);
-            
-            // Reset form
-            this.reset();
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobileMenu');
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                }
-            });
-        });
-
-        // Change sample URL on input
-        document.getElementById('name').addEventListener('input', function() {
-            const name = this.value.trim().toLowerCase().replace(/\s+/g, '-');
-            const sampleUrl = document.getElementById('sampleUrl');
-            sampleUrl.textContent = name || 'your-name';
-        });
-    </script>
+      }
+    });
+  });
+</script>
 </body>
+
 </html>
