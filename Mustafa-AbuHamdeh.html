@@ -104,8 +104,13 @@
                 <div class="md:w-1/2 flex justify-center animate-fade-in" style="animation-delay: 0.3s;">
                     <div class="relative">
                         <div class="w-64 h-64 md:w-80 md:h-80 bg-indigo-100 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                            <!-- Placeholder for profile image -->
-                            <div class="w-full h-full bg-indigo-200 flex items-center justify-center">
+                             <!-- Profile image -->
+                            <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Mustafa-Abuhamdeh.jpg" 
+                                 alt="Mustafa Abuhamdeh" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <!-- Fallback if image fails to load -->
+                            <div class="w-full h-full bg-indigo-200 flex items-center justify-center" style="display: none;">
                                 <i class="fas fa-user text-indigo-500 text-6xl"></i>
                             </div>
                         </div>
