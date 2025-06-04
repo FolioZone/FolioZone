@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Mobaideen - Promo Producer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            scroll-behavior: smooth;
+        }
+        
+        .glow-card:hover {
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
+        }
+        
+        .skill-bar {
+            background: #1e293b;
+            height: 10px;
+            border-radius: 5px;
+        }
+        
+        .skill-progress {
+            background: linear-gradient(90deg, #3b82f6, #9333ea);
+            height: 100%;
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -42px;
+            top: 10px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #9333ea);
+            border: 4px solid #0f172a;
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.3);
+            z-index: 1;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #3b82f6, #9333ea, transparent);
+            background-size: 100% 200%;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-gray-900/80 backdrop-blur-md z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-bold text-blue-400 flex items-center">
+                        <span class="mr-2"><i class="fas fa-film"></i></span>
+                        MOBAIDEEN
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="text-blue-400 hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium transition">Home</a>
+                        <a href="#about" class="text-gray-300 hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium transition">About</a>
+                        <a href="#experience" class="text-gray-300 hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium transition">Experience</a>
+                        <a href="#skills" class="text-gray-300 hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium transition">Skills</a>
+                        <a href="#contact" class="text-gray-300 hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium transition">Contact</a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="menu-toggle" class="bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-blue-300 hover:bg-gray-800 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-blue-400 hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="text-gray-300 hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#experience" class="text-gray-300 hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium">Experience</a>
+                <a href="#skills" class="text-gray-300 hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="#contact" class="text-gray-300 hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0 fade-in">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Hi, I'm <span class="text-white">Mohammad</span></h1>
+                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300">Promo Producer & Video Editor</h2>
+                <p class="text-lg text-gray-400 mb-8 max-w-lg">Video Editor and Videographer with more than 5 years' experience in education and TV industry. I create outstanding promotions that attract audiences and elevate the viewing experience.</p>
+                <div class="flex space-x-4">
+                    <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition transform hover:-translate-y-1">
+                        Contact Me
+                    </a>
+                    <a href="#experience" class="border border-blue-400 text-blue-400 hover:bg-blue-900/30 px-6 py-3 rounded-lg font-medium transition transform hover:-translate-y-1">
+                        View Work
+                    </a>
+                </div>
+                
+                <div class="mt-12 flex space-x-6">
+                    <a href="mailto:m.mobaideen97@gmail.com" class="text-gray-400 hover:text-blue-400 transition">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </a>
+                    <a href="tel:+962772330023" class="text-gray-400 hover:text-blue-400 transition">
+                        <i class="fas fa-phone text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 flex justify-center fade-in">
+                <div class="relative">
+                    <div class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center floating">
+                        <div class="w-60 h-60 md:w-72 md:h-72 bg-gray-800 rounded-full overflow-hidden border-4 border-gray-700">
+                            <img src="https://randomuser.me/api/portraits/lego/1.jpg" alt="Profile" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-5 -left-5 bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-700">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                            <span class="text-xs text-gray-300">Available for work</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gray-800/50 rounded-xl my-10">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl font-bold text-white mb-2">About Me</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="fade-in">
+                <h3 class="text-xl font-semibold text-blue-400 mb-4">Objective</h3>
+                <p class="text-gray-400 mb-6">Creative Promo Producer and Video Editor with extensive experience in television and education industries. I specialize in creating compelling visual content that engages audiences and enhances brand identity.</p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1 text-blue-400">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white">Education</h4>
+                            <p class="text-sm text-gray-400">Master of Mechatronics Engineering – Very Good - AlBalqaa Applied University</p>
+                            <p class="text-sm text-gray-400">Bachelor of Autotronics Engineering - AlBalqaa Applied University 2015-2019</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1 text-blue-400">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white">Location</h4>
+                            <p class="text-sm text-gray-400">Amman, Jordan</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1 text-blue-400">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white">Tools & Equipment</h4>
+                            <p class="text-sm text-gray-400">Adobe Premiere Pro, After Effects, Photoshop, Blender, Sony & Canon Cameras</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fade-in">
+                <h3 class="text-xl font-semibold text-blue-400 mb-4">Specializations</h3>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-medium text-white mb-1">Video Production</h4>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium text-white mb-1">Promo Creation</h4>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium text-white mb-1">Live Streaming</h4>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium text-white mb-1">Video Editing</h4>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 98%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-4">Work Philosophy</h3>
+                    <p class="text-gray-400">I believe in combining technical expertise with creative vision to produce content that not only meets but exceeds expectations. My engineering background gives me a unique perspective on problem-solving in media production.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl font-bold text-white mb-2">Professional Experience</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+        </div>
+        
+        <div class="relative timeline pl-10">
+            <!-- Current Role -->
+            <div class="mb-12 relative timeline-item fade-in">
+                <div class="bg-gray-800/50 p-6 rounded-xl glow-card hover:border-l-4 hover:border-blue-400 transition-all duration-300">
+                    <div class="flex flex-col sm:flex-row justify-between mb-2">
+                        <h3 class="text-xl font-semibold text-blue-400">Promo Producer</h3>
+                        <span class="text-gray-400 text-sm">APR 2023 - Present</span>
+                    </div>
+                    <h4 class="text-gray-300 mb-4">AlMamlaka TV</h4>
+                    <ul class="text-gray-400 space-y-2">
+                        <li class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <span>Create outstanding promotions that attract audiences and elevate the viewing experience of the Channel</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <span>Work with Marketing, Digital and Programming departments to develop unique branded promotions</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Production Team Leader -->
+            <div class="mb-12 relative timeline-item fade-in">
+                <div class="bg-gray-800/50 p-6 rounded-xl glow-card hover:border-l-4 hover:border-blue-400 transition-all duration-300">
+                    <div class="flex flex-col sm:flex-row justify-between mb-2">
+                        <h3 class="text-xl font-semibold text-blue-400">Production Team Leader</h3>
+                        <span class="text-gray-400 text-sm">SEP 2020 – APR 2023</span>
+                    </div>
+                    <h4 class="text-gray-300 mb-4">Jo Academy</h4>
+                    <ul class="text-gray-400 space-y-2">
+                        <li class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <span>Making promos for different services of the company</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <span>Shooting Videos for social media accounts that achieve the requirement of the platforms</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <span>Shooting and editing educational courses</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <span>Professional Live streaming on social media for many programs</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <span>Teaching and training promo performers (teachers, students and teammates)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Animator -->
+            <div class="mb-12 relative timeline-item fade-in">
+                <div class="bg-gray-800/50 p-6 rounded-xl glow-card hover:border-l-4 hover:border-blue-400 transition-all duration-300">
+                    <div class="flex flex-col sm:flex-row justify-between mb-2">
+                        <h3 class="text-xl font-semibold text-blue-400">Animator</h3>
+                        <span class="text-gray-400 text-sm">MAY 2020 – AUG 2020</span>
+                    </div>
+                    <h4 class="text-gray-300 mb-4">Circle4Media</h4>
+                    <ul class="text-gray-400 space-y-2">
+                        <li class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <span>Animating and recreation courses</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gray-800/50 rounded-xl my-10">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl font-bold text-white mb-2">My Skills</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-10">
+            <!-- Video/Technical Skills -->
+            <div class="fade-in">
+                <div class="flex items-center mb-6">
+                    <div class="mr-4 bg-blue-900/50 text-blue-400 p-3 rounded-lg">
+                        <i class="fas fa-video text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">Video & Technical Skills</h3>
+                </div>
+                
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Video Editing</span>
+                            <span class="text-blue-400">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Video Shooting</span>
+                            <span class="text-blue-400">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Directing Background</span>
+                            <span class="text-blue-400">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Live Streaming</span>
+                            <span class="text-blue-400">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Film and Lighting</span>
+                            <span class="text-blue-400">87%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 87%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- General Skills -->
+            <div class="fade-in">
+                <div class="flex items-center mb-6">
+                    <div class="mr-4 bg-purple-900/50 text-purple-400 p-3 rounded-lg">
+                        <i class="fas fa-star text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">General & Soft Skills</h3>
+                </div>
+                
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Time Management</span>
+                            <span class="text-blue-400">92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Social Media</span>
+                            <span class="text-blue-400">89%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 89%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Photographing</span>
+                            <span class="text-blue-400">86%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 86%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Leadership</span>
+                            <span class="text-blue-400">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Teamwork</span>
+                            <span class="text-blue-400">94%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 94%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tools & Software -->
+        <div class="mt-16 fade-in">
+            <div class="flex items-center mb-8">
+                <div class="mr-4 bg-indigo-900/50 text-indigo-400 p-3 rounded-lg">
+                    <i class="fas fa-tools text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white">Software Proficiency</h3>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-gray-900/50 rounded-lg p-4 flex flex-col items-center transition transform hover:scale-105">
+                    <div class="w-12 h-12 mb-3 bg-blue-900/20 rounded-full flex items-center justify-center text-blue-400">
+                        <i class="fab fa-adobe text-2xl"></i>
+                    </div>
+                    <span class="text-gray-300">Adobe Premiere Pro</span>
+                </div>
+                
+                <div class="bg-gray-900/50 rounded-lg p-4 flex flex-col items-center transition transform hover:scale-105">
+                    <div class="w-12 h-12 mb-3 bg-purple-900/20 rounded-full flex items-center justify-center text-purple-400">
+                        <i class="fab fa-adobe text-2xl"></i>
+                    </div>
+                    <span class="text-gray-300">Adobe After Effects</span>
+                </div>
+                
+                <div class="bg-gray-900/50 rounded-lg p-4 flex flex-col items-center transition transform hover:scale-105">
+                    <div class="w-12 h-12 mb-3 bg-pink-900/20 rounded-full flex items-center justify-center text-pink-400">
+                        <i class="fab fa-adobe text-2xl"></i>
+                    </div>
+                    <span class="text-gray-300">Adobe Photoshop</span>
+                </div>
+                
+                <div class="bg-gray-900/50 rounded-lg p-4 flex flex-col items-center transition transform hover:scale-105">
+                    <div class="w-12 h-12 mb-3 bg-orange-900/20 rounded-full flex items-center justify-center text-orange-400">
+                        <i class="fas fa-cube text-2xl"></i>
+                    </div>
+                    <span class="text-gray-300">Blender</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl font-bold text-white mb-2">Get In Touch</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-10">
+            <!-- Contact Info -->
+            <div class="fade-in">
+                <h3 class="text-xl font-semibold text-blue-400 mb-6">Contact Information</h3>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1 text-blue-400">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white">Email</h4>
+                            <a href="mailto:m.mobaideen97@gmail.com" class="text-gray-400 hover:text-blue-400 transition">m.mobaideen97@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1 text-blue-400">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white">Phone</h4>
+                            <a href="tel:+962772330023" class="text-gray-400 hover:text-blue-400 transition">+962 77 2330023</a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1 text-blue-400">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white">Location</h4>
+                            <p class="text-gray-400">Amman, Jordan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-10">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-6">Follow Me</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/in/mohammad-mobaideen-37a468194/" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://drive.google.com/drive/folders/1z27BmwqarYplmgIWimOKVz-CmCqQuQDe?usp=drive_link" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-yellow-600 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition">
+                            <i class="fab fa-google-drive"></i>
+                        </a>
+                        <a href="https://www.instagram.com/art_by_moh?igsh=OGt6YnA4MDRlNXVp" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Creative Contact Methods -->
+            <div class="fade-in">
+                <h3 class="text-xl font-semibold text-blue-400 mb-6">Quick Contact</h3>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <!-- Email Card -->
+                    <a href="mailto:m.mobaideen97@gmail.com" class="bg-gradient-to-br from-blue-900/50 to-blue-500/20 p-4 rounded-xl border border-blue-800/50 hover:border-blue-400 transition-all group">
+                        <div class="flex items-center">
+                            <div class="mr-4 text-blue-400 group-hover:text-white transition">
+                                <i class="fas fa-paper-plane text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-blue-300 group-hover:text-blue-100 transition">Let's discuss</p>
+                                <h4 class="font-medium text-white group-hover:text-blue-200 transition">Send Email</h4>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- WhatsApp Card -->
+                    <a href="https://wa.me/962772330023" target="_blank" class="bg-gradient-to-br from-green-900/50 to-green-500/20 p-4 rounded-xl border border-green-800/50 hover:border-green-400 transition-all group">
+                        <div class="flex items-center">
+                            <div class="mr-4 text-green-400 group-hover:text-white transition">
+                                <i class="fab fa-whatsapp text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-green-300 group-hover:text-green-100 transition">Chat with me</p>
+                                <h4 class="font-medium text-white group-hover:text-green-200 transition">WhatsApp</h4>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Drive Portfolio Card -->
+                    <a href="https://drive.google.com/drive/folders/1z27BmwqarYplmgIWimOKVz-CmCqQuQDe?usp=drive_link" target="_blank" class="bg-gradient-to-br from-yellow-900/50 to-yellow-500/20 p-4 rounded-xl border border-yellow-800/50 hover:border-yellow-400 transition-all group">
+                        <div class="flex items-center">
+                            <div class="mr-4 text-yellow-400 group-hover:text-white transition">
+                                <i class="fab fa-google-drive text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-yellow-300 group-hover:text-yellow-100 transition">View my work</p>
+                                <h4 class="font-medium text-white group-hover:text-yellow-200 transition">Portfolio</h4>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Calendar Card -->
+                    <a href="#" class="bg-gradient-to-br from-purple-900/50 to-purple-500/20 p-4 rounded-xl border border-purple-800/50 hover:border-purple-400 transition-all group">
+                        <div class="flex items-center">
+                            <div class="mr-4 text-purple-400 group-hover:text-white transition">
+                                <i class="fas fa-calendar-alt text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-purple-300 group-hover:text-purple-100 transition">Schedule meeting</p>
+                                <h4 class="font-medium text-white group-hover:text-purple-200 transition">Availability</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-gray-900/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-xl font-bold text-blue-400 flex items-center">
+                        <span class="mr-2"><i class="fas fa-film"></i></span>
+                        MOBAIDEEN
+                    </a>
+                </div>
+                
+                <div class="text-center text-gray-400 text-sm mb-4 md:mb-0">
+                    <p>© 2025 Mohammad Mobaideen. All rights reserved.</p>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="https://www.linkedin.com/in/mohammad-mobaideen-37a468194/" target="_blank" class="text-gray-400 hover:text-blue-600 transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1z27BmwqarYplmgIWimOKVz-CmCqQuQDe?usp=drive_link" target="_blank" class="text-gray-400 hover:text-yellow-600 transition">
+                        <i class="fab fa-google-drive"></i>
+                    </a>
+                    <a href="https://www.instagram.com/art_by_moh?igsh=OGt6YnA4MDRlNXVp" target="_blank" class="text-gray-400 hover:text-pink-600 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/962772330023" target="_blank" class="text-gray-400 hover:text-green-500 transition">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white text-xl shadow-lg transition opacity-0 invisible transform translate-y-10">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const navbarHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!document.getElementById('mobile-menu').classList.contains('hidden')) {
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible', 'translate-y-10');
+                backToTopButton.classList.add('opacity-100', 'visible', 'translate-y-0');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                backToTopButton.classList.add('opacity-0', 'invisible', 'translate-y-10');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Add pulsating effect to the current section in navigation
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-400');
+                link.classList.add('text-gray-300');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.remove('text-gray-300');
+                    link.classList.add('text-blue-400');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
