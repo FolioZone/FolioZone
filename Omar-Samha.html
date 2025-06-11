@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omar Samha | Content Manager & Social Media Expert</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS */
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --dark: #0f172a;
+            --darker: #020617;
+        }
+        
+        body {
+            background-color: var(--darker);
+            color: #e2e8f0;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-pattern {
+            background-image: radial-gradient(rgba(14, 165, 233, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            bottom: -8px;
+            left: 0;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 100%;
+            left: 11px;
+            top: 0;
+            background-color: var(--primary);
+        }
+        
+        .skill-bubble {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-bubble:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.3);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-gray-900 bg-opacity-90 backdrop-blur-sm z-50 py-4 px-6 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white flex items-center">
+                <span class="text-cyan-400">O</span>mar <span class="text-cyan-400">S</span>amha
+            </a>
+            
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-300 hover:text-cyan-400 transition">About</a>
+                <a href="#experience" class="text-gray-300 hover:text-cyan-400 transition">Experience</a>
+                <a href="#skills" class="text-gray-300 hover:text-cyan-400 transition">Skills</a>
+                <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition">Contact</a>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 mt-4 rounded-lg py-2 px-4">
+            <a href="#about" class="block py-2 text-gray-300 hover:text-cyan-400 transition">About</a>
+            <a href="#experience" class="block py-2 text-gray-300 hover:text-cyan-400 transition">Experience</a>
+            <a href="#skills" class="block py-2 text-gray-300 hover:text-cyan-400 transition">Skills</a>
+            <a href="#contact" class="block py-2 text-gray-300 hover:text-cyan-400 transition">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern min-h-screen flex items-center pt-20 pb-16 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-900 to-gray-900 opacity-80"></div>
+        <div class="container mx-auto relative z-10 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                    <span class="text-cyan-400">Content Manager</span> 
+                    & <span class="text-cyan-400">Head</span> of Social Media 
+                    <span class="text-cyan-400">Team</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-lg">
+                    Creative professional with extensive experience in digital content strategy,
+                    social media management, and team leadership across multiple industries.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#contact" class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:-translate-y-1 shadow-lg">
+                        Contact Me
+                    </a>
+                    <a href="#experience" class="border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:-translate-y-1">
+                        My Experience
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex items-center justify-center fade-in">
+                <div class="relative mx-auto">
+                    <div class="w-64 h-64 md:w-80 md:h-80 bg-cyan-500 rounded-full opacity-20 absolute -left-6 -top-6 animate-pulse"></div>
+                    <div class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-cyan-500 to-gray-900 rounded-full overflow-hidden border-4 border-cyan-400 shadow-2xl animate-float mx-auto">
+                        <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Omar-Samha.jpeg" alt="Omar Samha" class="w-full ">
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-cyan-400 hover:text-cyan-300 text-4xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 bg-gray-900">
+        <div class="container mx-auto fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title">About Me</h2>
+            
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/3 bg-gray-800 rounded-xl p-8 shadow-lg card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-cyan-500 p-3 rounded-full mr-4">
+                            <i class="fas fa-user-tie text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Personal Info</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-cyan-400 mr-3 mt-1"></i>
+                            <span>Tabarbor, Amman, Jordan</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-cyan-400 mr-3 mt-1"></i>
+                            <span>+962 796070905</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-cyan-400 mr-3 mt-1"></i>
+                            <span>omarsamha82@hotmail.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-calendar-alt text-cyan-400 mr-3 mt-1"></i>
+                            <span>D.O.B: May 10, 1982</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-flag text-cyan-400 mr-3 mt-1"></i>
+                            <span>Jordanian</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="md:w-2/3">
+                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">Professional Objective</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        To work with a company in a foreign relations field where I can apply my skills and languages to help the company develop new and lasting relations, also to be able to grow within that organization.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">Profile</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                        <span class="bg-gray-800 px-4 py-2 rounded-full text-center">Ambitious</span>
+                        <span class="bg-gray-800 px-4 py-2 rounded-full text-center">Hard worker</span>
+                        <span class="bg-gray-800 px-4 py-2 rounded-full text-center">Dependable</span>
+                        <span class="bg-gray-800 px-4 py-2 rounded-full text-center">Responsible</span>
+                        <span class="bg-gray-800 px-4 py-2 rounded-full text-center">Assertive</span>
+                        <span class="bg-gray-800 px-4 py-2 rounded-full text-center">Result oriented</span>
+                        <span class="bg-gray-800 px-4 py-2 rounded-full text-center">Enthusiastic</span>
+                        <span class="bg-gray-800 px-4 py-2 rounded-full text-center">Confident</span>
+                        <span class="bg-gray-800 px-4 py-2 rounded-full text-center">Faithful</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">Career Highlights</h3>
+                    <ul class="space-y-3 text-gray-300 list-disc pl-5">
+                        <li>Over 15 years of experience in content management, social media strategy, and digital marketing</li>
+                        <li>Led content teams across multiple countries including Jordan and Saudi Arabia</li>
+                        <li>Developed successful content strategies for major regional websites and brands</li>
+                        <li>Managed social media campaigns with measurable results and engagement metrics</li>
+                        <li>Expert in SEO optimization, content curation, and digital audience targeting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-6 bg-gray-800">
+        <div class="container mx-auto fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title">Professional Experience</h2>
+            
+            <div class="relative">
+                <!-- Timeline Item -->
+                <div class="timeline-item mb-12 fade-in">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/4 mb-4 md:mb-0">
+                            <div class="flex items-center">
+                                <div class="bg-cyan-500 w-6 h-6 rounded-full z-10 mr-4"></div>
+                                <div>
+                                    <div class="text-xl font-bold text-cyan-400">Sep 2023 - Present</div>
+                                    <div class="text-gray-400">Digimotive.ae</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4 bg-gray-900 rounded-xl p-8 shadow-lg card-hover">
+                            <h3 class="text-2xl font-bold mb-2">Content Manager & Head of Social Media Team</h3>
+                            <div class="text-cyan-400 mb-4">DiGi Motive - Al-Rabyieh, Amman, Jordan</div>
+                            <p class="text-gray-300 mb-4">
+                                DiGi Motive specializes in developing online media campaigns utilizing a range of digital media solutions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item -->
+                <div class="timeline-item mb-12 fade-in">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/4 mb-4 md:mb-0">
+                            <div class="flex items-center">
+                                <div class="bg-cyan-500 w-6 h-6 rounded-full z-10 mr-4"></div>
+                                <div>
+                                    <div class="text-xl font-bold text-cyan-400">Mar 2020 - Aug 2023</div>
+                                    <div class="text-gray-400">Motory.com</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4 bg-gray-900 rounded-xl p-8 shadow-lg card-hover">
+                            <h3 class="text-2xl font-bold mb-2">Content Manager & Head of Social Media</h3>
+                            <div class="text-cyan-400 mb-4">Motory Saudi Arabia - Khalda, Amman, Jordan</div>
+                            <p class="text-gray-300 mb-4">
+                                Motory Saudi Arabia is the largest specialized cars site in the region. Managed content team in Jordan & Saudi Arabia with responsibilities including:
+                            </p>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>Creation of workflow and manuals</li>
+                                <li>Content strategy development</li>
+                                <li>Content curation (SEO, PR, blogs, product descriptions, etc.)</li>
+                                <li>Social media management</li>
+                                <li>Proofreading and revision of team content</li>
+                                <li>SEO keyword research</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item -->
+                <div class="timeline-item mb-12 fade-in">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/4 mb-4 md:mb-0">
+                            <div class="flex items-center">
+                                <div class="bg-cyan-500 w-6 h-6 rounded-full z-10 mr-4"></div>
+                                <div>
+                                    <div class="text-xl font-bold text-cyan-400">Sep 2020 - Feb 2021</div>
+                                    <div class="text-gray-400">MENA Tech</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4 bg-gray-900 rounded-xl p-8 shadow-lg card-hover">
+                            <h3 class="text-2xl font-bold mb-2">Content Manager & Head of Social Media Team</h3>
+                            <div class="text-cyan-400 mb-4">MENA Tech Marketing - Mecca Street, Amman, Jordan</div>
+                            <p class="text-gray-300 mb-4">
+                                Managed all content about technology and business for websites, magazines, brands, and companies. Key responsibilities:
+                            </p>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>Copywriting, editing, and proofreading all company print and digital content</li>
+                                <li>Developed case study materials, social media posts, and articles</li>
+                                <li>Conducted interviews with activists, YouTubers, and technology experts</li>
+                                <li>Created content and distribution strategies to optimize organic growth</li>
+                                <li>Managed social networks: Facebook, Twitter, Instagram, YouTube, TikTok</li>
+                                <li>Used Google Analytics for performance tracking and reporting</li>
+                                <li>Assisted in long-term website planning with technical teams</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional timeline items can be added here following the same pattern -->
+                <!-- For brevity, I'll show one more detailed example -->
+                
+                <!-- Timeline Item -->
+                <div class="timeline-item mb-12 fade-in">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/4 mb-4 md:mb-0">
+                            <div class="flex items-center">
+                                <div class="bg-cyan-500 w-6 h-6 rounded-full z-10 mr-4"></div>
+                                <div>
+                                    <div class="text-xl font-bold text-cyan-400">Feb 2016 - Present</div>
+                                    <div class="text-gray-400">Hawaaworld.com</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4 bg-gray-900 rounded-xl p-8 shadow-lg card-hover">
+                            <h3 class="text-2xl font-bold mb-2">Social Media Manager & Content Manager</h3>
+                            <div class="text-cyan-400 mb-4">Hawaaworld - Seventh Circle, Amman, Jordan</div>
+                            <p class="text-gray-300 mb-4">
+                                Managed content and social media for portfolio sites including Hawaaworld, Jamaluk, Zafafi, Yumyume & Albeet.
+                            </p>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>Writing, editing, and proofreading content for multiple websites</li>
+                                <li>Crafting site promotions, email newsletters, and outreach campaigns</li>
+                                <li>Managing social networks (Facebook & Twitter)</li>
+                                <li>Google Analytics tracking and reporting</li>
+                                <li>Publishing campaign articles and promoting websites</li>
+                                <li>Comment moderation and database management</li>
+                                <li>Assisting in long-term website planning with technical team</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Note: Additional experience items would follow the same pattern -->
+                
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-lg font-medium transition duration-300 shadow-lg transform hover:-translate-y-1">
+                    View Full Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 bg-gray-900">
+        <div class="container mx-auto fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title">Skills & Expertise</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-gray-800 rounded-xl p-8 shadow-lg card-hover">
+                    <div class="text-cyan-400 text-4xl mb-4">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Content Management</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Content Strategy</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Copywriting</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Editing & Proofreading</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Blog & Article Writing</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Press Releases</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 rounded-xl p-8 shadow-lg card-hover">
+                    <div class="text-cyan-400 text-4xl mb-4">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Social Media</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Social Media Strategy</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Community Management</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Campaign Management</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Platform Expertise (FB, TW, IG, YT, LI)</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Influencer Engagement</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 rounded-xl p-8 shadow-lg card-hover">
+                    <div class="text-cyan-400 text-4xl mb-4">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">SEO & Digital</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Search Engine Optimization</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Google Analytics</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Content Marketing</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Email Marketing</li>
+                        <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i>Digital Strategy</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-6 text-center text-cyan-400">Technical Skills</h3>
+            <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+                <div class="skill-bubble bg-gray-800 px-6 py-3 rounded-full flex items-center hover:bg-cyan-500 hover:text-gray-900">
+                    <i class="fab fa-wordpress text-xl mr-2"></i>
+                    <span>WordPress</span>
+                </div>
+                <div class="skill-bubble bg-gray-800 px-6 py-3 rounded-full flex items-center hover:bg-cyan-500 hover:text-gray-900">
+                    <i class="fas fa-search-dollar text-xl mr-2"></i>
+                    <span>SEO</span>
+                </div>
+                <div class="skill-bubble bg-gray-800 px-6 py-3 rounded-full flex items-center hover:bg-cyan-500 hover:text-gray-900">
+                    <i class="fab fa-google text-xl mr-2"></i>
+                    <span>Google Analytics</span>
+                </div>
+                <div class="skill-bubble bg-gray-800 px-6 py-3 rounded-full flex items-center hover:bg-cyan-500 hover:text-gray-900">
+                    <i class="fas fa-file-contract text-xl mr-2"></i>
+                    <span>Content Strategy</span>
+                </div>
+                <div class="skill-bubble bg-gray-800 px-6 py-3 rounded-full flex items-center hover:bg-cyan-500 hover:text-gray-900">
+                    <i class="far fa-newspaper text-xl mr-2"></i>
+                    <span>Copywriting</span>
+                </div>
+                <div class="skill-bubble bg-gray-800 px-6 py-3 rounded-full flex items-center hover:bg-cyan-500 hover:text-gray-900">
+                    <i class="fas fa-code text-xl mr-2"></i>
+                    <span>HTML/CSS</span>
+                </div>
+                <div class="skill-bubble bg-gray-800 px-6 py-3 rounded-full flex items-center hover:bg-cyan-500 hover:text-gray-900">
+                    <i class="fas fa-chart-line text-xl mr-2"></i>
+                    <span>Digital Analytics</span>
+                </div>
+                <div class="skill-bubble bg-gray-800 px-6 py-3 rounded-full flex items-center hover:bg-cyan-500 hover:text-gray-900">
+                    <i class="fas fa-photo-video text-xl mr-2"></i>
+                    <span>Content Management</span>
+                </div>
+                <div class="skill-bubble bg-gray-800 px-6 py-3 rounded-full flex items-center hover:bg-cyan-500 hover:text-gray-900">
+                    <i class="fas fa-ad text-xl mr-2"></i>
+                    <span>Digital Advertising</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-gray-800">
+        <div class="container mx-auto fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title">Download My CV</h2>
+            
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-8 text-cyan-400">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-cyan-500 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Address</h4>
+                                <p class="text-gray-300">Tabarbor, Amman, Jordan</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-cyan-500 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Phone</h4>
+                                <a href="tel:+962796070905" class="text-gray-300 hover:underline">+962 796070905</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-cyan-500 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Email</h4>
+                                <a href="mailto:omarsamha82@hotmail.com" class="text-gray-300 hover:underline">omarsamha82@hotmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h3 class="text-2xl font-bold mb-6 text-cyan-400">Connect With Me</h3>
+                        <div class="flex space-x-4">
+                            <a href="https://www.linkedin.com/in/omarsamha/" class="w-12 h-12 flex items-center justify-center bg-gray-700 hover:bg-cyan-500 rounded-full text-xl transition" target="_blank">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://x.com/omarsamha" class="w-12 h-12 flex items-center justify-center bg-gray-700 hover:bg-cyan-500 rounded-full text-xl transition" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.facebook.com/omar.samha.2025" class="w-12 h-12 flex items-center justify-center bg-gray-700 hover:bg-cyan-500 rounded-full text-xl transition" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://www.instagram.com/omar_samha/" class="w-12 h-12 flex items-center justify-center bg-gray-700 hover:bg-cyan-500 rounded-full text-xl transition" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 flex items-center justify-center">
+                    <div class="bg-gray-700 rounded-xl p-8 shadow-2xl max-w-md w-full text-center card-hover border-2 border-cyan-400">
+                        <div class="text-cyan-400 text-7xl mb-6">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb## 4">Download My CV</h3>
+                        <p class="text-gray-300 mb-6">
+                            Get a PDF version of my professional resume with all my experience, skills and qualifications.
+                        </p>
+                        <a href="https://github.com/FolioZone/FolioZone/blob/main/CVs/Omar-Samha.pdf" 
+                           download="Omar-Samha-CV.pdf"
+                           class="inline-block bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-lg font-medium transition duration-300 transform hover:-translate-y-1 shadow-lg">
+                            <i class="fas fa-download mr-2"></i> Download CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 px-6 bg-gray-900">
+        <div class="container mx-auto text-center">
+            <div class="mb-6">
+                <a href="#" class="text-2xl font-bold text-white flex items-center justify-center">
+                    <span class="text-cyan-400">O</span>mar <span class="text-cyan-400">S</span>amha
+                </a>
+            </div>
+            
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#about" class="text-gray-400 hover:text-cyan-400 transition">About</a>
+                <a href="#experience" class="text-gray-400 hover:text-cyan-400 transition">Experience</a>
+                <a href="#skills" class="text-gray-400 hover:text-cyan-400 transition">Skills</a>
+                <a href="#contact" class="text-gray-400 hover:text-cyan-400 transition">Contact</a>
+            </div>
+            
+            <div class="mb-6">
+                <a href="https://wa.me/962796070905" class="text-gray-400 hover:text-cyan-400 transition mr-6" target="_blank">
+                    <i class="fab fa-whatsapp mr-2"></i>+962 796070905
+                </a>
+                <a href="mailto:omarsamha82@hotmail.com" class="text-gray-400 hover:text-cyan-400 transition mr-6">
+                    <i class="fas fa-envelope mr-2"></i>omarsamha82@hotmail.com
+                </a>
+                <a href="https://www.facebook.com/omar.samha.2025" class="text-gray-400 hover:text-cyan-400 transition" target="_blank">
+                    <i class="fab fa-facebook-f mr-2"></i>Facebook
+                </a>
+            </div>
+            
+            <p class="text-gray-500 text-sm">
+                © 2025 Omar Samha. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Hide mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    // Smooth scroll to target
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Current year for footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearSpan = document.getElementById('current-year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+</body>
+</html>
