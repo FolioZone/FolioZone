@@ -58,16 +58,13 @@
             border-radius: 50%;
             background: #3b82f6;
             z-index: 10;
+            animation: pulse 2s infinite;
         }
-        
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            left: -30px;
-            top: 15px;
-            width: 2px;
-            height: calc(100% + 20px);
-            background: rgba(59, 130, 246, 0.3);
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
         }
     </style>
 </head>
@@ -213,10 +210,11 @@
     <section id="education" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto bg-slate-900/50">
         <div class="animate-fadein">
             <h2 class="text-2xl md:text-3xl font-bold mb-12 section-title inline-block">Education Background</h2>
-            <div class="relative">
+            <div class="relative space-y-12">
                 <!-- Timeline Item -->
-                <div class="mb-12 timeline-item pl-14 relative">
-                    <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50 card-hover transition-all duration-300">
+                <div class="timeline-item pl-14 relative">
+                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl p-6 border border-slate-700/50 card-hover transition-all duration-300 transform hover:scale-[1.01] group overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <div class="flex flex-col md:flex-row justify-between">
                             <h3 class="text-xl font-semibold text-blue-400 mb-2">AL Yarmouk University, Irbid - Jordan</h3>
                             <span class="text-sm bg-blue-500/20 text-blue-400 py-1 px-3 rounded-full inline-block">2002 - 2006</span>
@@ -231,8 +229,9 @@
                 </div>
                 
                 <!-- Timeline Item -->
-                <div class="mb-12 timeline-item pl-14 relative">
-                    <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50 card-hover transition-all duration-300">
+                <div class="timeline-item pl-14 relative">
+                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl p-6 border border-slate-700/50 card-hover transition-all duration-300 transform hover:scale-[1.01] group overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <div class="flex flex-col md:flex-row justify-between">
                             <h3 class="text-xl font-semibold text-blue-400 mb-2">MINI MBA in practice</h3>
                             <span class="text-sm bg-blue-500/20 text-blue-400 py-1 px-3 rounded-full inline-block">2021</span>
@@ -243,9 +242,13 @@
                 
                 <!-- Training Courses -->
                 <div class="pl-14">
-                    <h3 class="text-xl font-semibold mb-6 text-blue-400">Training Courses</h3>
+                    <h3 class="text-xl font-semibold mb-8 text-blue-400 flex items-center">
+                        <i class="fas fa-certificate mr-3 animate-pulse"></i>
+                        Professional Training
+                    </h3>
                     <div class="grid md:grid-cols-2 gap-6">
-                        <div class="bg-slate-800/50 rounded-lg p-5 border border-slate-700/50 card-hover transition-all duration-300">
+                        <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-lg p-5 border border-slate-700/50 card-hover transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div class="flex items-center mb-3">
                                 <div class="bg-blue-500/20 p-2 rounded-lg mr-3 text-blue-400">
                                     <i class="fas fa-certificate"></i>
@@ -254,7 +257,8 @@
                             </div>
                             <p class="text-sm text-slate-400">Professional training on preparing financial statements compliant with international standards.</p>
                         </div>
-                        <div class="bg-slate-800/50 rounded-lg p-5 border border-slate-700/50 card-hover transition-all duration-300">
+                        <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-lg p-5 border border-slate-700/50 card-hover transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div class="flex items-center mb-3">
                                 <div class="bg-blue-500/20 p-2 rounded-lg mr-3 text-blue-400">
                                     <i class="fas fa-file-excel"></i>
@@ -263,7 +267,8 @@
                             </div>
                             <p class="text-sm text-slate-400">Advanced Excel training covering complex functions, data analysis, and automation.</p>
                         </div>
-                        <div class="bg-slate-800/50 rounded-lg p-5 border border-slate-700/50 card-hover transition-all duration-300">
+                        <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-lg p-5 border border-slate-700/50 card-hover transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div class="flex items-center mb-3">
                                 <div class="bg-blue-500/20 p-2 rounded-lg mr-3 text-blue-400">
                                     <i class="fas fa-chalkboard-teacher"></i>
@@ -272,7 +277,8 @@
                             </div>
                             <p class="text-sm text-slate-400">Leadership development seminar focusing on effective management strategies.</p>
                         </div>
-                        <div class="bg-slate-800/50 rounded-lg p-5 border border-slate-700/50 card-hover transition-all duration-300">
+                        <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-lg p-5 border border-slate-700/50 card-hover transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div class="flex items-center mb-3">
                                 <div class="bg-blue-500/20 p-2 rounded-lg mr-3 text-blue-400">
                                     <i class="fas fa-book"></i>
