@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malek Salameh | Senior Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --code-bg: #1e293b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            scroll-behavior: smooth;
+        }
+        
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .skill-tag {
+            background-color: var(--code-bg);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .code-bg {
+            background-color: var(--code-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .typing-cursor {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header with Navigation -->
+    <header class="fixed w-full z-50 bg-dark/90 backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500 animate-pulse"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                <a href="#" class="ml-4 text-xl font-bold gradient-text">Malek Salameh</a>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
+                <a href="#experience" class="hover:text-primary transition-colors">Experience</a>
+                <a href="#education" class="hover:text-primary transition-colors">Education</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+            </nav>
+            <button class="md:hidden text-gray-400 hover:text-white">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-20 pb-16 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 mt-8">
+                        <span class="gradient-text">Malek Salameh</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl text-gray-400 mb-6">
+                        Senior <span class="text-primary">.NET</span> Developer & 
+                        <span class="text-secondary">Cloud</span> Architect
+                    </h2>
+                    <p class="text-lg text-gray-400 mb-8 max-w-2xl">
+                        Crafting robust, scalable solutions with modern technologies. 
+                        Passionate about clean code, system architecture, and solving complex problems.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="px-6 py-3 bg-primary hover:bg-primary-dark rounded-lg font-medium transition-colors">
+                            Get in Touch
+                        </a>
+                        <a href="#experience" class="px-6 py-3 border border-primary text-primary hover:bg-primary/10 rounded-lg font-medium transition-colors">
+                            View Work
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-primary/10 pulse"></div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/30">
+                            <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Malek-Salameh.jpeg" alt="Malek Salameh" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-dark">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="gradient-text">About Me</span>
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+            </div>
+            
+            <div class="flex justify-center">
+                <div class="max-w-3xl">
+                    <div class="card p-8 rounded-xl mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-primary">Personal Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-gray-400"><span class="font-medium text-gray-300">Name:</span> Malek Yahya Saed Salameh</p>
+                                <p class="text-gray-400"><span class="font-medium text-gray-300">Date of Birth:</span> July 30, 1996</p>
+                                <p class="text-gray-400"><span class="font-medium text-gray-300">Nationality:</span> Jordanian</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400"><span class="font-medium text-gray-300">Marital Status:</span> Single</p>
+                                <p class="text-gray-400"><span class="font-medium text-gray-300">Languages:</span> Arabic (Native), English (Excellent), Turkish (Beginner)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-lg text-gray-400 mb-6">
+                        Experienced Senior .NET Developer with over 5 years of professional experience in designing, developing, and implementing software solutions. 
+                        Specialized in microservices architecture, cloud computing, and modern web technologies.
+                    </p>
+                    <p class="text-lg text-gray-400">
+                        Passionate about creating efficient, scalable, and maintainable systems. Strong problem-solving skills and ability to work in fast-paced environments. 
+                        Committed to continuous learning and staying updated with the latest industry trends.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="gradient-text">Technical Skills</span>
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Backend Skills -->
+                <div class="card p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-server text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Backend Development</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="skill-tag px-4 py-2 rounded code-font">C#</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">.NET Core</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">Web API</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">Entity Framework</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">gRPC</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">Kafka</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">Duende Identity Server</div>
+                    </div>
+                </div>
+                
+                <!-- Frontend Skills -->
+                <div class="card p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-laptop-code text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Frontend Development</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="skill-tag px-4 py-2 rounded code-font">JavaScript</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">jQuery</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">Angular</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">HTML5</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">CSS3</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">Bootstrap</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">Ionic Framework</div>
+                    </div>
+                </div>
+                
+                <!-- Cloud & Databases -->
+                <div class="card p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-cloud text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Cloud & Databases</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="skill-tag px-4 py-2 rounded code-font">Azure Services</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">SQL Server</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">PostgreSQL</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">MongoDB</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">Redis</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">Docker</div>
+                        <div class="skill-tag px-4 py-2 rounded code-font">Microservices</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-4 bg-dark">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="gradient-text">Work Experience</span>
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- ACACUS GROUP -->
+                <div class="timeline-item relative pl-8 pb-12">
+                    <div class="card p-6 rounded-xl">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-xl font-bold text-primary">Senior .NET Developer</h3>
+                            <span class="text-secondary font-medium">09/2022 - Present</span>
+                        </div>
+                        <h4 class="text-lg font-medium mb-4">ACACUS GROUP</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-400">
+                            <li>Had the opportunity to work with a wide range of Azure services, including virtual machines, app service, Azure functions, service bus, storage, and more</li>
+                            <li>Utilized Azure virtual machines to provision and manage scalable and customizable cloud-based infrastructure</li>
+                            <li>Developed and deployed web applications using Azure app service, leveraging its capabilities for automatic scaling, high availability, and easy deployment</li>
+                            <li>Utilized Azure service bus for implementing reliable messaging and asynchronous communication between distributed components of applications</li>
+                            <li>Developed and implemented an Azure Function using the serverless computing model (e.g., M3U8 to FLV conversion)</li>
+                            <li>Leveraged Azure storage services to store and retrieve various types of data, ensuring durability, scalability, and high performance</li>
+                            <li>Gained hands-on experience with Duende Identity Server, an OpenID Connect and OAuth 2.0 framework for ASP.NET Core</li>
+                            <li>Implemented secure authentication and authorization mechanisms using Duende Identity Server, ensuring the protection of sensitive data and enabling secure access to applications</li>
+                            <li>Worked closely with the development team to gather requirements, design, and implement robust and scalable solutions</li>
+                            <li>Conducted thorough testing, debugging, and participated in code reviews to ensure code quality, adherence to best practices, and secure application development</li>
+                            <li>Assisted in the deployment, maintenance, and optimization of applications to ensure seamless operation and optimal performance</li>
+                            <li>Designed and developed microservices architecture, enabling scalable, modular, and independently deployable services to improve flexibility, fault isolation, and rapid development</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- ADAA APPS -->
+                <div class="timeline-item relative pl-8 pb-12">
+                    <div class="card p-6 rounded-xl">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-xl font-bold text-primary">Senior .NET Developer</h3>
+                            <span class="text-secondary font-medium">06/2022 - 09/2022</span>
+                        </div>
+                        <h4 class="text-lg font-medium mb-4">ADAA APPS</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-400">
+                            <li>Skilled in technologies such as .NET Core, SQL Server, Redis</li>
+                            <li>Collaborated with the development team to gather requirements and translate them into technical specifications</li>
+                            <li>Utilized .NET Core to build robust and scalable applications, ensuring high performance and reliability</li>
+                            <li>Designed, developed, and implemented various features and functionality using MVC architecture</li>
+                            <li>Designed and developed applications following a microservice architecture, enabling modularity, independent scalability, fault isolation, and rapid development</li>
+                            <li>Worked on backend development tasks, including database design, query optimization, and business logic implementation</li>
+                            <li>Conducted thorough testing, debugging, and participated in code reviews to ensure code quality and adherence to best practices</li>
+                            <li>Assisted in the deployment, maintenance, and optimization of applications to ensure smooth operation and performance in the healthcare sector</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- CLOUD SOLUTIONS -->
+                <div class="timeline-item relative pl-8 pb-12">
+                    <div class="card p-6 rounded-xl">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-xl font-bold text-primary">.NET Developer</h3>
+                            <span class="text-secondary font-medium">05/2020 - 06/2022</span>
+                        </div>
+                        <h4 class="text-lg font-medium mb-4">CLOUD SOLUTIONS</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-400">
+                            <li>Worked with a specific focus on the healthcare sector, contributing to the development of innovative solutions</li>
+                            <li>Skilled in technologies such as .NET Core, SQL Server, PostgreSQL, MongoDB, Redis, Kafka, gRPC, and microservice architecture</li>
+                            <li>Collaborated with the development team to gather requirements and translate them into technical specifications</li>
+                            <li>Utilized .NET Core to build robust and scalable applications, ensuring high performance and reliability</li>
+                            <li>Utilized PostgreSQL and MongoDB for efficient data storage, retrieval, and management</li>
+                            <li>Implemented caching mechanisms using Redis to enhance application performance</li>
+                            <li>Integrated Kafka, a distributed streaming platform, for real-time data processing and event-driven architecture</li>
+                            <li>Leveraged gRPC, a high-performance remote procedure call (RPC) framework, for efficient inter-service communication</li>
+                            <li>Implemented containerization using Docker to facilitate seamless deployment, scalability, and portability across different environments</li>
+                            <li>Designed and developed applications following a microservice architecture, enabling modularity, independent scalability, fault isolation, and rapid development</li>
+                            <li>Conducted thorough testing, debugging, and participated in code reviews to ensure code quality and adherence to best practices</li>
+                            <li>Assisted in the deployment, maintenance, and optimization of applications to ensure smooth operation and performance in the healthcare sector</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- DIAMOND SOFTWARE TECHNOLOGIES -->
+                <div class="timeline-item relative pl-8">
+                    <div class="card p-6 rounded-xl">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-xl font-bold text-primary">.NET Developer</h3>
+                            <span class="text-secondary font-medium">03/2018 - 05/2020</span>
+                        </div>
+                        <h4 class="text-lg font-medium mb-4">DIAMOND SOFTWARE TECHNOLOGIES</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-400">
+                            <li>Involved in two major projects: SAPTCO mobile app (for a transportation company) and Sultan Bin Abdulaziz Humanitarian City (SBAHC) project</li>
+                            <li>Demonstrated strong expertise in .NET framework, C#, Web APIs, JavaScript, jQuery, Ionic framework (JavaScript-based hybrid mobile app framework), SQL Server</li>
+                            <li>Designed, developed, and implemented various features and functionality using MVC architecture</li>
+                            <li>Successfully integrated Web APIs and effectively utilized SQL Server for efficient data management and retrieval</li>
+                            <li>Worked on backend development tasks, including database design, query optimization, and business logic implementation</li>
+                            <li>Assisted in the deployment, maintenance, and optimization of applications for smooth operation and performance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="gradient-text">Education</span>
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- University -->
+                <div class="card p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-university text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Al-albayt University</h3>
+                            <p class="text-gray-400">B.S. Degree in Computer Science (84.3)</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400">
+                        Graduated with a Bachelor's degree in Computer Science, focusing on software engineering principles, algorithms, and system design.
+                    </p>
+                </div>
+                
+                <!-- High School -->
+                <div class="card p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-school text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">High School Certificate</h3>
+                            <p class="text-gray-400">Scientific Section - Jordan</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400">
+                        Completed high school education with focus on scientific subjects, laying the foundation for technical education.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-dark">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="gradient-text">Get In Touch</span>
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <div class="card p-8 rounded-xl mb-8">
+                        <h3 class="text-2xl font-bold mb-6 text-primary">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Phone</h4>
+                                    <a href="tel:00962789806919" class="text-gray-400 hover:text-primary transition-colors">00962789806919</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Email</h4>
+                                    <a href="mailto:maleksalameh63@gmail.com" class="text-gray-400 hover:text-primary transition-colors">maleksalameh63@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4 justify-center md:justify-start">
+                        <a href="https://wa.me/962789806919" target="_blank" class="w-12 h-12 rounded-full bg-green-600 hover:bg-green-700 flex items-center justify-center transition-colors">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/malek-salameh-aa197b1a2" target="_blank" class="w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 flex items-center justify-center transition-colors">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="https://github.com/FolioZone/FolioZone/raw/main/CVs/Malek-Salameh.pdf" download="Malek-Salameh-CV.pdf" class="w-12 h-12 rounded-full border border-secondary text-secondary hover:bg-secondary/10 flex items-center justify-center transition-colors">
+                            <i class="fas fa-download text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="card p-8 rounded-xl h-full">
+                        <h3 class="text-2xl font-bold mb-6 text-primary">Quick Contact</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                                    <i class="fas fa-clock text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-lg mb-1">Availability</h4>
+                                    <p class="text-gray-400">Monday - Friday: 9AM - 5PM (GMT+3)</p>
+                                    <p class="text-gray-400">Weekends: By appointment</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                                    <i class="fas fa-paper-plane text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-lg mb-1">Preferred Contact</h4>
+                                    <p class="text-gray-400">For fastest response:</p>
+                                    <a href="https://wa.me/962789806919" target="_blank" class="text-primary hover:underline">WhatsApp Message</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                                    <i class="fas fa-code text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-lg mb-1">Technical Inquiries</h4>
+                                    <p class="text-gray-400">For technical discussions or consulting requests:</p>
+                                    <a href="mailto:maleksalameh63@gmail.com" class="text-primary hover:underline">Email with Subject Line</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 border-t border-gray-800">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400 mb-2">© 2025 Malek Salameh. All rights reserved.</p>
+            <p class="text-gray-500 text-sm">Powered by <span class="text-primary">FolioZone</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple typing animation for the hero section
+        document.addEventListener('DOMContentLoaded', function() {
+            const phrases = [
+                "Senior .NET Developer",
+                "Cloud Architect",
+                "Software Engineer",
+                "Problem Solver"
+            ];
+            
+            let currentPhrase = 0;
+            let currentChar = 0;
+            let isDeleting = false;
+            const typingElement = document.querySelector('.typing-text');
+            
+            function type() {
+                const fullTxt = phrases[currentPhrase];
+                
+                if (isDeleting) {
+                    typingElement.textContent = fullTxt.substring(0, currentChar - 1);
+                    currentChar--;
+                } else {
+                    typingElement.textContent = fullTxt.substring(0, currentChar + 1);
+                    currentChar++;
+                }
+                
+                if (!isDeleting && currentChar === fullTxt.length) {
+                    isDeleting = true;
+                    setTimeout(type, 1500);
+                } else if (isDeleting && currentChar === 0) {
+                    isDeleting = false;
+                    currentPhrase = (currentPhrase + 1) % phrases.length;
+                    setTimeout(type, 500);
+                } else {
+                    const speed = isDeleting ? 50 : 100;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            // Start typing animation
+            setTimeout(type, 1000);
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.querySelector('nav');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+                mobileMenu.classList.toggle('flex-col');
+                mobileMenu.classList.toggle('absolute');
+                mobileMenu.classList.toggle('top-16');
+                mobileMenu.classList.toggle('right-4');
+                mobileMenu.classList.toggle('bg-dark');
+                mobileMenu.classList.toggle('p-4');
+                mobileMenu.classList.toggle('rounded-lg');
+                mobileMenu.classList.toggle('border');
+                mobileMenu.classList.toggle('border-gray-800');
+                mobileMenu.classList.toggle('space-y-4');
+                mobileMenu.classList.toggle('space-x-8');
+            });
+        });
+    </script>
+</body>
+</html>
