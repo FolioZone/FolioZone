@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayoub Abuhamdeh | Senior Mobile Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6d28d9',
+                        secondary: '#8b5cf6',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                        accent: '#a78bfa',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-reverse': 'float-reverse 5s ease-in-out infinite',
+                        'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'float-reverse': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: #f8fafc;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #8b5cf6, #a78bfa);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+        }
+        
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.5), transparent);
+        }
+        
+        .phone-mockup {
+            position: relative;
+            width: 280px;
+            height: 550px;
+            border-radius: 40px;
+            background: #0f172a;
+            border: 12px solid #1e293b;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 20px;
+            background: #1e293b;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .phone-screen {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border-radius: 28px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+        }
+        
+        .skill-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #6d28d9;
+            border: 3px solid #8b5cf6;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #6d28d9, transparent);
+        }
+        
+        .mobile-nav {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+        }
+        
+        .mobile-nav.open {
+            transform: translateX(0);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #8b5cf6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-1/4 left-1/4 w-16 h-16 rounded-full bg-purple-900 opacity-20 blur-xl animate-float"></div>
+        <div class="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-indigo-900 opacity-20 blur-xl animate-float-reverse"></div>
+        <div class="absolute bottom-1/4 left-1/2 w-20 h-20 rounded-full bg-violet-900 opacity-20 blur-xl animate-float"></div>
+    </div>
+
+    <!-- Header/Navigation -->
+    <header class="fixed w-full z-50 bg-darker/90 backdrop-blur-sm border-b border-slate-800">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full gradient-bg flex items-center justify-center">
+                    <i class="fas fa-mobile-alt text-white"></i>
+                </div>
+                <span class="text-xl font-bold text-white">Ayoub<span class="gradient-text">Abuhamdeh</span></span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link relative text-slate-300 hover:text-white transition-colors">Home</a>
+                <a href="#about" class="nav-link relative text-slate-300 hover:text-white transition-colors">About</a>
+                <a href="#skills" class="nav-link relative text-slate-300 hover:text-white transition-colors">Skills</a>
+                <a href="#experience" class="nav-link relative text-slate-300 hover:text-white transition-colors">Experience</a>
+                <a href="#projects" class="nav-link relative text-slate-300 hover:text-white transition-colors">Projects</a>
+                <a href="#contact" class="nav-link relative text-slate-300 hover:text-white transition-colors">Contact</a>
+            </nav>
+            
+            <button id="mobile-menu-button" class="md:hidden text-slate-300 hover:text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav" class="mobile-nav fixed inset-0 z-40 bg-darker/95 backdrop-blur-lg flex flex-col items-center justify-center space-y-8">
+        <button id="close-mobile-menu" class="absolute top-6 right-6 text-slate-300 hover:text-white">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <a href="#home" class="text-2xl font-medium text-slate-300 hover:text-white transition-colors">Home</a>
+        <a href="#about" class="text-2xl font-medium text-slate-300 hover:text-white transition-colors">About</a>
+        <a href="#skills" class="text-2xl font-medium text-slate-300 hover:text-white transition-colors">Skills</a>
+        <a href="#experience" class="text-2xl font-medium text-slate-300 hover:text-white transition-colors">Experience</a>
+        <a href="#projects" class="text-2xl font-medium text-slate-300 hover:text-white transition-colors">Projects</a>
+        <a href="#contact" class="text-2xl font-medium text-slate-300 hover:text-white transition-colors">Contact</a>
+        
+        <div class="flex space-x-6 mt-8">
+            <a href="https://wa.me/962797473575" target="_blank" class="w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center text-white hover:bg-emerald-700 transition-colors">
+                <i class="fab fa-whatsapp text-xl"></i>
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
+                <i class="fab fa-linkedin-in text-xl"></i>
+            </a>
+            <a href="mailto:ayoub.abuhamdeh@gmail.com" class="w-12 h-12 rounded-full bg-rose-600 flex items-center justify-center text-white hover:bg-rose-700 transition-colors">
+                <i class="fas fa-envelope text-xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20 pb-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <span class="text-white">Ayoub</span> <span class="gradient-text">Abuhamdeh</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl text-slate-300 mb-6">
+                    Senior <span class="gradient-text">Mobile Application</span> Developer
+                </h2>
+                <p class="text-lg text-slate-400 mb-8 max-w-lg">
+                    Crafting exceptional cross-platform mobile experiences with .NET MAUI, Flutter & Android Native. 
+                    Focused on performance, clean architecture, and intuitive UI/UX.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <a href="#contact" class="px-6 py-3 rounded-full gradient-bg text-white font-medium hover:opacity-90 transition-opacity">
+                        Contact Me
+                    </a>
+                    <a href="#projects" class="px-6 py-3 rounded-full border border-slate-700 text-white font-medium hover:bg-slate-800/50 transition-colors">
+                        View Projects
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                        <span class="text-slate-400">Available for work</span>
+                    </div>
+                    <span class="text-slate-600">|</span>
+                    <span class="text-slate-400">📍 Amman, Jordan</span>
+                </div>
+            </div>
+            
+            <div class="relative md:w-1/2 flex justify-center">
+                <div class="phone-mockup">
+                    <div class="phone-screen flex items-center justify-center p-4">
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-user-tie text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-1">Ayoub Abuhamdeh</h3>
+                            <p class="text-sm text-slate-300 mb-4">Mobile Developer</p>
+                            <div class="flex justify-center space-x-3 mb-6">
+                                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                                    <i class="fab fa-linkedin-in text-xs text-white"></i>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
+                                    <i class="fab fa-github text-xs text-white"></i>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center">
+                                    <i class="fab fa-whatsapp text-xs text-white"></i>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800/50 rounded-lg p-3 mb-4">
+                                <p class="text-xs text-slate-300">"Building seamless mobile experiences across platforms"</p>
+                            </div>
+                            <div class="flex justify-between px-2">
+                                <div class="text-center">
+                                    <p class="text-sm font-bold text-white">20+</p>
+                                    <p class="text-xs text-slate-400">Projects</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-sm font-bold text-white">5+</p>
+                                    <p class="text-xs text-slate-400">Years</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-sm font-bold text-white">10+</p>
+                                    <p class="text-xs text-slate-400">Apps</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-purple-900/20 blur-3xl -z-10"></div>
+                <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-indigo-900/20 blur-3xl -z-10"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-slate-900/50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+                    <div class="relative">
+                        <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-slate-800">
+                            <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Ayoub Abuhamdeh" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 bg-darker p-3 rounded-lg border border-slate-800 shadow-lg">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 rounded-full gradient-bg flex items-center justify-center">
+                                    <i class="fas fa-medal text-white text-sm"></i>
+                                </div>
+                                <span class="text-white font-medium">5+ Years</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 md:pl-12">
+                    <h2 class="text-3xl font-bold text-white mb-6">
+                        <span class="gradient-text">Professional</span> Summary
+                    </h2>
+                    
+                    <div class="space-y-4 text-slate-300">
+                        <p>
+                            Versatile and results-oriented <span class="text-white font-medium">Mobile Application Developer</span> with over 5 years of experience in building cross-platform applications for iOS and Android using .NET MAUI, Flutter, and Android Native. Skilled in designing, developing, and maintaining scalable apps, with the ability to create new APIs or modify existing ones to align with evolving business requirements.
+                        </p>
+                        <p>
+                            Highly competent in managing full application lifecycles, integrating third-party services like Firebase, and building real-time, connected features. Known for the ability to mentor junior developers, facilitate knowledge sharing, and deliver production-ready apps that meet business needs.
+                        </p>
+                        <p>
+                            Well-versed in modern AI-powered development tools, including GitHub Copilot, ChatGPT, and HuggingFace Spaces to enhance productivity and code quality.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-900/30 flex items-center justify-center">
+                                    <i class="fas fa-mobile-alt text-purple-400"></i>
+                                </div>
+                                <span class="text-white font-medium">Cross-Platform</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-900/30 flex items-center justify-center">
+                                    <i class="fas fa-fire text-blue-400"></i>
+                                </div>
+                                <span class="text-white font-medium">Firebase Expert</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-emerald-900/30 flex items-center justify-center">
+                                    <i class="fas fa-robot text-emerald-400"></i>
+                                </div>
+                                <span class="text-white font-medium">AI Integration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-2">
+                    Technical <span class="gradient-text">Skills</span>
+                </h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    My expertise spans across multiple technologies and frameworks that power modern mobile applications
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Languages -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-3">
+                            <i class="fas fa-code text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Languages</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">C#</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Dart</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Java</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">JavaScript</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">HTML5</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">CSS</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">XAML</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">XML</span>
+                    </div>
+                </div>
+                
+                <!-- Frameworks -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-3">
+                            <i class="fas fa-cubes text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Frameworks</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">.NET MAUI</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Flutter</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Xamarin.Forms</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Android Native</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">.NET Core</span>
+                    </div>
+                </div>
+                
+                <!-- Mobile Features -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-3">
+                            <i class="fas fa-mobile-screen text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Mobile Features</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">OTA Updates</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Google Maps</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Here Maps</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Streaming</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">REST APIs</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Localization</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">JWT Auth</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Firebase</span>
+                    </div>
+                </div>
+                
+                <!-- Architecture -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-3">
+                            <i class="fas fa-project-diagram text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Architecture</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">MVVM</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">BLoC</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Clean Arch</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">DI</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">SOLID</span>
+                    </div>
+                </div>
+                
+                <!-- Dev Tools -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-3">
+                            <i class="fas fa-tools text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Dev Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Azure DevOps</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Git</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">GitHub</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">AppCenter</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">NLog</span>
+                    </div>
+                </div>
+                
+                <!-- Databases -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-3">
+                            <i class="fas fa-database text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Databases</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">SQLite</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">SQL Server</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">NoSQL</span>
+                        <span class="skill-badge px-3 py-1 bg-slate-800 rounded-full text-sm text-slate-300">Firestore</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 bg-slate-900/50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-2">
+                    Professional <span class="gradient-text">Experience</span>
+                </h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    My journey through the mobile development landscape with leading companies
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto relative timeline">
+                <!-- Acacus Group -->
+                <div class="relative pl-12 mb-12 timeline-item">
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 hover:border-slate-700 transition-colors">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-white">Mobile Application Developer</h3>
+                            <span class="text-sm text-purple-400 font-medium">Jul 2020 – Present</span>
+                        </div>
+                        <h4 class="text-lg text-slate-300 mb-4">Acacus Group – Amman, Jordan</h4>
+                        
+                        <ul class="space-y-3 text-slate-400">
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Developed, maintained, and published 10+ cross-platform mobile apps using .NET MAUI, Flutter, and Android Native.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Successfully migrated multiple Xamarin apps to .NET MAUI, optimizing performance and future-proofing codebases.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Created and customized APIs to match feature enhancements and new business logic requirements.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class=
+
+$0"text-purple-400 mr-2">•</span>
+                                <span>Integrated Firebase services (Authentication, Firestore, Realtime Database, Cloud Messaging, Crashlytics, Analytics) across projects.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Mentored and trained junior developers, helping them transition from theory to production development with practical insights.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Released and maintained 5+ applications on Google Play and App Store, ensuring compliance with app store policies.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Led feature implementation involving OTA Updates, real-time GPS tracking, Bluetooth OBDII, Wi-Fi/USB-based communication, and secure token-based authentication.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Incorporated Clean Architecture and Bloc in Flutter projects, improving maintainability and testability.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Integrated AI-assisted tools such as ChatGPT and HuggingFace Spaces to improve development efficiency and speed.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Tech Process Solutions -->
+                <div class="relative pl-12 timeline-item">
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 hover:border-slate-700 transition-colors">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-white">Software Engineer</h3>
+                            <span class="text-sm text-purple-400 font-medium">Mar 2020 – Jun 2020</span>
+                        </div>
+                        <h4 class="text-lg text-slate-300 mb-4">Tech Process Solutions – Amman, Jordan</h4>
+                        
+                        <ul class="space-y-3 text-slate-400">
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Designed and implemented responsive web applications using .NET Core.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Developed and deployed over 3 custom plugins for nopCommerce.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Built cross-platform mobile apps using Flutter, showcasing adaptability.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Worked on internal tools that improved logistics and invoicing processes.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-400 mr-2">•</span>
+                                <span>Created internal documentation and onboarding material.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-2">
+                    Featured <span class="gradient-text">Projects</span>
+                </h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Some of my notable mobile application development projects
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- FolioZone -->
+                <div class="relative rounded-xl overflow-hidden project-card">
+                    <div class="h-64 bg-gradient-to-br from-purple-900 to-indigo-900 flex items-center justify-center">
+                        <i class="fas fa-briefcase text-6xl text-white opacity-30"></i>
+                    </div>
+                    <div class="absolute inset-0 project-overlay bg-gradient-to-t from-black/90 to-transparent flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">FolioZone</h3>
+                        <p class="text-slate-300 mb-4">Portfolio Builder Platform</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-300">Flutter</span>
+                            <span class="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-300">Firebase</span>
+                            <span class="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-300">Responsive</span>
+                        </div>
+                        <p class="text-sm text-slate-400 mb-4">
+                            A complete platform where users can generate and showcase professional portfolios based on their CV content.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="px-4 py-2 rounded-full bg-white/10 text-white text-sm hover:bg-white/20 transition-colors">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vehicle Social App -->
+                <div class="relative rounded-xl overflow-hidden project-card">
+                    <div class="h-64 bg-gradient-to-br from-blue-900 to-cyan-900 flex items-center justify-center">
+                        <i class="fas fa-car text-6xl text-white opacity-30"></i>
+                    </div>
+                    <div class="absolute inset-0 project-overlay bg-gradient-to-t from-black/90 to-transparent flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Vehicle Social Platform</h3>
+                        <p class="text-slate-300 mb-4">Flutter-based Social App</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-300">Flutter</span>
+                            <span class="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-300">Firebase</span>
+                            <span class="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-300">Google Maps</span>
+                        </div>
+                        <p class="text-sm text-slate-400 mb-4">
+                            A social platform for vehicle owners to connect, share routes and maintenance tips. Award-winning university project.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="px-4 py-2 rounded-full bg-white/10 text-white text-sm hover:bg-white/20 transition-colors">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- OBDII Diagnostic Tool -->
+                <div class="relative rounded-xl overflow-hidden project-card">
+                    <div class="h-64 bg-gradient-to-br from-emerald-900 to-teal-900 flex items-center justify-center">
+                        <i class="fas fa-tools text-6xl text-white opacity-30"></i>
+                    </div>
+                    <div class="absolute inset-0 project-overlay bg-gradient-to-t from-black/90 to-transparent flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">OBDII Diagnostic Tool</h3>
+                        <p class="text-slate-300 mb-4">Vehicle Diagnostics App</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-300">.NET MAUI</span>
+                            <span class="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-300">Bluetooth</span>
+                            <span class="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-300">OBDII</span>
+                        </div>
+                        <p class="text-sm text-slate-400 mb-4">
+                            Professional vehicle diagnostics application connecting via Bluetooth to OBDII devices for real-time data.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="px-4 py-2 rounded-full bg-white/10 text-white text-sm hover:bg-white/20 transition-colors">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-slate-900/50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-2">
+                    Get In <span class="gradient-text">Touch</span>
+                </h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Feel free to reach out for collaborations or just a friendly hello
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-8">
+                        <h3 class="text-xl font-bold text-white mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-slate-400 mb-1">Location</h4>
+                                    <p class="text-white">Amman, Jordan</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-phone-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-slate-400 mb-1">Phone</h4>
+                                    <a href="tel:+962797473575" class="text-white hover:text-purple-300 transition-colors">+962 797473575</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-slate-400 mb-1">Email</h4>
+                                    <a href="mailto:ayoub.abuhamdeh@gmail.com" class="text-white hover:text-purple-300 transition-colors">ayoub.abuhamdeh@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h3 class="text-xl font-bold text-white mb-4">Connect With Me</h3>
+                            <div class="flex space-x-4">
+                                <a href="https://wa.me/962797473575" target="_blank" class="w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center text-white hover:bg-emerald-700 transition-colors">
+                                    <i class="fab fa-whatsapp text-xl"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/" target="_blank" class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
+                                    <i class="fab fa-linkedin-in text-xl"></i>
+                                </a>
+                                <a href="https://github.com/" target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-gray-700 transition-colors">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-8">
+                        <h3 class="text-xl font-bold text-white mb-6">Send Me a Message</h3>
+                        
+                        <form class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-400 mb-1">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-400 mb-1">Your Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all">
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-slate-400 mb-1">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-slate-400 mb-1">Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full px-6 py-3 rounded-full gradient-bg text-white font-medium hover:opacity-90 transition-opacity">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full gradient-bg flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-white"></i>
+                        </div>
+                        <span class="text-lg font-bold text-white">Ayoub<span class="gradient-text">Abuhamdeh</span></span>
+                    </a>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <p class="text-slate-400 mb-2">© 2023 All Rights Reserved</p>
+                    <p class="text-sm text-slate-500">
+                        Powered by <span class="text-purple-400">FolioZone</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileNav = document.getElementById('mobile-nav');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileNav.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMobileMenu.addEventListener('click', () => {
+            mobileNav.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileNav.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Highlight active nav link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active-nav');
+                }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
