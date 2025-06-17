@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allaith Taekwondo Center | مركز الليث للتايكواندو</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+        
+        :root {
+            --primary-red: #d10000;
+            --primary-black: #1a1a1a;
+            --primary-white: #ffffff;
+            --accent-gold: #d4af37;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Tajawal', sans-serif;
+            background-color: var(--primary-white);
+            color: var(--primary-black);
+            direction: ltr;
+        }
+        
+        .arabic {
+            font-family: 'Noto Naskh Arabic', 'Tajawal', sans-serif;
+            direction: rtl;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .rounded-photo {
+            border-radius: 15px;
+            border: 5px solid var(--primary-white);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gold-border {
+            border: 3px solid var(--accent-gold);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            width: 4px;
+            height: 100%;
+            background-color: var(--primary-red);
+        }
+
+        .timeline-container {
+            padding-left: 24px;
+        }
+        
+        .korean-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d10000' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            body {
+                zoom: 100%;
+            }
+            
+            .page {
+                page-break-after: always;
+                height: 297mm;
+                width: 210mm;
+                margin: 0;
+                padding: 0;
+            }
+        }
+        
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="bg-red-600 text-white py-4 shadow-lg">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Allaith.jpg" alt="Allaith Taekwondo Logo" class="h-12 mr-4">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold english-lang">Allaith Taekwondo Center</h1>
+                    <h1 class="text-xl md:text-2xl font-bold arabic-lang hidden text-right">مركز الليث للتايكواندو</h1>
+                    <p class="text-xs english-lang">Est. 1984 | Developing Champions</p>
+                    <p class="text-xs arabic-lang hidden text-right">تأسس 1984 | نصنع الأبطال</p>
+                </div>
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="hover:text-yellow-300 transition english-lang">Home</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition arabic-lang hidden text-right">الرئيسية</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition english-lang">Schedule</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition arabic-lang hidden text-right">الجدول</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition english-lang">Contact</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition arabic-lang hidden text-right">تواصل</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Language Toggle -->
+    <div class="no-print fixed top-4 right-4 z-50">
+        <button id="toggleLang" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300">
+            <span class="english-lang">عربي</span>
+            <span class="arabic-lang hidden">English</span>
+        </button>
+    </div>
+
+<!-- Cover Page -->
+<!-- Cover Page -->
+<div class="page w-full h-screen flex flex-col justify-center items-center hero-section text-white relative overflow-hidden">
+    <div class="absolute inset-0 korean-pattern opacity-20"></div>
+    <div class="z-10 text-center px-4">
+        <div class="w-48 h-48 mx-auto mb-8 bg-white rounded-full flex items-center justify-center p-2">
+            <div class="w-full h-full bg-red-600 rounded-full flex items-center justify-center relative">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-32 h-32 bg-black rounded-full overflow-hidden">
+                        <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Allaith.jpg" alt="Allaith Logo" class="w-full h-full object-cover" />
+                    </div>
+                </div>
+                <i class="fas fa-lion text-6xl text-yellow-400 relative z-10"></i>
+            </div>
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-bold mb-4 english-lang">Allaith Taekwondo Center</h1>
+        <h1 class="text-5xl md:text-7xl font-bold mb-4 arabic-lang hidden text-center">مركز الليث للتايكواندو</h1>
+
+        <div class="w-full h-1 bg-yellow-400 my-6 mx-auto" style="max-width: 300px;"></div>
+
+        <p class="text-2xl md:text-3xl mb-8 english-lang">Building Champions</p>
+        <p class="text-2xl md:text-3xl mb-8 arabic-lang hidden">صُنّاعُ الأبطال</p>
+
+        <p class="text-4xl font-bold english-lang">2025</p>
+        <p class="text-4xl font-bold arabic-lang hidden">٢٠٢٥</p>
+    </div>
+</div>
+
+    <!-- About Us -->
+    <div class="page w-full min-h-screen bg-white py-12 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-600 mb-2 english-lang">About Us</h2>
+            <h2 class="text-4xl font-bold text-red-600 mb-2 arabic-lang hidden text-right">من نحن</h2>
+            
+            <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+            <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+            
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1600679472829-0bd2b81e555e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80" alt="Taekwondo class" class="w-full rounded-photo">
+                </div>
+                <div class="md:w-1/2">
+                    <div class="english-lang">
+                        <p class="text-lg mb-4">For over 40 years, Allaith Taekwondo Center has been shaping champions both on and off the mat. Founded in 1985, our center has become a beacon of excellence in martial arts training in Jordan.</p>
+                        <p class="text-lg mb-4">Our mission is to develop disciplined, confident individuals through the art of Taekwondo while maintaining a strong focus on academic excellence and personal development.</p>
+                        <p class="text-lg mb-4">We believe that true champions are built through perseverance, respect, and continuous self-improvement. Our students learn valuable life skills that extend far beyond the dojang.</p>
+                    </div>
+                    <div class="arabic-lang hidden text-right">
+                        <p class="text-lg mb-4">لأكثر من 40 عامًا، كان مركز الليث للتايكواندو يصنع الأبطال على الحصيرة وخارجها. تأسس المركز عام 1985، وأصبح منارة للتميز في تدريب الفنون القتالية في الأردن.</p>
+                        <p class="text-lg mb-4">مهمتنا هي تطوير أفراد منضبطين وواثقين من خلال فن التايكواندو مع الحفاظ على تركيز قوي على التميز الأكاديمي والتطور الشخصي.</p>
+                        <p class="text-lg mb-4">نؤمن بأن الأبطال الحقيقيين يُبنون من خلال المثابرة والاحترام والتطوير الذاتي المستمر. يتعلم طلابنا مهارات حياتية قيمة تتجاوز بكثير حدود الدوجانج.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Founder & Head Coach -->
+    <div class="page w-full min-h-screen bg-gray-100 py-12 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-600 mb-2 english-lang">Founder & Head Coach</h2>
+            <h2 class="text-4xl font-bold text-red-600 mb-2 arabic-lang hidden text-right">المؤسس والمدرب الرئيسي</h2>
+            
+            <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+            <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+            
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="md:w-1/3">
+                    <img src="https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80" alt="Grand Master Fouad Jarwan" class="w-full rounded-photo">
+                </div>
+                <div class="md:w-2/3">
+                    <div class="english-lang">
+                        <h3 class="text-3xl font-bold mb-2">Grand Master Fouad Jarwan</h3>
+                        <p class="text-xl text-yellow-600 mb-4">9th Dan Black Belt - Kukkiwon Certified (2024)</p>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
+                            <p class="text-lg mb-4">With over 45 years of experience in Taekwondo, Grand Master Jarwan is one of the most respected martial arts instructors in the Middle East.</p>
+                            <p class="text-lg mb-4">He began his Taekwondo journey in 1980 and established Allaith Taekwondo Center in 1985 with the vision of creating a world-class training facility that nurtures both athletic and personal excellence.</p>
+                            <p class="text-lg">In 2024, he was awarded the prestigious 9th Dan Black Belt from Kukkiwon, the World Taekwondo Headquarters in South Korea, recognizing his lifetime dedication to the art.</p>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden text-right">
+                        <h3 class="text-3xl font-bold mb-2">الأستاذ الكبير فؤاد جروان</h3>
+                        <p class="text-xl text-yellow-600 mb-4">الحزام الأسود دان 9 - معتمد من الكوكيون (2024)</p>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
+                            <p class="text-lg mb-4">بخبرة تزيد عن 45 عامًا في التايكواندو، يعتبر الأستاذ الكبير جروان أحد أكثر مدربي الفنون القتالية احترامًا في الشرق الأوسط.</p>
+                            <p class="text-lg mb-4">بدأ رحلته في التايكواندو عام 1980 وأسس مركز الليث للتايكواندو عام 1985 برؤية إنشاء منشأة تدريب عالمية المستوى تعزز التميز الرياضي والشخصي.</p>
+                            <p class="text-lg">في عام 2024، حصل على الحزام الأسود دان 9 من الكوكيون، المقر العالمي للتايكواندو في كوريا الجنوبية، تقديرًا لتكريس حياته لهذا الفن.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="bg-red-600 text-white p-4 rounded-lg text-center">
+                            <p class="text-3xl font-bold english-lang">45+</p>
+                            <p class="text-3xl font-bold arabic-lang hidden">٤٥+</p>
+                            <p class="text-sm english-lang">Years Experience</p>
+                            <p class="text-sm arabic-lang hidden">سنوات خبرة</p>
+                        </div>
+                        <div class="bg-black text-white p-4 rounded-lg text-center">
+                            <p class="text-3xl font-bold">9</p>
+                            <p class="text-sm english-lang">Dan Black Belt</p>
+                            <p class="text-sm arabic-lang hidden">دان حزام أسود</p>
+                        </div>
+                        <div class="bg-yellow-600 text-white p-4 rounded-lg text-center">
+                            <p class="text-3xl font-bold english-lang">1000+</p>
+                            <p class="text-3xl font-bold arabic-lang hidden">١٠٠٠+</p>
+                            <p class="text-sm english-lang">Students Trained</p>
+                            <p class="text-sm arabic-lang hidden">طالب تدربوا</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Branches & Locations -->
+    <div class="page w-full min-h-screen bg-white py-12 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-600 mb-2 english-lang">Branches & Locations</h2>
+            <h2 class="text-4xl font-bold text-red-600 mb-2 arabic-lang hidden text-right">الفروع والمواقع</h2>
+            
+            <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+            <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Rusaifa HQ -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-map-marker-alt text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold english-lang">Rusaifa Headquarters</h3>
+                        <h3 class="text-2xl font-bold arabic-lang hidden">المقر الرئيسي - الرصيفة</h3>
+                    </div>
+                    
+                    <div class="english-lang">
+                        <p class="mb-2"><i class="fas fa-map-pin text-red-600 mr-2"></i> Yajouz Street, Zarqa, Jordan</p>
+                        <p class="mb-4"><i class="fas fa-plus text-red-600 mr-2"></i> Plus Code: 2WQM+79 Amman</p>
+                    </div>
+                    <div class="arabic-lang hidden text-right">
+                        <p class="mb-2"><i class="fas fa-map-pin text-red-600 ml-2"></i> شارع الياجوز، الزرقاء، الأردن</p>
+                        <p class="mb-4"><i class="fas fa-plus text-red-600 ml-2"></i> كود الموقع: 2WQM+79 عمان</p>
+                    </div>
+                    
+                    <div class="h-48 bg-gray-300 rounded-lg mb-4 flex items-center justify-center">
+                        <i class="fas fa-map text-4xl text-gray-500"></i>
+                    </div>
+                    
+                    <div class="english-lang">
+                        <p class="font-semibold mb-2">Contact Numbers:</p>
+                        <p class="mb-1"><i class="fas fa-phone text-red-600 mr-2"></i> +962 79 037 1249</p>
+                        <p class="mb-1"><i class="fas fa-phone text-red-600 mr-2"></i> +962 78 550 4546</p>
+                        <p class="mb-1"><i class="fas fa-phone text-red-600 mr-2"></i> +962 79 697 1171</p>
+                    </div>
+                    <div class="arabic-lang hidden text-right">
+                        <p class="font-semibold mb-2">أرقام التواصل:</p>
+                        <p class="mb-1"><i class="fas fa-phone text-red-600 ml-2"></i> ٩٦٢ ٧٩ ٠٣٧ ١٢٤٩+</p>
+                        <p class="mb-1"><i class="fas fa-phone text-red-600 ml-2"></i> ٩٦٢ ٧٨ ٥٥٠ ٤٥٤٦+</p>
+                        <p class="mb-1"><i class="fas fa-phone text-red-600 ml-2"></i> ٩٦٢ ٧٩ ٦٩٧ ١١٧١+</p>
+                    </div>
+                </div>
+                
+                <!-- Al-Koum / Shafa Badran Branch -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-map-marker-alt text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold english-lang">Al-Koum / Shafa Badran Branch</h3>
+                        <h3 class="text-2xl font-bold arabic-lang hidden">فرع الكوم / شفا بدران</h3>
+                    </div>
+                    
+                    <div class="english-lang">
+                        <p class="mb-2"><i class="fas fa-map-pin text-red-600 mr-2"></i> Behind Al-Awael Schools, Amman</p>
+                        <p class="mb-4"><i class="fas fa-plus text-red-600 mr-2"></i> Plus Code: 2WQM+79 Amman</p>
+                    </div>
+                    <div class="arabic-lang hidden text-right">
+                        <p class="mb-2"><i class="fas fa-map-pin text-red-600 ml-2"></i> خلف مدارس الأوائل، عمان</p>
+                        <p class="mb-4"><i class="fas fa-plus text-red-600 ml-2"></i> كود الموقع: 2WQM+79 عمان</p>
+                    </div>
+                    
+                    <div class="h-48 bg-gray-300 rounded-lg mb-4 flex items-center justify-center">
+                        <i class="fas fa-map text-4xl text-gray-500"></i>
+                    </div>
+                    
+                    <div class="english-lang">
+                        <p class="font-semibold mb-2">Contact Numbers:</p>
+                        <p class="mb-1"><i class="fas fa-phone text-red-600 mr-2"></i> +962 79 093 2231</p>
+                        <p class="mb-1"><i class="fas fa-phone text-red-600 mr-2"></i> +962 79 895 3616</p>
+                    </div>
+                    <div class="arabic-lang hidden text-right">
+                        <p class="font-semibold mb-2">أرقام التواصل:</p>
+                        <p class="mb-1"><i class="fas fa-phone text-red-600 ml-2"></i> ٩٦٢ ٧٩ ٠٩٣ ٢٢٣١+</p>
+                        <p class="mb-1"><i class="fas fa-phone text-red-600 ml-2"></i> ٩٦٢ ٧٩ ٨٩٥ ٣٦١٦+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Programs & Age Groups -->
+    <div class="page w-full min-h-screen bg-gray-100 py-12 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-600 mb-2 english-lang">Programs & Age Groups</h2>
+            <h2 class="text-4xl font-bold text-red-600 mb-2 arabic-lang hidden text-right">البرامج والفئات العمرية</h2>
+            
+            <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+            <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <div class="english-lang">
+                        <h3 class="text-2xl font-bold mb-4">Taekwondo Training</h3>
+                        <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white mr-4 flex-shrink-0">
+                                    <i class="fas fa-child text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Kids Program (Ages 3-6)</h4>
+                                    <p class="text-sm">Basic movements, coordination, and discipline</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white mr-4 flex-shrink-0">
+                                    <i class="fas fa-user text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Juniors Program (Ages 7-12)</h4>
+                                    <p class="text-sm">Technical skills, forms, and sparring fundamentals</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white mr-4 flex-shrink-0">
+                                    <i class="fas fa-user-tie text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Adults Program (13+)</h4>
+                                    <p class="text-sm">Advanced techniques, competition training, black belt preparation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <h3 class="text-2xl font-bold mb-4 text-right">تدريب التايكواندو</h3>
+                        <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
+                            <div class="flex items-start mb-4 flex-row-reverse">
+                                <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white ml-4 flex-shrink-0">
+                                    <i class="fas fa-child text-xl"></i>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold">برنامج الأطفال (3-6 سنوات)</h4>
+                                    <p class="text-sm">حركات أساسية، تنسيق، وانضباط</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start mb-4 flex-row-reverse">
+                                <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white ml-4 flex-shrink-0">
+                                    <i class="fas fa-user text-xl"></i>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold">برنامج الناشئين (7-12 سنة)</h4>
+                                    <p class="text-sm">مهارات تقنية، أشكال، وأساسيات القتال</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start flex-row-reverse">
+                                <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white ml-4 flex-shrink-0">
+                                    <i class="fas fa-user-tie text-xl"></i>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold">برنامج الكبار (13+ سنة)</h4>
+                                    <p class="text-sm">تقنيات متقدمة، تدريب للمنافسات، تحضير للحزام الأسود</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="english-lang">
+                        <h3 class="text-2xl font-bold mb-4">Special Programs</h3>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white mr-4 flex-shrink-0">
+                                    <i class="fas fa-weight text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Physical Conditioning</h4>
+                                    <p class="text-sm">Weight loss and fitness training programs</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white mr-4 flex-shrink-0">
+                                    <i class="fas fa-shield-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Self-Defense</h4>
+                                    <p class="text-sm">Practical techniques for personal safety</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white mr-4 flex-shrink-0">
+                                    <i class="fas fa-certificate text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Referee Certification</h4>
+                                    <p class="text-sm">Official WT-recognized referee training</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white mr-4 flex-shrink-0">
+                                    <i class="fas fa-campground text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Summer Camps</h4>
+                                    <p class="text-sm">Intensive training and recreational activities</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <h3 class="text-2xl font-bold mb-4 text-right">برامج خاصة</h3>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <div class="flex items-start mb-4 flex-row-reverse">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white ml-4 flex-shrink-0">
+                                    <i class="fas fa-weight text-xl"></i>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold">التكييف البدني</h4>
+                                    <p class="text-sm">برامج فقدان الوزن واللياقة البدنية</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start mb-4 flex-row-reverse">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white ml-4 flex-shrink-0">
+                                    <i class="fas fa-shield-alt text-xl"></i>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold">الدفاع عن النفس</h4>
+                                    <p class="text-sm">تقنيات عملية للسلامة الشخصية</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start mb-4 flex-row-reverse">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white ml-4 flex-shrink-0">
+                                    <i class="fas fa-certificate text-xl"></i>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold">تدريب الحكام</h4>
+                                    <p class="text-sm">تدريب حكام معتمد من الاتحاد العالمي</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start flex-row-reverse">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white ml-4 flex-shrink-0">
+                                    <i class="fas fa-campground text-xl"></i>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold">المخيمات الصيفية</h4>
+                                    <p class="text-sm">تدريب مكثف وأنشطة ترفيهية</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Weekly Schedule & Fees -->
+    <div class="page w-full min-h-screen bg-white py-12 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-600 mb-2 english-lang">Weekly Schedule & Fees</h2>
+            <h2 class="text-4xl font-bold text-red-600 mb-2 arabic-lang hidden text-right">الجدول الأسبوعي والرسوم</h2>
+            
+            <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+            <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2">
+                    <div class="english-lang">
+                        <h3 class="text-2xl font-bold mb-4">Training Schedule</h3>
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-lg mb-6">
+                            <div class="flex justify-between items-center py-2 border-b">
+                                <span class="font-semibold">Monday - Thursday</span>
+                                <span>3:00 PM - 9:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b">
+                                <span class="font-semibold">Saturday - Sunday</span>
+                                <span>3:00 PM - 9:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="font-semibold">Friday</span>
+                                <span>Closed</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold mb-4">Fees Structure</h3>
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                            <div class="flex justify-between items-center py-2 border-b">
+                                <span class="font-semibold">Monthly Tuition</span>
+                                <span>15 JOD</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b">
+                                <span class="font-semibold">Belt Testing Fee</span>
+                                <span>10 JOD</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b">
+                                <span class="font-semibold">Black Belt Exam (1st Dan)</span>
+                                <span>150 JOD</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="font-semibold">Referee Certification</span>
+                                <span>50 JOD</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <h3 class="text-2xl font-bold mb-4 text-right">جدول التدريب</h3>
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-lg mb-6">
+                            <div class="flex justify-between items-center py-2 border-b">
+                                <span>3:00 مساءً - 9:00 مساءً</span>
+                                <span class="font-semibold">الإثنين - الخميس</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b">
+                                <span>3:00 مساءً - 9:00 مساءً</span>
+                                <span class="font-semibold">السبت - الأحد</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span>مغلق</span>
+                                <span class="font-semibold">الجمعة</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold mb-4 text-right">هيكل الرسوم</h3>
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                            <div class="flex justify-between items-center py-2 border-b">
+                                <span>15 دينار</span>
+                                <span class="font-semibold">الرسوم الشهرية</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b">
+                                <span>10 دينار</span>
+                                <span class="font-semibold">رسوم اختبار الحزام</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b">
+                                <span>150 دينار</span>
+                                <span class="font-semibold">امتحان الحزام الأسود (دان 1)</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span>50 دينار</span>
+                                <span class="font-semibold">شهادة الحكام</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1565992441121-4367c2967103?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80" alt="Taekwondo class in session" class="w-full rounded-photo">
+                    
+                    <div class="english-lang mt-6">
+                        <h3 class="text-2xl font-bold mb-4">Special Notes</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>First trial class is free for new students</li>
+                            <li>Family discounts available for multiple enrollments</li>
+                            <li>Advanced students may qualify for assistant instructor positions</li>
+                            <li>All fees subject to change with prior notice</li>
+                        </ul>
+                    </div>
+                    <div class="arabic-lang hidden mt-6 text-right">
+                        <h3 class="text-2xl font-bold mb-4">ملاحظات خاصة</h3>
+                        <ul class="list-disc pr-5 space-y-2">
+                            <li>الحصة التجريبية الأولى مجانية للطلاب الجدد</li>
+                            <li>خصومات عائلية متاحة للعديد من التسجيلات</li>
+                            <li>الطلاب المتقدمون قد يتأهلون لوظائف مساعد مدرب</li>
+                            <li>جميع الرسوم قابلة للتغيير مع إشعار مسبق</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2024-2025 Highlights -->
+    <div class="page w-full min-h-screen bg-gray-100 py-12 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-600 mb-2 english-lang">2024-2025 Highlights</h2>
+            <h2 class="text-4xl font-bold text-red-600 mb-2 arabic-lang hidden text-right">أبرز الأحداث 2024-2025</h2>
+            
+            <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+            <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+            
+            <div class="relative">
+                <div class="timeline-container space-y-8">
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-item relative pl-16 pb-8">
+                        <div class="absolute left-0 top-0 w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-trophy text-xl"></i>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-2 english-lang">National Championship Gold</h3>
+                            <h3 class="text-xl font-bold mb-2 arabic-lang hidden text-right">ذهبية البطولة الوطنية</h3>
+                            <p class="text-gray-600 english-lang">March 2024 - Our team won 5 gold medals at the Jordan National Taekwondo Championship</p>
+                            <p class="text-gray-600 arabic-lang hidden text-right">مارس 2024 - فاز فريقنا بـ5 ميداليات ذهبية في بطولة الأردن الوطنية للتايكواندو</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-item relative pl-16 pb-8">
+                        <div class="absolute left-0 top-0 w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-graduation-cap text-xl"></i>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-2 english-lang">Black Belt Promotion</h3>
+                            <h3 class="text-xl font-bold mb-2 arabic-lang hidden text-right">ترقية الحزام الأسود</h3>
+                            <p class="text-gray-600 english-lang">June 2024 - 12 students promoted to 1st Dan Black Belt in special ceremony</p>
+                            <p class="text-gray-600 arabic-lang hidden text-right">يونيو 2024 - ترقية 12 طالب إلى حزام أسود دان 1 في حفل خاص</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="timeline-item relative pl-16 pb-8">
+                        <div class="absolute left-0 top-0 w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-globe-asia text-xl"></i>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-2 english-lang">International Competition</h3>
+                            <h3 class="text-xl font-bold mb-2 arabic-lang hidden text-right">منافسة دولية</h3>
+                            <p class="text-gray-600 english-lang">September 2024 - 3 students selected for Jordan National Team competing in Korea Open</p>
+                            <p class="text-gray-600 arabic-lang hidden text-right">سبتمبر 2024 - اختيار 3 طلاب للمنتخب الوطني للمشاركة في بطولة كوريا المفتوحة</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 4 -->
+                    <div class="timeline-item relative pl-16 pb-8">
+                        <div class="absolute left-0 top-0 w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-calendar-star text-xl"></i>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-2 english-lang">40th Anniversary Celebration</h3>
+                            <h3 class="text-xl font-bold mb-2 arabic-lang hidden text-right">احتفالية الذكرى الـ40</h3>
+                            <p class="text-gray-600 english-lang">December 2024 - Special events planned to celebrate our 40 years of excellence</p>
+                            <p class="text-gray-600 arabic-lang hidden text-right">ديسمبر 2024 - فعاليات خاصة للاحتفال بمرور 40 عامًا على التميز</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 5 -->
+                    <div class="timeline-item relative pl-16">
+                        <div class="absolute left-0 top-0 w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-medal text-xl"></i>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-2 english-lang">2025 Championship Goals</h3>
+                            <h3 class="text-xl font-bold mb-2 arabic-lang hidden text-right">أهداف بطولة 2025</h3>
+                            <p class="text-gray-600 english-lang">March 2025 - Preparing our team for the Arab Taekwondo Championship in Egypt</p>
+                            <p class="text-gray-600 arabic-lang hidden text-right">مارس 2025 - تحضير فريقنا لبطولة العرب للتايكواندو في مصر</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medal Tally 2022-2025 -->
+<div class="page w-full min-h-screen bg-white py-12 px-6 md:px-12">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-red-600 mb-2 english-lang">Medal Tally 2022–2025</h2>
+        <h2 class="text-4xl font-bold text-red-600 mb-2 arabic-lang hidden text-right">حصيلة الميداليات ٢٠٢٢–٢٠٢٥</h2>
+        
+        <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+        <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+        
+        <p class="text-lg text-gray-700 mb-8 english-lang">
+            Our champions have made us proud over the past years. Here's a quick glance at our medal achievements across national and international competitions.
+        </p>
+        <p class="text-lg text-gray-700 mb-8 arabic-lang hidden text-right">
+            أبطالنا جعلونا فخورين خلال السنوات الماضية. إليكم لمحة عن إنجازاتنا في المسابقات المحلية والدولية.
+        </p>
+
+        <div class="bg-gray-100 p-6 rounded-xl shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Gold -->
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                        <i class="fas fa-medal text-white text-4xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-extrabold text-yellow-600" id="goldCount">0</h3>
+                    <h4 class="text-xl font-bold mt-2 english-lang">Gold Medals</h4>
+                    <h4 class="text-xl font-bold mt-2 arabic-lang hidden">ميداليات ذهبية</h4>
+                </div>
+
+                <!-- Silver -->
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                        <i class="fas fa-award text-white text-4xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-extrabold text-gray-700" id="silverCount">0</h3>
+                    <h4 class="text-xl font-bold mt-2 english-lang">Silver Medals</h4>
+                    <h4 class="text-xl font-bold mt-2 arabic-lang hidden">ميداليات فضية</h4>
+                </div>
+
+                <!-- Bronze -->
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-amber-700 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                        <i class="fas fa-trophy text-white text-4xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-extrabold text-amber-200" id="bronzeCount">0</h3>
+                    <h4 class="text-xl font-bold mt-2 english-lang">Bronze Medals</h4>
+                    <h4 class="text-xl font-bold mt-2 arabic-lang hidden">ميداليات برونزية</h4>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <canvas id="medalChart" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Student Success Stories -->
+    <div class="page w-full min-h-screen bg-gray-100 py-12 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-600 mb-2 english-lang">Student Success Stories</h2>
+            <h2 class="text-4xl font-bold text-red-600 mb-2 arabic-lang hidden text-right">قصص نجاح الطلاب</h2>
+            
+            <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+            <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-user-graduate text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold english-lang">Ahmad Al-Masri</h3>
+                            <h3 class="font-bold arabic-lang hidden">أحمد المصري</h3>
+                            <p class="text-sm text-gray-600 english-lang">4th Dan Black Belt</p>
+                            <p class="text-sm text-gray-600 arabic-lang hidden">حزام أسود دان 4</p>
+                        </div>
+                    </div>
+                    <div class="english-lang">
+                        <p class="text-sm mb-2">"Taekwondo taught me discipline that helped me graduate top of my class in engineering school while competing internationally."</p>
+                        <div class="flex space-x-2">
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">#Allaith_Champions</span>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <p class="text-sm mb-2 text-right">"علمني التايكواندو الانضباط الذي ساعدني على التخرج الأول في كلية الهندسة أثناء المنافسة دوليًا."</p>
+                        <div class="flex space-x-2 justify-end">
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">#أبطال_الليث</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-medal text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold english-lang">Bilsan Abu Rabbeh</h3>
+                            <h3 class="font-bold arabic-lang hidden">بلسان أبو ربة</h3>
+                            <p class="text-sm text-gray-600 english-lang">Gold Medalist</p>
+                            <p class="text-sm text-gray-600 arabic-lang hidden">حاصلة على ذهبية</p>
+                        </div>
+                    </div>
+                    <div class="english-lang">
+                        <p class="text-sm mb-2">"Winning gold at Al-Fursan Championship while maintaining a 95% average in school shows what discipline can achieve."</p>
+                        <div class="flex space-x-2">
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">#Allaith_Champions</span>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <p class="text-sm mb-2 text-right">"الفوز بالميدالية الذهبية في بطولة الفرسان مع الحفاظ على معدل 95% في المدرسة يظهر ما يمكن تحقيقه بالانضباط."</p>
+                        <div class="flex space-x-2 justify-end">
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">#أبطال_الليث</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-user-tie text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold english-lang">Yousef Jarwan</h3>
+                            <h3 class="font-bold arabic-lang hidden">يوسف جروان</h3>
+                            <p class="text-sm text-gray-600 english-lang">National Referee</p>
+                            <p class="text-sm text-gray-600 arabic-lang hidden">حكم وطني</p>
+                        </div>
+                    </div>
+                    <div class="english-lang">
+                        <p class="text-sm mb-2">"From student to certified referee, Allaith Taekwondo provided the pathway for my career in sports administration."</p>
+                        <div class="flex space-x-2">
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">#Allaith_Champions</span>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <p class="text-sm mb-2 text-right">"من طالب إلى حكم معتمد، وفر مركز الليث المسار الوظيفي لي في الإدارة الرياضية."</p>
+                        <div class="flex space-x-2 justify-end">
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">#أبطال_الليث</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="page w-full min-h-screen bg-white py-12 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-600 mb-2 english-lang">Testimonials</h2>
+            <h2 class="text-4xl font-bold text-red-600 mb-2 arabic-lang hidden text-right">آراء الأهالي</h2>
+            
+            <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+            <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold english-lang">Mohammad's Father</h3>
+                            <h3 class="font-bold arabic-lang hidden">والد محمد</h3>
+                            <p class="text-sm text-gray-600 english-lang">Parent since 2019</p>
+                            <p class="text-sm text-gray-600 arabic-lang hidden">ولي أمر منذ 2019</p>
+                        </div>
+                    </div>
+                    <div class="english-lang">
+                        <p class="italic mb-4">"My son's confidence and grades improved dramatically since joining Allaith. The discipline he learned in Taekwondo transferred to his academic life."</p>
+                        <div class="flex space-x-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <p class="italic mb-4 text-right">"تحسنت ثقة ابني ودرجاته بشكل كبير منذ انضمامه لمركز الليث. الانضباط الذي تعلمه في التايكواندو انتقل إلى حياته الأكاديمية."</p>
+                        <div class="flex space-x-2 justify-end">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold english-lang">Lina's Mother</h3>
+                            <h3 class="font-bold arabic-lang hidden">والدة لينا</h3>
+                            <p class="text-sm text-gray-600 english-lang">Parent since 2021</p>
+                            <p class="text-sm text-gray-600 arabic-lang hidden">ولي أمر منذ 2021</p>
+                        </div>
+                    </div>
+                    <div class="english-lang">
+                        <p class="italic mb-4">"As a mother, I appreciate how Allaith emphasizes respect and self-control. My daughter has become more focused and responsible in all aspects of life."</p>
+                        <div class="flex space-x-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <p class="italic mb-4 text-right">"كأم، أقدر كيف يركز مركز الليث على الاحترام وضبط النفس. أصبحت ابنتي أكثر تركيزًا ومسؤولية في جميع جوانب الحياة."</p>
+                        <div class="flex space-x-2 justify-end">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold english-lang">Karim's Parents</h3>
+                            <h3 class="font-bold arabic-lang hidden">والدا كريم</h3>
+                            <p class="text-sm text-gray-600 english-lang">Parents since 2020</p>
+                            <p class="text-sm text-gray-600 arabic-lang hidden">أولياء أمر منذ 2020</p>
+                        </div>
+                    </div>
+                    <div class="english-lang">
+                        <p class="italic mb-4">"We've seen our son transform from a shy boy to a confident young man ready to take on challenges, both in competitions and in school."</p>
+                        <div class="flex space-x-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <p class="italic mb-4 text-right">"لقد رأينا ابننا يتحول من طفل خجول إلى شاب واثق مستعد لمواجهة التحديات، سواء في المنافسات أو في المدرسة."</p>
+                        <div class="flex space-x-2 justify-end">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold english-lang">Noor's Father</h3>
+                            <h3 class="font-bold arabic-lang hidden">والد نور</h3>
+                            <p class="text-sm text-gray-600 english-lang">Parent since 2022</p>
+                            <p class="text-sm text-gray-600 arabic-lang hidden">ولي أمر منذ 2022</p>
+                        </div>
+                    </div>
+                    <div class="english-lang">
+                        <p class="italic mb-4">"The family atmosphere at Allaith is unmatched. My daughter looks forward to every training session and has made lifelong friends."</p>
+                        <div class="flex space-x-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <p class="italic mb-4 text-right">"الجو العائلي في مركز الليث لا مثيل له. تتطلع ابنتي إلى كل حصة تدريبية وقد كونت صداقات تدوم مدى الحياة."</p>
+                        <div class="flex space-x-2 justify-end">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Us -->
+    <div class="page w-full min-h-screen bg-red-600 py-12 px-6 md:px-12 text-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-2 english-lang">Join Us</h2>
+            <h2 class="text-4xl font-bold mb-2 arabic-lang hidden text-right">انضم إلينا</h2>
+            
+            <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+            <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+            
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="md:w-1/2">
+                    <div class="english-lang">
+                        <h3 class="text-2xl font-bold mb-4">Start Your Taekwondo Journey Today</h3>
+                        <p class="text-lg mb-6">Become part of our champion family and discover how Taekwondo can transform your life. We welcome students of all ages and skill levels.</p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold mb-2">Why Choose Allaith Taekwondo?</h4>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>40+ years of martial arts excellence</li>
+                                <li>9th Dan Grand Master instructor</li>
+                                <li>Proven track record of champion students</li>
+                                <li>Focus on discipline and academic success</li>
+                                <li>Family-friendly environment</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#" class="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-full flex items-center transition duration-300">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i> WhatsApp HQ
+                            </a>
+                            <a href="#" class="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-full flex items-center transition duration-300">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i> WhatsApp Branch
+                            </a>
+                        </div>
+                    </div>
+                    <div class="arabic-lang hidden">
+                        <h3 class="text-2xl font-bold mb-4 text-right">ابدأ رحلتك في التايكواندو اليوم</h3>
+                        <p class="text-lg mb-6 text-right">كن جزءًا من عائلة الأبطال لدينا واكتشف كيف يمكن للتايكواندو أن يغير حياتك. نرحب بالطلاب من جميع الأعمار والمستويات.</p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold mb-2 text-right">لماذا تختار مركز الليث؟</h4>
+                            <ul class="list-disc pr-5 space-y-2 text-right">
+                                <li>أكثر من 40 عامًا من التميز في الفنون القتالية</li>
+                                <li>مدرب من درجة الأستاذ الكبير دان 9</li>
+                                <li>سجل حافل من الطلاب الأبطال</li>
+                                <li>التركيز على الانضباط والنجاح الأكاديمي</li>
+                                <li>بيئة مناسبة للعائلة</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-4 justify-end">
+                            <a href="#" class="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-full flex items-center transition duration-300">
+                                <i class="fab fa-whatsapp ml-2 text-xl"></i> واتساب المقر
+                            </a>
+                            <a href="#" class="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-full flex items-center transition duration-300">
+                                <i class="fab fa-whatsapp ml-2 text-xl"></i> واتساب الفرع
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="text-center">
+                                <div class="bg-gray-100 p-4 rounded-lg mb-2">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.facebook.com/profile.php?id=100051369315120" alt="Facebook QR Code" class="w-full">
+                                </div>
+                                <p class="text-black text-sm english-lang">Scan for HQ Facebook</p>
+                                <p class="text-black text-sm arabic-lang hidden">المقر على فيسبوك</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-gray-100 p-4 rounded-lg mb-2">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.facebook.com/profile.php?id=100087056914185" alt="Facebook QR Code" class="w-full">
+                                </div>
+                                <p class="text-black text-sm english-lang">Scan for Branch Facebook</p>
+                                <p class="text-black text-sm arabic-lang hidden">الفرع على فيسبوك</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <div class="flex justify-center space-x-4">
+                                <a href="#" class="text-black hover:text-red-600 transition duration-300">
+                                    <i class="fab fa-facebook text-3xl"></i>
+                                </a>
+                                <a href="#" class="text-black hover:text-red-600 transition duration-300">
+                                    <i class="fab fa-instagram text-3xl"></i>
+                                </a>
+                                <a href="#" class="text-black hover:text-red-600 transition duration-300">
+                                    <i class="fab fa-youtube text-3xl"></i>
+                                </a>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <p class="text-center text-black font-bold english-lang">Follow us on social media</p>
+                                <p class="text-center text-black font-bold arabic-lang hidden">تابعنا على وسائل التواصل</p>
+                                <div class="flex justify-center mt-2">
+                                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded english-lang">#Allaith_Champions</span>
+                                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded arabic-lang hidden">#أبطال_الليث</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contacts -->
+    <div class="page w-full min-h-screen bg-white py-12 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-600 mb-2 english-lang">Contacts</h2>
+            <h2 class="text-4xl font-bold text-red-600 mb-2 arabic-lang hidden text-right">تواصل معنا</h2>
+            
+            <div class="w-24 h-1 bg-yellow-400 mb-8 english-lang"></div>
+            <div class="w-24 h-1 bg-yellow-400 mb-8 arabic-lang hidden ml-auto"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4 english-lang">Rusaifa Headquarters</h3>
+                    <h3 class="text-2xl font-bold mb-4 arabic-lang hidden text-right">المقر الرئيسي - الرصيفة</h3>
+                    
+                    <div class="english-lang">
+                        <p class="mb-2"><i class="fas fa-map-marker-alt text-red-600 mr-2"></i> Yajouz Street, Zarqa, Jordan</p>
+                        <p class="mb-4"><i class="fas fa-plus text-red-600 mr-2"></i> Plus Code: 2WQM+79 Amman</p>
+                        
+                        <div class="mb-4">
+                            <p class="font-semibold mb-2">Phone Numbers:</p>
+                            <p class="mb-1"><i class="fas fa-phone text-red-600 mr-2"></i> +962 79 037 1249</p>
+                            <p class="mb-1"><i class="fas fa-phone text-red-600 mr-2"></i> +962 78 550 4546</p>
+                            <p class="mb-1"><i class="fas fa-phone text-red-600 mr-2"></i> +962 79 697 1171</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <p class="font-semibold mb-2">WhatsApp:</p>
+                            <p><i class="fab fa-whatsapp text-red-600 mr-2"></i> +962 79 037 1249</p>
+                        </div>
+                        
+                        <div>
+                            <p class="font-semibold mb-2">Email:</p>
+                            <p><i class="fas fa-envelope text-red-600 mr-2"></i> allaith.tkd@example.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 english-lang">Allaith Taekwondo Center</h3>
+                    <h3 class="text-xl font-bold mb-4 arabic-lang hidden text-right">مركز الليث للتايكواندو</h3>
+                    <p class="text-gray-400 english-lang">Developing champions since 1984</p>
+                    <p class="text-gray-400 arabic-lang hidden text-right">نصنع الأبطال منذ 1984</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 english-lang">Quick Links</h3>
+                    <h3 class="text-xl font-bold mb-4 arabic-lang hidden text-right">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 english-lang">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 arabic-lang hidden text-right">الرئيسية</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 english-lang">Schedule</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 arabic-lang hidden text-right">الجدول</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 english-lang">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 arabic-lang hidden text-right">تواصل</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 english-lang">Connect With Us</h3>
+                    <h3 class="text-xl font-bold mb-4 arabic-lang hidden text-right">تواصل معنا</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p class="english-lang">&copy; 2024 Allaith Taekwondo Center. All rights reserved.</p>
+                <p class="arabic-lang hidden">&copy; 2024 مركز الليث للتايكواندو. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Language toggle functionality
+        document.getElementById('toggleLang').addEventListener('click', function() {
+            document.querySelectorAll('.english-lang').forEach(el => el.classList.toggle('hidden'));
+            document.querySelectorAll('.arabic-lang').forEach(el => el.classList.toggle('hidden'));
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Count up effect
+    function animateValue(id, start, end, duration) {
+        let obj = document.getElementById(id);
+        let range = end - start;
+        let current = start;
+        let increment = end > start ? 1 : -1;
+        let stepTime = Math.abs(Math.floor(duration / range));
+        let timer = setInterval(function () {
+            current += increment;
+            obj.textContent = current;
+            if (current == end) clearInterval(timer);
+        }, stepTime);
+    }
+
+    animateValue("goldCount", 0, 42, 1500);
+    animateValue("silverCount", 0, 28, 1500);
+    animateValue("bronzeCount", 0, 19, 1500);
+
+    // Medal Chart
+    const ctx = document.getElementById('medalChart').getContext('2d');
+    const medalChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['2022', '2023', '2024', '2025'],
+            datasets: [
+                {
+                    label: 'Gold',
+                    data: [10, 12, 11, 9],
+                    backgroundColor: '#facc15',
+                },
+                {
+                    label: 'Silver',
+                    data: [6, 7, 8, 7],
+                    backgroundColor: '#d1d5db',
+                },
+                {
+                    label: 'Bronze',
+                    data: [3, 5, 6, 5],
+                    backgroundColor: '#92400e',
+                },
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 2
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
