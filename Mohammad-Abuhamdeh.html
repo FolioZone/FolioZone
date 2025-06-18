@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Abuhamdeh - QA Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            scroll-behavior: smooth;
+        }
+        
+        .mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 3px solid var(--dark);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -18px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% - 12px);
+            background-color: var(--gray);
+        }
+        
+        .skill-pill {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .progress-bar {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background-color: var(--primary);
+            animation: progress 1.5s ease-in-out forwards;
+        }
+        
+        @keyframes progress {
+            to {
+                width: var(--progress-width);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full bg-slate-900/90 backdrop-blur-sm z-50 border-b border-slate-800">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white flex items-center">
+                <span class="text-blue-500 mono">QA</span>Portfolio
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-gray-300 hover:text-white">About</a>
+                <a href="#experience" class="nav-link text-gray-300 hover:text-white">Experience</a>
+                <a href="#skills" class="nav-link text-gray-300 hover:text-white">Skills</a>
+                <a href="#education" class="nav-link text-gray-300 hover:text-white">Education</a>
+                <a href="#achievements" class="nav-link text-gray-300 hover:text-white">Achievements</a>
+            </nav>
+            <button class="md:hidden text-gray-300 hover:text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Mohammad <span class="text-blue-500">Abuhamdeh</span></h1>
+                <h2 class="text-2xl md:text-3xl text-gray-400 mb-6">Software Quality Assurance Engineer</h2>
+                <p class="text-gray-400 mb-8 max-w-lg">
+                    Certified Software Quality Assurance Engineer with success reviewing, delivering, and owning features 
+                    and assessing functionality to identify common and complex software and data problems.
+                </p>
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <a href="https://wa.me/962797122544" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohammad-abuhamdeh" target="_blank" class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-full flex items-center">
+                        <i class="fab fa-linkedin-in mr-2"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/FolioZone/FolioZone/blob/main/CVs/Mohammad-Abuhamdeh.pdf" download class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full flex items-center">
+                        <i class="fas fa-download mr-2"></i> Download CV
+                    </a>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex items-center text-gray-400">
+                        <i class="fas fa-envelope mr-3"></i>
+                        <a href="mailto:mohammad_abuhamdeh@outlook.com" class="hover:text-blue-400">mohammad_abuhamdeh@outlook.com</a>
+                    </div>
+                    <div class="flex items-center text-gray-400">
+                        <i class="fas fa-phone mr-3"></i>
+                        <a href="tel:+962797122544" class="hover:text-blue-400">+962 7 9712 2544</a>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-blue-500 animate-float">
+                    <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Mohammad-Abuhamdeh.jpeg" 
+                         alt="Mohammad Abuhamdeh" 
+                         class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-slate-800/50">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 section-title">About Me</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card bg-slate-800 p-6 rounded-lg">
+                    <div class="text-blue-500 text-4xl mb-4">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Quality Focus</h3>
+                    <p class="text-gray-400">
+                        Passionate about delivering zero-defect outcomes through robust QA strategies and meticulous testing methodologies.
+                    </p>
+                </div>
+                <div class="card bg-slate-800 p-6 rounded-lg">
+                    <div class="text-blue-500 text-4xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Automation Expert</h3>
+                    <p class="text-gray-400">
+                        Extensive experience in test automation frameworks, API testing, and CI/CD integration for efficient quality assurance.
+                    </p>
+                </div>
+                <div class="card bg-slate-800 p-6 rounded-lg">
+                    <div class="text-blue-500 text-4xl mb-4">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Process Improvement</h3>
+                    <p class="text-gray-400">
+                        Proven track record of optimizing QA processes, reducing testing cycles, and implementing innovative solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 section-title">Work Experience</h2>
+            <div class="relative">
+                <!-- Timeline -->
+                <div class="space-y-8 border-l-2 border-gray-700 pl-8 md:pl-12">
+                    <!-- Amazon -->
+                    <div class="timeline-item relative pl-6">
+                        <div class="card bg-slate-800 p-6 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                <h3 class="text-xl font-bold">Software Quality Assurance Engineer</h3>
+                                <span class="text-blue-400 mono">2024 - Present</span>
+                            </div>
+                            <h4 class="text-gray-400 font-medium mb-4">Amazon Payment Services</h4>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Led QA for compliance projects, ensuring secure data handling in regulated environments and data-stores.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Reviewed and validated complex SQL stored procedures across data transformation pipelines.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Experienced in achieving extensive automation testing coverage using Data Providers for API requests with a CSV-driven framework.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Optimized automation frameworks by introducing attributes for test grouping, services, and processors to enhance filtering and scalability.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Delivered zero-defect outcomes for critical projects like Instant Bank Discount and Recurring Payments through robust QA strategy.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Atypon -->
+                    <div class="timeline-item relative pl-6">
+                        <div class="card bg-slate-800 p-6 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                <h3 class="text-xl font-bold">Quality Assurance Engineer</h3>
+                                <span class="text-blue-400 mono">2021 - 2024</span>
+                            </div>
+                            <h4 class="text-gray-400 font-medium mb-4">Atypon (Wiley)</h4>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Led the QA efforts needed for new migration and redesign projects delivery.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Managed test strategy to maximize the quality of the UI, FE, BE, components handled.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Reviewed designs and features for assigned sites as QA owner, outlining and detailing areas of improvement for enhanced user experience.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Initiated a new team that is responsible for supporting the QA Engineers with their automated tests concerns to reduce the load on the QAA team.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Adopted tools like Applitools and lambdaTest to review detailed automation testing results.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Acacus -->
+                    <div class="timeline-item relative pl-6">
+                        <div class="card bg-slate-800 p-6 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                <h3 class="text-xl font-bold">Quality Assurance Engineer</h3>
+                                <span class="text-blue-400 mono">2021 - 2021</span>
+                            </div>
+                            <h4 class="text-gray-400 font-medium mb-4">Acacus Group Technologies (Internship)</h4>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Extensive experience in manual testing of web and mobile applications, including various projects.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Demonstrated ability to work as a crew member for live testing, requiring a high level of focus and analysis.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Skilled in testing tracking devices under different conditions by manipulating their status.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Proficient in performing manual testing for websites and CMS tools.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-2">•</span>
+                                    Amateur in automation testing using Selenium WebDriver and scripting full scripts for CRUD operations throughout projects.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 bg-slate-800/50">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 section-title">Skills</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Soft Skills -->
+                <div class="card bg-slate-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-6 text-blue-500">Professional Skills</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Leadership</span>
+                                <span class="text-gray-400">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar h-2 rounded-full" style="--progress-width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Innovation</span>
+                                <span class="text-gray-400">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar h-2 rounded-full" style="--progress-width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Critical Thinking</span>
+                                <span class="text-gray-400">97%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar h-2 rounded-full" style="--progress-width: 97%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Communication</span>
+                                <span class="text-gray-400">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar h-2 rounded-full" style="--progress-width: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical Skills -->
+                <div class="card bg-slate-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-6 text-blue-500">Technical Skills</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Selenium Automation</span>
+                                <span class="text-gray-400">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar h-2 rounded-full" style="--progress-width: 92%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">SQL & Database Testing</span>
+                                <span class="text-gray-400">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar h-2 rounded-full" style="--progress-width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">API Testing</span>
+                                <span class="text-gray-400">93%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar h-2 rounded-full" style="--progress-width: 93%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">CI/CD Integration</span>
+                                <span class="text-gray-400">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar h-2 rounded-full" style="--progress-width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skill Pills -->
+            <div class="card bg-slate-800 p-6 rounded-lg">
+                <h3 class="text-xl font-bold mb-6 text-blue-500">Technical Expertise</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">Selenium WebDriver</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">TestRail</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">Postman</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">Jenkins</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">GitHub Actions</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">SQL</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">NoSQL</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">AWS Redshift</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">DynamoDB</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">Jira</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">Azure DevOps</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">Applitools</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">LambdaTest</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">POM Design</span>
+                    <span class="skill-pill bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full mono">CI/CD</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 section-title">Education</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card bg-slate-800 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-500/10 p-3 rounded-full mr-4">
+                            <i class="fas fa-graduation-cap text-blue-500 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Bachelor's Degree in Computer Science</h3>
+                            <p class="text-gray-400">The University of Jordan</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-blue-400 mono">2017 - 2021</span>
+                        <span class="text-green-500 font-medium">Graduated</span>
+                    </div>
+                </div>
+                
+                <div class="card bg-slate-800 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-500/10 p-3 rounded-full mr-4">
+                            <i class="fas fa-certificate text-blue-500 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">ISTQB - Certified Tester Foundation Level</h3>
+                            <p class="text-gray-400">International Software Testing Qualifications Board</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-blue-400 mono">2022</span>
+                        <span class="text-green-500 font-medium">Certified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20 px-4 bg-slate-800/50">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 section-title">Achievements</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card bg-slate-800 p-6 rounded-lg">
+                    <div class="text-blue-500 text-3xl mb-4">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Process Innovation</h3>
+                    <p class="text-gray-400">
+                        Proposed and implemented process improvements optimizing QA efforts, enhancing efficiency, faster issue resolution, and reduced testing cycles.
+                    </p>
+                </div>
+                <div class="card bg-slate-800 p-6 rounded-lg">
+                    <div class="text-blue-500 text-3xl mb-4">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Leading QA Role</h3>
+                    <p class="text-gray-400">
+                        Delivered multiple migration and redesign projects leading QA, included at early phases of implementation and design.
+                    </p>
+                </div>
+                <div class="card bg-slate-800 p-6 rounded-lg">
+                    <div class="text-blue-500 text-3xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Team Innovation</h3>
+                    <p class="text-gray-400">
+                        Initiated a new team to support QA Engineers with the automated tests concerns reducing the load on the SDE-Ts.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold mb-12 section-title">Get In Touch</h2>
+            <div class="card bg-slate-800 p-8 rounded-lg">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-blue-500/10 p-2 rounded-full mr-4">
+                                    <i class="fas fa-envelope text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">Email</h4>
+                                    <a href="mailto:mohammad_abuhamdeh@outlook.com" class="text-gray-400 hover:text-blue-400">mohammad_abuhamdeh@outlook.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-blue-500/10 p-2 rounded-full mr-4">
+                                    <i class="fas fa-phone text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">Phone</h4>
+                                    <a href="tel:+962797122544" class="text-gray-400 hover:text-blue-400">+962 7 9712 2544</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-blue-500/10 p-2 rounded-full mr-4">
+                                    <i class="fab fa-linkedin-in text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">LinkedIn</h4>
+                                    <a href="https://www.linkedin.com/in/mohammad-abuhamdeh" target="_blank" class="text-gray-400 hover:text-blue-400">linkedin.com/in/mohammad-abuhamdeh</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Quick Message</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <input type="text" placeholder="Your Name" class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <input type="email" placeholder="Your Email" class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <textarea placeholder="Your Message" rows="4" class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                            </div>
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium w-full transition duration-300">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-8 px-4 border-t border-slate-800">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400">&copy; 2024 Mohammad Abuhamdeh. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://wa.me/962797122544" target="_blank" class="text-gray-400 hover:text-green-500 text-xl">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohammad-abuhamdeh" target="_blank" class="text-gray-400 hover:text-blue-400 text-xl">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:mohammad_abuhamdeh@outlook.com" class="text-gray-400 hover:text-blue-400 text-xl">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-6 text-center">
+                <p class="text-gray-600 mono text-sm">
+                    <span class="text-blue-500">//</span> Powered by <span class="text-blue-400">FolioZone</span> 
+                    <span class="text-blue-500">//</span> Quality Assurance Engineered
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.md\\:hidden');
+        const navLinks = document.querySelector('nav');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            navLinks.classList.toggle('hidden');
+            navLinks.classList.toggle('flex');
+            navLinks.classList.toggle('flex-col');
+            navLinks.classList.toggle('absolute');
+            navLinks.classList.toggle('top-16');
+            navLinks.classList.toggle('left-0');
+            navLinks.classList.toggle('right-0');
+            navLinks.classList.toggle('bg-slate-900');
+            navLinks.classList.toggle('p-4');
+            navLinks.classList.toggle('space-y-4');
+            navLinks.classList.toggle('space-x-8');
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.card, .section-title, .skill-pill').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
