@@ -1,171 +1,95 @@
-# 🌟 FolioZone
+# 🌐 FolioZone — Professional Portfolio Creation Service
 
-<div align="center">
-  
-![FolioZone Logo](https://via.placeholder.com/400x100/6366F1/FFFFFF?text=FolioZone)
+FolioZone is a modern, bilingual web platform that helps professionals showcase their careers through custom-designed portfolio webpages. With fast delivery, sleek design, and shareable links, FolioZone is perfect for developers, designers, writers, marketers, and more.
 
-**Your Professional Portfolio, Made Simple**
-
-[![Website](https://img.shields.io/badge/Website-foliozone.com-6366F1?style=for-the-badge)]([https://foliozone.com](https://foliozone.github.io/FolioZone))
-[![Status](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)]()
-[![Support](https://img.shields.io/badge/Support-24/7-blue?style=for-the-badge)]()
-
-</div>
+> 🔗 Live Website: [https://folio-zone.com](https://folio-zone.com)
 
 ---
 
-## 🚀 What is FolioZone?
+## 📸 What Is FolioZone?
 
-Send us your CV and get a **beautiful, personalized portfolio page** in no time. Perfect for professionals in any field who want to make a lasting impression without the hassle of building from scratch.
-
-### ✨ Why Choose FolioZone?
-
-- 🎨 **Custom Design** - Tailored to your profession and personal brand
-- ⚡ **Lightning Fast** - From CV to live portfolio in record time
-- 🌐 **Professional URLs** - Clean links like `foliozone.com/your-name`
-- 📱 **Responsive Design** - Looks amazing on all devices
-- 🔧 **Zero Maintenance** - We handle everything technical
-- 💼 **All Professions** - Designers, developers, marketers, consultants, and more
+FolioZone allows users to submit their CV or LinkedIn profile and receive a beautiful, responsive, and shareable portfolio in 24–48 hours. No coding or design skills required.
 
 ---
 
-## 🛠️ How It Works
+## 🎯 Features
 
-<div align="center">
-
-### 📋 Step 1: Submit Your Details
-Send us your CV, LinkedIn profile, or any professional information via email or our contact form.
-
-⬇️
-
-### 🎨 Step 2: We Design Your Portfolio  
-Our team creates a custom, professional portfolio page that represents your unique brand.
-
-⬇️
-
-### 🌐 Step 3: Get Your Live Link
-Receive a clean, professional URL that you can share anywhere to showcase your work.
-
-</div>
+- ⚡ **Fast Turnaround** — Get your portfolio in as little as 24 hours.
+- 🧩 **Custom Designs** — Tailored layout based on your profession.
+- 🌍 **Bilingual Support** — English and Arabic with RTL layout.
+- 📱 **Fully Responsive** — Works seamlessly on desktop, tablet, and mobile.
+- 🔗 **Shareable Link** — Hosted on `folio-zone.com/your-name`.
+- 💼 **Profession-Specific Templates** — Ideal for developers, writers, marketers, designers, and more.
 
 ---
 
-## 🎯 Perfect For
+## 🧭 How It Works
 
-<table>
-<tr>
-<td width="33%">
+1. **Submit Your Details**  
+   Send your CV, LinkedIn profile, and any relevant content through the form or via email.
 
-### 💻 **Developers**
-- Showcase projects
-- Display technical skills
-- Professional GitHub integration
+2. **Portfolio Design Begins**  
+   Our team creates your personalized portfolio within 24–48 hours.
 
-</td>
-<td width="33%">
-
-### 🎨 **Designers** 
-- Visual portfolio galleries
-- Creative project showcases
-- Brand-aligned aesthetics
-
-</td>
-<td width="33%">
-
-### 📈 **Business Professionals**
-- Clean, corporate layouts
-- Achievement highlights
-- Professional networking
-
-</td>
-</tr>
-</table>
+3. **Get a Shareable Link**  
+   You'll receive a live portfolio URL on `folio-zone.com` to include on LinkedIn, resumes, or job applications.
 
 ---
 
-## 🌟 Features
+## 💰 Pricing
 
-- ✅ **Custom Domain** - Professional URL structure
-- ✅ **Mobile Optimized** - Perfect on any device
-- ✅ **SEO Friendly** - Get found by recruiters
-- ✅ **Fast Loading** - Optimized performance
-- ✅ **Analytics Ready** - Track your portfolio views
-- ✅ **Easy Updates** - Just send us new info
-- ✅ **Professional Support** - We're here to help
+| Plan        | Price  | Features |
+|-------------|--------|----------|
+| **Starter** | 5 JOD  | Basic portfolio, clean layout, 48-hour delivery |
+| **Basic**   | 10 JOD | Profile picture, CV download, 3 updates within 6 months |
+| **Premium** | 20 JOD | Custom layout, contact form, 10 updates within 1 year |
 
 ---
 
-## 🚀 Getting Started
+## 📦 Tech Stack
 
-### Option 1: Quick Email
-Send your CV to: **hello@foliozone.com**
-
-### Option 2: Contact Form
-Visit our website and fill out the detailed form
-
-### Option 3: LinkedIn Integration  
-Share your LinkedIn profile URL with us
+- **Frontend:** HTML, CSS, JavaScript (or Tailwind, React, etc.)
+- **Animations:** CSS, Lottie, GSAP (optional)
+- **Multilingual Support:** i18n + RTL layout for Arabic
+- **Deployment:** GitHub Pages / Vercel / Netlify (depending on setup)
 
 ---
 
-## 📊 Built With Modern Tech
+## 🌐 Languages
 
-<div align="center">
-
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
-
-</div>
+- 🇺🇸 English (default)
+- 🇸🇦 Arabic (toggle supported, RTL-compliant)
 
 ---
 
-## 💼 Sample Portfolios
+## 📩 Contact & Support
 
-Check out some amazing portfolios we've created:
+To request your portfolio or for general inquiries:
 
-- 🎨 [Sarah Designer](https://foliozone.com/sarah-designer) - Creative Portfolio
-- 💻 [John Developer](https://foliozone.com/john-developer) - Tech Portfolio  
-- 📊 [Mike Analyst](https://foliozone.com/mike-analyst) - Business Portfolio
-
----
-
-## 📞 Contact & Support
-
-<div align="center">
-
-[![Email](https://img.shields.io/badge/Email-hello@foliozone.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:hello@foliozone.com)
-[![Twitter](https://img.shields.io/badge/Twitter-@FolioZone-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/foliozone)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-FolioZone-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/company/foliozone)
-
-**Response Time:** Within 24 hours  
-**Portfolio Delivery:** 3-5 business days
-
-</div>
+- 📬 Email: `info@folio-zone.com`
+- 🌍 Website: [https://folio-zone.com](https://folio-zone.com)
 
 ---
 
-## 🎉 Special Offers
+## 🤔 FAQ
 
-- 🎓 **Students:** 25% off with valid student ID
-- 🚀 **Startups:** Bulk discounts for team portfolios
-- 🔄 **Referrals:** Get $20 credit for each successful referral
+**Q: How long does it take to receive my portfolio?**  
+A: 1–3 business days, depending on the selected package.
 
----
+**Q: Can I request updates later?**  
+A: Yes. Basic and Premium plans include updates. Additional updates are available for a small fee.
 
-<div align="center">
-
-### 🌟 Ready to Get Started?
-
-**Transform your career with a stunning portfolio today!**
-
-[![Get Started](https://img.shields.io/badge/Get_Started_Now-6366F1?style=for-the-badge&logo=rocket&logoColor=white)](https://foliozone.com/get-started)
+**Q: Do you support custom domains?**  
+A: Coming soon! Currently, portfolios are hosted on `folio-zone.com/your-name`.
 
 ---
 
-*Made with ❤️ by the FolioZone Team*
+## 📃 License
 
-![Visitors](https://komarev.com/ghpvc/?username=FolioZone&color=6366f1&style=flat-square&label=Repository+Views)
+This project is under a commercial license. All rights reserved © FolioZone.
 
-</div>
+---
+
+## 🙌 Contributing
+
+While the platform is a service-based offering, we welcome suggestions for features or improvements. Please open an issue or contact us directly.
