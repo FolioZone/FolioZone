@@ -3,739 +3,678 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FolioZone - Professional Portfolio Service</title>
+    <title>FolioZone - Your Professional Portfolio Solution</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #000000;
-            --secondary: #ffffff;
-            --accent-blue: #3b82f6;
-            --accent-green: #10b981;
+            --accent: #00ffaa;
+            --accent-hover: #00f0ff;
+            --primary: #000;
+            --secondary: #fff;
+            --text-gray: #bcbcbc;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--primary);
             color: var(--secondary);
-            transition: all 0.3s ease;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
-        
-        .rtl {
+
+        body[dir="rtl"] {
             font-family: 'Cairo', sans-serif;
-            direction: rtl;
         }
-        
+
         .glassmorphism {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+
+        .accent-gradient {
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
         }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+
+        .accent-hover {
+            transition: all 0.3s ease;
         }
-        
-        .pricing-card:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-green);
+
+        .accent-hover:hover {
+            box-shadow: 0 0 15px rgba(0, 255, 170, 0.5);
         }
-        
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.7);
         }
-        
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .icon-container {
+            transition: transform 0.3s ease;
+        }
+
+        .icon-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        .animate-fadeIn {
-            animation: fadeIn 0.6s ease-out forwards;
+
+        #hero {
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
         }
-        
-        .delay-100 {
-            animation-delay: 0.1s;
+
+        .hero-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(0, 255, 170, 0.15) 0%, rgba(0, 0, 0, 0) 30%);
+            z-index: -1;
         }
-        
-        .delay-200 {
-            animation-delay: 0.2s;
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
         }
-        
-        .delay-300 {
-            animation-delay: 0.3s;
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
         }
-        
-        .delay-400 {
-            animation-delay: 0.4s;
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
         }
-        
-        .delay-500 {
-            animation-delay: 0.5s;
+
+        .accordion-content.active {
+            max-height: 200px;
+        }
+
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1;
+            background-color: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            color: white;
+            text-align: center;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            width: max-content;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .lang-btn {
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: all 0.3s;
+            width: 48px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lang-btn:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.1);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateX(-100%);
+            border-radius: 40px;
+        }
+
+        .lang-btn:hover:after {
+            transform: translateX(0);
+        }
+
+        .lang-btn.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .input-field {
+            background-color: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 255, 170, 0.2);
+        }
+
+        .plan-popular {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-popular:before {
+            content: "Most Popular";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            transform: rotate(45deg);
+            background-color: var(--accent);
+            color: var(--primary);
+            padding: 3px 35px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* Make timeline horizontal on small screens */
+        @media (max-width: 768px) {
+            .timeline-wrapper {
+                flex-direction: column;
+            }
+            
+            .timeline-item {
+                padding-left: 0;
+                padding-top: 40px;
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .timeline-item:before {
+                border-top: 1px solid rgba(255,255,255,0.1);
+                border-left: none;
+                left: calc(50% - 8px);
+                top: 0;
+                width: 0;
+                height: 100%;
+            }
+            
+            .timeline-dot {
+                top: 0;
+                left: calc(50% - 8px);
+                transform: translateX(-50%);
+            }
+            
+            .timeline-item:nth-child(odd), 
+            .timeline-item:nth-child(even) {
+                border-right: none;
+            }
         }
     </style>
 </head>
-<body class="antialiased">
-    <!-- Language Toggle -->
-    <div class="fixed top-4 right-4 z-50">
-        <button id="languageToggle" class="bg-black text-white px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-900 transition flex items-center gap-2">
-            <span class="en-text">EN</span>
-            <span class="ar-text hidden">AR</span>
-            <i class="fas fa-globe"></i>
-        </button>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="glassmorphism fixed w-full z-40">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold text-white">
-                    <span class="en-text">Folio<span class="text-blue-500">Zone</span></span>
-                    <span class="ar-text hidden">فوليو<span class="text-blue-500">زون</span></span>
+<body>
+    <!-- Header/Navigation -->
+    <header class="fixed w-full z-50 py-4 backdrop-blur-lg">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="mr-8">
+                        <div class="w-48">
+                            <div class="font-bold text-2xl">FOLIO<span class="text-[#00ffaa]">ZONE</span></div>
+                        </div>
+                    </a>
+                    <div class="hidden lg:flex">
+                        <a href="#features" class="mx-4 text-gray-300 hover:text-white transition" data-en="Features" data-ar="المميزات">Features</a>
+                        <a href="#how-it-works" class="mx-4 text-gray-300 hover:text-white transition" data-en="How It Works" data-ar="كيف يعمل">How It Works</a>
+                        <a href="#pricing" class="mx-4 text-gray-300 hover:text-white transition" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                        <a href="#contact" class="mx-4 text-gray-300 hover:text-white transition" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+                    </div>
                 </div>
                 
-                <div class="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
-                    <a href="#features" class="text-white hover:text-blue-400 transition en-text">Features</a>
-                    <a href="#how-it-works" class="text-white hover:text-blue-400 transition en-text">How It Works</a>
-                    <a href="#pricing" class="text-white hover:text-blue-400 transition en-text">Pricing</a>
-                    <a href="#contact" class="text-white hover:text-blue-400 transition en-text">Contact</a>
-                    
-                    <a href="#request" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full transition flex items-center gap-2">
-                        <span class="en-text">Request Portfolio</span>
-                        <span class="ar-text hidden">طلب ملف شخصي</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                <div class="flex items-center">
+                    <div class="flex border border-gray-700 rounded-full mr-4">
+                        <div class="lang-btn active">EN</div>
+                        <div class="lang-btn">AR</div>
+                    </div>
+                    <a href="#form" class="bg-white text-black font-medium px-6 py-2 rounded-full hover:bg-gray-200 transition" data-en="Request Portfolio" data-ar="اطلب ملفك">Request Portfolio</a>
                 </div>
-                
-                <button class="md:hidden text-white focus:outline-none" id="mobileMenuButton">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-            
-            <!-- Mobile Menu -->
-            <div class="md:hidden hidden mt-4" id="mobileMenu">
-                <div class="flex flex-col space-y-4">
-                    <a href="#features" class="text-white hover:text-blue-400 transition en-text">Features</a>
-                    <a href="#how-it-works" class="text-white hover:text-blue-400 transition en-text">How It Works</a>
-                    <a href="#pricing" class="text-white hover:text-blue-400 transition en-text">Pricing</a>
-                    <a href="#contact" class="text-white hover:text-blue-400 transition en-text">Contact</a>
-                    
-                    <a href="#request" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full transition flex items-center gap-2 justify-center">
-                        <span class="en-text">Request Portfolio</span>
-                        <span class="ar-text hidden">طلب ملف شخصي</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="hero-section min-h-screen flex items-center justify-center pt-20">
-        <div class="container mx-auto px-6 py-20 text-center">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fadeIn">
-                <span class="en-text">Your Professional Portfolio, <span class="text-blue-400">Made Simple</span></span>
-                <span class="ar-text hidden">ملفك الشخصي الاحترافي، <span class="text-blue-400">بكل بساطة</span></span>
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto animate-fadeIn delay-100">
-                <span class="en-text">Send us your CV and get a beautiful, personalized portfolio page in no time.</span>
-                <span class="ar-text hidden">أرسل لنا سيرتك الذاتية واحصل على صفحة ملف شخصي جميلة ومخصصة في وقت قصير.</span>
-            </p>
-            <div class="animate-fadeIn delay-200">
-                <a href="#request" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium transition inline-flex items-center gap-2">
-                    <span class="en-text">Request Your Portfolio</span>
-                    <span class="ar-text hidden">اطلب ملفك الشخصي</span>
-                    <i class="fas fa-arrow-right"></i>
+    <section id="hero" class="flex items-center">
+        <div class="hero-gradient"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 glow-text" data-en="Your Professional Portfolio, <span class='accent-hover'>Made Simple</span>" data-ar="ملفك الشخصي الاحترافي، <span class='accent-hover'>بكل بساطة</span>">
+                    Your Professional Portfolio, <span class="accent-hover">Made Simple</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto" data-en="Send us your CV and get a beautiful, personalized portfolio page in no time." data-ar="أرسل لنا سيرتك الذاتية واحصل على صفحة ملف شخصي جميلة ومخصصة في وقت قصير.">
+                    Send us your CV and get a beautiful, personalized portfolio page in no time.
+                </p>
+                <a href="#form" class="accent-gradient hover:opacity-90 text-black font-bold px-8 py-4 rounded-full inline-block transition transform hover:-translate-y-1" data-en="Request Your Portfolio" data-ar="اطلب ملفك الشخصي">
+                    Request Your Portfolio
                 </a>
+            </div>
+        </div>
+
+        <!-- Hero Animation -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="text-gray-400 text-center">
+                <div>Scroll Down</div>
+                <div class="mt-1">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-black">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 animate-fadeIn">
-                <span class="en-text">Why Choose <span class="text-blue-400">FolioZone</span>?</span>
-                <span class="ar-text hidden">لماذا تختار <span class="text-blue-400">فوليو زون</span>؟</span>
-            </h2>
+    <section id="features" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16" data-en="Why Choose FolioZone?" data-ar="لماذا تختار فوليو زون؟">Why Choose FolioZone?</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="feature-card bg-gray-900 p-8 rounded-xl transition duration-300 animate-fadeIn delay-100">
-                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-bolt text-2xl text-white"></i>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glassmorphism p-8 rounded-xl animate-on-scroll">
+                    <div class="flex justify-center mb-6">
+                        <div class="icon-container">
+                            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_jDB0um.json" background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-center en-text">Fast Turnaround</h3>
-                    <h3 class="text-xl font-bold mb-3 text-center ar-text hidden">تنفيذ سريع</h3>
-                    <p class="text-gray-400 text-center en-text">Get your professional portfolio ready within 48 hours after submitting your details.</p>
-                    <p class="text-gray-400 text-center ar-text hidden">احصل على ملفك الشخصي الاحترافي جاهزًا خلال 48 ساعة بعد إرسال تفاصيلك.</p>
+                    <h3 class="text-xl font-bold mb-4" data-en="Fast Turnaround" data-ar="تسليم سريع">Fast Turnaround</h3>
+                    <p class="text-gray-400 mb-4" data-en="Delivery in as little as 24–48 hours" data-ar="تسليم في غضون 24-48 ساعة">Delivery in as little as 24–48 hours</p>
+                    <p class="text-sm text-gray-500" data-en="Get your portfolio ready in record time without compromising on quality." data-ar="احصل على ملفك جاهزًا في وقت قياسي دون المساس بالجودة.">Get your portfolio ready in record time without compromising on quality.</p>
                 </div>
                 
-                <!-- Feature 2 -->
-                <div class="feature-card bg-gray-900 p-8 rounded-xl transition duration-300 animate-fadeIn delay-200">
-                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-palette text-2xl text-white"></i>
+                <!-- Card 2 -->
+                <div class="glassmorphism p-8 rounded-xl animate-on-scroll">
+                    <div class="flex justify-center mb-6">
+                        <div class="icon-container">
+                            <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_5itQer1CSd.json" background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-center en-text">Custom Designs</h3>
-                    <h3 class="text-xl font-bold mb-3 text-center ar-text hidden">تصاميم مخصصة</h3>
-                    <p class="text-gray-400 text-center en-text">Tailored to your profession with multiple design options to choose from.</p>
-                    <p class="text-gray-400 text-center ar-text hidden">مصممة خصيصًا لمهنتك مع خيارات تصميم متعددة للاختيار من بينها.</p>
+                    <h3 class="text-xl font-bold mb-4">Custom Designs</h3>
+                    <p class="text-gray-400 mb-4">Tailored to your profession</p>
+                    <p class="text-sm text-gray-500">Profession-specific designs that highlight your strengths and expertise.</p>
                 </div>
                 
-                <!-- Feature 3 -->
-                <div class="feature-card bg-gray-900 p-8 rounded-xl transition duration-300 animate-fadeIn delay-300">
-                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-share-alt text-2xl text-white"></i>
+                <!-- Card 3 -->
+                <div class="glassmorphism p-8 rounded-xl animate-on-scroll">
+                    <div class="flex justify-center mb-6">
+                        <div class="icon-container">
+                            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_tbjuenvb.json" background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay onhover></lottie-player>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-center en-text">Simple Sharing</h3>
-                    <h3 class="text-xl font-bold mb-3 text-center ar-text hidden">مشاركة سهلة</h3>
-                    <p class="text-gray-400 text-center en-text">Get a clean, memorable URL to share with potential employers or clients.</p>
-                    <p class="text-gray-400 text-center ar-text hidden">احصل على عنوان URL نظيف وسهل التذكر لمشاركته مع أصحاب العمل أو العملاء المحتملين.</p>
+                    <h3 class="text-xl font-bold mb-4">Simple Sharing</h3>
+                    <p class="text-gray-400 mb-4">Clean folio-zone.com URL</p>
+                    <p class="text-sm text-gray-500">Share your portfolio with a professional domain that impresses potential employers.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Target Audience -->
-    <section class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 animate-fadeIn">
-                <span class="en-text">Perfect for <span class="text-green-400">All Professions</span></span>
-                <span class="ar-text hidden">مثالي لـ <span class="text-green-400">جميع المهن</span></span>
-            </h2>
+    <section class="py-20 bg-gray-900 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16" data-en="Perfect for All Professions" data-ar="مثالي لجميع المهن">Perfect for All Professions</h2>
             
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                <!-- Profession 1 -->
-                <div class="bg-gray-800 p-6 rounded-lg text-center transition hover:bg-gray-700 animate-fadeIn delay-100">
-                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-code text-2xl text-white"></i>
+                <!-- Developer -->
+                <div class="glassmorphism p-6 text-center animate-on-scroll">
+                    <div class="mb-4">
+                        <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_pmvvgyac.json" background="transparent" speed="1" style="width: 80px; height: 80px; margin: 0 auto;" loop autoplay></lottie-player>
                     </div>
-                    <h3 class="font-medium en-text">Developers</h3>
-                    <h3 class="font-medium ar-text hidden">المطورون</h3>
+                    <h3 class="font-bold" data-en="Developers" data-ar="المطورين">Developers</h3>
                 </div>
                 
-                <!-- Profession 2 -->
-                <div class="bg-gray-800 p-6 rounded-lg text-center transition hover:bg-gray-700 animate-fadeIn delay-200">
-                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-pencil-ruler text-2xl text-white"></i>
+                <!-- Designers -->
+                <div class="glassmorphism p-6 text-center animate-on-scroll">
+                    <div class="mb-4">
+                        <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_x1ikfvrt.json" background="transparent" speed="1" style="width: 80px; height: 80px; margin: 0 auto;" loop autoplay></lottie-player>
                     </div>
-                    <h3 class="font-medium en-text">Designers</h3>
-                    <h3 class="font-medium ar-text hidden">المصممون</h3>
+                    <h3 class="font-bold">Designers</h3>
                 </div>
                 
-                <!-- Profession 3 -->
-                <div class="bg-gray-800 p-6 rounded-lg text-center transition hover:bg-gray-700 animate-fadeIn delay-300">
-                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-bullhorn text-2xl text-white"></i>
+                <!-- Writers -->
+                <div class="glassmorphism p-6 text-center animate-on-scroll">
+                    <div class="mb-4">
+                        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_qwo7joly.json" background="transparent" speed="1" style="width: 80px; height: 80px; margin: 0 auto;" loop autoplay></lottie-player>
                     </div>
-                    <h3 class="font-medium en-text">Marketers</h3>
-                    <h3 class="font-medium ar-text hidden">مسوقون</h3>
+                    <h3 class="font-bold">Writers</h3>
                 </div>
                 
-                <!-- Profession 4 -->
-                <div class="bg-gray-800 p-6 rounded-lg text-center transition hover:bg-gray-700 animate-fadeIn delay-400">
-                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-pen-fancy text-2xl text-white"></i>
+                <!-- Marketers -->
+                <div class="glassmorphism p-6 text-center animate-on-scroll">
+                    <div class="mb-4">
+                        <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_hwliqtnn.json" background="transparent" speed="1" style="width: 80px; height: 80px; margin: 0 auto;" loop autoplay></lottie-player>
                     </div>
-                    <h3 class="font-medium en-text">Writers</h3>
-                    <h3 class="font-medium ar-text hidden">كتاب</h3>
+                    <h3 class="font-bold">Marketers</h3>
                 </div>
                 
-                <!-- Profession 5 -->
-                <div class="bg-gray-800 p-6 rounded-lg text-center transition hover:bg-gray-700 animate-fadeIn delay-500">
-                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-camera text-2xl text-white"></i>
+                <!-- Photographers -->
+                <div class="glassmorphism p-6 text-center animate-on-scroll">
+                    <div class="mb-4">
+                        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_hjhwehzk.json" background="transparent" speed="1" style="width: 80px; height: 80px; margin: 0 auto;" loop autoplay></lottie-player>
                     </div>
-                    <h3 class="font-medium en-text">Photographers</h3>
-                    <h3 class="font-medium ar-text hidden">مصورون</h3>
+                    <h3 class="font-bold">Photographers</h3>
                 </div>
                 
-                <!-- Profession 6 -->
-                <div class="bg-gray-800 p-6 rounded-lg text-center transition hover:bg-gray-700 animate-fadeIn delay-600">
-                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-chart-line text-2xl text-white"></i>
+                <!-- Consultants -->
+                <div class="glassmorphism p-6 text-center animate-on-scroll">
+                    <div class="mb-4">
+                        <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_roe2yjsh.json" background="transparent" speed="1" style="width: 80px; height: 80px; margin: 0 auto;" loop autoplay></lottie-player>
                     </div>
-                    <h3 class="font-medium en-text">Consultants</h3>
-                    <h3 class="font-medium ar-text hidden">استشاريون</h3>
+                    <h3 class="font-bold">Consultants</h3>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section id="how-it-works" class="py-20 bg-black">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 animate-fadeIn">
-                <span class="en-text">How It <span class="text-blue-400">Works</span></span>
-                <span class="ar-text hidden">كيف <span class="text-blue-400">تعمل</span></span>
-            </h2>
+    <section id="how-it-works" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16" data-en="How FolioZone Works" data-ar="كيف يعمل فوليو زون">How FolioZone Works</h2>
             
-            <div class="flex flex-col md:flex-row items-center justify-between">
+            <div class="timeline-wrapper flex justify-between relative">
                 <!-- Step 1 -->
-                <div class="relative mb-16 md:mb-0 text-center w-full md:w-1/3 animate-fadeIn delay-100">
-                    <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <span class="text-2xl font-bold text-white">1</span>
+                <div class="timeline-item relative pb-10 w-[30%] animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-black bg-opacity-30 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-3" data-en="Submit Your Details" data-ar="أرسل بياناتك">Submit Your Details</h3>
+                        <p class="text-gray-400" data-en="Send us your CV and any other details you'd like to feature" data-ar="أرسل لنا سيرتك الذاتية وأي تفاصيل أخرى تود تضمينها">Send us your CV and any other details you'd like to feature</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 en-text">Submit Your Details</h3>
-                    <h3 class="text-xl font-bold mb-3 ar-text hidden">إرسال تفاصيلك</h3>
-                    <p class="text-gray-400 max-w-xs mx-auto en-text">Fill out our simple form with your professional information and upload your CV.</p>
-                    <p class="text-gray-400 max-w-xs mx-auto ar-text hidden">املأ نموذجنا البسيط بمعلوماتك المهنية وقم بتحميل سيرتك الذاتية.</p>
-                </div>
-                
-                <!-- Arrow -->
-                <div class="hidden md:block animate-fadeIn delay-200">
-                    <i class="fas fa-arrow-right text-3xl text-gray-500 mx-4"></i>
                 </div>
                 
                 <!-- Step 2 -->
-                <div class="relative mb-16 md:mb-0 text-center w-full md:w-1/3 animate-fadeIn delay-300">
-                    <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <span class="text-2xl font-bold text-white">2</span>
+                <div class="timeline-item relative pb-10 w-[30%] animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-black bg-opacity-30 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-3">We Design Your Portfolio</h3>
+                        <p class="text-gray-400">Our team creates a beautiful portfolio tailored to your profession</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 en-text">We Design Your Portfolio</h3>
-                    <h3 class="text-xl font-bold mb-3 ar-text hidden">نصمم ملفك الشخصي</h3>
-                    <p class="text-gray-400 max-w-xs mx-auto en-text">Our team creates a beautiful, professional portfolio tailored to your needs.</p>
-                    <p class="text-gray-400 max-w-xs mx-auto ar-text hidden">يقوم فريقنا بإنشاء ملف شخصي جميل ومهني مصمم خصيصًا لاحتياجاتك.</p>
-                </div>
-                
-                <!-- Arrow -->
-                <div class="hidden md:block animate-fadeIn delay-400">
-                    <i class="fas fa-arrow-right text-3xl text-gray-500 mx-4"></i>
                 </div>
                 
                 <!-- Step 3 -->
-                <div class="relative text-center w-full md:w-1/3 animate-fadeIn delay-500">
-                    <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <span class="text-2xl font-bold text-white">3</span>
+                <div class="timeline-item relative pb-10 w-[30%] animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-black bg-opacity-30 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-3">Receive Your Shareable Link</h3>
+                        <p class="text-gray-400">Get a clean folio-zone.com/your-name URL to share with anyone</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 en-text">Get Your Live Link</h3>
-                    <h3 class="text-xl font-bold mb-3 ar-text hidden">احصل على الرابط المباشر</h3>
-                    <p class="text-gray-400 max-w-xs mx-auto en-text">Receive your personalized URL (like folio-zone.com/your-name) to share with the world.</p>
-                    <p class="text-gray-400 max-w-xs mx-auto ar-text hidden">احصل على عنوان URL المخصص (مثل folio-zone.com/your-name) لمشاركته مع العالم.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Plans -->
-    <section id="pricing" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 animate-fadeIn">
-                <span class="en-text">Simple, <span class="text-green-400">Transparent</span> Pricing</span>
-                <span class="ar-text hidden">أسعار <span class="text-green-400">شفافة</span> وبسيطة</span>
-            </h2>
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gray-900 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16" data-en="Simple, Transparent Pricing" data-ar="أسعار بسيطة وشفافة">Simple, Transparent Pricing</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <!-- Starter Plan -->
-                <div class="pricing-card bg-gray-800 border border-gray-700 p-8 rounded-xl transition duration-300 animate-fadeIn delay-100">
-                    <h3 class="text-xl font-bold mb-2 text-center en-text">Starter</h3>
-                    <h3 class="text-xl font-bold mb-2 text-center ar-text hidden">البداية</h3>
-                    <p class="text-gray-400 text-center mb-6 en-text">Perfect for students and new graduates</p>
-                    <p class="text-gray-400 text-center mb-6 ar-text hidden">مثالي للطلاب والخريجين الجدد</p>
-                    <div class="text-4xl font-bold text-center mb-6">$49</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>1-Page Portfolio</span>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Plan 1 -->
+                <div class="glassmorphism p-8 rounded-xl animate-on-scroll">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2" data-en="Starter Plan" data-ar="الخطة الأساسية">Starter Plan</h3>
+                        <p class="text-3xl font-bold mb-2">5 JOD</p>
+                        <p class="text-gray-400 mb-4" data-en="One-time fee" data-ar="دفعة لمرة واحدة">One-time fee</p>
+                    </div>
+                    <ul class="mb-6">
+                        <li class="py-1 flex items-center">
+                            <i class="fas fa-check-circle text-[#00ffaa] mr-2"></i>
+                            <span data-en="Portfolio with CV sections" data-ar="ملف شخصي مع أقسام السيرة الذاتية">Portfolio with CV sections</span>
                         </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>3 Design Options</span>
+                        <li class="py-1 flex items-center">
+                            <i class="fas fa-check-circle text-[#00ffaa] mr-2"></i>
+                            <span data-en="Clean, professional design" data-ar="تصميم نظيف واحترافي">Clean, professional design</span>
                         </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>Basic Customization</span>
+                        <li class="py-1 flex items-center">
+                            <i class="fas fa-check-circle text-[#00ffaa] mr-2"></i>
+                            <span data-en="Hosted on folio-zone.com subdomain" data-ar="مستضاف على نطاق فرعي من folio-zone.com">Hosted on folio-zone.com subdomain</span>
                         </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>folio-zone.com/your-name</span>
-                        </li>
-                        
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>ملف شخصي من صفحة واحدة</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>3 خيارات تصميم</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>تخصيص أساسي</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>folio-zone.com/your-name</span>
+                        <li class="py-1 flex items-center">
+                            <i class="fas fa-check-circle text-[#00ffaa] mr-2"></i>
+                            <span data-en="48-hour delivery" data-ar="تسليم خلال 48 ساعة">48-hour delivery</span>
                         </li>
                     </ul>
-                    <button onclick="selectPlan('Starter')" class="w-full bg-gray-700 hover:bg-blue-500 text-white py-3 rounded-lg transition en-text">
-                        Get Started
-                    </button>
-                    <button onclick="selectPlan('Starter')" class="w-full bg-gray-700 hover:bg-blue-500 text-white py-3 rounded-lg transition ar-text hidden">
-                        ابدأ الآن
-                    </button>
+                    <p class="text-sm text-gray-500 mb-6">Ideal for students and entry-level professionals</p>
+                    <button class="w-full bg-gray-700 hover:bg-gray-800 py-3 rounded-full">Get Started</button>
                 </div>
                 
-                <!-- Basic Plan -->
-                <div class="pricing-card bg-gray-800 border-2 border-blue-500 p-8 rounded-xl transition duration-300 animate-fadeIn delay-200">
-                    <div class="absolute top-0 right-0 bg-blue-500 text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-sm font-bold en-text">
-                        POPULAR
+                <!-- Plan 2 -->
+                <div class="glassmorphism p-8 rounded-xl plan-popular animate-on-scroll">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">Basic Plan</h3>
+                        <p class="text-3xl font-bold mb-2">10 JOD</p>
+                        <p class="text-gray-400 mb-4">Includes all Starter features</p>
                     </div>
-                    <div class="absolute top-0 right-0 bg-blue-500 text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-sm font-bold ar-text hidden">
-                        الأكثر شيوعًا
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-center en-text">Basic</h3>
-                    <h3 class="text-xl font-bold mb-2 text-center ar-text hidden">الأساسي</h3>
-                    <p class="text-gray-400 text-center mb-6 en-text">Ideal for professionals and freelancers</p>
-                    <p class="text-gray-400 text-center mb-6 ar-text hidden">مثالي للمحترفين والعاملين المستقلين</p>
-                    <div class="text-4xl font-bold text-center mb-6">$99</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>3-Page Portfolio</span>
+                    <ul class="mb-6">
+                        <li class="py-1 flex items-center">
+                            <i class="fas fa-check-circle text-[#00ffaa] mr-2"></i>
+                            <span data-en="Add profile picture" data-ar="إضافة صورة شخصية">Add profile picture</span>
                         </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>5 Design Options</span>
+                        <li class="py-1 flex items-center">
+                            <i class="fas fa-check-circle text-[#00ffaa] mr-2"></i>
+                            <span data-en="Download CV button (PDF)" data-ar="زر تحميل السيرة الذاتية (PDF)">Download CV button (PDF)</span>
                         </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>Advanced Customization</span>
-                        </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>folio-zone.com/your-name</span>
-                        </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>Basic SEO Optimization</span>
-                        </li>
-                        
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>ملف شخصي من 3 صفحات</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>5 خيارات تصميم</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>تخصيص متقدم</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>folio-zone.com/your-name</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>تحسين أساسي لمحركات البحث</span>
+                        <li class="py-1 flex items-center">
+                            <i class="fas fa-check-circle text-[#00ffaa] mr-2"></i>
+                            <span data-en="3 content updates in 6 months" data-ar="3 تحديثات للمحتوى خلال 6 أشهر">3 content updates in 6 months</span>
                         </li>
                     </ul>
-                    <button onclick="selectPlan('Basic')" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg transition en-text">
-                        Get Started
-                    </button>
-                    <button onclick="selectPlan('Basic')" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg transition ar-text hidden">
-                        ابدأ الآن
-                    </button>
+                    <p class="text-sm text-gray-500 mb-6">Ideal for growing professionals</p>
+                    <button class="w-full accent-gradient hover:opacity-90 text-black font-bold py-3 rounded-full">Get Started</button>
                 </div>
                 
-                <!-- Premium Plan -->
-                <div class="pricing-card bg-gray-800 border border-gray-700 p-8 rounded-xl transition duration-300 animate-fadeIn delay-300">
-                    <h3 class="text-xl font-bold mb-2 text-center en-text">Premium</h3>
-                    <h3 class="text-xl font-bold mb-2 text-center ar-text hidden">المتميز</h3>
-                    <p class="text-gray-400 text-center mb-6 en-text">For executives and established professionals</p>
-                    <p class="text-gray-400 text-center mb-6 ar-text hidden">للمدراء التنفيذيين والمحترفين المخضرمين</p>
-                    <div class="text-4xl font-bold text-center mb-6">$199</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>5-Page Portfolio</span>
+                <!-- Plan 3 -->
+                <div class="glassmorphism p-8 rounded-xl animate-on-scroll">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">Premium Plan</h3>
+                        <p class="text-3xl font-bold mb-2">20 JOD</p>
+                        <p class="text-gray-400 mb-4">Includes all Basic features</p>
+                    </div>
+                    <ul class="mb-6">
+                        <li class="py-1 flex items-center">
+                            <i class="fas fa-check-circle text-[#00ffaa] mr-2"></i>
+                            <span data-en="Fully customized layout" data-ar="تخطيط مخصص بالكامل">Fully customized layout</span>
                         </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>Unlimited Design Options</span>
+                        <li class="py-1 flex items-center">
+                            <i class="fas fa-check-circle text-[#00ffaa] mr-2"></i>
+                            <span data-en="Contact form integration" data-ar="دمج نموذج الاتصال">Contact form integration</span>
                         </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>Fully Custom Design</span>
-                        </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>folio-zone.com/your-name</span>
-                        </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>Advanced SEO Optimization</span>
-                        </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>Custom Domain Support</span>
-                        </li>
-                        <li class="flex items-center gap-2 en-text">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>Priority Support</span>
-                        </li>
-                        
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>ملف شخصي من 5 صفحات</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>خيارات تصميم غير محدودة</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>تصميم مخصص بالكامل</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>folio-zone.com/your-name</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>تحسين متقدم لمحركات البحث</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>دعم النطاق المخصص</span>
-                        </li>
-                        <li class="flex items-center gap-2 ar-text hidden">
-                            <i class="fas fa-check text-green-500"></i>
-                            <span>دعم أولوية</span>
+                        <li class="py-1 flex items-center">
+                            <i class="fas fa-check-circle text-[#00ffaa] mr-2"></i>
+                            <span data-en="10 content updates in 1 year" data-ar="10 تحديثات للمحتوى خلال سنة">10 content updates in 1 year</span>
                         </li>
                     </ul>
-                    <button onclick="selectPlan('Premium')" class="w-full bg-gray-700 hover:bg-blue-500 text-white py-3 rounded-lg transition en-text">
-                        Get Started
-                    </button>
-                    <button onclick="selectPlan('Premium')" class="w-full bg-gray-700 hover:bg-blue-500 text-white py-3 rounded-lg transition ar-text hidden">
-                        ابدأ الآن
-                    </button>
+                    <p class="text-sm text-gray-500 mb-6">Ideal for full personalization</p>
+                    <button class="w-full bg-gray-700 hover:bg-gray-800 py-3 rounded-full">Get Started</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Request Portfolio Form -->
-    <section id="request" class="py-20 bg-black">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 animate-fadeIn">
-                <span class="en-text">Request Your <span class="text-blue-400">Portfolio</span></span>
-                <span class="ar-text hidden">اطلب <span class="text-blue-400">ملفك الشخصي</span></span>
-            </h2>
-            <p class="text-xl text-gray-400 text-center mb-12 animate-fadeIn delay-100">
-                <span class="en-text">Fill out the form below and we'll get back to you within 24 hours</span>
-                <span class="ar-text hidden">املأ النموذج أدناه وسنعاود الاتصال بك خلال 24 ساعة</span>
-            </p>
-            
-            <form id="portfolioForm" class="bg-gray-900 rounded-xl p-8 animate-fadeIn delay-200">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <!-- Request Form -->
+    <section id="form" class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="max-w-3xl mx-auto glassmorphism p-8 rounded-xl">
+                <h2 class="text-3xl font-bold text-center mb-8" data-en="Request Your Portfolio" data-ar="اطلب ملفك الشخصي">Request Your Portfolio</h2>
+                
+                <form id="portfolio-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block mb-2" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+                            <input type="text" class="w-full input-field py-3 px-4 rounded-lg focus:outline-none" placeholder="Your name" data-en="Your name" data-ar="اسمك">
+                        </div>
+                        <div>
+                            <label class="block mb-2">Email</label>
+                            <input type="email" class="w-full input-field py-3 px-4 rounded-lg focus:outline-none" placeholder="Your email" data-en="Your email" data-ar="بريدك الإلكتروني">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block mb-2">Profession</label>
+                            <input type="text" class="w-full input-field py-3 px-4 rounded-lg focus:outline-none" placeholder="Your profession" data-en="Your profession" data-ar="مهنتك">
+                        </div>
+                        <div>
+                            <label class="block mb-2">Choose Package</label>
+                            <select class="w-full input-field py-3 px-4 rounded-lg focus:outline-none">
+                                <option value="">Select a package</option>
+                                <option value="starter">Starter Plan (5 JOD)</option>
+                                <option value="basic">Basic Plan (10 JOD)</option>
+                                <option value="premium">Premium Plan (20 JOD)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
                     <div>
-                        <label for="name" class="block mb-2 font-medium en-text">Full Name</label>
-                        <label for="name" class="block mb-2 font-medium ar-text hidden">الاسم الكامل</label>
-                        <input type="text" id="name" name="name" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <label class="block mb-2">Paste Your CV or Additional Notes</label>
+                        <textarea class="w-full input-field py-3 px-4 rounded-lg focus:outline-none h-40 resize-none" placeholder="Paste your CV contents or share any special requirements"></textarea>
                     </div>
-                    <div>
-                        <label for="email" class="block mb-2 font-medium en-text">Email Address</label>
-                        <label for="email" class="block mb-2 font-medium ar-text hidden">عنوان البريد الإلكتروني</label>
-                        <input type="email" id="email" name="email" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label for="profession" class="block mb-2 font-medium en-text">Profession</label>
-                        <label for="profession" class="block mb-2 font-medium ar-text hidden">المهنة</label>
-                        <input type="text" id="profession" name="profession" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label for="package" class="block mb-2 font-medium en-text">Package</label>
-                        <label for="package" class="block mb-2 font-medium ar-text hidden">الباقة</label>
-                        <select id="package" name="package" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="" disabled selected class="en-text">Select a package</option>
-                            <option value="" disabled selected class="ar-text hidden">اختر باقة</option>
-                            <option value="Starter">Starter</option>
-                            <option value="Basic">Basic</option>
-                            <option value="Premium">Premium</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="mb-6">
-                    <label for="cv" class="block mb-2 font-medium en-text">Upload CV (PDF, DOC, DOCX)</label>
-                    <label for="cv" class="block mb-2 font-medium ar-text hidden">تحميل السيرة الذاتية (PDF, DOC, DOCX)</label>
-                    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                
-                <div class="mb-6">
-                    <label for="notes" class="block mb-2 font-medium en-text">Additional Notes</label>
-                    <label for="notes" class="block mb-2 font-medium ar-text hidden">ملاحظات إضافية</label>
-                    <textarea id="notes" name="notes" rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                </div>
-                
-                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition flex items-center justify-center gap-2">
-                    <span class="en-text">Submit Portfolio Request</span>
-                    <span class="ar-text hidden">إرسال طلب الملف الشخصي</span>
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 animate-fadeIn">
-                <span class="en-text">Other Ways to <span class="text-green-400">Reach Us</span></span>
-                <span class="ar-text hidden">طرق أخرى <span class="text-green-400">للتواصل معنا</span></span>
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <!-- Email -->
-                <div class="bg-gray-800 p-8 rounded-xl text-center animate-fadeIn delay-100">
-                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-envelope text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 en-text">Email Us</h3>
-                    <h3 class="text-xl font-bold mb-3 ar-text hidden">راسلنا عبر البريد</h3>
-                    <p class="text-gray-400 mb-4 en-text">We'll respond within 24 hours</p>
-                    <p class="text-gray-400 mb-4 ar-text hidden">سنجيب خلال 24 ساعة</p>
-                    <a href="mailto:hello@folio-zone.com" class="text-blue-400 hover:text-blue-300 transition font-medium">hello@folio-zone.com</a>
-                </div>
-                
-                <!-- WhatsApp -->
-                <div class="bg-gray-800 p-8 rounded-xl text-center animate-fadeIn delay-200">
-                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fab fa-whatsapp text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 en-text">WhatsApp</h3>
-                    <h3 class="text-xl font-bold mb-3 ar-text hidden">واتساب</h3>
-                    <p class="text-gray-400 mb-4 en-text">Chat with us directly</p>
-                    <p class="text-gray-400 mb-4 ar-text hidden">تواصل معنا مباشرة</p>
-                    <a href="https://wa.me/1234567890" target="_blank" class="text-green-400 hover:text-green-300 transition font-medium en-text">+1 234 567 890</a>
-                    <a href="https://wa.me/1234567890" target="_blank" class="text-green-400 hover:text-green-300 transition font-medium ar-text hidden">+1 234 567 890</a>
-                </div>
-                
-                <!-- Telegram -->
-                <div class="bg-gray-800 p-8 rounded-xl text-center animate-fadeIn delay-300">
-                    <div class="w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fab fa-telegram text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 en-text">Telegram</h3>
-                    <h3 class="text-xl font-bold mb-3 ar-text hidden">تيليجرام</h3>
-                    <p class="text-gray-400 mb-4 en-text">Send us a message</p>
-                    <p class="text-gray-400 mb-4 ar-text hidden">أرسل لنا رسالة</p>
-                    <a href="https://t.me/foliozone" target="_blank" class="text-blue-400 hover:text-blue-300 transition font-medium">@foliozone</a>
-                </div>
+                    
+                    <button type="submit" class="accent-gradient hover:opacity-90 text-black font-bold py-4 w-full rounded-lg">
+                        Submit Portfolio Request
+                    </button>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="py-20 bg-black">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 animate-fadeIn">
-                <span class="en-text">Frequently Asked <span class="text-blue-400">Questions</span></span>
-                <span class="ar-text hidden">أسئلة <span class="text-blue-400">شائعة</span></span>
-            </h2>
+    <!-- Contact Options -->
+    <section id="contact" class="py-20 bg-gray-900 px-4">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Other Ways to Reach Us</h2>
             
-            <div class="space-y-4">
-                <!-- FAQ 1 -->
-                <div class="bg-gray-900 rounded-lg overflow-hidden animate-fadeIn delay-100">
-                    <button class="faq-toggle w-full flex items-center justify-between p-6 focus:outline-none">
-                        <h3 class="text-lg font-medium text-left en-text">How long does it take to get my portfolio?</h3>
-                        <h3 class="text-lg font-medium text-right ar-text hidden">كم من الوقت يستغرق الحصول على ملفي الشخصي؟</h3>
-                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            <div class="flex flex-wrap justify-center gap-10">
+                <a href="#" class="social-link accent-hover tooltip">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                    <span class="tooltip-text">Chat on WhatsApp</span>
+                </a>
+                
+                <a href="mailto:info@folio-zone.com" class="social-link accent-hover tooltip">
+                    <i class="fas fa-envelope text-xl"></i>
+                    <span class="tooltip-text">Email Us</span>
+                </a>
+                
+                <a href="#" class="social-link accent-hover tooltip">
+                    <i class="fab fa-telegram text-xl"></i>
+                    <span class="tooltip-text">Message on Telegram</span>
+                </a>
+                
+                <a href="#" class="social-link accent-hover tooltip">
+                    <i class="fab fa-instagram text-xl"></i>
+                    <span class="tooltip-text">Follow us on Instagram</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 px-4">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+            
+            <div>
+                <div class="faq-item">
+                    <button class="accordion-header w-full text-left flex justify-between items-center">
+                        <h3 class="font-medium">How long does it take?</h3>
+                        <span class="accordion-icon text-lg">+</span>
                     </button>
-                    <div class="accordion-content px-6">
-                        <div class="pb-6 text-gray-400 en-text">
-                            Our standard turnaround time is 48 hours after receiving all your information. For Premium packages, we prioritize your request and typically deliver within 24 hours.
-                        </div>
-                        <div class="pb-6 text-gray-400 ar-text hidden">
-                            وقت التسليم القياسي لدينا هو 48 ساعة بعد استلام جميع معلوماتك. بالنسبة للباقات المتميزة، نعطي طلبك أولوية ونقوم بالتسليم عادةً خلال 24 ساعة.
-                        </div>
+                    <div class="accordion-content">
+                        <p class="pt-4 text-gray-400">
+                            Most portfolios are completed within 24-48 hours. Complex customizations may require up to 72 hours.
+                        </p>
                     </div>
                 </div>
                 
-                <!-- FAQ 2 -->
-                <div class="bg-gray-900 rounded-lg overflow-hidden animate-fadeIn delay-200">
-                    <button class="faq-toggle w-full flex items-center justify-between p-6 focus:outline-none">
-                        <h3 class="text-lg font-medium text-left en-text">Can I update my portfolio later?</h3>
-                        <h3 class="text-lg font-medium text-right ar-text hidden">هل يمكنني تحديث ملفي الشخصي لاحقًا؟</h3>
-                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                <div class="faq-item">
+                    <button class="accordion-header w-full text-left flex justify-between items-center">
+                        <h3 class="font-medium">Can I update my portfolio later?</h3>
+                        <span class="accordion-icon text-lg">+</span>
                     </button>
-                    <div class="accordion-content px-6">
-                        <div class="pb-6 text-gray-400 en-text">
-                            Yes! All our packages include 3 free updates within the first year. After that, you can purchase additional updates or upgrade to our maintenance plan for unlimited updates.
-                        </div>
-                        <div class="pb-6 text-gray-400 ar-text hidden">
-                            نعم! جميع باقاتنا تشمل 3 تحديثات مجانية خلال السنة الأولى. بعد ذلك، يمكنك شراء تحديثات إضافية أو الترقية إلى خطة الصيانة الخاصة بنا للحصول على تحديثات غير محدودة.
-                        </div>
+                    <div class="accordion-content">
+                        <p class="pt-4 text-gray-400">
+                            Yes! Our Basic and Premium plans include update packages. Starter plan users can purchase updates separately.
+                        </p>
                     </div>
                 </div>
                 
-                <!-- FAQ 3 -->
-                <div class="bg-gray-900 rounded-lg overflow-hidden animate-fadeIn delay-300">
-                    <button class="faq-toggle w-full flex items-center justify-between p-6 focus:outline-none">
-                        <h3 class="text-lg font-medium text-left en-text">Do you offer custom domains?</h3>
-                        <h3 class="text-lg font-medium text-right ar-text hidden">هل تقدمون نطاقات مخصصة؟</h3>
-                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                <div class="faq-item">
+                    <button class="accordion-header w-full text-left flex justify-between items-center">
+                        <h3 class="font-medium">Do you offer custom domain options?</h3>
+                        <span class="accordion-icon text-lg">+</span>
                     </button>
-                    <div class="accordion-content px-6">
-                        <div class="pb-6 text-gray-400 en-text">
-                            Absolutely! Our Premium package includes support for custom domains (like yourname.com). We can help you purchase and set up a domain if you don't already have one.
-                        </div>
-                        <div class="pb-6 text-gray-400 ar-text hidden">
-                            بالتأكيد! تشمل الباقة المتميزة لدينا دعمًا للنطاقات المخصصة (مثل yourname.com). يمكننا مساعدتك في شراء وإعداد نطاق إذا لم يكن لديك واحد بالفعل.
-                        </div>
+                    <div class="accordion-content">
+                        <p class="pt-4 text-gray-400">
+                            Currently we only offer subdomains on folio-zone.com. Custom domain hosting is in development and coming soon.
+                        </p>
                     </div>
                 </div>
                 
-                <!-- FAQ 4 -->
-                <div class="bg-gray-900 rounded-lg overflow-hidden animate-fadeIn delay-400">
-                    <button class="faq-toggle w-full flex items-center justify-between p-6 focus:outline-none">
-                        <h3 class="text-lg font-medium text-left en-text">What if I'm not happy with the design?</h3>
-                        <h3 class="text-lg font-medium text-right ar-text hidden">ماذا لو لم أكن راضيًا عن التصميم؟</h3>
-                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                <div class="faq-item">
+                    <button class="accordion-header w-full text-left flex justify-between items-center">
+                        <h3 class="font-medium">How do I make payments?</h3>
+                        <span class="accordion-icon text-lg">+</span>
                     </button>
-                    <div class="accordion-content px-6">
-                        <div class="pb-6 text-gray-400 en-text">
-                            We offer unlimited revisions until you're completely satisfied with your portfolio. Our goal is to create something you'll be proud to share with potential employers or clients.
-                        </div>
-                        <div class="pb-6 text-gray-400 ar-text hidden">
-                            نقدم مراجعات غير محدودة حتى تكون راضيًا تمامًا عن ملفك الشخصي. هدفنا هو إنشاء شيء ستكون فخورًا بمشاركته مع أصحاب العمل أو العملاء المحتملين.
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- FAQ 5 -->
-                <div class="bg-gray-900 rounded-lg overflow-hidden animate-fadeIn delay-500">
-                    <button class="faq-toggle w-full flex items-center justify-between p-6 focus:outline-none">
-                        <h3 class="text-lg font-medium text-left en-text">Is there a discount for multiple portfolios?</h3>
-                        <h3 class="text-lg font-medium text-right ar-text hidden">هل هناك خصم لعدة ملفات شخصية؟</h3>
-                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                    </button>
-                    <div class="accordion-content px-6">
-                        <div class="pb-6 text-gray-400 en-text">
-                            Yes! If you're ordering portfolios for your team (5+ members), we offer volume discounts. Contact us for a custom quote tailored to your needs.
-                        </div>
-                        <div class="pb-6 text-gray-400 ar-text hidden">
-                            نعم! إذا كنت تطلب ملفات شخصية لفريقك (5+ أعضاء)، فإننا نقدم خصومات على الكميات. اتصل بنا للحصول على عرض أسعار مخصص يناسب احتياجاتك.
-                        </div>
+                    <div class="accordion-content">
+                        <p class="pt-4 text-gray-400">
+                            We accept payments via credit/debit cards, PayPal, and bank transfer. Details will be provided after submission.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -743,224 +682,176 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 pt-20 pb-10 border-t border-gray-800">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-                <!-- About -->
-                <div>
-                    <div class="text-2xl font-bold text-white mb-4">
-                        <span class="en-text">Folio<span class="text-blue-500">Zone</span></span>
-                        <span class="ar-text hidden">فوليو<span class="text-blue-500">زون</span></span>
-                    </div>
-                    <p class="text-gray-400 mb-4 en-text">
-                        We transform your CV into a stunning professional portfolio that showcases your skills and experience in the best possible light.
-                    </p>
-                    <p class="text-gray-400 mb-4 ar-text hidden">
-                        نحول سيرتك الذاتية إلى ملف شخصي احترافي مذهل يعرض مهاراتك وخبراتك بأفضل صورة ممكنة.
-                    </p>
-                    <div class="flex space-x-4 rtl:space-x-reverse">
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-linkedin text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-facebook text-xl"></i>
-                        </a>
-                    </div>
+    <footer class="py-12 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <div class="font-bold text-2xl mb-4">FOLIO<span class="text-[#00ffaa]">ZONE</span></div>
+                    <p class="text-gray-400 max-w-xs">Your professional portfolio, simplified.</p>
                 </div>
                 
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-6 en-text">Quick Links</h3>
-                    <h3 class="text-lg font-bold text-white mb-6 ar-text hidden">روابط سريعة</h3>
-                    <ul class="space-y-3">
-                        <li>
-                            <a href="#features" class="text-gray-400 hover:text-blue-400 transition en-text">Features</a>
-                            <a href="#features" class="text-gray-400 hover:text-blue-400 transition ar-text hidden">الميزات</a>
-                        </li>
-                        <li>
-                            <a href="#how-it-works" class="text-gray-400 hover:text-blue-400 transition en-text">How It Works</a>
-                            <a href="#how-it-works" class="text-gray-400 hover:text-blue-400 transition ar-text hidden">كيف تعمل</a>
-                        </li>
-                        <li>
-                            <a href="#pricing" class="text-gray-400 hover:text-blue-400 transition en-text">Pricing</a>
-                            <a href="#pricing" class="text-gray-400 hover:text-blue-400 transition ar-text hidden">الأسعار</a>
-                        </li>
-                        <li>
-                            <a href="#contact" class="text-gray-400 hover:text-blue-400 transition en-text">Contact</a>
-                            <a href="#contact" class="text-gray-400 hover:text-blue-400 transition ar-text hidden">اتصل بنا</a>
-                        </li>
-                        <li>
-                            <a href="#request" class="text-gray-400 hover:text-blue-400 transition en-text">Request Portfolio</a>
-                            <a href="#request" class="text-gray-400 hover:text-blue-400 transition ar-text hidden">طلب ملف شخصي</a>
-                        </li>
+                <div class="mb-8 md:mb-0">
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white">How It Works</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white">Pricing</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
                     </ul>
                 </div>
                 
-                <!-- Legal -->
                 <div>
-                    <h3 class="text-lg font-bold text-white mb-6 en-text">Legal</h3>
-                    <h3 class="text-lg font-bold text-white mb-6 ar-text hidden">قانوني</h3>
-                    <ul class="space-y-3">
-                        <li>
-                            <a href="#" class="text-gray-400 hover:text-blue-400 transition en-text">Terms of Service</a>
-                            <a href="#" class="text-gray-400 hover:text-blue-400 transition ar-text hidden">شروط الخدمة</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-gray-400 hover:text-blue-400 transition en-text">Privacy Policy</a>
-                            <a href="#" class="text-gray-400 hover:text-blue-400 transition ar-text hidden">سياسة الخصوصية</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-gray-400 hover:text-blue-400 transition en-text">Refund Policy</a>
-                            <a href="#" class="text-gray-400 hover:text-blue-400 transition ar-text hidden">سياسة الاسترداد</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-gray-400 hover:text-blue-400 transition en-text">Cookie Policy</a>
-                            <a href="#" class="text-gray-400 hover:text-blue-400 transition ar-text hidden">سياسة ملفات تعريف الارتباط</a>
-                        </li>
+                    <h4 class="font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Refund Policy</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="pt-8 border-t border-gray-800 text-center">
-                <p class="text-gray-500 en-text">
-                    &copy; 2023 FolioZone. All rights reserved.
-                </p>
-                <p class="text-gray-500 ar-text hidden">
-                    &copy; 2023 فوليو زون. جميع الحقوق محفوظة.
-                </p>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col items-center">
+                <div class="flex gap-6 mb-6">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">© 2023 FolioZone. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        // Language Toggle
-        const languageToggle = document.getElementById('languageToggle');
-        let currentLanguage = 'en';
-        
-        languageToggle.addEventListener('click', () => {
-            currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
+        // Language switch functionality
+        function switchLanguage(isRTL) {
+            const htmlElement = document.documentElement;
+            const elements = document.querySelectorAll('[data-en], [data-ar]');
             
-            // Toggle text in button
-            document.querySelector('.en-text').classList.toggle('hidden');
-            document.querySelector('.ar-text').classList.toggle('hidden');
-            
-            // Toggle all elements with language classes
-            document.querySelectorAll('.en-text').forEach(el => {
-                if (currentLanguage === 'ar') {
-                    el.classList.add('hidden');
-                } else {
-                    el.classList.remove('hidden');
-                }
-            });
-            
-            document.querySelectorAll('.ar-text').forEach(el => {
-                if (currentLanguage === 'ar') {
-                    el.classList.remove('hidden');
-                } else {
-                    el.classList.add('hidden');
-                }
-            });
-            
-            // Toggle RTL direction
-            if (currentLanguage === 'ar') {
-                document.documentElement.setAttribute('dir', 'rtl');
-                document.documentElement.setAttribute('lang', 'ar');
-                document.body.classList.add('rtl');
-            } else {
-                document.documentElement.setAttribute('dir', 'ltr');
-                document.documentElement.setAttribute('lang', 'en');
-                document.body.classList.remove('rtl');
-            }
-        });
-        
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // FAQ Accordion
-        document.querySelectorAll('.faq-toggle').forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                const icon = button.querySelector('i');
+            if (isRTL) {
+                htmlElement.setAttribute('dir', 'rtl');
+                htmlElement.setAttribute('lang', 'ar');
+                document.querySelector('.lang-btn:first-child').innerHTML = 'AR';
+                document.querySelector('.lang-btn:nth-child(2)').innerHTML = 'EN';
                 
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                    icon.style.transform = 'rotate(0deg)';
-                } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    icon.style.transform = 'rotate(180deg)';
-                }
+                elements.forEach(el => {
+                    if (el.dataset.ar) {
+                        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
+                            el.placeholder = el.dataset.ar;
+                        } else if (el.tagName === 'OPTION') {
+                            el.textContent = el.dataset.ar;
+                        } else if (el.tagName === 'SPAN' && el.classList.contains('tooltip-text')) {
+                            el.textContent = el.dataset.ar;
+                        } else if (el.tagName === 'LI') {
+                            el.querySelector('span').innerHTML = el.querySelector('span').dataset.ar;
+                        } else {
+                            el.innerHTML = el.dataset.ar;
+                        }
+                    }
+                });
+            } else {
+                htmlElement.removeAttribute('dir');
+                htmlElement.setAttribute('lang', 'en');
+                document.querySelector('.lang-btn:first-child').innerHTML = 'EN';
+                document.querySelector('.lang-btn:nth-child(2)').innerHTML = 'AR';
+                
+                elements.forEach(el => {
+                    if (el.dataset.en) {
+                        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
+                            el.placeholder = el.dataset.en;
+                        } else if (el.tagName === 'OPTION') {
+                            el.textContent = el.dataset.en;
+                        } else if (el.tagName === 'SPAN' && el.classList.contains('tooltip-text')) {
+                            el.textContent = el.dataset.en;
+                        } else if (el.tagName === 'LI') {
+                            el.querySelector('span').innerHTML = el.querySelector('span').dataset.en;
+                        } else {
+                            el.innerHTML = el.dataset.en;
+                        }
+                    }
+                });
+            }
+        }
+
+        document.querySelector('.lang-btn:nth-child(2)').addEventListener('click', function() {
+            const htmlElement = document.documentElement;
+            const isRTL = htmlElement.getAttribute('dir') !== 'rtl';
+            
+            if (isRTL) {
+                document.querySelector('.lang-btn:first-child').classList.add('active');
+                this.classList.remove('active');
+            } else {
+                document.querySelector('.lang-btn:first-child').classList.remove('active');
+                this.classList.add('active');
+            }
+            
+            switchLanguage(isRTL);
+        });
+        
+        // Accordion FAQ
+        document.querySelectorAll('.accordion-header').forEach(button => {
+            button.addEventListener('click', () => {
+                const accordionContent = button.nextElementSibling;
+                
+                // Close other accordions
+                document.querySelectorAll('.accordion-content').forEach(content => {
+                    if (content !== accordionContent) {
+                        content.classList.remove('active');
+                        content.previousElementSibling.querySelector('.accordion-icon').textContent = '+';
+                    }
+                });
+                
+                // Toggle this accordion
+                accordionContent.classList.toggle('active');
+                button.querySelector('.accordion-icon').textContent = accordionContent.classList.contains('active') ? '−' : '+';
             });
         });
         
-        // Form Submission
-        const portfolioForm = document.getElementById('portfolioForm');
+        // Plan selection buttons
+        document.querySelectorAll('.pricing button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Scroll to form section
+                document.querySelector('#form').scrollIntoView({ behavior: 'smooth' });
+                
+                const plan = this.parentElement.parentElement.querySelector('h3').textContent;
+                setTimeout(() => {
+                    document.querySelector('[name="Choose Package"]').value = plan.toLowerCase().replace(' plan', '');
+                }, 500);
+            });
+        });
         
-        portfolioForm.addEventListener('submit', (e) => {
+        // Submit form
+        document.getElementById('portfolio-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const profession = document.getElementById('profession').value;
-            const package = document.getElementById('package').value;
-            const notes = document.getElementById('notes').value;
-            
-            // In a real app, you would send this data to your backend
-            console.log({
-                name,
-                email,
-                profession,
-                package,
-                notes
-            });
-            
-            // Show success message
-            alert(currentLanguage === 'en' 
-                ? 'Thank you for your request! We will contact you within 24 hours.' 
-                : 'شكرًا لك على طلبك! سوف نتصل بك خلال 24 ساعة.');
-            
-            // Reset form
-            portfolioForm.reset();
+            alert('Portfolio request submitted! We will contact you soon.');
+            this.reset();
         });
         
-        // Select Plan Function
-        function selectPlan(plan) {
-            document.getElementById('package').value = plan;
-            
-            // Scroll to form
-            document.getElementById('request').scrollIntoView({
-                behavior: 'smooth'
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('visible');
+                }
             });
         }
         
-        // Animation on scroll
-        const animateElements = document.querySelectorAll('.animate-fadeIn');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        animateElements.forEach(element => {
-            observer.observe(element);
-        });
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on load
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
