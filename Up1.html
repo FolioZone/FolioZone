@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FolioZone - Professional Portfolio Pages Made Simple</title>
+    <!-- Alpine.js (in your <head> or before </body>) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -141,7 +142,112 @@
         }
     </style>
 </head>
-<body class="bg-darker text-gray-200">
+<body class="bg-darker text-gray-200" 
+      x-data="{ 
+          showTerms: false, 
+          showPrivacy: false,           
+          showCookies: false 
+      }">
+
+    
+ <!-- Terms Modal -->
+    <div x-show="showTerms" x-cloak 
+         class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div class="bg-dark rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative">
+            <button @click="showTerms = false" 
+                    class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+                &times;
+            </button>
+            <div class="p-8">
+  <h2 class="text-3xl font-bold mb-6 gradient-text primary-gradient">Terms of Service</h2>
+  <div class="prose prose-invert max-w-none text-gray-400 space-y-4">
+
+    <p>Welcome to FolioZone. These Terms of Service govern your use of our website and services. By accessing or using FolioZone, you agree to be bound by these terms.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">1. Services Provided</h3>
+    <p>FolioZone offers professionally designed portfolio web pages hosted on our platform. Each plan includes varying levels of customization and update frequency.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">2. User Responsibilities</h3>
+    <p>You agree to provide accurate information when submitting your portfolio request. You are responsible for ensuring that any files or content you upload are your own and do not violate any third-party rights.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">3. Payment and Access</h3>
+    <p>All plans are one-time payments. Once payment is completed, your portfolio will be delivered within the stated timeframe depending on your plan.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">4. Intellectual Property</h3>
+    <p>All templates, designs, and services provided remain the intellectual property of FolioZone. You may not replicate or resell the content or structure of your delivered portfolio.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">5. Modifications</h3>
+    <p>We reserve the right to update these Terms of Service at any time. Continued use of our services after changes constitutes acceptance of the new terms.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">6. Contact</h3>
+    <p>If you have any questions about these Terms, please contact us via the support form on our website.</p>
+
+  </div>
+</div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div x-show="showPrivacy" x-cloak 
+         class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div class="bg-dark rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative">
+            <button @click="showPrivacy = false" 
+                    class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+                &times;
+            </button>
+            <div class="p-8">
+  <h2 class="text-3xl font-bold mb-6 gradient-text primary-gradient">Privacy Policy</h2>
+  <div class="prose prose-invert max-w-none text-gray-400 space-y-4">
+
+    <p>At FolioZone, we are committed to protecting your privacy and ensuring that your personal information is handled securely and responsibly. This Privacy Policy outlines how we collect, use, and protect your data.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">1. Information We Collect</h3>
+    <p>We collect only the information necessary to deliver our services effectively. This includes your name, email address, CV/resume files, social links, and any custom content you provide for your portfolio.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">2. How We Use Your Information</h3>
+    <p>Your data is used solely to create, host, and maintain your professional portfolio. We do not use your information for marketing unless you give explicit consent.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">3. Data Sharing</h3>
+    <p>We never sell, rent, or share your personal data with third parties. Your information remains strictly confidential and is only accessible by the FolioZone team involved in fulfilling your order.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">4. Data Storage & Security</h3>
+    <p>We store your data on secure servers and implement modern security measures to protect it from unauthorized access, alteration, or disclosure.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">5. Cookies</h3>
+    <p>We may use cookies to enhance user experience and analyze site performance. These cookies do not collect personal information and can be managed through your browser settings.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">6. Your Rights</h3>
+    <p>You have the right to request access to, correction of, or deletion of your personal data at any time. Simply contact us using the form on our website.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">7. Updates to This Policy</h3>
+    <p>We may update this Privacy Policy periodically. All changes will be posted on this page with the revised date. Continued use of our service implies acceptance of the updated terms.</p>
+
+    <h3 class="text-lg text-white font-semibold mt-4">8. Contact</h3>
+    <p>If you have any questions or concerns about our Privacy Policy, please reach out through our contact form. We’re here to help.</p>
+
+  </div>
+</div>
+        </div>
+    </div>
+
+    <!-- Cookies Modal -->
+    <div x-show="showCookies" x-cloak 
+         class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div class="bg-dark rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative">
+            <button @click="showCookies = false" 
+                    class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+                &times;
+            </button>
+            <div class="p-8">
+                <h2 class="text-3xl font-bold mb-6 gradient-text primary-gradient">Cookie Policy</h2>
+                <div class="prose prose-invert max-w-none">
+                    <p>We use cookies to enhance your browsing experience and analyze site traffic.</p>
+                    <p>By continuing to use FolioZone, you consent to our use of cookies as outlined in this policy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-dark/90 backdrop-blur-md border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -153,7 +259,7 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-center space-x-8">
-                        <a href="#features" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Features</a>
+                        <a href="#features" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Why FolioZone?</a>
                         <a href="#audience" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">For Who?</a>
                         <a href="#pricing" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Pricing</a>
                         <a href="#how-it-works" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">How It Works</a>
@@ -342,230 +448,168 @@
 
     <!-- Pricing Section -->
     <section id="pricing" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="text-center mb-16 animate-on-scroll">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, <span class="gradient-text primary-gradient">Transparent Pricing</span></h2>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Choose the plan that fits your needs. No hidden fees, no surprises.</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div class="glass-card p-8 rounded-xl border border-gray-800 pricing-card transition-all duration-300 hover:border-primary/50 animate-on-scroll">
-                <div class="mb-6">
-                    <h3 class="text-xl font-bold mb-2">Starter</h3>
-                    <div class="flex items-end">
-                        <span class="text-4xl font-bold">5</span>
-                        <span class="text-lg text-gray-400 ml-1">JOD</span>
-                    </div>
-                </div>
-                <ul class="space-y-3 mb-8">
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>Basic portfolio layout</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>48-hour turnaround</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>Subdomain hosting</span>
-                    </li>
-                    <li class="flex items-center text-gray-500">
-                        <i class="fas fa-times-circle mr-2"></i>
-                        <span>No profile picture</span>
-                    </li>
-                    <li class="flex items-center text-gray-500">
-                        <i class="fas fa-times-circle mr-2"></i>
-                        <span>No updates included</span>
-                    </li>
-                </ul>
-                <a href="#request" class="block w-full text-center border border-primary text-primary hover:bg-primary/10 py-3 rounded-md font-medium transition duration-300">
-                    Choose Starter
-                </a>
-            </div>
-            
-            <div class="glass-card p-8 rounded-xl border border-primary/50 pricing-card transition-all duration-300 relative animate-on-scroll" style="transition-delay: 100ms">
-                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
-                    MOST POPULAR
-                </div>
-                <div class="mb-6">
-                    <h3 class="text-xl font-bold mb-2">Basic</h3>
-                    <div class="flex items-end">
-                        <span class="text-4xl font-bold">10</span>
-                        <span class="text-lg text-gray-400 ml-1">JOD</span>
-                    </div>
-                </div>
-                <ul class="space-y-3 mb-8">
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>Enhanced portfolio layout</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>24-hour turnaround</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>Subdomain hosting</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>Profile picture included</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>3 updates in 6 months</span>
-                    </li>
-                </ul>
-                <a href="#request" class="block w-full text-center bg-primary hover:bg-primary/90 text-white py-3 rounded-md font-medium transition duration-300">
-                    Choose Basic
-                </a>
-            </div>
-            
-            <div class="glass-card p-8 rounded-xl border border-gray-800 pricing-card transition-all duration-300 hover:border-accent/50 animate-on-scroll" style="transition-delay: 200ms">
-                <div class="mb-6">
-                    <h3 class="text-xl font-bold mb-2">Premium</h3>
-                    <div class="flex items-end">
-                        <span class="text-4xl font-bold">20</span>
-                        <span class="text-lg text-gray-400 ml-1">JOD</span>
-                    </div>
-                </div>
-                <ul class="space-y-3 mb-8">
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>Fully customized design</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>Priority 12-hour turnaround</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>Subdomain hosting</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>Profile picture & gallery</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>10 updates in 1 year</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-circle text-primary mr-2"></i>
-                        <span>Contact form included</span>
-                    </li>
-                </ul>
-                <a href="#request" class="block w-full text-center border border-accent text-accent hover:bg-accent/10 py-3 rounded-md font-medium transition duration-300">
-                    Choose Premium
-                </a>
-            </div>
-        </div>
-    </section>
+  <div class="text-center mb-16 animate-on-scroll">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, <span class="gradient-text primary-gradient">Transparent Pricing</span></h2>
+    <p class="text-lg text-gray-400 max-w-3xl mx-auto">Choose the plan that fits your needs. No hidden fees, no surprises.</p>
+  </div>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-dark/50 rounded-3xl my-12">
-        <div class="text-center mb-16 animate-on-scroll">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Getting your professional portfolio is <span class="gradient-text secondary-gradient">quick and easy</span></h2>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Just three simple steps between you and your perfect portfolio.</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
+
+    <!-- Starter Plan -->
+    <div class="glass-card p-8 rounded-xl border border-gray-800 pricing-card transition-all duration-300 hover:border-primary/50 animate-on-scroll flex flex-col">
+      <div class="mb-6">
+        <h3 class="text-xl font-bold mb-2">Starter</h3>
+        <div class="flex items-end">
+          <span class="text-4xl font-bold">5</span>
+          <span class="text-lg text-gray-400 ml-1">JOD</span>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-800 hidden md:block -z-10"></div>
-            <div class="glass-card p-8 rounded-xl border border-gray-800 transition-all duration-300 animate-on-scroll">
-                <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 mx-auto text-2xl font-bold gradient-text primary-gradient">
-                    1
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-center">Submit Your Details</h3>
-                <p class="text-gray-400 text-center">Fill out our simple form with your information, upload your CV, and select your preferred package.</p>
-            </div>
-            
-            <div class="glass-card p-8 rounded-xl border border-gray-800 transition-all duration-300 animate-on-scroll" style="transition-delay: 100ms">
-                <div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mb-6 mx-auto text-2xl font-bold gradient-text secondary-gradient">
-                    2
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-center">We Design Your Portfolio</h3>
-                <p class="text-gray-400 text-center">Our team creates your personalized portfolio based on your profession, experience, and preferences.</p>
-            </div>
-            
-            <div class="glass-card p-8 rounded-xl border border-gray-800 transition-all duration-300 animate-on-scroll" style="transition-delay: 200ms">
-                <div class="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mb-6 mx-auto text-2xl font-bold gradient-text accent-gradient">
-                    3
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-center">Get Your Live Link</h3>
-                <p class="text-gray-400 text-center">Receive your portfolio URL, review it, and request any changes if needed. Then share it with the world!</p>
-            </div>
+        <p class="text-sm text-gray-400">One-time fee</p>
+      </div>
+      <ul class="space-y-3 mb-8 flex-grow">
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>Professional portfolio webpage with core CV sections</li>
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>Clean, professional template design</li>
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>Hosted on FolioZone subdomain</li>
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>Fast 48-hour turnaround</li>
+      </ul>
+      <p class="text-sm text-gray-400 text-center mb-4">For students and entry-level professionals</p>
+      <a href="#request" class="mt-auto block w-full text-center border border-primary text-primary hover:bg-primary/10 py-3 rounded-md font-medium transition duration-300">
+        Get Started
+      </a>
+    </div>
+
+    <!-- Basic Plan -->
+    <div class="glass-card p-8 rounded-xl border border-primary/50 pricing-card transition-all duration-300 relative animate-on-scroll flex flex-col" style="transition-delay: 100ms">
+      <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+        MOST POPULAR
+      </div>
+      <div class="mb-6">
+        <h3 class="text-xl font-bold mb-2">Basic</h3>
+        <div class="flex items-end">
+          <span class="text-4xl font-bold">10</span>
+          <span class="text-lg text-gray-400 ml-1">JOD</span>
         </div>
-    </section>
+        <p class="text-sm text-gray-400">One-time fee</p>
+      </div>
+      <ul class="space-y-3 mb-8 flex-grow">
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>Includes all Starter Plan features</li>
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>Professional profile picture integration</li>
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>Download CV button (you provide PDF)</li>
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>3 content updates within 6 months</li>
+      </ul>
+      <p class="text-sm text-gray-400 text-center mb-4">For professionals wanting enhanced features</p>
+      <a href="#request" class="mt-auto block w-full text-center bg-primary hover:bg-primary/90 text-white py-3 rounded-md font-medium transition duration-300">
+        Get Started
+      </a>
+    </div>
+
+    <!-- Premium Plan -->
+    <div class="glass-card p-8 rounded-xl border border-gray-800 pricing-card transition-all duration-300 hover:border-accent/50 animate-on-scroll flex flex-col" style="transition-delay: 200ms">
+      <div class="mb-6">
+        <h3 class="text-xl font-bold mb-2">Premium</h3>
+        <div class="flex items-end">
+          <span class="text-4xl font-bold">20</span>
+          <span class="text-lg text-gray-400 ml-1">JOD</span>
+        </div>
+        <p class="text-sm text-gray-400">One-time fee</p>
+      </div>
+      <ul class="space-y-3 mb-8 flex-grow">
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>Includes all Basic Plan features</li>
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>Fully customized design & layout</li>
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>Working contact form</li>
+        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i>10 content updates within 1 year</li>
+      </ul>
+      <p class="text-sm text-gray-400 text-center mb-4">For maximum customization and support</p>
+      <a href="#request" class="mt-auto block w-full text-center border border-accent text-accent hover:bg-accent/10 py-3 rounded-md font-medium transition duration-300">
+        Get Started
+      </a>
+    </div>
+
+  </div>
+</section>
 
     <!-- Request Form Section -->
-    <section id="request" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="glass-card p-8 md:p-12 rounded-2xl border border-gray-800">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="animate-on-scroll">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready for Your <span class="gradient-text primary-gradient">Professional Portfolio?</span></h2>
-                    <p class="text-lg text-gray-400 mb-6">Fill out this form and we'll get started on creating your perfect online presence.</p>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                                <i class="fas fa-check text-primary"></i>
-                            </div>
-                            <p class="text-gray-300">No technical skills required</p>
+   <section id="request" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="glass-card p-8 md:p-12 rounded-2xl border border-gray-800">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready for Your <span class="gradient-text primary-gradient">Professional Portfolio?</span></h2>
+                <p class="text-lg text-gray-400 mb-6">Fill out this form and we'll get started on creating your perfect online presence.</p>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-check text-primary"></i>
                         </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                                <i class="fas fa-check text-primary"></i>
-                            </div>
-                            <p class="text-gray-300">Quick turnaround time</p>
+                        <p class="text-gray-300">No technical skills required</p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-check text-primary"></i>
                         </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                                <i class="fas fa-check text-primary"></i>
-                            </div>
-                            <p class="text-gray-300">Professional results</p>
+                        <p class="text-gray-300">Quick turnaround time</p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-check text-primary"></i>
                         </div>
+                        <p class="text-gray-300">Professional results</p>
                     </div>
                 </div>
-                
-                <div class="animate-on-scroll" style="transition-delay: 100ms">
-                    <form id="portfolioRequestForm" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium mb-1">Full Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        </div>
-                        <div>
-                            <label for="profession" class="block text-sm font-medium mb-1">Profession</label>
-                            <input type="text" id="profession" name="profession" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        </div>
-                        <div>
-                            <label for="package" class="block text-sm font-medium mb-1">Package</label>
-                            <select id="package" name="package" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                                <option value="">Select a package</option>
-                                <option value="starter">Starter (5 JOD)</option>
-                                <option value="basic">Basic (10 JOD)</option>
-                                <option value="premium">Premium (20 JOD)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium mb-1">Message (or paste CV content)</label>
-                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
-                        </div>
-                        <div>
-                            <label for="cv" class="block text-sm font-medium mb-1">Upload CV (optional)</label>
-                            <input type="file" id="cv" name="cv" class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        </div>
-                        <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-md font-medium transition duration-300 flex items-center justify-center">
-                            <span>Request Portfolio</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </form>
-                </div>
+            </div>
+            
+            <div class="animate-on-scroll" style="transition-delay: 100ms">
+                <form id="portfolioRequestForm" action="https://formsubmit.co/foliozonejo@gmail.com" method="POST" class="space-y-6" enctype="multipart/form-data">
+                    <!-- FormSubmit configuration -->
+                    <input type="hidden" name="_subject" value="New Portfolio Request">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html"> <!-- Replace with your thank you page URL -->
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <div>
+                        <label for="name" class="block text-sm font-medium mb-1">Full Name*</label>
+                        <input type="text" id="name" name="name" 
+                        placeholder="Omar Ali" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-1">Email Address*</label>
+                        <input type="email" id="email" name="email" 
+                        placeholder="yourname@email.com" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium mb-1">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" 
+                               placeholder="+962 79 000 0000">
+                    </div>
+                    <div>
+                        <label for="profession" class="block text-sm font-medium mb-1">Profession*</label>
+                        <input type="text" id="profession" name="profession"
+                        placeholder="Full Stack Developer" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="package" class="block text-sm font-medium mb-1">Package*</label>
+                        <select id="package" name="package" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="">Select a package</option>
+                            <option value="starter">Starter (5 JOD)</option>
+                            <option value="basic">Basic (10 JOD)</option>
+                            <option value="premium">Premium (20 JOD)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium mb-1">Message (or paste CV content)</label>
+                        <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                    </div>
+                    <div>
+                        <label for="cv" class="block text-sm font-medium mb-1">Upload CV (optional)</label>
+                        <input type="file" id="cv" name="attachment" accept=".pdf,.doc,.docx,.txt" class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-md font-medium transition duration-300 flex items-center justify-center">
+                        <span>Request Portfolio</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- FAQ Section -->
     <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -586,7 +630,7 @@
                         <ul class="list-disc pl-5 mt-2 space-y-1">
                             <li>Starter: 48 hours</li>
                             <li>Basic: 24 hours</li>
-                            <li>Premium: 12 hours (priority service)</li>
+                            <li>Premium: 48 hours (priority service)</li>
                         </ul>
                         <p class="mt-2">These times start from when we receive all your information and materials.</p>
                     </div>
@@ -632,8 +676,7 @@
                 <div class="accordion-content px-6">
                     <div class="pb-6 text-gray-400">
                         <p>We accept various payment methods for your convenience:</p>
-                        <ul class="list-disc pl-5 mt-2 space-y-1">
-                            <li>Credit/Debit cards (Visa, MasterCard)</li>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">                            
                             <li>Bank transfers (Jordanian banks)</li>
                             <li>Mobile payment apps (Zain Cash, Orange Money)</li>
                             <li>Cash on delivery (Amman area only)</li>
@@ -654,7 +697,7 @@
                         <ol class="list-decimal pl-5 mt-2 space-y-1">
                             <li>We'll send you a preview link when your portfolio is ready</li>
                             <li>You can request up to 2 rounds of revisions (for Basic and Premium packages)</li>
-                            <li>If you're still not satisfied, we offer a full refund within 7 days</li>
+                            <li>Not fully satisfied? We’ll revise your portfolio for free until it’s right — within 7 days of delivery.</li>
                         </ol>
                         <p class="mt-2">Our goal is to create something you'll be proud to share with potential employers and clients.</p>
                     </div>
@@ -677,7 +720,7 @@
                 </div>
                 <h3 class="text-xl font-bold mb-3 text-center">Email Us</h3>
                 <p class="text-gray-400 text-center mb-4">For general inquiries and support</p>
-                <a href="mailto:hello@folio-zone.com" class="text-primary hover:underline text-center block">hello@folio-zone.com</a>
+                <a href="mailto:hello@folio-zone.com" class="text-primary hover:underline text-center block">foliozonejo@gmail.com</a>
             </div>
             
             <div class="glass-card p-8 rounded-xl border border-gray-800 hover:border-secondary/50 transition-all duration-300 animate-on-scroll" style="transition-delay: 100ms">
@@ -686,7 +729,7 @@
                 </div>
                 <h3 class="text-xl font-bold mb-3 text-center">WhatsApp</h3>
                 <p class="text-gray-400 text-center mb-4">For quick questions and chat</p>
-                <a href="https://wa.me/962790000000" class="text-secondary hover:underline text-center block">+962 79 000 0000</a>
+                <a href="https://wa.me/962797473575" class="text-secondary hover:underline text-center block">+962797473575</a>
             </div>
             
             <div class="glass-card p-8 rounded-xl border border-gray-800 hover:border-accent/50 transition-all duration-300 animate-on-scroll" style="transition-delay: 200ms">
@@ -695,85 +738,100 @@
                 </div>
                 <h3 class="text-xl font-bold mb-3 text-center">Call Us</h3>
                 <p class="text-gray-400 text-center mb-4">For urgent matters during business hours</p>
-                <a href="tel:+96262000000" class="text-accent hover:underline text-center block">+962 6 200 0000</a>
+                <a href="tel:+96262000000" class="text-accent hover:underline text-center block">+962797473575</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div class="animate-on-scroll">
-                    <a href="#" class="flex items-center space-x-2 mb-4">
-                        <span class="text-2xl font-bold gradient-text primary-gradient">FolioZone</span>
-                    </a>
-                    <p class="text-gray-400 mb-6">Creating beautiful, professional portfolios for individuals across all professions.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="animate-on-scroll" style="transition-delay: 50ms">
-                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#features" class="text-gray-400 hover:text-primary transition duration-300">Features</a></li>
-                        <li><a href="#pricing" class="text-gray-400 hover:text-primary transition duration-300">Pricing</a></li>
-                        <li><a href="#how-it-works" class="text-gray-400 hover:text-primary transition duration-300">How It Works</a></li>
-                        <li><a href="#faq" class="text-gray-400 hover:text-primary transition duration-300">FAQ</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-primary transition duration-300">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="animate-on-scroll" style="transition-delay: 100ms">
-                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Refund Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Cookie Policy</a></li>
-                    </ul>
-                </div>
-                
-                <div class="animate-on-scroll" style="transition-delay: 150ms">
-                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
-                    <p class="text-gray-400 mb-4">Subscribe to get updates and special offers.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary bg-gray-800 text-white w-full">
-                        <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition duration-300">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center animate-on-scroll">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 FolioZone. All rights reserved.</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-500 hover:text-primary text-sm transition duration-300">Sitemap</a>
-                    <a href="#" class="text-gray-500 hover:text-primary text-sm transition duration-300">Careers</a>
-                    <a href="#" class="text-gray-500 hover:text-primary text-sm transition duration-300">Blog</a>
-                </div>
-            </div>
+   <footer class="bg-dark py-12 px-4 sm:px-6 lg:px-8" >
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+      
+      <!-- Branding & Social -->
+      <div class="animate-on-scroll">
+        <a href="#" class="flex items-center space-x-2 mb-4">
+          <span class="text-2xl font-bold gradient-text primary-gradient">FolioZone</span>
+        </a>
+        <p class="text-gray-400 mb-6">
+          Creating beautiful, professional portfolios for individuals across all professions.
+        </p>
+        <div class="flex space-x-4">
+          <a href="https://www.instagram.com/foliozone" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-400 hover:text-primary transition duration-300 text-xl">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/foliozone" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-gray-400 hover:text-primary transition duration-300 text-xl">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
         </div>
-    </footer>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="animate-on-scroll" style="transition-delay: 50ms">
+        <h3 class="text-lg font-semibold mb-4 text-white">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="#features" class="text-gray-400 hover:text-primary transition duration-300">Features</a></li>
+          <li><a href="#pricing" class="text-gray-400 hover:text-primary transition duration-300">Pricing</a></li>
+          <li><a href="#how-it-works" class="text-gray-400 hover:text-primary transition duration-300">How It Works</a></li>
+          <li><a href="#faq" class="text-gray-400 hover:text-primary transition duration-300">FAQ</a></li>
+          <li><a href="#contact" class="text-gray-400 hover:text-primary transition duration-300">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      
+<!-- Optional: Add this to your global CSS or <style> tag -->
+
+<!-- Legal Section with Popups -->
+<div class="animate-on-scroll" style="transition-delay: 100ms">
+  <h3 class="text-lg font-semibold mb-4 text-white">Legal</h3>
+  <ul class="space-y-2">
+    <li>
+      <a href="javascript:void(0);" @click="showTerms = true" class="text-gray-400 hover:text-primary transition duration-300">
+        Terms of Service
+      </a>
+    </li>
+    <li>
+      <a href="javascript:void(0);" @click="showPrivacy = true" class="text-gray-400 hover:text-primary transition duration-300">
+        Privacy Policy
+      </a>
+    </li>    
+    <li>
+      <a href="javascript:void(0);" @click="showCookies = true" class="text-gray-400 hover:text-primary transition duration-300">
+        Cookie Policy
+      </a>
+    </li>
+  </ul>
+</div>
+
+      <!-- Sitemap, Careers, Blog -->
+      <div class="animate-on-scroll" style="transition-delay: 150ms">
+        <h3 class="text-lg font-semibold mb-4 text-white">More</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Sitemap</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Careers</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center animate-on-scroll">
+      <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 FolioZone. All rights reserved.</p>      
+    </div>
+  </div>
+  
+</footer>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- Back to Top Button -->
     <button id="back-to-top" class="back-to-top fixed bottom-8 right-8 w-12 h-12 rounded-full bg-primary hover:bg-primary/90 text-white flex items-center justify-center shadow-lg transition-all duration-300 z-40">
         <i class="fas fa-arrow-up"></i>
     </button>
 
+ <!-- Modal Overlay -->  
     <script>
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
