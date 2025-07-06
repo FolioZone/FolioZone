@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toonari - Personalized Storybooks for Children</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'english': ['Poppins', 'sans-serif'],
+                        'arabic': ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                        },
+                        secondary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            600: '#475569',
+                            500: '#64748b',
+                        },
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-in',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #475569);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        .rtl {
+            direction: rtl;
+        }
+        
+        .art-style-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .language-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .language-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #334155;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #0ea5e9;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+        
+        .slider:after {
+            content: "EN";
+            color: white;
+            display: block;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 30%;
+            font-size: 10px;
+            font-family: "Poppins", sans-serif;
+        }
+        
+        input:checked + .slider:after {
+            content: "AR";
+            left: 70%;
+        }
+        
+        .storybook-page {
+            perspective: 1000px;
+        }
+        
+        .storybook-page:hover .page-inner {
+            transform: rotateY(10deg);
+        }
+        
+        .page-inner {
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+        
+        .order-form input,
+        .order-form textarea,
+        .order-form select {
+            transition: all 0.3s;
+        }
+        
+        .order-form input:focus,
+        .order-form textarea:focus,
+        .order-form select:focus {
+            box-shadow: 0 0 0 2px #0ea5e9;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+            }
+            
+            .mobile-menu.open {
+                max-height: 500px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-100 font-english min-h-screen">
+    <!-- Language Toggle -->
+    <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <label class="language-switch">
+            <input type="checkbox" id="languageToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-dark-800 shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-secondary-500 to-primary-500 flex items-center justify-center mr-2">
+                            <i class="fas fa-book-open text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary-400 to-primary-400">Toonari</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="hover:text-secondary-400 transition">Home</a>
+                    <a href="#about" class="hover:text-secondary-400 transition">About</a>
+                    <a href="#styles" class="hover:text-secondary-400 transition">Art Styles</a>
+                    <a href="#gallery" class="hover:text-secondary-400 transition">Gallery</a>
+                    <a href="#pricing" class="hover:text-secondary-400 transition">Pricing</a>
+                    <a href="#testimonials" class="hover:text-secondary-400 transition">Testimonials</a>
+                    <a href="#contact" class="hover:text-secondary-400 transition">Contact</a>
+                    <a href="#order" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition">Order Now</a>
+                </div>
+                
+                <button id="mobileMenuButton" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <div id="mobileMenu" class="mobile-menu md:hidden">
+                <div class="pt-4 pb-2 space-y-2">
+                    <a href="#home" class="block px-3 py-2 hover:bg-dark-700 rounded">Home</a>
+                    <a href="#about" class="block px-3 py-2 hover:bg-dark-700 rounded">About</a>
+                    <a href="#styles" class="block px-3 py-2 hover:bg-dark-700 rounded">Art Styles</a>
+                    <a href="#gallery" class="block px-3 py-2 hover:bg-dark-700 rounded">Gallery</a>
+                    <a href="#pricing" class="block px-3 py-2 hover:bg-dark-700 rounded">Pricing</a>
+                    <a href="#testimonials" class="block px-3 py-2 hover:bg-dark-700 rounded">Testimonials</a>
+                    <a href="#contact" class="block px-3 py-2 hover:bg-dark-700 rounded">Contact</a>
+                    <a href="#order" class="block bg-primary-600 text-white px-3 py-2 rounded text-center">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg py-20 md:py-32">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 animate-fade-in">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-secondary-400 to-primary-400">Magical Storybooks</span>
+                        <br>For Your Little Ones
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 mb-8">Transform your child's photos into personalized storybooks with enchanting tales they'll cherish forever.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#order" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg text-center font-medium transition">Create Your Story</a>
+                        <a href="#gallery" class="border border-secondary-500 text-secondary-400 hover:bg-secondary-900 hover:bg-opacity-30 px-6 py-3 rounded-lg text-center font-medium transition">View Samples</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center animate-float">
+                    <div class="relative">
+                        <div class="w-64 h-80 md:w-80 md:h-96 bg-dark-800 rounded-xl shadow-2xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Sample Storybook" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-40 h-52 bg-dark-700 rounded-xl shadow-lg overflow-hidden transform rotate-6 border border-dark-600">
+                            <img src="https://images.unsplash.com/photo-1544717305-2787409b809e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Sample Storybook Page" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">About Toonari</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-secondary-500 to-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <div class="relative">
+                        <div class="w-full h-80 bg-dark-700 rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1579208575657-c5a601d7ab4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Family reading" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 bg-dark-900 p-4 rounded-lg shadow-lg border border-dark-700 w-3/4">
+                            <div class="flex items-center">
+                                <div class="bg-primary-500 p-2 rounded-full mr-3">
+                                    <i class="fas fa-lightbulb text-white"></i>
+                                </div>
+                                <p class="text-sm">"We believe every child deserves their own magical story"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6">Creating Magical Memories</h3>
+                    <p class="text-gray-300 mb-6">Toonari transforms your child's photos into beautifully illustrated storybooks that spark imagination and create lasting memories. Our personalized books help children see themselves as the heroes of their own adventures.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-secondary-500 p-2 rounded-full mr-4">
+                                <i class="fas fa-star text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">Unique Personalization</h4>
+                                <p class="text-gray-400 text-sm">We incorporate your child's name, appearance, and even their favorite things into each story.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-secondary-500 p-2 rounded-full mr-4">
+                                <i class="fas fa-palette text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">Diverse Art Styles</h4>
+                                <p class="text-gray-400 text-sm">Choose from 10 different artistic styles to match your child's personality and preferences.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-secondary-500 p-2 rounded-full mr-4">
+                                <i class="fas fa-heart text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">Quality Materials</h4>
+                                <p class="text-gray-400 text-sm">Premium paper and durable binding ensure your storybook lasts through years of bedtime stories.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Art Styles Section -->
+    <section id="styles" class="py-20 bg-dark-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Choose Your Art Style</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Select from our diverse range of artistic styles to create a storybook that perfectly matches your child's personality.</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-secondary-500 to-primary-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+                <!-- 3D Pixar Style -->
+                <div class="art-style-card bg-dark-800 rounded-xl overflow-hidden shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1635805737707-6ca306e63d04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="3D Pixar Style" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">3D Pixar Style</h3>
+                        <p class="text-gray-400 text-sm">Bright, colorful characters with that classic animated movie look.</p>
+                    </div>
+                </div>
+                
+                <!-- American Cartoon -->
+                <div class="art-style-card bg-dark-800 rounded-xl overflow-hidden shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="American Cartoon Style" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">American Cartoon</h3>
+                        <p class="text-gray-400 text-sm">Bold outlines and exaggerated features for a fun, comic-like appearance.</p>
+                    </div>
+                </div>
+                
+                <!-- Anime -->
+                <div class="art-style-card bg-dark-800 rounded-xl overflow-hidden shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1636489953081-103c369cb40b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Anime Style" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Anime</h3>
+                        <p class="text-gray-400 text-sm">Expressive characters with large eyes and dynamic action scenes.</p>
+                    </div>
+                </div>
+                
+                <!-- Watercolor -->
+                <div class="art-style-card bg-dark-800 rounded-xl overflow-hidden shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1579762715459-5a068c287a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Watercolor Style" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Watercolor</h3>
+                        <p class="text-gray-400 text-sm">Soft, dreamy illustrations with beautiful blending and texture.</p>
+                    </div>
+                </div>
+                
+                <!-- Flat Vector -->
+                <div class="art-style-card bg-dark-800 rounded-xl overflow-hidden shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Flat Vector Style" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Flat Vector</h3>
+                        <p class="text-gray-400 text-sm">Clean, modern illustrations with solid colors and simple shapes.</p>
+                    </div>
+                </div>
+                
+                <!-- Chibi -->
+                <div class="art-style-card bg-dark-800 rounded-xl overflow-hidden shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Chibi Style" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Chibi</h3>
+                        <p class="text-gray-400 text-sm">Super-deformed cute characters with oversized heads and tiny bodies.</p>
+                    </div>
+                </div>
+                
+                <!-- Comic Book -->
+                <div class="art-style-card bg-dark-800 rounded-xl overflow-hidden shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Comic Book Style" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Comic Book</h3>
+                        <p class="text-gray-400 text-sm">High-contrast illustrations with dramatic shading and speech bubbles.</p>
+                    </div>
+                </div>
+                
+                <!-- Pastel -->
+                <div class="art-style-card bg-dark-800 rounded-xl overflow-hidden shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1636489953081-103c369cb40b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Pastel Style" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Pastel</h3>
+                        <p class="text-gray-400 text-sm">Soft, muted colors create a gentle, soothing visual experience.</p>
+                    </div>
+                </div>
+                
+                <!-- Digital Painting -->
+                <div class="art-style-card bg-dark-800 rounded-xl overflow-hidden shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1579762715459-5a068c287a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Digital Painting Style" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Digital Painting</h3>
+                        <p class="text-gray-400 text-sm">Rich, painterly textures with visible brush strokes and depth.</p>
+                    </div>
+                </div>
+                
+                <!-- Paper Cutout -->
+                <div class="art-style-card bg-dark-800 rounded-xl overflow-hidden shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Paper Cutout Style" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Paper Cutout</h3>
+                        <p class="text-gray-400 text-sm">Layered paper textures create a unique dimensional effect.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-dark-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Storybook Gallery</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Browse samples of our personalized storybooks to see the magic we create.</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-secondary-500 to-primary-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Storybook 1 -->
+                <div class="storybook-page bg-dark-700 rounded-xl overflow-hidden shadow-lg transition duration-300">
+                    <div class="page-inner h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Storybook Sample" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">The Little Explorer</h3>
+                            <p class="text-gray-300 text-sm">3D Pixar Style - 12 pages</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Storybook 2 -->
+                <div class="storybook-page bg-dark-700 rounded-xl overflow-hidden shadow-lg transition duration-300">
+                    <div class="page-inner h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1544717305-2787409b809e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Storybook Sample" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Princess of the Stars</h3>
+                            <p class="text-gray-300 text-sm">Watercolor Style - 10 pages</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Storybook 3 -->
+                <div class="storybook-page bg-dark-700 rounded-xl overflow-hidden shadow-lg transition duration-300">
+                    <div class="page-inner h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1579208575657-c5a601d7ab4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Storybook Sample" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Super Kid Adventures</h3>
+                            <p class="text-gray-300 text-sm">Comic Book Style - 15 pages</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Storybook 4 -->
+                <div class="storybook-page bg-dark-700 rounded-xl overflow-hidden shadow-lg transition duration-300">
+                    <div class="page-inner h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1635805737707-6ca306e63d04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Storybook Sample" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Dinosaur Friends</h3>
+                            <p class="text-gray-300 text-sm">American Cartoon Style - 8 pages</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Storybook 5 -->
+                <div class="storybook-page bg-dark-700 rounded-xl overflow-hidden shadow-lg transition duration-300">
+                    <div class="page-inner h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1636489953081-103c369cb40b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Storybook Sample" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Magical Tea Party</h3>
+                            <p class="text-gray-300 text-sm">Pastel Style - 10 pages</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Storybook 6 -->
+                <div class="storybook-page bg-dark-700 rounded-xl overflow-hidden shadow-lg transition duration-300">
+                    <div class="page-inner h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1579762715459-5a068c287a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Storybook Sample" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Space Explorer</h3>
+                            <p class="text-gray-300 text-sm">Digital Painting Style - 12 pages</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#order" class="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition">
+                    <span>Create Your Own Story</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-dark-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple Pricing</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Choose the perfect package for your personalized storybook.</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-secondary-500 to-primary-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Basic Package -->
+                <div class="bg-dark-800 rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-xl">
+                    <div class="p-8 text-center border-b border-dark-700">
+                        <h3 class="text-2xl font-bold mb-2">Basic</h3>
+                        <div class="flex justify-center items-baseline">
+                            <span class="text-4xl font-bold">10</span>
+                            <span class="text-xl ml-1">JOD</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>8 pages story</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>1 art style</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>Softcover binding</span>
+                            </li>
+                            <li class="flex items-center text-gray-500">
+                                <i class="fas fa-times text-gray-600 mr-3"></i>
+                                <span>No custom story</span>
+                            </li>
+                            <li class="flex items-center text-gray-500">
+                                <i class="fas fa-times text-gray-600 mr-3"></i>
+                                <span>No premium paper</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <a href="#order" class="block w-full py-3 px-6 text-center bg-dark-700 hover:bg-dark-600 rounded-lg transition">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Standard Package -->
+                <div class="bg-dark-800 rounded-xl shadow-lg overflow-hidden border-2 border-secondary-500 transform scale-105 z-10">
+                    <div class="p-8 text-center border-b border-dark-700">
+                        <div class="absolute top-0 right-0 bg-secondary-500 text-white text-xs font-bold px-3 py-1 transform translate-x-2 -translate-y-2">POPULAR</div>
+                        <h3 class="text-2xl font-bold mb-2">Standard</h3>
+                        <div class="flex justify-center items-baseline">
+                            <span class="text-4xl font-bold">15</span>
+                            <span class="text-xl ml-1">JOD</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>12 pages story</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>2 art styles</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>Hardcover binding</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>Custom story</span>
+                            </li>
+                            <li class="flex items-center text-gray-500">
+                                <i class="fas fa-times text-gray-600 mr-3"></i>
+                                <span>No premium paper</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <a href="#order" class="block w-full py-3 px-6 text-center bg-secondary-600 hover:bg-secondary-700 text-white rounded-lg transition">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Premium Package -->
+                <div class="bg-dark-800 rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-xl">
+                    <div class="p-8 text-center border-b border-dark-700">
+                        <h3 class="text-2xl font-bold mb-2">Premium</h3>
+                        <div class="flex justify-center items-baseline">
+                            <span class="text-4xl font-bold">25</span>
+                            <span class="text-xl ml-1">JOD</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>16 pages story</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>3 art styles</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>Deluxe hardcover</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>Custom story</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-secondary-500 mr-3"></i>
+                                <span>Premium paper</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <a href="#order" class="block w-full py-3 px-6 text-center bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-dark-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Happy Parents & Kids</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">See what families are saying about their personalized Toonari storybooks.</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-secondary-500 to-primary-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-dark-700 p-8 rounded-xl shadow-lg transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Sarah M." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Sarah M.</h4>
+                            <p class="text-gray-400 text-sm">Mother of 5-year-old</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6">"My daughter was overjoyed to see herself as the princess in her own fairy tale. She carries the book everywhere and 'reads' it to her stuffed animals!"</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-dark-700 p-8 rounded-xl shadow-lg transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Ahmed K." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Ahmed K.</h4>
+                            <p class="text-gray-400 text-sm">Father of twins</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6">"The quality exceeded my expectations. Both my boys love their adventure story and ask to read it every night. Worth every dinar!"</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-dark-700 p-8 rounded-xl shadow-lg transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Layla T." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Layla T.</h4>
+                            <p class="text-gray-400 text-sm">Mother of 7-year-old</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6">"The custom story option was perfect for my daughter who has special needs. Seeing herself as the hero in a story that understands her was priceless."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form Section -->
+    <section id="order" class="py-20 bg-dark-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-dark-800 rounded-xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 bg-gradient-to-br from-primary-700 to-secondary-700 p-8 flex flex-col justify-center">
+                        <h2 class="text-3xl font-bold mb-6">Create Your Storybook</h2>
+                        <p class="text-gray-200 mb-8">Fill out this form to begin creating a magical personalized storybook for your child.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="bg-white bg-opacity-20 p-3 rounded-full mr-4">
+                                    <i class="fas fa-child text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Personalized for Your Child</h4>
+                                    <p class="text-gray-200 text-sm">Name, appearance, and interests included</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="bg-white bg-opacity-20 p-3 rounded-full mr-4">
+                                    <i class="fas fa-palette text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Choose Your Style</h4>
+                                    <p class="text-gray-200 text-sm">10 different artistic styles available</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="bg-white bg-opacity-20 p-3 rounded-full mr-4">
+                                    <i class="fas fa-gift text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Perfect Gift</h4>
+                                    <p class="text-gray-200 text-sm">Cherished keepsake for years to come</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 p-8">
+                        <form class="order-form space-y-6">
+                            <div>
+                                <label for="package" class="block text-sm font-medium mb-1">Package</label>
+                                <select id="package" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary-500">
+                                    <option value="basic">Basic (10 JOD)</option>
+                                    <option value="standard" selected>Standard (15 JOD)</option>
+                                    <option value="premium">Premium (25 JOD)</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="childName" class="block text-sm font-medium mb-1">Child's Name</label>
+                                <input type="text" id="childName" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary-500" placeholder="What's your child's name?">
+                            </div>
+                            
+                            <div>
+                                <label for="childAge" class="block text-sm font-medium mb-1">Child's Age</label>
+                                <input type="number" id="childAge" min="1" max="12" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary-500" placeholder="How old is your child?">
+                            </div>
+                            
+                            <div>
+                                <label for="artStyle" class="block text-sm font-medium mb-1">Art Style</label>
+                                <select id="artStyle" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary-500">
+                                    <option value="">Select a style</option>
+                                    <option value="3d">3D Pixar Style</option>
+                                    <option value="cartoon">American Cartoon</option>
+                                    <option value="anime">Anime</option>
+                                    <option value="watercolor">Watercolor</option>
+                                    <option value="vector">Flat Vector</option>
+                                    <option value="chibi">Chibi</option>
+                                    <option value="comic">Comic Book</option>
+                                    <option value="pastel">Pastel</option>
+                                    <option value="painting">Digital Painting</option>
+                                    <option value="cutout">Paper Cutout</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="childPhoto" class="block text-sm font-medium mb-1">Child's Photo</label>
+                                <div class="flex items-center justify-center w-full">
+                                    <label for="childPhoto" class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-dark-600 rounded-lg cursor-pointer bg-dark-700 hover:bg-dark-600">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <i class="fas fa-cloud-upload-alt text-gray-500 text-2xl mb-2"></i>
+                                            <p class="text-sm text-gray-500">Click to upload photo</p>
+                                        </div>
+                                        <input id="childPhoto" type="file" class="hidden" accept="image/*">
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="storyType" class="block text-sm font-medium mb-1">Story Type</label>
+                                <select id="storyType" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary-500">
+                                    <option value="adventure">Adventure</option>
+                                    <option value="fantasy">Fantasy</option>
+                                    <option value="superhero">Superhero</option>
+                                    <option value="princess">Princess</option>
+                                    <option value="animals">Animal Friends</option>
+                                    <option value="space">Space Explorer</option>
+                                    <option value="custom">Custom Story</option>
+                                </select>
+                            </div>
+                            
+                            <div id="customStoryGroup" class="hidden">
+                                <label for="customStory" class="block text-sm font-medium mb-1">Your Story Idea</label>
+                                <textarea id="customStory" rows="3" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary-500" placeholder="Tell us your story idea..."></textarea>
+                            </div>
+                            
+                            <div class="pt-2">
+                                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition">
+                                    Continue to Checkout
+                                </button>
+                            </div>
+                            
+                            <p class="text-xs text-gray-500 text-center">By submitting, you agree to our <a href="#" class="text-secondary-400 hover:underline">Terms</a> and <a href="#" class="text-secondary-400 hover:underline">Privacy Policy</a>.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-dark-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Find answers to common questions about our personalized storybooks.</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-secondary-500 to-primary-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-dark-700 rounded-lg overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-medium">How long does it take to create and receive my storybook?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-300">The creation process typically takes 5-7 business days after we receive all necessary information and photos. Shipping time depends on your location, but most orders arrive within 2-3 weeks from the order date. We'll provide a tracking number once your book ships.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="bg-dark-700 rounded-lg overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-medium">What file types can I upload for my child's photo?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-300">We accept JPG, PNG, and WEBP files. For best results, please upload high-resolution photos (at least 1000x1000 pixels) with good lighting where your child's face is clearly visible. Avoid heavily filtered or edited photos.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="bg-dark-700 rounded-lg overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-medium">Can I include multiple children in one storybook?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-300">Yes! Our Standard and Premium packages allow you to include up to 3 children in the same storybook. Additional characters may require a custom quote - please contact us for details.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="bg-dark-700 rounded-lg overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-medium">What languages are available for the story text?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-300">Currently, we offer stories in both English and Arabic. If you need a different language, please contact us before ordering as custom language translations may be possible for an additional fee.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="bg-dark-700 rounded-lg overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-medium">Can I see a preview before the final book is printed?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-300">Absolutely! For Standard and Premium packages, we'll send you a digital proof of your storybook within 3-5 business days. You'll have 48 hours to request minor adjustments before we proceed with printing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Have questions? We're here to help create magical stories for your children.</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-secondary-500 to-primary-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <!-- Email -->
+                    <div class="bg-dark-800 p-6 rounded-xl text-center">
+                        <div class="bg-secondary-600 bg-opacity-20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-envelope text-secondary-400 text-xl"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Email Us</h3>
+                        <p class="text-gray-400 mb-2">We typically reply within 24 hours</p>
+                        <a href="mailto:hello@toonari.com" class="text-secondary-400 hover:underline">hello@toonari.com</a>
+                    </div>
+                    
+                    <!-- WhatsApp -->
+                    <div class="bg-dark-800 p-6 rounded-xl text-center">
+                        <div class="bg-green-600 bg-opacity-20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fab fa-whatsapp text-green-400 text-xl"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">WhatsApp</h3>
+                        <p class="text-gray-400 mb-2">Fast responses during business hours</p>
+                        <a href="https://wa.me/962790000000" class="text-green-400 hover:underline">+962 79 000 0000</a>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="bg-dark-800 p-6 rounded-xl text-center">
+                        <div class="bg-primary-600 bg-opacity-20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-hashtag text-primary-400 text-xl"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Social Media</h3>
+                        <p class="text-gray-400 mb-4">Follow us for updates and inspiration</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="social-icon text-gray-400 hover:text-blue-400 transition"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon text-gray-400 hover:text-pink-600 transition"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon text-gray-400 hover:text-red-600 transition"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="max-w-2xl mx-auto bg-dark-800 rounded-xl p-8 shadow-lg">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-1">Your Name</label>
+                                <input type="text" id="name" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary-500" placeholder="Enter your name">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
+                                <input type="email" id="email" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary-500" placeholder="Enter your email">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium mb-1">Subject</label>
+                            <input type="text" id="subject" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary-500" placeholder="What's this about?">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-1">Message</label>
+                            <textarea id="message" rows="4" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary-500" placeholder="How can we help you?"></textarea>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input id="privacy" type="checkbox" class="w-4 h-4 bg-dark-700 border-dark-600 rounded focus:ring-secondary-500">
+                            <label for="privacy" class="ml-2 text-sm text-gray-400">I agree to the <a href="#" class="text-secondary-400 hover:underline">privacy policy</a></label>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="w-full md:w-auto bg-secondary-600 hover:bg-secondary-700 text-white font-medium py-3 px-8 rounded-lg transition">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-950 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-secondary-500 to-primary-500 flex items-center justify-center mr-2">
+                            <i class="fas fa-book-open text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary-400 to-primary-400">Toonari</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Creating magical, personalized storybooks that bring children's imaginations to life.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon text-gray-400 hover:text-blue-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-pink-600 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-red-600 transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About</a></li>
+                        <li><a href="#styles" class="text-gray-400 hover:text-white transition">Art Styles</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition">Pricing</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Shipping Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Refund Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe for updates and special offers.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="bg-dark-800 text-white px-4 py-2 rounded-l-lg focus:outline-none w-full">
+                        <button type="submit" class="bg-secondary-600 hover:bg-secondary-700 text-white px-4 py-2 rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-dark-800">
+                <p class="text-gray-500 text-center text-sm">&copy; 2023 Toonari. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language Toggle
+        const languageToggle = document.getElementById('languageToggle');
+        const htmlElement = document.documentElement;
+        
+        languageToggle.addEventListener('change', function() {
+            if (this.checked) {
+                htmlElement.setAttribute('dir', 'rtl');
+                htmlElement.setAttribute('lang', 'ar');
+                htmlElement.classList.add('rtl');
+                htmlElement.classList.add('font-arabic');
+                htmlElement.classList.remove('font-english');
+            } else {
+                htmlElement.setAttribute('dir', 'ltr');
+                htmlElement.setAttribute('lang', 'en');
+                htmlElement.classList.remove('rtl');
+                htmlElement.classList.remove('font-arabic');
+                htmlElement.classList.add('font-english');
+            }
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('open');
+        });
+        
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+                
+                // Close other open answers
+                faqQuestions.forEach(q => {
+                    if (q !== question) {
+                        q.nextElementSibling.classList.add('hidden');
+                        q.querySelector('i').classList.remove('rotate-180');
+                    }
+                });
+            });
+        });
+        
+        // Show custom story field when custom is selected
+        const storyTypeSelect = document.getElementById('storyType');
+        const
+</body>
+</html>
