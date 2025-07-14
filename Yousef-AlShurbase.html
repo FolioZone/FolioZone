@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yousef AlShurbase | Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 3px;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #3b82f6;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 20px;
+            width: 1px;
+            height: calc(100% - 15px);
+            background: #334155;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background-color: #1e293b;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+            transition: width 1.5s ease;
+        }
+
+        .download-btn {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+            background-size: 200% 200%;
+            border-radius: 12px;
+            animation: gradient 3s ease infinite;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .download-container {
+            position: relative;
+            padding: 2px;
+            border-radius: 14px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            animation: gradient 3s ease infinite;
+            background-size: 200% 200%;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .download-inner {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-slate-900/80 backdrop-blur-md z-50 shadow-lg">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">Yousef AlShurbase</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="md:hidden text-xl focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-slate-800 px-6 py-4" id="mobile-menu">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20">
+        <div class="max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Hi, I'm <span class="gradient-text">Yousef AlShurbase</span></h1>
+                <h2 class="text-xl md:text-2xl text-slate-300 mb-6">Dedicated Professional with Diverse Experience</h2>
+                <p class="text-slate-400 mb-8 max-w-lg">Hardworking and eager to get opportunities to improve myself professionally and contribute to the growth of organizations with quality services.</p>
+                <div class="flex space-x-4">
+                    <a href="#contact" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium hover:opacity-90 transition">Contact Me</a>
+                    <a href="#about" class="px-6 py-3 border border-slate-600 rounded-lg font-medium hover:bg-slate-800 transition">Learn More</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center fade-in delay-100">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-slate-700 shadow-xl">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-9xl font-bold text-slate-700">YA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-800/50">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 section-title fade-in">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="fade-in delay-100">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-400">Personal Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex">
+                            <span class="w-32 text-slate-400">Full Name:</span>
+                            <span>Yousef Tawq Ahmad AlShurbase</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-slate-400">Date of Birth:</span>
+                            <span>25/5/2000</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-slate-400">Nationality:</span>
+                            <span>Jordanian</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-slate-400">Marital Status:</span>
+                            <span>Single</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-slate-400">Location:</span>
+                            <span>Amman - Tabarbour</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-slate-400">Phone:</span>
+                            <a href="tel:0796065991" class="hover:text-blue-400 transition">0796065991</a>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-slate-400">Email:</span>
+                            <a href="mailto:youseftawfeeq852@gmail.com" class="hover:text-blue-400 transition">youseftawfeeq852@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in delay-200">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-400">Objective</h3>
+                    <p class="mb-6 text-slate-300">Looking for a job and want to associate with an organization to provide my skills. Hardworking and eager to get opportunities to improve myself professionally and contribute to the growth of the organization with quality services.</p>
+                    <p class="mb-6 text-slate-300">Adept in Research, Planning, and Organization with a proven track record in various professional settings.</p>
+                    
+                    <h3 class="text-xl font-semibold mb-4 text-blue-400">Education</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium">Tariq Bin Ziyad Secondary School</h4>
+                            <p class="text-slate-400">General Secondary Certificate | 2018</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Florida International Academy</h4>
+                            <p class="text-slate-400">Diploma Certificate in Ticket Booking | 3 Months</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 section-title fade-in">Professional Experience</h2>
+            
+            <div class="space-y-8">
+                <div class="card-hover bg-slate-800 p-6 rounded-xl fade-in delay-100">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-400">Employee at We Market</h3>
+                    <h4 class="text-lg mb-2">We Market | 10/2023 – Present</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-300">
+                        <li>Supported customers with inquiries and ensured positive shopping experience</li>
+                        <li>Managed inventory by restocking shelves and organizing products efficiently</li>
+                        <li>Operated point-of-sale system and handled cash and card transactions</li>
+                        <li>Contributed to maintaining clean and welcoming store environment</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-slate-800 p-6 rounded-xl fade-in delay-200">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-400">Employee at Al-Rayhan</h3>
+                    <h4 class="text-lg mb-2">Al-Rayhan | 1/2023 – 8/2023</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-300">
+                        <li>Assisted customers with product selection and provided recommendations</li>
+                        <li>Maintained cleanliness and organization of store shelves and displays</li>
+                        <li>Handled cash register operations and ensured accurate transaction records</li>
+                        <li>Collaborated with team members to achieve daily sales targets</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-slate-800 p-6 rounded-xl fade-in delay-300">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-400">Delivery Driver</h3>
+                    <h4 class="text-lg mb-2">Careem Box | 2020 – Present</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-300">
+                        <li>Delivered packages and ensured timely delivery to customers</li>
+                        <li>Maintained professionalism and adherence to safety protocols</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-slate-800 p-6 rounded-xl fade-in delay-100">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-400">Sales Employee & Warehouse (Operation) Service</h3>
+                    <h4 class="text-lg mb-2">Qattous Group Company | 11/14/2019 – 6/6/2022</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-300">
+                        <li>Managed warehouse operations, including inventory tracking and logistics</li>
+                        <li>Provided excellent customer service and resolved queries effectively</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-slate-800 p-6 rounded-xl fade-in delay-200">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-400">Sales Employee</h3>
+                    <h4 class="text-lg mb-2">Al Shaab Roasters | 5 Months</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-300">
+                        <li>Conducted sales transactions and maintained customer relationships</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-slate-800 p-6 rounded-xl fade-in delay-300">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-400">Hotel Management</h3>
+                    <h4 class="text-lg mb-2">Reception and Room Reservation</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-300">
+                        <li>Handled guest reservations, check-ins, and inquiries</li>
+                        <li>Maintained accurate records and ensured smooth operations</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-slate-800 p-6 rounded-xl fade-in delay-100">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-400">Sales Employee</h3>
+                    <h4 class="text-lg mb-2">Gift Shop | 2014 – 2017</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-300">
+                        <li>Managed sales operations and customer interactions</li>
+                        <li>Assisted in inventory management and product organization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-slate-800/50">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 section-title fade-in">Professional Skills</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="fade-in delay-100">
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Communication & Interpersonal Skills</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Working Under Pressure</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Microsoft Office</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Problem Solving</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in delay-200">
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Teamwork</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Adaptability</span>
+                            <span>87%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 87%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Time Management</span>
+                            <span>83%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 83%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Attention to Detail</span>
+                            <span>89%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 89%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 fade-in delay-300">
+                <h3 class="text-xl font-semibold mb-6 text-blue-400">Languages</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-medium mb-2">Arabic</h4>
+                        <p class="text-slate-400">Mother Tongue</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-2">English</h4>
+                        <p class="text-slate-400">Good</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 section-title fade-in">Get In Touch</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="fade-in delay-100">
+                    <h3 class="text-xl font-semibold mb-6 text-blue-400">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-slate-800 p-3 rounded-lg mr-4">
+                                <i class="fas fa-map-marker-alt text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Location</h4>
+                                <p class="text-slate-400">Amman - Tabarbour, Jordan</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-slate-800 p-3 rounded-lg mr-4">
+                                <i class="fas fa-phone text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Phone</h4>
+                                <a href="tel:0796065991" class="text-slate-400 hover:text-blue-400 transition">0796065991</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-slate-800 p-3 rounded-lg mr-4">
+                                <i class="fas fa-envelope text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Email</h4>
+                                <a href="mailto:youseftawfeeq852@gmail.com" class="text-slate-400 hover:text-blue-400 transition">youseftawfeeq852@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-medium mb-4">Connect with me</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://wa.me/962796065991" target="_blank" class="bg-slate-800 hover:bg-green-600 transition w-12 h-12 rounded-full flex items-center justify-center">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in delay-200">
+                    <div class="download-container h-full">
+                        <div class="download-inner">
+                            <h3 class="text-xl font-semibold mb-4 text-blue-400">Download My Resume</h3>
+                            <p class="text-slate-400 mb-6 text-center">Get a copy of my professional CV in PDF format</p>
+                            <a href="https://github.com/FolioZone/FolioZone/raw/main/CVs/Yousef-AlShurbase.pdf" download="Yousef-AlShurbase-CV.pdf" 
+                               class="download-btn px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 font-medium flex items-center" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-download mr-2"></i> Download CV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-400 mb-4 md:mb-0">© 2025 Yousef AlShurbase. All rights reserved.</p>
+                <p class="text-slate-500">Powered by <a href="https://folio-zone.com" target="_blank" class="text-blue-400 hover:underline">FolioZone</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Initialize animations
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Animate skill bars on scroll
+        const animateSkillBars = () => {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            const skillsSection = document.getElementById('skills');
+            const sectionPosition = skillsSection.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (sectionPosition < windowHeight - 200) {
+                skillBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+                
+                // Remove event listener after animation
+                window.removeEventListener('scroll', animateSkillBars);
+            }
+        };
+        
+        window.addEventListener('scroll', animateSkillBars);
+    </script>
+</body>
+</html>
