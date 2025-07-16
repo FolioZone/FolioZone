@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahmoud Aljaidi | Mechanical Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a;
+            color: #e5e5e5;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #121212 100%);
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #333 50%, transparent 100%);
+        }
+        
+        .skill-bar {
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #fff;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #fff; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black bg-opacity-90 z-50 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-white font-bold text-xl">MA</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#home" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium transition-colors duration-300">Home</a>
+                        <a href="#about" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium transition-colors duration-300">About</a>
+                        <a href="#skills" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium transition-colors duration-300">Skills</a>
+                        <a href="#projects" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium transition-colors duration-300">Projects</a>
+                        <a href="#contact" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium transition-colors duration-300">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-300 hover:text-blue-400 focus:outline-none transition-colors duration-300">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900/95 backdrop-blur-sm">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800/50 rounded-md transition-colors duration-300">Home</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800/50 rounded-md transition-colors duration-300">About</a>
+                <a href="#skills" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800/50 rounded-md transition-colors duration-300">Skills</a>
+                <a href="#projects" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800/50 rounded-md transition-colors duration-300">Projects</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800/50 rounded-md transition-colors duration-300">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-16 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 fade-in">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white">
+                        <span class="typewriter">Mahmoud Aljaidi</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold text-blue-400 delay-100 fade-in">Mechanical Engineer</h2>
+                    <p class="text-lg text-gray-300 max-w-lg delay-200 fade-in">
+                        Specializing in Hydraulic Systems, HVAC Design, and Mechanical Engineering with a passion for innovative solutions and sustainable design.
+                    </p>
+                    <div class="flex flex-wrap gap-4 delay-300 fade-in">
+                        <a href="#contact" class="px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300">
+                            Contact Me
+                        </a>
+                        <a href="#projects" class="px-6 py-3 border border-blue-400 text-blue-400 font-medium rounded-md hover:bg-blue-900/30 transition duration-300">
+                            View Projects
+                        </a>
+                        <a href="https://github.com/FolioZone/FolioZone/blob/main/CVs/Mahmoud-Aljaidi.pdf" 
+                           download="Mahmoud-Aljaidi-CV.pdf"
+                           class="px-6 py-3 bg-gray-800 text-white font-medium rounded-md hover:bg-gray-700 transition duration-300 flex items-center">
+                            <i class="fas fa-download mr-2"></i> Download CV
+                        </a>
+                    </div>
+                </div>
+                <div class="relative delay-400 fade-in">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl opacity-20 blur-xl"></div>
+                    <div class="relative bg-gray-800/50 backdrop-blur-sm rounded-2xl p-1 border border-gray-700/50">
+                        <div class="h-64 md:h-96 w-full bg-gray-800/30 rounded-xl flex items-center justify-center overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Mahmoud-Aljaidi.jpg" 
+                                 alt="Mahmoud Aljaidi" 
+                                 class="w-full h-full object-cover object-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gradient-to-b from-gray-900/70 to-gray-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-white">About Me</h2>
+                <div class="section-divider w-24 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 rounded-xl p-6 fade-in delay-100">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold text-white">Personal Info</h3>
+                        <a href="https://github.com/FolioZone/FolioZone/blob/main/CVs/Mahmoud-Aljaidi.pdf" 
+                           download="Mahmoud-Aljaidi-CV.pdf"
+                           class="px-4 py-2 bg-gray-700 text-white text-sm rounded-md hover:bg-gray-600 transition duration-300 flex items-center">
+                            <i class="fas fa-download mr-1"></i> CV
+                        </a>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-gray-400 mt-1 mr-3"></i>
+                            <div>
+                                <span class="block text-gray-400 text-sm">Phone</span>
+                                <a href="tel:+962785228236" class="text-white hover:text-gray-300">+962 785 228 236</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-gray-400 mt-1 mr-3"></i>
+                            <div>
+                                <span class="block text-gray-400 text-sm">Email</span>
+                                <a href="mailto:Mjoidi1234@gmail.com" class="text-white hover:text-gray-300">Mjoidi1234@gmail.com</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-gray-400 mt-1 mr-3"></i>
+                            <div>
+                                <span class="block text-gray-400 text-sm">Address</span>
+                                <span class="text-white">Tabarbour, Amman, Jordan</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-birthday-cake text-gray-400 mt-1 mr-3"></i>
+                            <div>
+                                <span class="block text-gray-400 text-sm">Date of Birth</span>
+                                <span class="text-white">November 14, 2000</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-flag text-gray-400 mt-1 mr-3"></i>
+                            <div>
+                                <span class="block text-gray-400 text-sm">Nationality</span>
+                                <span class="text-white">Jordanian</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 rounded-xl p-6 md:col-span-2 fade-in delay-200">
+                    <h3 class="text-xl font-semibold text-white mb-4">Professional Summary</h3>
+                    <p class="text-gray-300 mb-6">
+                        Highly motivated Mechanical Engineering student with a strong academic background in Hydraulic Systems Engineering and Heavy Machinery. Experienced in HVAC design and Revit MEP, with a focus on practical problem-solving and technical innovation. Seeking to apply my skills and knowledge to contribute to impactful engineering projects in a dynamic organization.
+                    </p>
+                    
+                    <h3 class="text-xl font-semibold text-white mb-4 mt-8">Education</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-medium text-white">Philadelphia University - Amman, Jordan</h4>
+                            <p class="text-gray-400">Bachelor of Science in Mechanical Engineering</p>
+                            <p class="text-gray-400">Expected Graduation: 2025</p>
+                            <p class="text-gray-300 mt-2 text-sm">
+                                Relevant coursework: Thermodynamics, Fluid Mechanics, Machine Design, Materials Science, Heat Transfer
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium text-white">Diploma in Hydraulic Systems Engineering / Heavy Machinery</h4>
+                            <p class="text-gray-400">2019 – 2022</p>
+                            <p class="text-gray-300 mt-2 text-sm">
+                                Specialized training in hydraulic system design, maintenance, and operation of heavy machinery
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-white">Technical Skills</h2>
+                <div class="section-divider w-24 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6 fade-in delay-100">
+                    <div class="bg-gray-900/70 rounded-xl p-6">
+                        <h3 class="text-xl font-semibold text-white mb-4">Engineering Software</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-300">Revit MEP</span>
+                                    <span class="text-gray-400">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="skill-bar bg-white h-2 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-300">AutoCAD</span>
+                                    <span class="text-gray-400">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="skill-bar bg-white h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-300">HVAC Design</span>
+                                    <span class="text-gray-400">88%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="skill-bar bg-white h-2 rounded-full" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 rounded-xl p-6">
+                        <h3 class="text-xl font-semibold text-white mb-4">Languages</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-300">Arabic</span>
+                                    <span class="text-gray-400">100%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="skill-bar bg-white h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-300">English</span>
+                                    <span class="text-gray-400">75%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="skill-bar bg-white h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in delay-200">
+                    <div class="bg-gray-900/70 rounded-xl p-6 h-full">
+                        <h3 class="text-xl font-semibold text-white mb-4">Core Competencies</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-gray-800 p-4 rounded-lg flex items-center">
+                                <i class="fas fa-cogs text-white mr-3"></i>
+                                <span class="text-gray-300">Hydraulic Systems</span>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg flex items-center">
+                                <i class="fas fa-wind text-white mr-3"></i>
+                                <span class="text-gray-300">HVAC Design</span>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg flex items-center">
+                                <i class="fas fa-tools text-white mr-3"></i>
+                                <span class="text-gray-300">Heavy Machinery</span>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg flex items-center">
+                                <i class="fas fa-fire text-white mr-3"></i>
+                                <span class="text-gray-300">Thermodynamics</span>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg flex items-center">
+                                <i class="fas fa-tint text-white mr-3"></i>
+                                <span class="text-gray-300">Fluid Mechanics</span>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg flex items-center">
+                                <i class="fas fa-leaf text-white mr-3"></i>
+                                <span class="text-gray-300">Sustainable Engineering</span>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg flex items-center">
+                                <i class="fas fa-bolt text-white mr-3"></i>
+                                <span class="text-gray-300">Energy Efficiency</span>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg flex items-center">
+                                <i class="fas fa-project-diagram text-white mr-3"></i>
+                                <span class="text-gray-300">System Simulation</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-white mt-8 mb-4">Certifications</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <i class="fas fa-certificate text-gray-400 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">Revit MEP Course</h4>
+                                    <p class="text-gray-500 text-sm">Advanced modeling and design techniques for mechanical systems</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-certificate text-gray-400 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">HVAC Design Course</h4>
+                                    <p class="text-gray-500 text-sm">Comprehensive training in heating, ventilation, and air conditioning systems</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gradient-to-b from-gray-900/30 to-gray-900/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-white">Projects & Achievements</h2>
+                <div class="section-divider w-24 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden fade-in delay-100">
+                    <div class="h-48 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                        <i class="fas fa-wind text-5xl text-white opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">HVAC System Design</h3>
+                        <p class="text-gray-400 mb-4">
+                            Designed a small-scale HVAC system as part of coursework, optimizing energy efficiency and air flow distribution.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">HVAC</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">Energy Efficiency</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">Revit MEP</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden fade-in delay-200">
+                    <div class="h-48 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                        <i class="fas fa-tint text-5xl text-white opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">Hydraulic System Analysis</h3>
+                        <p class="text-gray-400 mb-4">
+                            Conducted a comparative analysis of hydraulic system components to improve performance and reduce maintenance costs.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">Hydraulics</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">System Optimization</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">Heavy Machinery</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden fade-in delay-300">
+                    <div class="h-48 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                        <i class="fas fa-project-diagram text-5xl text-white opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">Fluid Flow Simulation</h3>
+                        <p class="text-gray-400 mb-4">
+                            Collaborated with peers on a university project to simulate fluid flow in pipelines using engineering software.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">Fluid Mechanics</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">Simulation</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">Team Project</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center fade-in delay-400">
+                <h3 class="text-xl font-semibold text-white mb-6">Interests</h3>
+                <div class="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
+                    <div class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full flex items-center">
+                        <i class="fas fa-solar-panel mr-2 text-green-400"></i>
+                        <span>Sustainable Engineering</span>
+                    </div>
+                    <div class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full flex items-center">
+                        <i class="fas fa-recycle mr-2 text-blue-400"></i>
+                        <span>Renewable Energy</span>
+                    </div>
+                    <div class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full flex items-center">
+                        <i class="fas fa-industry mr-2 text-yellow-400"></i>
+                        <span>Industrial Efficiency</span>
+                    </div>
+                    <div class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full flex items-center">
+                        <i class="fas fa-seedling mr-2 text-green-500"></i>
+                        <span>Environmental Sustainability</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-white">Get In Touch</h2>
+                <div class="section-divider w-24 mx-auto mt-4"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto mt-6">
+                    Interested in working together or have questions about my projects? Feel free to reach out through any of the channels below.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="fade-in delay-100">
+                    <div class="bg-gray-900 rounded-xl p-8 h-full">
+                        <h3 class="text-xl font-semibold text-white mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-gray-800 p-3 rounded-full mr-4">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">Phone</h4>
+                                    <a href="tel:+962785228236" class="text-white hover:text-gray-400">+962 785 228 236</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-gray-800 p-3 rounded-full mr-4">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">Email</h4>
+                                    <a href="mailto:Mjoidi1234@gmail.com" class="text-white hover:text-gray-400">Mjoidi1234@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-gray-800 p-3 rounded-full mr-4">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">Location</h4>
+                                    <p class="text-white">Tabarbour, Amman, Jordan</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                            <h4 class="text-gray-300 font-medium mb-4">Connect with me</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://wa.me/962785228236" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition duration-300">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/mahmoud-aljaidi-a38050365/" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://www.facebook.com/share/1JJpy8jZeb/" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.instagram.com/mahmoudjoidi?igsh=MXVldnlpcTlncHl1MQ==" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="mailto:Mjoidi1234@gmail.com" class="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition duration-300">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/80 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-white font-bold text-xl">Mahmoud Aljaidi</span>
+                    <p class="text-gray-400 mt-2">Mechanical Engineer</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#home" class="text-gray-400 hover:text-white">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-white">About</a>
+                    <a href="#skills" class="text-gray-400 hover:text-white">Skills</a>
+                    <a href="#projects" class="text-gray-400 hover:text-white">Projects</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white">Contact</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    &copy; 2025 Mahmoud Aljaidi. All rights reserved.
+                </p>
+                <div class="flex items-center space-x-2">
+                    <span class="text-gray-500 text-sm">Powered by</span>
+                    <a href="https://folio-zone.com" target="_blank" class="text-white hover:text-gray-300 font-medium">FolioZone</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Animate elements when they come into view
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            fadeInObserver.observe(element);
+        });
+
+        // Animate skill bars when they come into view
+        const skillBars = document.querySelectorAll('.skill-bar');
+        
+        const skillBarObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0';
+                    setTimeout(() => {
+                        entry.target.style.width = width;
+                    }, 100);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        skillBars.forEach(bar => {
+            skillBarObserver.observe(bar);
+        });
+    </script>
+</body>
+</html>
