@@ -688,125 +688,112 @@
     </section>
 
     <!-- Request Form Section -->
-    <section id="request" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="glass-card p-8 md:p-12 rounded-2xl border border-gray-800">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="animate-on-scroll" dir="auto">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                        <span data-en="Ready for Your " data-ar="هل أنت مستعد لـ ">Ready for Your </span>
-                        <span class="gradient-text primary-gradient" data-en="Professional Portfolio?" data-ar="محفظتك المهنية؟">Professional Portfolio?</span>
-                    </h2>
-                    <p class="text-lg text-gray-400 mb-6" 
-                       data-en="Fill out this form and we'll get started on creating your perfect online presence." 
-                       data-ar="املأ هذا النموذج وسنبدأ في إنشاء وجودك المثالي على الإنترنت.">
-                        Fill out this form and we'll get started on creating your perfect online presence.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center me-4">
-                                <i class="fas fa-check text-primary"></i>
-                            </div>
-                            <p class="text-gray-300" data-en="No technical skills required" data-ar="لا حاجة لمهارات تقنية">No technical skills required</p>
+   <section id="request" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="glass-card p-8 md:p-12 rounded-2xl border border-gray-800">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="animate-on-scroll" dir="auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span data-en="Ready for Your " data-ar="هل أنت مستعد لـ ">Ready for Your </span>
+                    <span class="gradient-text primary-gradient" data-en="Professional Portfolio?" data-ar="محفظتك المهنية؟">Professional Portfolio?</span>
+                </h2>
+                <p class="text-lg text-gray-400 mb-6" 
+                   data-en="Fill out this form and we'll get started on creating your perfect online presence." 
+                   data-ar="املأ هذا النموذج وسنبدأ في إنشاء وجودك المثالي على الإنترنت.">
+                    Fill out this form and we'll get started on creating your perfect online presence.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center me-4">
+                            <i class="fas fa-check text-primary"></i>
                         </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center me-4">
-                                <i class="fas fa-check text-primary"></i>
-                            </div>
-                            <p class="text-gray-300" data-en="Quick turnaround time" data-ar="وقت تسليم سريع">Quick turnaround time</p>
+                        <p class="text-gray-300" data-en="No technical skills required" data-ar="لا حاجة لمهارات تقنية">No technical skills required</p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center me-4">
+                            <i class="fas fa-check text-primary"></i>
                         </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center me-4">
-                                <i class="fas fa-check text-primary"></i>
-                            </div>
-                            <p class="text-gray-300" data-en="Professional results" data-ar="نتائج احترافية">Professional results</p>
+                        <p class="text-gray-300" data-en="Quick turnaround time" data-ar="وقت تسليم سريع">Quick turnaround time</p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center me-4">
+                            <i class="fas fa-check text-primary"></i>
                         </div>
+                        <p class="text-gray-300" data-en="Professional results" data-ar="نتائج احترافية">Professional results</p>
                     </div>
                 </div>
-                
-                <form id="portfolioRequestForm" 
-      action="https://api.web3forms.com/submit" 
-      method="POST"
-      class="space-y-6">
-  <input type="hidden" name="access_key" value="39614f44-3bfa-4ebb-833d-f17ba6bb38cb">
-  <input type="hidden" name="subject" value="New Portfolio Request from Website">
-  <input type="hidden" name="redirect" value="https://yourdomain.com/thank-you.html">
-  <input type="hidden" name="from_name" value="FolioZone">
-  <input type="checkbox" name="botcheck" style="display: none;">
-                    <input type="hidden" name="_autoresponse" value="Thank you for your portfolio request! We'll get back to you soon.">
-                    
-                    <div>
-                        <label for="name" class="block text-sm font-medium mb-1" data-en="Full Name*" data-ar="الاسم الكامل*">Full Name*</label>
-                        <input type="text" id="name" name="name" 
-                               placeholder="John Smith" required
-                               minlength="3" maxlength="50"
-                               pattern="[A-Za-z\u0600-\u06FF\s]+"
-                               class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        <p class="text-xs text-red-500 mt-1 hidden" id="name-error">Please enter a valid name (3-50 characters)</p>
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-sm font-medium mb-1" data-en="Email Address*" data-ar="عنوان البريد الإلكتروني*">Email Address*</label>
-                        <input type="email" id="email" name="email" 
-                               placeholder="john.smith@example.com" required
-                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                               class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        <p class="text-xs text-red-500 mt-1 hidden" id="email-error">Please enter a valid email address</p>
-                    </div>
-                    
-                    <div>
-                        <label for="phone" class="block text-sm font-medium mb-1" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" 
-                               data-ph-en="+962 7********" 
-                               data-ph-ar="+962 7********"
-                               pattern="^\+?\d{8,15}$"
-                               class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent placeholder:text-right rtl:placeholder:text-left">
-                        <p class="text-xs text-red-500 mt-1 hidden" id="phone-error">Please enter a valid phone number (8-15 digits)</p>
-                    </div>
-                    
-                    <div>
-                        <label for="profession" class="block text-sm font-medium mb-1" data-en="Profession*" data-ar="المهنة*">Profession*</label>
-                        <input type="text" id="profession" name="profession"
-                               placeholder="Software Engineer" required
-                               minlength="3" maxlength="50"
-                               class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        <p class="text-xs text-red-500 mt-1 hidden" id="profession-error">Please enter your profession (3-50 characters)</p>
-                    </div>
-                    
-                    <div>
-                        <label for="package" class="block text-sm font-medium mb-1" data-en="Package*" data-ar="الباقة*">Package*</label>
-                        <select id="package" name="package" required 
-                                class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                            <option value="">Select a package</option>
-                            <option value="starter">Starter (5 JOD)</option>
-                            <option value="basic">Basic (10 JOD)</option>
-                            <option value="premium">Premium (20 JOD)</option>
-                        </select>
-                        <p class="text-xs text-red-500 mt-1 hidden" id="package-error">Please select a package</p>
-                    </div>
-                    
-                    <div>
-                        <label for="message" class="block text-sm font-medium mb-1" data-en="Message (or paste CV content)" data-ar="معلومات اضافية (أو لصق محتوى السيرة الذاتية)">Extra Information (or paste CV content)</label>
-                        <textarea id="message" name="message" rows="4" 
-                                  maxlength="1000"
-                                  class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
-                        <p class="text-xs text-gray-500 mt-1" id="message-counter">0/1000 characters</p>
-                    </div>
-                    
-                    <div>
-                        <label for="cv" class="block text-sm font-medium mb-1" data-en="Upload CV (optional)" data-ar="تحميل السيرة الذاتية (اختياري)">Upload CV (optional)</label>
-                        <input type="file" id="cv" name="attachment" 
-                               accept=".pdf,.doc,.docx,.txt"
-                               class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        <p class="text-xs text-red-500 mt-1 hidden" id="cv-error">File must be PDF, DOC, DOCX or TXT (max 5MB)</p>
-                    </div>
-                    
-                    <button type="submit" id="submit-btn" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-md font-medium transition duration-300 flex items-center justify-center">
-                        <span data-en="Request Portfolio" data-ar="طلب المحفظة">Request Portfolio</span>
-                    </button>
-                </form>
             </div>
+            
+            <form id="portfolioRequestForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-6" enctype="multipart/form-data">
+                <!-- Web3Forms Configuration -->
+                <input type="hidden" name="access_key" value="39614f44-3bfa-4ebb-833d-f17ba6bb38cb">
+                <input type="hidden" name="subject" value="New Portfolio Request from FolioZone">
+                <input type="hidden" name="redirect" value="https://folio-zone.com">
+                <input type="hidden" name="from_name" value="FolioZone">
+                <input type="checkbox" name="botcheck" style="display: none;">
+                
+                <div>
+                    <label for="name" class="block text-sm font-medium mb-1" data-en="Full Name*" data-ar="الاسم الكامل*">Full Name*</label>
+                    <input type="text" id="name" name="name" 
+                           placeholder="John Smith" required
+                           minlength="3" maxlength="50"
+                           class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <p class="text-xs text-red-500 mt-1 hidden" id="name-error">Please enter a valid name (3-50 characters)</p>
+                </div>
+                
+                <div>
+                    <label for="email" class="block text-sm font-medium mb-1" data-en="Email Address*" data-ar="عنوان البريد الإلكتروني*">Email Address*</label>
+                    <input type="email" id="email" name="email" 
+                           placeholder="john.smith@example.com" required
+                           class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <p class="text-xs text-red-500 mt-1 hidden" id="email-error">Please enter a valid email address</p>
+                </div>
+                
+                <div>
+                    <label for="phone" class="block text-sm font-medium mb-1" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" 
+                           data-ph-en="+962 7********" 
+                           data-ph-ar="+962 7********"
+                           class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent placeholder:text-gray-500 placeholder:rtl:text-right placeholder:ltr:text-left"
+                           placeholder="+962 7********">
+                    <p class="text-xs text-red-500 mt-1 hidden" id="phone-error">Please enter a valid phone number (8-15 digits)</p>
+                </div>
+                
+                <div>
+                    <label for="profession" class="block text-sm font-medium mb-1" data-en="Profession*" data-ar="المهنة*">Profession*</label>
+                    <input type="text" id="profession" name="profession"
+                           placeholder="Software Engineer" required
+                           minlength="3" maxlength="50"
+                           class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <p class="text-xs text-red-500 mt-1 hidden" id="profession-error">Please enter your profession (3-50 characters)</p>
+                </div>
+                
+                <div>
+                    <label for="package" class="block text-sm font-medium mb-1" data-en="Package*" data-ar="الباقة*">Package*</label>
+                    <select id="package" name="package" required 
+                            class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="">Select a package</option>
+                        <option value="starter">Starter (5 JOD)</option>
+                        <option value="basic">Basic (10 JOD)</option>
+                        <option value="premium">Premium (20 JOD)</option>
+                    </select>
+                    <p class="text-xs text-red-500 mt-1 hidden" id="package-error">Please select a package</p>
+                </div>
+                
+                <div>
+                    <label for="message" class="block text-sm font-medium mb-1" data-en="Message (or paste CV content)" data-ar="معلومات اضافية (أو لصق محتوى السيرة الذاتية)">Extra Information (or paste CV content)</label>
+                    <textarea id="message" name="message" rows="4" 
+                              maxlength="1000"
+                              class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                    <p class="text-xs text-gray-500 mt-1" id="message-counter">0/1000 characters</p>
+                </div>
+                                              
+                <button type="submit" id="submit-btn" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-md font-medium transition duration-300 flex items-center justify-center">
+                    <span data-en="Request Portfolio" data-ar="طلب المحفظة">Request Portfolio</span>
+                </button>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- FAQ Section -->
     <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -1063,6 +1050,85 @@
     <button id="back-to-top" class="back-to-top fixed bottom-8 end-8 w-12 h-12 rounded-full bg-primary hover:bg-primary/90 text-white flex items-center justify-center shadow-lg transition-all duration-300 z-40">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+<script>
+
+  (function () {
+  "use strict";
+  /*
+   * Form Validation
+   */
+
+  // Fetch all the forms we want to apply custom validation styles to
+  const forms = document.querySelectorAll(".needs-validation");
+  const result = document.getElementById("result");
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach(function (form) {
+    form.addEventListener(
+      "submit",
+      function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          form.querySelectorAll(":invalid")[0].focus();
+        } else {
+          /*
+           * Form Submission using fetch()
+           */
+
+          const formData = new FormData(form);
+          event.preventDefault();
+          event.stopPropagation();
+          const object = {};
+          formData.forEach((value, key) => {
+            object[key] = value;
+          });
+          const json = JSON.stringify(object);
+          result.innerHTML = "Please wait...";
+
+          fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json"
+            },
+            body: json
+          })
+            .then(async (response) => {
+              let json = await response.json();
+              if (response.status == 200) {
+                result.innerHTML = json.message;
+                result.classList.remove("text-gray-500");
+                result.classList.add("text-green-500");
+              } else {
+                console.log(response);
+                result.innerHTML = json.message;
+                result.classList.remove("text-gray-500");
+                result.classList.add("text-red-500");
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+              result.innerHTML = "Something went wrong!";
+            })
+            .then(function () {
+              form.reset();
+              form.classList.remove("was-validated");
+              setTimeout(() => {
+                result.style.display = "none";
+              }, 5000);
+            });
+        }
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
+})();
+
+
+  </script>
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
