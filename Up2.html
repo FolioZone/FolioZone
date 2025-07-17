@@ -628,6 +628,7 @@
                     <div class="flex items-end">
                         <span class="text-4xl font-bold">5</span>
                         <span class="text-lg text-gray-400 ms-1" data-en="JOD" data-ar="دينار">JOD</span>
+                        <span class="text-sm text-gray-500 ms-2 line-through" data-en="10 JOD" data-ar="10 دينار">10 JOD</span>
                     </div>
                     <p class="text-sm text-gray-400" data-en="One-time fee" data-ar="دفعة لمرة واحدة">One-time fee</p>
                 </div>
@@ -649,6 +650,7 @@
                     <div class="flex items-end">
                         <span class="text-4xl font-bold">10</span>
                         <span class="text-lg text-gray-400 ms-1" data-en="JOD" data-ar="دينار">JOD</span>
+                        <span class="text-sm text-gray-500 ms-2 line-through" data-en="20 JOD" data-ar="20 دينار">20 JOD</span>
                     </div>
                     <p class="text-sm text-gray-400" data-en="One-time fee" data-ar="دفعة لمرة واحدة">One-time fee</p>
                 </div>
@@ -669,6 +671,7 @@
                     <div class="flex items-end">
                         <span class="text-4xl font-bold">20</span>
                         <span class="text-lg text-gray-400 ms-1" data-en="JOD" data-ar="دينار">JOD</span>
+                        <span class="text-sm text-gray-500 ms-2 line-through" data-en="35 JOD" data-ar="35 دينار">35 JOD</span>
                     </div>
                     <p class="text-sm text-gray-400" data-en="One-time fee" data-ar="دفعة لمرة واحدة">One-time fee</p>
                 </div>
@@ -720,12 +723,15 @@
                     </div>
                 </div>
                 
-                <form id="portfolioRequestForm" action="https://formsubmit.co/6933008f85e678744c8d6bdd65642e01" method="POST" class="space-y-6" enctype="multipart/form-data">
-                    <!-- FormSubmit configuration -->
-                    <input type="hidden" name="_subject" value="New Portfolio Request from Website">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html"> <!-- Replace with your actual thank you page -->
+                <form id="portfolioRequestForm" 
+      action="https://api.web3forms.com/submit" 
+      method="POST"
+      class="space-y-6">
+  <input type="hidden" name="access_key" value="39614f44-3bfa-4ebb-833d-f17ba6bb38cb">
+  <input type="hidden" name="subject" value="New Portfolio Request from Website">
+  <input type="hidden" name="redirect" value="https://yourdomain.com/thank-you.html">
+  <input type="hidden" name="from_name" value="FolioZone">
+  <input type="checkbox" name="botcheck" style="display: none;">
                     <input type="hidden" name="_autoresponse" value="Thank you for your portfolio request! We'll get back to you soon.">
                     
                     <div>
@@ -997,6 +1003,9 @@
                         <a href="https://www.instagram.com/foliozone" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-400 hover:text-primary transition duration-300 text-xl">
                             <i class="fab fa-instagram"></i>
                         </a>
+                        <a href="https://www.facebook.com/profile.php?id=61577734149115" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-gray-400 hover:text-primary transition duration-300 text-xl">
+                            <i class="fab fa-facebook"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -1165,58 +1174,78 @@
             const submitBtn = document.getElementById('submit-btn');
             
             if (form && submitBtn) {
-                form.addEventListener('submit', function(e) {
-                    // Validate form first
-                    if (!validateForm()) {
-                        e.preventDefault();
-                        return;
-                    }
-                    
-                    // Show loading state
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<span data-en="Sending..." data-ar="جاري الإرسال...">Sending...</span> <i class="fas fa-spinner fa-spin ml-2"></i>';
-                    
-                    // Create FormData object
-                    const formData = new FormData(form);
-                    
-                    // Submit form via fetch API
-                    fetch(form.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            return response.json();
-                        }
-                        throw new Error('Network response was not ok');
-                    })
-                    .then(data => {
-                        showNotification(
-                            'fas fa-check-circle text-green-500',
-                            'Success!',
-                            'Your request has been submitted successfully! We will contact you soon.',
-                            true
-                        );
-                        form.reset();
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        showNotification(
-                            'fas fa-times-circle text-red-500',
-                            'Error!',
-                            'There was an error submitting your request. Please try again later or contact us directly.',
-                            false
-                        );
-                    })
-                    .finally(() => {
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = '<span data-en="Request Portfolio" data-ar="طلب المحفظة">Request Portfolio</span>';
-                    });
-                });
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        if (!validateForm()) {
+            return;
+        }
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = document.body.classList.contains('arabic') ? 
+            '<span>جاري الإرسال...</span> <i class="fas fa-spinner fa-spin ml-2"></i>' : 
+            '<span>Sending...</span> <i class="fas fa-spinner fa-spin ml-2"></i>';
+        
+        try {
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showNotification(
+                    'fas fa-check-circle text-green-500',
+                    document.body.classList.contains('arabic') ? 'تم الإرسال بنجاح!' : 'Success!',
+                    document.body.classList.contains('arabic') ? 
+                        'تم استلام طلبك بنجاح! سنتواصل معك قريبًا.' : 
+                        'Your request has been submitted successfully! We will contact you soon.',
+                    true
+                );
+                form.reset();
+            } else {
+                throw new Error(result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showNotification(
+                'fas fa-times-circle text-red-500',
+                document.body.classList.contains('arabic') ? 'خطأ!' : 'Error!',
+                document.body.classList.contains('arabic') ? 
+                    'حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى أو الاتصال بنا مباشرة.' : 
+                    'There was an error submitting your request. Please try again later or contact us directly.',
+                false
+            );
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    });
                 
+                function showNotification(iconClass, title, message, isSuccess) {
+    const notification = document.getElementById('form-notification');
+    const icon = document.getElementById('notification-icon');
+    const notificationTitle = document.getElementById('notification-title');
+    const notificationMessage = document.getElementById('notification-message');
+    
+    // Set notification content
+    icon.className = iconClass;
+    notificationTitle.textContent = title;
+    notificationMessage.textContent = message;
+    
+    // Show notification
+    notification.classList.remove('hidden');
+    
+    // Auto-hide after 5 seconds if success
+    if (isSuccess) {
+        setTimeout(hideNotification, 5000);
+    }
+}
+
                 // Form validation function
                 function validateForm() {
                     let isValid = true;
