@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+  <style>
+    @media (max-width: 767px) {
+    nav {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdullah Akkawy - Professional Driver</title>
@@ -42,9 +50,9 @@
     
    <!-- Navigation -->
 <nav class="fixed top-0 w-full bg-charcoal/90 backdrop-blur-md border-b border-slate z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
-            <div class="text-xl font-bold">
+            <div class="flex-shrink-0 text-xl font-bold">
                 <span class="text-gold">Abdullah</span> <span class="text-electric">Akkawy</span>
             </div>
             
@@ -57,12 +65,12 @@
                 <a href="#contact" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Contact</a>
             </div>
             
-            <div class="flex items-center gap-2 rtl:space-x-reverse rtl:space-x-0 ltr:space-x-4">
-                <button id="langToggle" class="bg-electric text-charcoal px-4 py-2 rounded-lg font-semibold hover:bg-gold transition-all duration-300 transform hover:scale-105">
+            <div class="flex items-center space-x-2">
+                <button id="langToggle" class="bg-electric text-charcoal px-3 py-1 md:px-4 md:py-2 rounded-lg font-semibold hover:bg-gold transition-all duration-300 transform hover:scale-105">
                     <span id="langBtnText">ع</span>
                 </button>
                 
-                <button id="mobileMenuBtn" class="md:hidden text-smoke">
+                <button id="mobileMenuBtn" class="md:hidden text-smoke ml-2">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
@@ -778,5 +786,7 @@
         
         sections.forEach(section => observer.observe(section));
     </script>
+
+    
 </body>
 </html>
