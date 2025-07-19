@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah Akkawy - Professional Driver</title>
+    <meta name="description" content="Premium Uber & delivery driver in Amman, Jordan. Airport transfers, city tours, and tourist services.">
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'charcoal': '#121212',
+                        'gunmetal': '#1E1E1E',
+                        'electric': '#3FA9F5',
+                        'gold': '#FFB829',
+                        'smoke': '#F5F5F5',
+                        'cool-gray': '#B0B0B0',
+                        'slate': '#2E2E2E'
+                    },
+                    fontFamily: {
+                        'arabic': ['Noto Sans Arabic', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-charcoal text-smoke font-['Inter'] transition-all duration-300">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-charcoal/90 backdrop-blur-md border-b border-slate z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="text-xl font-bold">
+                    <span class="text-gold">Abdullah</span> <span class="text-electric">Akkawy</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="nav-link text-smoke hover:text-electric transition-colors duration-300">About</a>
+                    <a href="#services" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Services</a>
+                    <a href="#vehicle" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Vehicle</a>
+                    <a href="#pricing" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Pricing</a>
+                    <a href="#testimonials" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Reviews</a>
+                    <a href="#contact" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Contact</a>
+                </div>
+                
+                <div class="flex items-center gap-4 rtl:space-x-reverse rtl:space-x-0 ltr:space-x-4">
+                    <button id="langToggle" class="bg-electric text-charcoal px-4 py-2 rounded-lg font-semibold hover:bg-gold transition-all duration-300 transform hover:scale-105">
+                        <span id="langBtnText">ع</span>
+                    </button>
+                    
+                    <button id="mobileMenuBtn" class="md:hidden text-smoke">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-gunmetal border-t border-slate">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#about" class="block py-2 text-smoke hover:text-electric transition-colors">About</a>
+                <a href="#services" class="block py-2 text-smoke hover:text-electric transition-colors">Services</a>
+                <a href="#vehicle" class="block py-2 text-smoke hover:text-electric transition-colors">Vehicle</a>
+                <a href="#pricing" class="block py-2 text-smoke hover:text-electric transition-colors">Pricing</a>
+                <a href="#testimonials" class="block py-2 text-smoke hover:text-electric transition-colors">Reviews</a>
+                <a href="#contact" class="block py-2 text-smoke hover:text-electric transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-16 bg-cover bg-center" style="background-image: linear-gradient(rgba(18, 18, 18, 0.8), rgba(30, 30, 30, 0.8)), url('https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Abdullah-Akawy/0.jpeg')">
+        <div class="max-w-4xl mx-auto px-4 text-center" data-aos="fade-up">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <span id="heroTitle">Professional Uber & Delivery Driver</span>
+                <br>            
+                <br>                 
+                <span class="text-electric">Abdullah Akkawy</span>
+            </h1>
+            <p id="heroSubtitle" class="text-xl text-cool-gray mb-8">Premium transportation services in Amman, Jordan</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="bg-electric text-charcoal px-8 py-3 rounded-lg font-semibold hover:bg-gold transition-all duration-300 transform hover:scale-105">
+                    <span id="ctaBook">Book Now</span>
+                </a>
+                <a href="#services" class="border border-electric text-electric px-8 py-3 rounded-lg font-semibold hover:bg-electric hover:text-charcoal transition-all duration-300">
+                    <span id="ctaExplore">Explore Services</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gunmetal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Abdullah-Akawy/2.jpeg" 
+                         alt="Abdullah Akkawy" 
+                         class="rounded-xl shadow-2xl w-full">
+                </div>
+                
+                <div data-aos="fade-left">
+                    <h2 id="aboutTitle" class="text-3xl md:text-4xl font-bold mb-6">
+                        <span class="text-electric">About</span> Abdallah
+                    </h2>
+                    <p id="aboutText" class="text-cool-gray leading-relaxed mb-4">
+                        Abdullah Ibrahim Akkawy is a 27-year-old full-time Uber & delivery driver with over 8 years of professional driving experience. He is specialized in airport transfers, covering both arrivals and departures, and is actively involved in tourism-focused rides to Jordan's key tourist and historical sites.
+                    </p>
+                    <p id="aboutText2" class="text-cool-gray leading-relaxed">
+                        Fluent in Arabic and conversational in English, Abdullah is known for his friendly attitude, clean car, punctuality, and dedication to providing a premium rider experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+<section id="services" class="py-20 bg-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <h2 id="servicesTitle" class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="text-electric">Services</span> Offered
+            </h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Uber Rides -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-car text-electric text-3xl mb-4"></i>
+                <h3 id="service1" class="text-xl font-semibold mb-2">Uber Rides</h3>
+                <p id="service1Desc" class="text-cool-gray">Premium ride-hailing services in Amman</p>
+            </div>
+            
+            <!-- Item Delivery -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-box text-electric text-3xl mb-4"></i>
+                <h3 id="service2" class="text-xl font-semibold mb-2">Item Delivery</h3>
+                <p id="service2Desc" class="text-cool-gray">Fast and secure delivery services</p>
+            </div>
+            
+            <!-- Airport Transfers -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-plane text-electric text-3xl mb-4"></i>
+                <h3 id="service3" class="text-xl font-semibold mb-2">Airport Transfers</h3>
+                <p id="service3Desc" class="text-cool-gray">Arrivals & departures at Queen Alia Airport</p>
+            </div>
+            
+            <!-- Vacation Transfers -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-suitcase text-electric text-3xl mb-4"></i>
+                <h3 id="service4" class="text-xl font-semibold mb-2">Vacation Transfers</h3>
+                <p id="service4Desc" class="text-cool-gray">Reliable transportation for your vacation needs</p>
+            </div>
+            
+            <!-- Tourism & Heritage -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="500">
+                <i class="fas fa-mosque text-electric text-3xl mb-4"></i>
+                <h3 id="service5" class="text-xl font-semibold mb-2">Tourism & Heritage Rides</h3>
+                <p id="service5Desc" class="text-cool-gray">Explore Jordan's historical sites with an expert</p>
+            </div>
+            
+            <!-- City Tours -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="600">
+                <i class="fas fa-map-marked-alt text-electric text-3xl mb-4"></i>
+                <h3 id="service6" class="text-xl font-semibold mb-2">Personalized City Tours</h3>
+                <p id="service6Desc" class="text-cool-gray">Custom tours based on your interests</p>
+            </div>
+            
+            <!-- Business Travel -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="700">
+                <i class="fas fa-briefcase text-electric text-3xl mb-4"></i>
+                <h3 id="service7" class="text-xl font-semibold mb-2">Business Travel</h3>
+                <p id="service7Desc" class="text-cool-gray">Professional transportation for corporate clients</p>
+            </div>
+            
+            <!-- Medical Transport -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="800">
+                <i class="fas fa-ambulance text-electric text-3xl mb-4"></i>
+                <h3 id="service8" class="text-xl font-semibold mb-2">Medical Transport</h3>
+                <p id="service8Desc" class="text-cool-gray">Safe transportation for medical appointments</p>
+            </div>
+            
+            <!-- Wedding Services -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="900">
+<i class="fas fa-ring text-electric text-3xl mb-4"></i>                <h3 id="service9" class="text-xl font-semibold mb-2">Wedding Services</h3>
+                <p id="service9Desc" class="text-cool-gray">Elegant transportation for special occasions</p>
+            </div>
+            
+            <!-- Night Rides -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="1000">
+                <i class="fas fa-moon text-electric text-3xl mb-4"></i>
+                <h3 id="service10" class="text-xl font-semibold mb-2">Night Rides</h3>
+                <p id="service10Desc" class="text-cool-gray">Safe late-night transportation</p>
+            </div>
+            
+            <!-- Student Transport -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="1100">
+                <i class="fas fa-school text-electric text-3xl mb-4"></i>
+                <h3 id="service11" class="text-xl font-semibold mb-2">Student Transport</h3>
+                <p id="service11Desc" class="text-cool-gray">Reliable rides for university students</p>
+            </div>
+            
+            <!-- VIP Services -->
+            <div class="bg-gunmetal p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="1200">
+                <i class="fas fa-crown text-electric text-3xl mb-4"></i>
+                <h3 id="service12" class="text-xl font-semibold mb-2">VIP Services</h3>
+                <p id="service12Desc" class="text-cool-gray">Premium transportation with extra amenities</p>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <!-- Vehicle Section -->
+    <section id="vehicle" class="py-20 bg-gunmetal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 id="vehicleTitle" class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="text-electric">Vehicle</span> Details
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" class="grid grid-cols-2 gap-4">
+                    <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Abdullah-Akawy/3.jpeg" 
+                         alt="Volkswagen ID.4 Front" 
+                         class="rounded-xl shadow-2xl w-full h-full object-cover">
+                    <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Abdullah-Akawy/4.jpeg" 
+                         alt="Volkswagen ID.4 Interior" 
+                         class="rounded-xl shadow-2xl w-full h-full object-cover">
+                    <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Abdullah-Akawy/5.jpeg" 
+                         alt="Volkswagen ID.4 Side" 
+                         class="rounded-xl shadow-2xl w-full h-full object-cover">
+                    <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Abdullah-Akawy/1.jpeg" 
+                         alt="Volkswagen ID.4 Back" 
+                         class="rounded-xl shadow-2xl w-full h-full object-cover">
+                </div>
+                
+                <div data-aos="fade-left">
+                    <h3 id="carModel" class="text-2xl font-bold mb-4 text-electric">Volkswagen ID.4 (2022)</h3>
+                    <p id="carDesc" class="text-cool-gray mb-6">
+                        A modern, quiet, and eco-friendly SUV offering a smooth ride, a spacious trunk, and comfortable premium seating. Cleaned and sanitized daily for a safe, professional experience.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-charcoal p-4 rounded-lg">
+                            <i class="fas fa-palette text-gold mb-2"></i>
+                            <p id="carColor"><strong>Color:</strong> Navy Blue</p>
+                        </div>
+                        <div class="bg-charcoal p-4 rounded-lg">
+                            <i class="fas fa-leaf text-gold mb-2"></i>
+                            <p id="carType"><strong>Type:</strong> Fully Electric</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-charcoal p-4 rounded-lg text-center" data-aos="fade-up">
+                    <i class="fas fa-wifi text-electric text-2xl mb-2"></i>
+                    <p id="feature1">Wi-Fi Hotspot</p>
+                </div>
+                <div class="bg-charcoal p-4 rounded-lg text-center" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-charging-station text-electric text-2xl mb-2"></i>
+                    <p id="feature2">USB + Type-C Charging</p>
+                </div>
+                <div class="bg-charcoal p-4 rounded-lg text-center" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-shield-virus text-electric text-2xl mb-2"></i>
+                    <p id="feature3">Sanitized Daily</p>
+                </div>
+                <div class="bg-charcoal p-4 rounded-lg text-center" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-music text-electric text-2xl mb-2"></i>
+                    <p id="feature4">Bluetooth / AUX</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+   <section id="pricing" class="py-20 bg-charcoal">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <h2 id="pricingTitle" class="text-3xl md:text-4xl font-bold mb-4">
+        <span class="text-electric">Pricing</span> Guide
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up">
+        <h3 id="price1Title" class="text-lg font-semibold mb-2">Airport Pickup</h3>
+        <p id="price1Value" class="text-2xl text-gold">25 JOD</p>
+        <p id="price1Desc" class="text-cool-gray text-sm">Includes meet & greet at arrivals, luggage assistance, and direct transfer to your destination in Amman</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+        <h3 id="price2Title" class="text-lg font-semibold mb-2">Airport Drop-off</h3>
+        <p id="price2Value" class="text-2xl text-gold">20 JOD</p>
+        <p id="price2Desc" class="text-cool-gray text-sm">Timely pickup from your location with flight monitoring to ensure on-time arrival</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+        <h3 id="price3Title" class="text-lg font-semibold mb-2">Amman Hourly</h3>
+        <p id="price3Value" class="text-2xl text-gold">5 JOD/hour</p>
+        <p id="price3Desc" class="text-cool-gray text-sm">Minimum 2 hours. Perfect for business meetings, shopping trips, or city exploration</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up">
+        <h3 id="price4Title" class="text-lg font-semibold mb-2">Jerash</h3>
+        <p id="price4Value" class="text-2xl text-gold">35 JOD</p>
+        <p id="price4Desc" class="text-cool-gray text-sm">Round trip from Amman with 3 hours at site (additional hours at 5 JOD/hour)</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+        <h3 id="price5Title" class="text-lg font-semibold mb-2">Ajloun</h3>
+        <p id="price5Value" class="text-2xl text-gold">45 JOD</p>
+        <p id="price5Desc" class="text-cool-gray text-sm">Includes visit to Ajloun Castle with scenic route through olive groves</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+        <h3 id="price6Title" class="text-lg font-semibold mb-2">Dead Sea</h3>
+        <p id="price6Value" class="text-2xl text-gold">45 JOD</p>
+        <p id="price6Desc" class="text-cool-gray text-sm">Full day trip (8 hours) including beach access recommendations</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up">
+        <h3 id="price7Title" class="text-lg font-semibold mb-2">Umm Qais</h3>
+        <p id="price7Value" class="text-2xl text-gold">60 JOD</p>
+        <p id="price7Desc" class="text-cool-gray text-sm">Full day tour with stops at Gadara ruins and panoramic Sea of Galilee views</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+        <h3 id="price8Title" class="text-lg font-semibold mb-2">Ma'in</h3>
+        <p id="price8Value" class="text-2xl text-gold">60 JOD</p>
+        <p id="price8Desc" class="text-cool-gray text-sm">Hot springs visit with 4 hours at resort (entry fees not included)</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+        <h3 id="price9Title" class="text-lg font-semibold mb-2">Madaba & Mount Nebo</h3>
+        <p id="price9Value" class="text-2xl text-gold">25 JOD</p>
+        <p id="price9Desc" class="text-cool-gray text-sm">Half-day tour including St. George's Church and Moses' Memorial</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up">
+        <h3 id="price10Title" class="text-lg font-semibold mb-2">Petra</h3>
+        <p id="price10Value" class="text-2xl text-gold">90 JOD</p>
+        <p id="price10Desc" class="text-cool-gray text-sm">One-way transfer (3hrs). Overnight packages available upon request</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+        <h3 id="price11Title" class="text-lg font-semibold mb-2">Wadi Rum</h3>
+        <p id="price11Value" class="text-2xl text-gold">90 JOD</p>
+        <p id="price11Desc" class="text-cool-gray text-sm">Direct transfer to visitor center (4hrs). Can combine with Petra trip</p>
+      </div>
+
+      <div class="bg-gunmetal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+        <h3 id="price12Title" class="text-lg font-semibold mb-2">Aqaba</h3>
+        <p id="price12Value" class="text-2xl text-gold">95 JOD</p>
+        <p id="price12Desc" class="text-cool-gray text-sm">One-way transfer (4hrs). Special rates for multi-day stays</p>
+        <small id="priceNote" class="text-cool-gray">(negotiable if overnight)</small>
+      </div>
+    </div>
+  </div>
+</section>
+    
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gunmetal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 id="testimonialsTitle" class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="text-electric">Customer</span> Reviews
+                </h2>
+                <p id="testimonialsSubtitle" class="text-cool-gray">⭐ 5-Star Rating</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-charcoal p-6 rounded-xl" data-aos="fade-up">
+                    <div class="text-gold mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-cool-gray mb-4" id="review1">"Abdullah is the most professional driver I've ever met. Clean car, smooth ride, and always on time!"</p>
+                    <p class="text-electric font-semibold">– Rami S.</p>
+                </div>
+                
+                <div class="bg-charcoal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-gold mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-cool-gray mb-4" id="review2">"I booked a city tour with Abdullah and ended up learning so much about Amman! Highly recommend."</p>
+                    <p class="text-electric font-semibold">– Sarah M.</p>
+                </div>
+                
+                <div class="bg-charcoal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-gold mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-cool-gray mb-4" id="review3">"The car was spotless and he even had Wi-Fi and a charger ready. Great service!"</p>
+                    <p class="text-electric font-semibold">– Lina A.</p>
+                </div>
+                
+                <div class="bg-charcoal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-gold mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-cool-gray mb-4" id="review4">"Very respectful and kind. Helped me with my luggage and drove safely all the way to the airport."</p>
+                    <p class="text-electric font-semibold">– Omar K.</p>
+                </div>
+                
+                <div class="bg-charcoal p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-gold mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-cool-gray mb-4" id="review5">"Loved the vibes, the sound system, and how friendly Abdullah is. Will ride again for sure!"</p>
+                    <p class="text-electric font-semibold">– Haneen T.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-charcoal">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div data-aos="fade-up">
+                <h2 id="contactTitle" class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="text-electric">Get in</span> Touch
+                </h2>
+                <p id="contactSubtitle" class="text-cool-gray mb-8">Available daily from 7:00 AM – 11:00 PM</p>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <a href="https://wa.me/962791894553" target="_blank" rel="noopener noreferrer" class="bg-gunmetal p-6 rounded-xl hover:bg-electric hover:text-charcoal transition-all duration-300">
+    <i class="fab fa-whatsapp text-3xl mb-2"></i>
+    <p id="contactWhatsapp">WhatsApp</p>
+    <p class="font-bold">+962 7 9189 4553</p>
+</a>
+                    
+                    <a href="https://instagram.com/abdullah_akawy" target="_blank" class="bg-gunmetal p-6 rounded-xl hover:bg-electric hover:text-charcoal transition-all duration-300">
+                        <i class="fab fa-instagram text-3xl mb-2"></i>
+                        <p id="contactInstagram">Instagram</p>
+                        <p class="font-bold">@abdullah_akawy</p>
+                    </a>
+                    
+                    <a href="https://facebook.com/AboodAkawy" target="_blank" class="bg-gunmetal p-6 rounded-xl hover:bg-electric hover:text-charcoal transition-all duration-300">
+                        <i class="fab fa-facebook text-3xl mb-2"></i>
+                        <p id="contactFacebook">Facebook</p>
+                        <p class="font-bold">Abood Akawy</p>
+                    </a>
+
+                    <a href="tel:+962791894553" class="bg-gunmetal p-6 rounded-xl hover:bg-electric hover:text-charcoal transition-all duration-300">
+    <i class="fas fa-phone-alt text-3xl mb-2"></i>
+    <p id="contactPhone">Phone Call</p>
+    <p class="font-bold">+962 7 9189 4553</p>
+</a>
+                </div>
+                
+               <div class="mt-8" dir="{{LANG_DIRECTION}}">
+  <p id="paymentTitle" class="text-xl font-semibold mb-4 text-center">
+    Payment Methods
+  </p>
+  <div class="flex justify-center space-x-8 rtl:space-x-reverse">
+    <span id="paymentCash" class="text-cool-gray">💵 Cash</span>
+    <span id="paymentZain" class="text-cool-gray">📱 Zain Cash</span>
+    <span id="paymentCliq" class="text-cool-gray">💳 CliQ</span>
+  </div>
+</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gunmetal py-6 text-center">
+        <p class="text-cool-gray">
+            Powered by <a href="https://www.folio-zone.com" class="text-electric hover:text-gold transition-colors">FolioZone</a>
+        </p>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // Language toggle
+        const translations = {
+            en: {
+                heroTitle: 'Professional Uber & Delivery Driver',
+                heroSubtitle: 'Premium transportation services in Amman, Jordan',
+                ctaBook: 'Book Now',
+                ctaExplore: 'Explore Services',
+                aboutTitle: 'About Abdullah',
+                aboutText: 'Abdullah Ibrahim Akkawy is a 27-year-old full-time Uber & delivery driver with over 8 years of professional driving experience. He is specialized in airport transfers, covering both arrivals and departures, and is actively involved in tourism-focused rides to Jordan\'s key tourist and historical sites.',
+                aboutText2: 'Fluent in Arabic and conversational in English, Abdullah is known for his friendly attitude, clean car, punctuality, and dedication to providing a premium rider experience.',
+                servicesTitle: 'Services Offered',
+                service1: 'Uber Rides',
+                service2: 'Item Delivery',
+                service3: 'Airport Transfers',
+                service4: 'Vacation Transfers',
+                service5: 'Tourism & Heritage Rides',
+                service6: 'Personalized City Tours',
+                vehicleTitle: 'Vehicle Details',
+                carModel: 'Volkswagen ID.4 (2022)',
+                carDesc: 'A modern, quiet, and eco-friendly SUV offering a smooth ride, a spacious trunk, and comfortable premium seating. Cleaned and sanitized daily for a safe, professional experience.',
+                carColor: 'Color: Navy Blue',
+                carType: 'Type: Fully Electric',
+                feature1: 'Wi-Fi Hotspot',
+                feature2: 'USB + Type-C Charging',
+                feature3: 'Sanitized Daily',
+                feature4: 'Bluetooth / AUX',
+                pricingTitle: 'Pricing Guide',
+                price1Title: 'الاستلام من المطار',
+                price1Desc: 'يشمل الاستقبال في الوصول، المساعدة في الأمتعة، والنقل المباشر إلى وجهتك في عمان',
+                price2Title: 'التوصيل للمطار',
+                price2Desc: 'استلام في الوقت المحدد من موقعك مع مراقبة الرحلة لضمان الوصول في الوقت المناسب',
+                price3Title: 'ساعة في عمان',
+                price3Desc: 'حد أدنى ساعتين. مثالي لاجتماعات العمل، رحلات التسوق، أو استكشاف المدينة',
+                price4Title: 'جرش',
+                price4Desc: 'رحلة ذهاب وعودة من عمان مع 3 ساعات في الموقع (ساعات إضافية بسعر 5 دينار/ساعة)',
+                price5Title: 'عجلون',
+                price5Desc: 'يشمل زيارة قلعة عجلون مع طريق خلاب عبر بساتين الزيتون',
+                price6Title: 'البحر الميت',
+                price6Desc: 'رحلة يوم كامل (8 ساعات) تشمل توصيات لدخول الشاطئ',
+                price7Title: 'أم قيس',
+                price7Desc: 'جولة يوم كامل مع توقف عند أطلال جدارا ومناظر بانورامية لبحر الجليل',
+                price8Title: 'معين',
+                price8Desc: 'زيارة الينابيع الساخنة مع 4 ساعات في المنتجع (لا تشمل رسوم الدخول)',
+                price9Title: 'مادابا وجبل نيبو',
+                price9Desc: 'جولة نصف يوم تشمل كنيسة القديس جورج ونصب موسى التذكاري',
+                price10Title: 'البتراء',
+                price10Desc: 'نقل ذهاب (3 ساعات). عروض ليلة متاحة عند الطلب',
+                price11Title: 'وادي رم',
+                price11Desc: 'نقل مباشر إلى مركز الزوار (4 ساعات). يمكن دمجه مع رحلة البتراء',
+                price12Title: 'العقبة',
+                price12Desc: 'نقل ذهاب (4 ساعات). أسعار خاصة للإقامات المتعددة الأيام',
+                priceNote: '(negotiable if overnight)',
+                testimonialsTitle: 'Customer Reviews',
+                testimonialsSubtitle: '⭐ 5-Star Rating',
+                review1: '"Abdullah is the most professional driver I\'ve ever met. Clean car, smooth ride, and always on time!"',
+                review2: '"I booked a city tour with Abdullah and ended up learning so much about Amman! Highly recommend."',
+                review3: '"The car was spotless and he even had Wi-Fi and a charger ready. Great service!"',
+                review4: '"Very respectful and kind. Helped me with my luggage and drove safely all the way to the airport."',
+                review5: '"Loved the vibes, the sound system, and how friendly Abdullah is. Will ride again for sure!"',
+                contactTitle: 'Get in Touch',
+                contactSubtitle: 'Available daily from 7:00 AM – 11:00 PM',
+                contactWhatsapp: 'WhatsApp',
+                contactInstagram: 'Instagram',
+                contactFacebook: 'Facebook',
+                paymentTitle: 'Payment Methods',
+                paymentCash: '💵 نقداً',
+                paymentZain: '📱 زين كاش',
+                paymentCliq: '💳 كليك',
+                langBtnText: 'ع',
+                 servicesTitle: "Services Offered",
+        service1: "Uber Rides",
+        service1Desc: "Premium ride-hailing services in Amman",
+        service2: "Item Delivery",
+        service2Desc: "Fast and secure delivery services",
+        service3: "Airport Transfers",
+        service3Desc: "Arrivals & departures at Queen Alia Airport",
+        service4: "Vacation Transfers",
+        service4Desc: "Reliable transportation for your vacation needs",
+        service5: "Tourism & Heritage Rides",
+        service5Desc: "Explore Jordan's historical sites with an expert",
+        service6: "Personalized City Tours",
+        service6Desc: "Custom tours based on your interests",
+        service7: "Business Travel",
+        service7Desc: "Professional transportation for corporate clients",
+        service8: "Medical Transport",
+        service8Desc: "Safe transportation for medical appointments",
+        service9: "Wedding Services",
+        service9Desc: "Elegant transportation for special occasions",
+        service10: "Night Rides",
+        service10Desc: "Safe late-night transportation",
+        service11: "Student Transport",
+        service11Desc: "Reliable rides for university students",
+        service12: "VIP Services",
+        service12Desc: "Premium transportation with extra amenities",
+            },
+            ar: {
+                heroTitle: 'سائق أوبر وتوصيل محترف',
+                heroSubtitle: 'خدمات نقل متميزة في عمان، الأردن',
+                ctaBook: 'احجز الآن',
+                ctaExplore: 'استكشف الخدمات',
+                aboutTitle: 'عن عبدالله',
+                aboutText: 'عبدالله إبراهيم عكاوي هو سائق أوبر وتوصيل بدوام كامل يبلغ من العمر 27 عاماً ولديه أكثر من 8 سنوات من الخبرة في القيادة المهنية. متخصص في نقل المطار، يغطي الوصول والمغادرة، ونشط في الرحلات السياحية إلى المواقع السياحية والتاريخية الرئيسية في الأردن.',
+                aboutText2: 'يتقن اللغة العربية ويتكلم الإنجليزية محادثة، ويعرف بأسلوبه الودود، سيارته النظيفة، الالتزام بالمواعيد، والتفاني في تقديم تجربة ركوب ممتازة.',
+                servicesTitle: 'الخدمات المقدمة',
+                service1: 'رحلات أوبر',
+                service2: 'توصيل الطلبات',
+                service3: 'نقل المطار',
+                service4: 'نقل الإجازات',
+                service5: 'رحلات السياحة والتراث',
+                service6: 'جولات المدينة المخصصة',
+                vehicleTitle: 'تفاصيل السيارة',
+                carModel: 'فولكسفاجن ID.4 (2022)',
+                carDesc: 'SUV حديثة وهادئة وصديقة للبيئة توفر رحلة سلسة، صندوق واسع، ومقاعد ممتازة مريحة. تُنظف وتُعقم يومياً لتجربة آمنة ومهنية.',
+                carColor: 'اللون: أزرق بحري',
+                carType: 'النوع: كهربائية بالكامل',
+                feature1: 'نقطة اتصال Wi-Fi',
+                feature2: 'شحن USB + Type-C',
+                feature3: 'معقم يومياً',
+                feature4: 'بلوتوث / AUX',
+                pricingTitle: 'دليل الأسعار',
+                price1Title: 'الاستلام من المطار',
+                price1Desc: 'يشمل الاستقبال في الوصول، المساعدة في الأمتعة، والنقل المباشر إلى وجهتك في عمان',
+                price2Title: 'التوصيل للمطار',
+                price2Desc: 'استلام في الوقت المحدد من موقعك مع مراقبة الرحلة لضمان الوصول في الوقت المناسب',
+                price3Title: 'ساعة في عمان',
+                price3Desc: 'حد أدنى ساعتين. مثالي لاجتماعات العمل، رحلات التسوق، أو استكشاف المدينة',
+                price4Title: 'جرش',
+                price4Desc: 'رحلة ذهاب وعودة من عمان مع 3 ساعات في الموقع (ساعات إضافية بسعر 5 دينار/ساعة)',
+                price5Title: 'عجلون',
+                price5Desc: 'يشمل زيارة قلعة عجلون مع طريق خلاب عبر بساتين الزيتون',
+                price6Title: 'البحر الميت',
+                price6Desc: 'رحلة يوم كامل (8 ساعات) تشمل توصيات لدخول الشاطئ',
+                price7Title: 'أم قيس',
+                price7Desc: 'جولة يوم كامل مع توقف عند أطلال جدارا ومناظر بانورامية لبحر الجليل',
+                price7DescAr: 'جولة يوم كامل مع توقف عند أطلال جدارا ومناظر بانورامية لبحر الجليل',
+                price8Title: 'معين',
+                price8Desc: 'زيارة الينابيع الساخنة مع 4 ساعات في المنتجع (لا تشمل رسوم الدخول)',
+                price9Title: 'مادابا وجبل نيبو',
+                price9Desc: 'جولة نصف يوم تشمل كنيسة القديس جورج ونصب موسى التذكاري',
+                price10Title: 'البتراء',
+                price10Desc: 'نقل ذهاب (3 ساعات). عروض ليلة متاحة عند الطلب',
+                price11Title: 'وادي رم',
+                price11Desc: 'نقل مباشر إلى مركز الزوار (4 ساعات). يمكن دمجه مع رحلة البتراء',
+                price12Title: 'العقبة',
+                price12Desc: 'نقل ذهاب (4 ساعات). أسعار خاصة للإقامات المتعددة الأيام',
+                priceNote: '(قابل للتفاوض إذا كان هنالك مبيت)',
+                testimonialsTitle: 'آراء العملاء',
+                testimonialsSubtitle: '⭐ تقييم 5 نجوم',
+                review1: '"عبدالله هو أكثر سائق محترف قابلته. سيارة نظيفة، رحلة سلسة، ودائماً في الوقت!"',
+                review2: '"حجزت جولة في المدينة مع عبدالله وتعلمت الكثير عن عمان! أوصي بشدة."',
+                review3: '"كانت السيارة نظيفة تماماً وحتى أن لديه واي فاي وشاحن جاهز. خدمة رائعة!"',
+                review4: '"محترم جداً ولطيف. ساعدني في حقائبي وقاد بأمان حتى المطار."',
+                review5: '"أحببت الأجواء، نظام الصوت، ومدى ودية عبدالله. سأركب مرة أخرى بالتأكيد!"',
+                contactTitle: 'تواصل معنا',
+                contactSubtitle: 'متاح يومياً من 7:00 صباحاً – 11:00 مساءً',
+                contactWhatsapp: 'واتساب',
+                contactInstagram: 'انستغرام',
+                contactFacebook: 'فيسبوك',
+                paymentTitle: 'طرق الدفع',
+                langBtnText: 'En',
+                 servicesTitle: "الخدمات المقدمة",
+        servicesTitle: "الخدمات المقدمة",
+        service1: "رحلات أوبر",
+        service1Desc: "خدمات نقل متميزة عبر أوبر في عمّان",
+        service2: "توصيل الطلبات",
+        service2Desc: "خدمات توصيل سريعة وآمنة",
+        service3: "نقل المطار",
+        service3Desc: "وصول ومغادرة من مطار الملكة علياء",
+        service4: "نقل العطلات",
+        service4Desc: "نقل موثوق لاحتياجات عطلتك",
+        service5: "رحلات سياحية وتراثية",
+        service5Desc: "استكشف المواقع التاريخية في الأردن مع خبير",
+        service6: "جولات مدينة مخصصة",
+        service6Desc: "جولات مصممة حسب اهتماماتك",
+        service7: "السفر للعمل",
+        service7Desc: "نقل احترافي للعملاء من الشركات",
+        service8: "النقل الطبي",
+        service8Desc: "نقل آمن للمواعيد الطبية",
+        service9: "خدمات الزفاف",
+        service9Desc: "نقل أنيق للمناسبات الخاصة",
+        service10: "رحلات ليلية",
+        service10Desc: "نقل آمن خلال الليل",
+        service11: "نقل الطلاب",
+        service11Desc: "رحلات موثوقة لطلاب الجامعات",
+        service12: "خدمات VIP",
+        service12Desc: "نقل متميز مع مرافق إضافية",
+            }
+        };
+        
+        let currentLang = 'en';
+        
+        const langToggle = document.getElementById('langToggle');
+        const html = document.documentElement;
+        
+        function updateLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            
+            // Update text content
+            Object.keys(t).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    // Use Arabic description if available and language is Arabic
+                    if (lang === 'ar' && key.endsWith('Desc') && t[key + 'Ar']) {
+                        element.textContent = t[key + 'Ar'];
+                    } else {
+                        element.textContent = t[key];
+                    }
+                }
+            });
+            
+            // Update direction
+            html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            html.lang = lang;
+            
+            // Update font for Arabic
+            if (lang === 'ar') {
+                document.body.classList.add('font-arabic');
+            } else {
+                document.body.classList.remove('font-arabic');
+            }
+        }
+        
+        langToggle.addEventListener('click', () => {
+            const newLang = currentLang === 'en' ? 'ar' : 'en';
+            updateLanguage(newLang);
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let isMenuOpen = false;
+        
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.innerHTML = isMenuOpen 
+                ? '<i class="fas fa-times text-xl"></i>' 
+                : '<i class="fas fa-bars text-xl"></i>';
+        }
+        
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Intersection Observer for active navigation
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('text-electric');
+                        if (link.getAttribute('href') === `#${entry.target.id}`) {
+                            link.classList.add('text-electric');
+                        }
+                    });
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+        
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
