@@ -3,11 +3,17 @@
 <head>
   <style>
     @media (max-width: 767px) {
-    nav {
-        padding-left: 1rem;
-        padding-right: 1rem;
+      nav {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .flex.justify-between.items-center {
+        height: 3.5rem;
+      }
+      #mobileMenuBtn {
+        margin-left: 0.25rem;
+      }
     }
-}
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,26 +57,26 @@
    <!-- Navigation -->
 <nav class="fixed top-0 w-full bg-charcoal/90 backdrop-blur-md border-b border-slate z-50">
     <div class="px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <div class="flex-shrink-0 text-xl font-bold">
+        <div class="flex justify-between items-center h-16 px-2">
+            <div class="flex-shrink-0 text-lg sm:text-xl font-bold">
                 <span class="text-gold">Abdullah</span> <span class="text-electric">Akkawy</span>
             </div>
             
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="nav-link text-smoke hover:text-electric transition-colors duration-300">About</a>
-                <a href="#services" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Services</a>
-                <a href="#vehicle" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Vehicle</a>
-                <a href="#pricing" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Pricing</a>
-                <a href="#testimonials" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Reviews</a>
-                <a href="#contact" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Contact</a>
-            </div>
+           <div class="hidden md:flex space-x-8 rtl:space-x-reverse">
+    <a href="#about" id="navAbout" class="nav-link text-smoke hover:text-electric transition-colors duration-300">About</a>
+    <a href="#services" id="navServices" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Services</a>
+    <a href="#vehicle" id="navVehicle" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Vehicle</a>
+    <a href="#pricing" id="navPricing" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Pricing</a>
+    <a href="#testimonials" id="navReviews" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Reviews</a>
+    <a href="#contact" id="navContact" class="nav-link text-smoke hover:text-electric transition-colors duration-300">Contact</a>
+</div>
             
-            <div class="flex items-center gap-2 rtl:gap-x-0 ltr:gap-x-4">
+            <div class="flex items-center space-x-2">
                 <button id="langToggle" class="bg-electric text-charcoal px-3 py-1 md:px-4 md:py-2 rounded-lg font-semibold hover:bg-gold transition-all duration-300 transform hover:scale-105">
                     <span id="langBtnText">ع</span>
                 </button>
                 
-                <button id="mobileMenuBtn" class="md:hidden text-smoke ml-2">
+                <button id="mobileMenuBtn" class="md:hidden text-smoke ml-2 p-2 rounded-full hover:bg-slate/50 transition-colors">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
@@ -78,16 +84,16 @@
     </div>
     
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden bg-gunmetal border-t border-slate">
-        <div class="px-4 py-2 space-y-2">
-            <a href="#about" class="block py-2 text-smoke hover:text-electric transition-colors">About</a>
-            <a href="#services" class="block py-2 text-smoke hover:text-electric transition-colors">Services</a>
-            <a href="#vehicle" class="block py-2 text-smoke hover:text-electric transition-colors">Vehicle</a>
-            <a href="#pricing" class="block py-2 text-smoke hover:text-electric transition-colors">Pricing</a>
-            <a href="#testimonials" class="block py-2 text-smoke hover:text-electric transition-colors">Reviews</a>
-            <a href="#contact" class="block py-2 text-smoke hover:text-electric transition-colors">Contact</a>
-        </div>
+ <div id="mobileMenu" class="hidden md:hidden bg-gunmetal border-t border-slate">
+    <div class="px-6 py-4 space-y-4">
+        <a href="#about" id="mobileMenuAbout" class="block py-3 text-lg text-smoke hover:text-electric transition-colors">About</a>
+        <a href="#services" id="mobileMenuServices" class="block py-3 text-lg text-smoke hover:text-electric transition-colors">Services</a>
+        <a href="#vehicle" id="mobileMenuVehicle" class="block py-3 text-lg text-smoke hover:text-electric transition-colors">Vehicle</a>
+        <a href="#pricing" id="mobileMenuPricing" class="block py-3 text-lg text-smoke hover:text-electric transition-colors">Pricing</a>
+        <a href="#testimonials" id="mobileMenuReviews" class="block py-3 text-lg text-smoke hover:text-electric transition-colors">Reviews</a>
+        <a href="#contact" id="mobileMenuContact" class="block py-3 text-lg text-smoke hover:text-electric transition-colors">Contact</a>
     </div>
+</div>
 </nav>
     
     <!-- Hero Section -->
@@ -597,6 +603,18 @@
         service11Desc: "Reliable rides for university students",
         service12: "VIP Services",
         service12Desc: "Premium transportation with extra amenities",
+        mobileMenuAbout: "About",
+        mobileMenuServices: "Services",
+        mobileMenuVehicle: "Vehicle",
+        mobileMenuPricing: "Pricing",
+        mobileMenuReviews: "Reviews",
+        mobileMenuContact: "Contact",
+         navAbout: "About",
+        navServices: "Services",
+        navVehicle: "Vehicle",
+        navPricing: "Pricing",
+        navReviews: "Reviews",
+        navContact: "Contact"
             },
             ar: {
                 heroTitle: 'سائق أوبر وتوصيل محترف',
@@ -689,6 +707,18 @@
         service11Desc: "رحلات موثوقة لطلاب الجامعات",
         service12: "خدمات VIP",
         service12Desc: "نقل متميز مع مرافق إضافية",
+        mobileMenuAbout: "حول",
+        mobileMenuServices: "خدمات",
+        mobileMenuVehicle: "المركبة",
+        mobileMenuPricing: "الأسعار",
+        mobileMenuReviews: "التقييمات",
+        mobileMenuContact: "اتصل بنا",
+        navAbout: "حول",
+        navServices: "خدمات",
+        navVehicle: "المركبة",
+        navPricing: "الأسعار",
+        navReviews: "التقييمات",
+        navContact: "اتصل بنا"
             }
         };
         
@@ -790,3 +820,4 @@
     
 </body>
 </html>
+
