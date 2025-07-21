@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibrahim Samha | CFO Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1A1A1A;
+            color: #F5F5F0;
+            scroll-behavior: smooth;
+        }
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            bottom: -8px;
+            left: 0;
+            background-color: #C0A060;
+        }
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            left: -42px;
+            top: 12px;
+            background-color: #005F4B;
+            border: 3px solid #C0A060;
+            z-index: 1;
+            animation: fadeInOut 2s infinite ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.5; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C0A060;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        .skill-bar {
+            height: 6px;
+            background-color: #0D1B2A;
+            border-radius: 3px;
+        }
+        .skill-progress {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #005F4B, #C0A060);
+            transition: width 1s ease-in-out;
+        }
+        .hover-grow {
+            transition: transform 0.3s ease;
+        }
+        .hover-grow:hover {
+            transform: translateY(-5px);
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black bg-opacity-90 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="#" class="text-2xl font-bold serif text-emerald-500">I.Samha</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-ivory-100 hover:text-emerald-400">Home</a>
+                    <a href="#summary" class="nav-link text-ivory-100 hover:text-emerald-400">Summary</a>
+                    <a href="#expertise" class="nav-link text-ivory-100 hover:text-emerald-400">Expertise</a>
+                    <a href="#experience" class="nav-link text-ivory-100 hover:text-emerald-400">Experience</a>
+                    <a href="#education" class="nav-link text-ivory-100 hover:text-emerald-400">Education</a>
+                    <a href="#contact" class="nav-link text-ivory-100 hover:text-emerald-400">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-emerald-400 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-0D1B2A pt-20">
+        <div class="container mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold serif mb-6 text-emerald-400">Ibrahim Salah Mohammed Samha</h1>
+                <h2 class="text-2xl md:text-3xl text-gold-300 mb-8">Chief Financial Officer</h2>
+                <p class="text-lg text-ivory-300 mb-8 max-w-lg">25+ years of executive leadership in Islamic banking, investments, and financial strategy with a proven track record of enhancing organizational performance.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-md font-medium transition duration-300 transform hover:scale-105">
+                        Contact Me
+                    </a>
+                    <a href="https://github.com/FolioZone/FolioZone/raw/main/CVs/Ibrahim-Samha.doc" download="Ibrahim-Samha-Resume.doc" class="border border-emerald-400 text-emerald-400 hover:bg-emerald-900 hover:bg-opacity-30 px-6 py-3 rounded-md font-medium transition duration-300 transform hover:scale-105">
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center fade-in">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-emerald-500 shadow-xl hover:shadow-2xl transition duration-500">
+                    <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/Ibrahim-Samha.jpeg" 
+                         alt="Ibrahim Samha" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-emerald-900 bg-opacity-20"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section id="summary" class="py-20 bg-0D1B2A">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-12 section-title text-emerald-400">Executive Summary</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg border-l-4 border-emerald-500 hover-grow">
+                    <h3 class="text-xl font-bold text-gold-300 mb-4">Leadership Profile</h3>
+                    <ul class="space-y-3 text-ivory-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-400 mt-1 mr-3"></i>
+                            <span>Dynamic leader with 25+ years in senior roles across diverse organizations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-400 mt-1 mr-3"></i>
+                            <span>Consistently enhances organizational P/L and customer satisfaction</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-400 mt-1 mr-3"></i>
+                            <span>Core member of professional committees for operational efficiency</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-400 mt-1 mr-3"></i>
+                            <span>Expert in evaluating financial performance for strategic realignment</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg border-l-4 border-gold-300 hover-grow">
+                    <h3 class="text-xl font-bold text-gold-300 mb-4">Strategic Value</h3>
+                    <ul class="space-y-3 text-ivory-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-emerald-400 mt-1 mr-3"></i>
+                            <span>Defines and implements corporate strategies for competitive edge</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-emerald-400 mt-1 mr-3"></i>
+                            <span>Formulates policies and systems to monitor employee productivity</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-emerald-400 mt-1 mr-3"></i>
+                            <span>Increases tangible contribution per employee to company revenues</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-emerald-400 mt-1 mr-3"></i>
+                            <span>Seeks senior leadership role to apply competencies for top/bottom-line growth</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Skills Proficiency -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold serif text-emerald-400 mb-8">Technical Skills Proficiency</h3>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gold-300">Financial Reporting (IFRS/AAOIFI)</span>
+                            <span class="text-emerald-400">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-level="95%" style="width: 0;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gold-300">Strategic Planning</span>
+                            <span class="text-emerald-400">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-level="90%" style="width: 0;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gold-300">Risk Management</span>
+                            <span class="text-emerald-400">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-level="88%" style="width: 0;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gold-300">Financial Modeling</span>
+                            <span class="text-emerald-400">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-level="85%" style="width: 0;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Areas of Expertise -->
+    <section id="expertise" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-12 section-title text-emerald-400">Areas of Expertise</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Column 1 -->
+                <div class="bg-0D1B2A p-6 rounded-lg hover-grow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                            <i class="fas fa-chess-king text-gold-300 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gold-300">Strategic Leadership</h3>
+                    </div>
+                    <ul class="space-y-2 text-ivory-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Strategic Planning</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Policy Implementation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Business Process Reengineering</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Senior Management Representation</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Column 2 -->
+                <div class="bg-0D1B2A p-6 rounded-lg hover-grow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                            <i class="fas fa-chart-line text-gold-300 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gold-300">Financial Excellence</h3>
+                    </div>
+                    <ul class="space-y-2 text-ivory-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Finance & Accounts Management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Cash Flow Optimization</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Budget & Cost Management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Financial Reporting & Analysis</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div class="bg-0D1B2A p-6 rounded-lg hover-grow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                            <i class="fas fa-shield-alt text-gold-300 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gold-300">Governance & Compliance</h3>
+                    </div>
+                    <ul class="space-y-2 text-ivory-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Compliance Management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Internal & External Audit</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Risk & Change Management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>IFRS & AAOIFI Standards</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div class="bg-0D1B2A p-6 rounded-lg hover-grow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                            <i class="fas fa-university text-gold-300 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gold-300">Islamic Banking</h3>
+                    </div>
+                    <ul class="space-y-2 text-ivory-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Islamic Finance Products</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Sharia-compliant Investments</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Profit Distribution Mechanisms</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Islamic Financial Reporting</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Column 5 -->
+                <div class="bg-0D1B2A p-6 rounded-lg hover-grow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                            <i class="fas fa-users text-gold-300 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gold-300">People & Operations</h3>
+                    </div>
+                    <ul class="space-y-2 text-ivory-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Team Leadership</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Training & Development</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Stakeholder Relations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Liaison and Coordination</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Column 6 -->
+                <div class="bg-0D1B2A p-6 rounded-lg hover-grow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                            <i class="fas fa-lightbulb text-gold-300 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gold-300">Business Strategy</h3>
+                    </div>
+                    <ul class="space-y-2 text-ivory-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Business & ROI Management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Corporate Strategy Development</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Market Expansion Strategies</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                            <span>Competitive Positioning</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section id="experience" class="py-20 bg-0D1B2A">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-12 section-title text-emerald-400">Professional Experience</h2>
+            
+            <div class="relative pl-8">
+                <!-- Experience 1 -->
+                <div class="mb-12 pl-6 relative timeline-item">
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg border-l-4 border-emerald-500 hover-grow">
+                        <div class="flex flex-col md:flex-row justify-between mb-4">
+                            <h3 class="text-2xl md:text-3xl font-bold text-gold-300">Group Chief Financial Officer</h3>
+                            <span class="text-emerald-400 font-medium text-xl">Feb 2025 - July 2025</span>
+                        </div>
+                        <h4 class="text-xl text-emerald-300 mb-4">Bank of Khartoum</h4>
+                        
+                        <h5 class="font-bold text-ivory-200 mb-2">Key Responsibilities:</h5>
+                        <ul class="space-y-3 text-lg text-ivory-300 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-3 mr-3"></i>
+                                <span>Managing consolidation of the group</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Helping management in building intercompany transactions in terms of profitability, cash management and Taxes</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Building accounting policy in line with international standards and Central bank of Soudan regulations</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Helping the management in achieving the strategic Goals</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Building full managerial reporting system covering all activities</span>
+                            </li>
+                        </ul>
+                        
+                        <h5 class="font-bold text-ivory-200 mb-2">Duties to work on:</h5>
+                        <ul class="space-y-2 text-ivory-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Improving the financial control function</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Preparing a full set of policies and procedures</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Monitor the best balance between the sources and uses of fund</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Reviewing the profit distribution mechanism</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Review the profitability and cash management in Int'l branches and subsidiaries</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Experience 2 -->
+                <div class="mb-12 pl-6 relative timeline-item">
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg border-l-4 border-gold-300 hover-grow">
+                        <div class="flex flex-col md:flex-row justify-between mb-4">
+                            <h3 class="text-xl md:text-2xl font-bold text-gold-300">Consultant – Accounting, Finance, Planning and Strategies</h3>
+                            <span class="text-emerald-400 font-medium">Sep 2022 - Feb 2024</span>
+                        </div>
+                        <h4 class="text-lg text-emerald-300 mb-4">Iraqi Middle East Investment Bank, Iraq / Al-Mustashar Islamic Bank</h4>
+                        
+                        <h5 class="font-bold text-ivory-200 mb-2">Key Responsibilities:</h5>
+                        <ul class="space-y-2 text-ivory-300 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Review accounting cycles for all products and services</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Building accounting policy in line with international standards and Central banks' of Iraq regulations</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Helping the management in building a budging system based on clear goals and transfer pricing between head office and branches</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Building full managerial reporting system covering all activities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Assist in reviewing the capabilities of the current core banking system</span>
+                            </li>
+                        </ul>
+                        
+                        <h5 class="font-bold text-ivory-200 mb-2">Duties to work on:</h5>
+                        <ul class="space-y-2 text-ivory-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Building a financial control function</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Assist in building a modern hierarchy chart to achieve both the efficiency and control</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Monitor preparing a full set of policies and procedures</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Monitor the best balance between the sources and uses of fund</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Preparing a full and comprehensive profitability package</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Building a clear strategy for the bank</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Experience 3 -->
+                <div class="mb-12 pl-6 relative timeline-item">
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg border-l-4 border-emerald-500 hover-grow">
+                        <div class="flex flex-col md:flex-row justify-between mb-4">
+                            <h3 class="text-xl md:text-2xl font-bold text-gold-300">Deputy CEO – Chief of Finance and Corporate Strategies</h3>
+                            <span class="text-emerald-400 font-medium">Mar 2013 - Mar 2021</span>
+                        </div>
+                        <h4 class="text-lg text-emerald-300 mb-4">Safwa Islamic Bank (Jordan Dubai Islamic Bank), Jordan</h4>
+                        <div class="bg-emerald-900 bg-opacity-30 p-3 rounded mb-4 border-l-4 border-gold-300">
+                            <p class="text-gold-300 italic">*Recipient of almost full marks from King Abdullah Excellence Award for the strategy pillar*</p>
+                            <p class="text-gold-300 italic">*Distinguished for placing the bank as the first bank to deliver financial reports to stocks market for the fourth year*</p>
+                        </div>
+                        
+                        <h5 class="font-bold text-ivory-200 mb-2">Key Responsibilities:</h5>
+                        <ul class="space-y-2 text-ivory-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Spearhead day to day financial functions of the bank and its subsidiaries in compliance to IFRS and AAOIFI, companies' Law and regulatory bodies</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Collaborate with various department heads for effectively identifying/ mitigating budget variances for maintaining organizational bottom lines</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Assist the senior management in implementing business/ market strategies and product plans for accomplishing financial as well as operational objectives</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Participate in annual audits & stock taking and conduct due diligence for potential joint ventures</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Negotiate/ finalize terms of financing from banks to maintain multiple options of financing existing/ future business ventures</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Guide concerned stakeholders in realigning business strategies based on collated market intelligence on competition and other market trends</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Function as member of committees like Management, ALCO, Credit, Investments, purchases, Human resources, Risk and branching</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Acquaint team members with organizational policies and procedures for implementing the same in day to day business transactions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Assess team performance and recommend productivity enhancement trainings</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Groom and mentor potential leaders in the team to take up future leadership roles in the organization</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Evaluate and present various status reports at senior management reviews for realigning policy decisions based on prevailing market conditions and other related factors</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Experience 4 -->
+                <div class="mb-12 pl-6 relative timeline-item">
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg border-l-4 border-gold-300 hover-grow">
+                        <div class="flex flex-col md:flex-row justify-between mb-4">
+                            <h3 class="text-xl md:text-2xl font-bold text-gold-300">Head of Finance – CFO</h3>
+                            <span class="text-emerald-400 font-medium">Nov 2010 - Mar 2013</span>
+                        </div>
+                        <h4 class="text-lg text-emerald-300 mb-4">Al-Rajhi Bank, Jordan</h4>
+                        <div class="bg-emerald-900 bg-opacity-30 p-3 rounded mb-4 border-l-4 border-emerald-500">
+                            <p class="text-gold-300 italic">*Successfully managed Islamic and traditional financial reporting standards for Jordan branches and Head office in KSA*</p>
+                        </div>
+                        
+                        <h5 class="font-bold text-ivory-200 mb-2">Key Responsibilities:</h5>
+                        <ul class="space-y-2 text-ivory-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Functioned as member of the bank establishment team involved in testing & dry run jobs, setting up financial function in the bank</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Drafted and presented manuals, policies and procedures of finance department in compliance to organizational policies and procedures</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Set up and ensured compliance to reporting structure for head office, management and regulators</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Defined and implemented accounting cycles for various banking products and services as well as other control procedures</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Rendered consultancy to the board on major business strategies based on financial analysis and existing market dynamics</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Convened/ conducted board meetings, implemented internal controls across departments and optimized utilization of accounting software</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Collaborated with banks and auditors, assisted the Board of Directors on major financial issues like product pricing, sale/ lease of equipments</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Optimized resource utilization and streamlined processes for enhancing operational efficiency and organizational profitability</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Experience 5 -->
+                <div class="mb-12 pl-6 relative timeline-item">
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg border-l-4 border-emerald-500 hover-grow">
+                        <div class="flex flex-col md:flex-row justify-between mb-4">
+                            <h3 class="text-xl md:text-2xl font-bold text-gold-300">Assistant General Manager – Head of Financial Control</h3>
+                            <span class="text-emerald-400 font-medium">Mar 1999 - Nov 2010</span>
+                        </div>
+                        <h4 class="text-lg text-emerald-300 mb-4">Capital Bank of Jordan</h4>
+                        <div class="bg-emerald-900 bg-opacity-30 p-3 rounded mb-4 border-l-4 border-gold-300">
+                            <p class="text-gold-300 italic">*Played key role in spinning off brokerage and investments activities into a fully owned subsidiary leading to enhanced business growth for the organization*</p>
+                            <p class="text-gold-300 italic">*Core member of the team involved in assessing the Iraqi market and a member of management team of Iraqi bank (a subsidiary for Capital bank)*</p>
+                            <p class="text-gold-300 italic">*Functioned as member of core steering committee and head of data migration to successfully convert the system from kindle to Temenos*</p>
+                        </div>
+                        
+                        <h5 class="font-bold text-ivory-200 mb-2">Key Responsibilities:</h5>
+                        <ul class="space-y-2 text-ivory-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Led two direct teams - Financial control team (8 staff) and Middle office team (3 staff) in planning and implementing operating plans, financial reporting (system & manual) for banking and trade firms</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Assessed financial statements, Group/bank performance against annual budget and group/bank's long-term strategy for implementing effective remedial measures</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Developed control procedures including tools and systems to provide critical financial information to the GM and Board of Directors followed by recommendations on strategy and operations</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Focused on development and analysis of various business initiatives (opening new operations, asset acquisition, new service/product launches)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Coordinated with the senior management in implementing annual objectives, meeting agendas, selecting and engaging outside consultants (auditors, investment advisors)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Prepared and implemented long-term budgetary plans and costs management based on bank's strategic plan to optimize utilization of resources and funds</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Functioned as member of executive leadership team including committees like (ALCO, Investments, Risk, Bad debts, Purchasing, HR committee branching committee and IT Steering committee)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Managed day to day administrative aspects of the department in compliance to organizational policies and other statutory regulations</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Conducted audits and ensured proper filing of tax returns</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Ensured legal and regulatory compliance regarding all financial functions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Represented the bank to financial partners, including financial institutions, investors, central bank, auditors and others</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Maintained updated knowledge of international accounting standards, central bank's regulations and tax laws</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Participated in corporate policy development as a member of the senior management team</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Interacted with board of directors to develop short, medium and long-term financial plans and projections</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-emerald-400 mt-2 mr-2"></i>
+                                <span>Prepared and presented various status reports for the senior management and other stakeholders (central bank, board of directors and shareholders as well as Capital Group (Capital Bank of Jordan, Capital Investments and National Bank of Iraq) to enable effective decision making</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Previous Experience -->
+                <div class="pl-6 relative timeline-item">
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg border-l-4 border-gold-300 hover-grow">
+                        <h3 class="text-xl font-bold text-gold-300 mb-4">Previous Work Experience</h3>
+                        <div class="flex items-center">
+                            <i class="fas fa-briefcase text-emerald-400 mr-3"></i>
+                            <span class="text-ivory-300">Accounting Clerk, HSBC Bank– Jordan (Sep 1995 – Mar 1999)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-12 section-title text-emerald-400">Education</h2>
+            
+            <div class="bg-0D1B2A p-8 rounded-lg border-l-4 border-emerald-500 hover-grow">
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                            <i class="fas fa-graduation-cap text-gold-300"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-emerald-300">MBA (Banking and Finance)</h4>
+                            <p class="text-ivory-300">University of Jordan and Institute of banking studies (2005)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                            <i class="fas fa-university text-gold-300"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-emerald-300">BA (Accounting and Public Administration)</h4>
+                            <p class="text-ivory-300">University of Jordan (1994 / 1995)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Development -->
+    <section id="professional-development" class="py-20 bg-0D1B2A">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-12 section-title text-emerald-400">Professional Development</h2>
+            
+            <div class="bg-black bg-opacity-50 p-8 rounded-lg border-l-4 border-gold-300 hover-grow">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">International accounting Standards update (London)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Balanced scorecard (Egypt)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Bank's strategy and Managerial decisions Egypt (50 hours)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Bank's Budgets Preparation and Analyzing-Egypt (50 hours)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Financial Instruments (Options, swaps, derivatives)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Analyzing Banks' financial Statements</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Securities Forward deals</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">IAS 39</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Banks' Cost Accounting Systems</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Financial Analysis and Cash Budgeting</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Tax for employees - Jordanian Accounting Association</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Dealing Operations and Investments in Foreign Currencies Markets (Institute of banking studies)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Financial analyzing using Excel 97 at (KCSC)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Banking Induction Course in BANKING PROCEDURES at British Bank of the Middle East</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Swift Course at the Institute of Banking Studies</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Accounting and analysis Balance sheets, attachment at Accounting Dept. at British Bank of the Middle East - Dubai</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-emerald-400 mt-1 mr-2"></i>
+                            <span class="text-ivory-300">Onsite training at The British Bank (HSBC) training center: Hexagon (Electronic Banking), Financial Reporting, Credit facilities analyzing for preparing Bad & Doubtful provisions, Securities, Treasury, Corporate Banking, Personal Banking and Trade Services</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications List (keep all the existing certification items) -->
+
+    <!-- Personal Details -->
+    <section class="py-16 bg-0D1B2A">
+        <div class="container mx-auto px-6">
+            <div class="bg-black bg-opacity-50 p-8 rounded-lg max-w-5xl mx-auto">
+                <h3 class="text-2xl font-bold serif text-emerald-400 mb-6">Personal Details</h3>
+                <div class="grid md:grid-cols-2 gap-6 text-ivory-300">
+                    <div class="flex items-center">
+                        <i class="fas fa-passport text-gold-300 mr-4 w-6"></i>
+                        <div>
+                            <p class="font-semibold">Nationality</p>
+                            <p>Jordanian</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-birthday-cake text-gold-300 mr-4 w-6"></i>
+                        <div>
+                            <p class="font-semibold">Date of Birth</p>
+                            <p>10 July 1973</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                            <i class="fas fa-language text-gold-300"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-bold text-emerald-300 mb-4">Languages</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-gold-300 font-medium">Arabic</span>
+                                        <span class="text-emerald-400 bg-emerald-900 bg-opacity-50 px-2 py-1 rounded text-sm">Native</span>
+                                    </div>
+                                    <div class="relative pt-1">
+                                        <div class="flex items-center justify-between">
+                                            <div class="w-full bg-0D1B2A rounded-full h-2">
+                                                <div class="bg-emerald-500 h-2 rounded-full" style="width: 100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-gold-300 font-medium">English</span>
+                                        <span class="text-emerald-400 bg-emerald-900 bg-opacity-50 px-2 py-1 rounded text-sm">Professional</span>
+                                    </div>
+                                    <div class="relative pt-1">
+                                        <div class="flex items-center justify-between">
+                                            <div class="w-full bg-0D1B2A rounded-full h-2">
+                                                <div class="bg-emerald-500 h-2 rounded-full" style="width: 98%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-file-alt text-gold-300 mr-4 w-6"></i>
+                        <div>
+                            <p class="font-semibold">References</p>
+                            <p>Available upon request</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-12 section-title text-emerald-400">Contact</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="bg-0D1B2A p-8 rounded-lg hover-grow">
+                    <h3 class="text-2xl font-bold serif text-gold-300 mb-6">Get In Touch</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-gold-300"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-emerald-300">Location</h4>
+                                <p class="text-ivory-300">Amman, Jordan</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-gold-300"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-emerald-300">Phone</h4>
+                                <p class="text-ivory-300">+962 799704070 / 797117776</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-gold-300"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-emerald-300">Email</h4>
+                                <p class="text-ivory-300">isamha@hotmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-0D1B2A p-8 rounded-lg hover-grow">
+                    <h3 class="text-2xl font-bold serif text-gold-300 mb-6">Connect With Me</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                                <i class="fab fa-linkedin-in text-gold-300"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-emerald-300">LinkedIn</h4>
+                                <a href="https://www.linkedin.com/in/ibrahim-samha-7200b48/" target="_blank" class="text-ivory-300 hover:text-emerald-400 transition">linkedin.com/in/ibrahim-samha</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                                <i class="fab fa-whatsapp text-gold-300"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-emerald-300">WhatsApp</h4>
+                                <a href="https://wa.me/962799704070" target="_blank" class="text-ivory-300 hover:text-emerald-400 transition">+962 799704070</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-emerald-900 p-3 rounded-full mr-4">
+                                <i class="fas fa-globe text-gold-300"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-emerald-300">Website</h4>
+                                <a href="https://folio-zone.com/Ibrahim-Samha" target="_blank" class="text-ivory-300 hover:text-emerald-400 transition">folio-zone.com/Ibrahim-Samha</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-0D1B2A py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-ivory-300">© 2025 Ibrahim Salah Mohammed Samha. All rights reserved.</p>
+                </div>
+                <div>
+                    <a href="https://folio-zone.com" target="_blank" class="text-emerald-400 hover:text-emerald-300 flex items-center">
+                        <span>Powered by FolioZone</span>
+                        <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation trigger on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            // Animate skill bars on scroll
+            const animateOnScroll = function() {
+                skillBars.forEach(bar => {
+                    const rect = bar.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight * 0.8) {
+                        bar.style.width = bar.getAttribute('data-level');
+                    }
+                });
+            };
+            
+            // Initial check
+            animateOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Mobile menu toggle (would need additional HTML/CSS for full implementation)
+            const mobileMenuButton = document.querySelector('.md\\:hidden button');
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function() {
+                    // This would toggle a mobile menu - implementation would depend on your design
+                    console.log('Mobile menu clicked');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
