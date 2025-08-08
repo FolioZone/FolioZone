@@ -1147,38 +1147,76 @@
             // Form submission handling
             const form = document.getElementById('subscriptionRequestForm');
             if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Validate form
-                    if (validateForm()) {
-                        // Show loading state
-                        const submitBtn = document.getElementById('submit-btn');
-                        const originalText = submitBtn.innerHTML;
-                        submitBtn.disabled = true;
-                        submitBtn.innerHTML = document.body.classList.contains('arabic') ? 
-                            '<span>جاري الإرسال...</span> <i class="fas fa-spinner fa-spin ml-2"></i>' : 
-                            '<span>Sending...</span> <i class="fas fa-spinner fa-spin ml-2"></i>';
-                        
-                        // Simulate form submission (in a real scenario, this would be an AJAX call)
-                        setTimeout(() => {
-                            showNotification(
-                                'fas fa-check-circle text-green-500',
-                                document.body.classList.contains('arabic') ? 'تم الإرسال بنجاح!' : 'Success!',
-                                document.body.classList.contains('arabic') ? 
-                                    'تم استلام طلبك بنجاح! سنتواصل معك قريبًا.' : 
-                                    'Your request has been submitted successfully! We will contact you soon.',
-                                true
-                            );
-                            
-                            // Reset form and button
-                            form.reset();
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = originalText;
-                        }, 1500);
-                    }
-                });
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Validate form
+        if (!validateForm()) {
+            return;
+        }
+        
+        // Show loading state
+        const submitBtn = document.getElementById('submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = document.body.classList.contains('arabic') ? 
+            '<span>جاري الإرسال...</span> <i class="fas fa-spinner fa-spin ml-2"></i>' : 
+            '<span>Sending...</span> <i class="fas fa-spinner fa-spin ml-2"></i>';
+        
+        try {
+            // Prepare form data for Web3Forms
+            const formData = new FormData(form);
+            const object = {};
+            formData.forEach((value, key) => {
+                object[key] = value;
+            });
+            
+            // Add your Web3Forms access key
+            object['access_key'] = 'YOUR_WEB3FORMS_ACCESS_KEY'; // Replace with your actual key
+            
+            const json = JSON.stringify(object);
+            
+            // Submit to Web3Forms
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+                showNotification(
+                    'fas fa-check-circle text-green-500',
+                    document.body.classList.contains('arabic') ? 'تم الإرسال بنجاح!' : 'Success!',
+                    document.body.classList.contains('arabic') ? 
+                        'تم استلام طلبك بنجاح! سنتواصل معك قريبًا.' : 
+                        'Your request has been submitted successfully! We will contact you soon.',
+                    true
+                );
+                form.reset();
+            } else {
+                throw new Error(result.message || 'Submission failed');
             }
+        } catch (error) {
+            console.error('Error:', error);
+            showNotification(
+                'fas fa-times-circle text-red-500',
+                document.body.classList.contains('arabic') ? 'خطأ!' : 'Error!',
+                document.body.classList.contains('arabic') ? 
+                    'حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى أو الاتصال بنا مباشرة.' : 
+                    'There was an error submitting your request. Please try again later or contact us directly.',
+                false
+            );
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    });
+}
             
             // Character counter for message textarea
             const message = document.getElementById('message');
