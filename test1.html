@@ -724,7 +724,12 @@
                     </div>
                 </div>
                 
-                <form id="subscriptionRequestForm" class="space-y-6">
+                <form id="subscriptionRequestForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-6" enctype="multipart/form-data">
+                  <input type="hidden" name="access_key" value="4381337c-cb10-4cf8-b6d4-defe77727bed">
+                <input type="hidden" name="subject" value="New Premium Subscription Request Form">
+                <input type="hidden" name="redirect" value="https://folio-zone.com/UnityApp-Submit.html">
+                <input type="hidden" name="from_name" value="UnityApp">
+                <input type="checkbox" name="botcheck" style="display: none;">
                     <div>
                         <label for="name" class="block text-sm font-medium mb-1 text-text" data-en="Name*" data-ar="الاسم الكامل*">Name*</label>
                         <input type="text" id="name" name="name" 
