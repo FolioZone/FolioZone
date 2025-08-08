@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/UnityApp.png" type="image/png">
     <title>UnityApp - Premium App Subscriptions Made Simple</title>
     <!-- Alpine.js (in your <head> or before </body>) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -271,6 +272,7 @@
 <body class="bg-background text-text" 
       x-data="{ 
           showTerms: false, 
+          showPrivacy: false,  // Add this line
           isArabic: false,
           toggleLanguage() {
               this.isArabic = !this.isArabic;
@@ -297,12 +299,123 @@
       }"
       x-init="init()">
 
+<!-- Terms Modal -->
+  <div x-show="showTerms" x-cloak 
+     class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="bg-dark rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative">
+        <button @click="showTerms = false" 
+                class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+            &times;
+        </button>
+        <div class="p-8">
+            <h2 class="text-3xl font-bold mb-6 gradient-text primary-gradient" 
+                data-en="Terms and Conditions – Unity App" 
+                data-ar="الشروط والأحكام – تطبيق يونيتي">
+                Terms and Conditions – Unity App
+            </h2>
+
+            <div class="prose prose-invert max-w-none text-gray-400 space-y-4">
+
+                <p data-en="Please read the following terms and conditions carefully before using Unity App services. By accessing the app or subscribing to any of its services, you agree to be bound by these terms."
+                   data-ar="يرجى قراءة الشروط والأحكام التالية بعناية قبل استخدام خدمات تطبيق يونيتي. من خلال الوصول إلى التطبيق أو الاشتراك في أي من خدماته، فإنك توافق على الالتزام بهذه الشروط.">
+                    Please read the following terms and conditions carefully before using Unity App services. By accessing the app or subscribing to any of its services, you agree to be bound by these terms.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="1. Service Content" data-ar="1. محتوى الخدمة">1. Service Content</h3>
+                <p data-en="Unity App offers enhanced versions of App Store applications with additional features and capabilities, available exclusively through an annual subscription under two distinct plans."
+                   data-ar="يقدم تطبيق يونيتي نسخاً محسّنة من تطبيقات متجر التطبيقات مع ميزات وقدرات إضافية، متاحة حصرياً من خلال اشتراك سنوي ضمن خطتين مميزتين.">
+                    Unity App offers enhanced versions of App Store applications with additional features and capabilities, available exclusively through an annual subscription under two distinct plans.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="2. Payment & Refund Policy" data-ar="2. سياسة الدفع والاسترداد">2. Payment & Refund Policy</h3>
+                <p data-en="Payments are non-refundable once the subscription process is completed."
+                   data-ar="المدفوعات غير قابلة للاسترداد بمجرد إتمام عملية الاشتراك.">
+                    Payments are non-refundable once the subscription process is completed.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="3. Misunderstanding of Features" data-ar="3. سوء فهم الميزات">3. Misunderstanding of Features</h3>
+                <p data-en="In case of any misunderstanding or misinterpretation regarding the subscription content or app functionality, the only official and binding reference is the terms and conditions outlined herein. Personal opinions or external explanations are not considered binding on Unity App."
+                   data-ar="في حال حدوث أي سوء فهم أو تفسير خاطئ لمحتوى الاشتراك أو وظيفة التطبيق، فإن المرجع الرسمي والملزم الوحيد هو الشروط والأحكام الموضحة هنا. الآراء الشخصية أو التفسيرات الخارجية لا تعتبر ملزمة لتطبيق يونيتي.">
+                    In case of any misunderstanding or misinterpretation regarding the subscription content or app functionality, the only official and binding reference is the terms and conditions outlined herein. Personal opinions or external explanations are not considered binding on Unity App.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="4. Snapchat Subscription" data-ar="4. اشتراك سناب شات">4. Snapchat Subscription</h3>
+                <p data-en="Snapchat is not included in either of the annual plans. It is offered as an optional add-on: • For the Standard Plan, the Snapchat add-on is available without a discount. • For the Premium Plan, users receive a special discount on the Snapchat add-on. Snapchat is not guaranteed, and its functionality or availability may vary."
+                   data-ar="لا يشمل سناب شات أي من الخطط السنوية. يتم تقديمه كإضافة اختيارية: • في الخطة القياسية، يتوفر سناب شات كإضافة بدون خصم. • في الخطة المميزة، يحصل المستخدمون على خصم خاص على إضافة سناب شات. لا يتم ضمان سناب شات وقد تختلف وظيفته أو توفره.">
+                    Snapchat is not included in either of the annual plans. It is offered as an optional add-on:
+                    <br>• For the Standard Plan, the Snapchat add-on is available without a discount.
+                    <br>• For the Premium Plan, users receive a special discount on the Snapchat add-on.
+                    <br>Snapchat is not guaranteed, and its functionality or availability may vary.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="5. Subscription Duration" data-ar="5. مدة الاشتراك">5. Subscription Duration</h3>
+                <p data-en="The Standard and Premium plans are valid for one full year from the date of activation."
+                   data-ar="تكون الخطة القياسية والخطة المميزة صالحتين لمدة عام كامل من تاريخ التفعيل.">
+                    The Standard and Premium plans are valid for one full year from the date of activation.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="6. Age & Usage Policy" data-ar="6. سياسة العمر والاستخدام">6. Age & Usage Policy</h3>
+                <p data-en="Unity App is available for users of all ages, provided the app is used responsibly. Access to the app is strictly limited to the provided services and features, with no user-generated content or interaction supported."
+                   data-ar="يتوفر تطبيق يونيتي للمستخدمين من جميع الأعمار، بشرط استخدامه بمسؤولية. يقتصر الوصول إلى التطبيق على الخدمات والميزات المقدمة فقط، ولا يدعم أي محتوى أو تفاعل ينشئه المستخدم.">
+                    Unity App is available for users of all ages, provided the app is used responsibly. Access to the app is strictly limited to the provided services and features, with no user-generated content or interaction supported.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="7. Service Availability" data-ar="7. توفر الخدمة">7. Service Availability</h3>
+                <p data-en="Unity App services are available to users both inside and outside Jordan."
+                   data-ar="تتوفر خدمات تطبيق يونيتي للمستخدمين داخل الأردن وخارجه.">
+                    Unity App services are available to users both inside and outside Jordan.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="8. Subscription Usage" data-ar="8. استخدام الاشتراك">8. Subscription Usage</h3>
+                <p data-en="Each subscription is tied to a single device and cannot be transferred to another device."
+                   data-ar="يرتبط كل اشتراك بجهاز واحد ولا يمكن نقله إلى جهاز آخر.">
+                    Each subscription is tied to a single device and cannot be transferred to another device.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="9. Apple Policies & Previous App Usage" data-ar="9. سياسات آبل والاستخدام السابق للتطبيق">9. Apple Policies & Previous App Usage</h3>
+                <p data-en="If you have previously subscribed to a different app (not Unity), Apple’s policies may require you to wait 15–30 days before reactivating your subscription using a new code."
+                   data-ar="إذا كنت قد اشتركت سابقًا في تطبيق مختلف (ليس يونيتي)، فقد تتطلب سياسات آبل الانتظار لمدة 15–30 يومًا قبل إعادة تفعيل اشتراكك باستخدام رمز جديد.">
+                    If you have previously subscribed to a different app (not Unity), Apple’s policies may require you to wait 15–30 days before reactivating your subscription using a new code.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="10. App Compatibility" data-ar="10. توافق التطبيق">10. App Compatibility</h3>
+                <p data-en="Some applications may not be compatible with your iPhone’s current iOS version."
+                   data-ar="قد لا تكون بعض التطبيقات متوافقة مع إصدار iOS الحالي على جهاز iPhone الخاص بك.">
+                    Some applications may not be compatible with your iPhone’s current iOS version.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="11. Application Continuity" data-ar="11. استمرارية التطبيق">11. Application Continuity</h3>
+                <p data-en="Unity App does not guarantee the continued availability or functionality of any third-party application. If the app developer or tool creator fails to provide necessary updates, the Unity team cannot maintain or fix the service."
+                   data-ar="لا يضمن تطبيق يونيتي استمرار توفر أو وظيفة أي تطبيق تابع لجهة خارجية. إذا فشل مطور التطبيق أو منشئ الأداة في تقديم التحديثات اللازمة، فلن يتمكن فريق يونيتي من صيانة الخدمة أو إصلاحها.">
+                    Unity App does not guarantee the continued availability or functionality of any third-party application. If the app developer or tool creator fails to provide necessary updates, the Unity team cannot maintain or fix the service.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="12. User Responsibility" data-ar="12. مسؤولية المستخدم">12. User Responsibility</h3>
+                <p data-en="Unity App bears no legal or ethical responsibility for how users utilize the features or applications provided. Users are solely responsible for any misuse or violation of laws, platform policies, or community standards."
+                   data-ar="لا يتحمل تطبيق يونيتي أي مسؤولية قانونية أو أخلاقية عن كيفية استخدام المستخدمين للميزات أو التطبيقات المقدمة. يتحمل المستخدمون وحدهم مسؤولية أي إساءة استخدام أو انتهاك للقوانين أو سياسات المنصات أو معايير المجتمع.">
+                    Unity App bears no legal or ethical responsibility for how users utilize the features or applications provided. Users are solely responsible for any misuse or violation of laws, platform policies, or community standards.
+                </p>
+
+                <h3 class="text-lg text-white font-semibold mt-4" data-en="13. Changes to Terms" data-ar="13. التغييرات على الشروط">13. Changes to Terms</h3>
+                <p data-en="Unity App reserves the right to update or modify these terms and conditions at any time without prior notice. Users are encouraged to review this page regularly."
+                   data-ar="يحتفظ تطبيق يونيتي بالحق في تحديث أو تعديل هذه الشروط والأحكام في أي وقت دون إشعار مسبق. يُنصح المستخدمون بمراجعة هذه الصفحة بانتظام.">
+                    Unity App reserves the right to update or modify these terms and conditions at any time without prior notice. Users are encouraged to review this page regularly.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-surface/90 backdrop-blur-md border-b border-gray">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <a href="#" class="flex items-center space-x-2">
+                        <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/UnityApp.png" 
+                             alt="UnityApp Logo" 
+                             class="h-16 w-16 rounded-lg">
                         <span class="text-2xl font-bold gradient-text primary-gradient">UnityApp</span>
                     </a>
                 </div>
@@ -364,49 +477,24 @@
                 </div>
             </div>
             <div class="md:w-1/2 animate-on-scroll">
-                <div class="glass-card p-6 rounded-2xl shadow-xl">
-                    <div class="relative">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-primary to-primary-light rounded-xl blur opacity-25"></div>
-                        <div class="relative bg-surface rounded-xl p-6">
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex items-center gap-2" dir="auto">
-                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                                </div>
-                                <span class="text-xs text-gray-400">unityapp.com/<span data-en="your-subscriptions" data-ar="اشتراكاتك">your-subscriptions</span></span>
-                            </div>
-                            <div class="border border-gray rounded-lg overflow-hidden">
-                                <div class="bg-gray p-4 flex items-center justify-center" dir="auto">
-                                    <h3 class="font-medium text-text" data-en="Your Premium Apps" data-ar="تطبيقاتك المميزة">Your Premium Apps</h3>
-                                </div>
-                                <div class="p-4 bg-background">
-                                    <div class="grid grid-cols-3 gap-4 mb-4">
-                                        <div class="flex flex-col items-center">
-                                            <div class="app-icon youtube-icon">
-                                                <i class="fab fa-youtube"></i>
-                                            </div>
-                                            <span class="text-sm">YouTube Premium</span>
-                                        </div>
-                                        <div class="flex flex-col items-center">
-                                            <div class="app-icon spotify-icon">
-                                                <i class="fab fa-spotify"></i>
-                                            </div>
-                                            <span class="text-sm">Spotify</span>
-                                        </div>
-                                        <div class="flex flex-col items-center">
-                                            <div class="app-icon snapchat-icon">
-                                                <i class="fab fa-snapchat-ghost"></i>
-                                            </div>
-                                            <span class="text-sm">Snapchat+</span>
-                                        </div>
-                                    </div>
-                                    <button class="w-full bg-primary hover:bg-primary-light text-white py-2 rounded-md text-sm font-medium transition duration-300" data-en="Manage Subscriptions" data-ar="إدارة الاشتراكات">Manage Subscriptions</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+
+<div class="glass-card p-6 rounded-2xl shadow-xl">
+    <div class="relative">
+        <div class="absolute -inset-1 bg-gradient-to-r from-primary to-primary-light rounded-xl blur opacity-25"></div>
+        <div class="relative bg-surface rounded-xl p-6">
+            <div class="flex justify-between items-center mb-4">                                
+            </div>            
+            <!-- New image section with animation -->
+            <div class="overflow-hidden rounded-xl border border-gray bg-background group">
+                <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/refs/heads/main/Users/UnityApp.png" 
+                     alt="UnityApp Preview"
+                     class="w-full h-auto transform scale-100 group-hover:scale-105 transition-transform duration-500 ease-out" />
+            </div>
+        </div>
+    </div>
+</div>
+
             </div>
         </div>
     </section>
@@ -511,24 +599,40 @@
                 <a href="#request" class="mt-auto block w-full text-center bg-primary hover:bg-primary-light text-white py-3 rounded-md font-medium transition duration-300" data-en="Get Premium" data-ar="احصل على المتميز">Get Premium</a>
             </div>
 
-            <!-- Snapchat Add-on -->
-            <div class="glass-card p-8 rounded-xl border border-gray pricing-card transition-all duration-300 hover:border-primary/50 animate-on-scroll flex flex-col" style="transition-delay: 200ms">
-                <div class="mb-6">
-                    <h3 class="text-xl font-bold mb-2 text-text" data-en="Snapchat Add-on" data-ar="إضافة سناب شات">Snapchat Add-on</h3>
-                    <div class="flex items-end">
-                        <span class="text-4xl font-bold text-text">9</span>
-                        <span class="text-lg text-gray-400 ms-1" data-en="JOD/month" data-ar="دينار/شهر">JOD/month</span>
-                    </div>
-                    <p class="text-sm text-gray-400" data-en="Optional monthly subscription" data-ar="اشتراك شهري اختياري">Optional monthly subscription</p>
-                </div>
-                <ul class="space-y-3 mb-8 flex-grow">
-                    <li class="flex items-center"><i class="fas fa-check-circle text-primary me-2"></i><span data-en="Monthly subscription" data-ar="اشتراك شهري">Monthly subscription</span></li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-primary me-2"></i><span data-en="Optional" data-ar="اختياري">Optional</span></li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-primary me-2"></i><span data-en="Fast activation" data-ar="تفعيل سريع">Fast activation</span></li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-primary me-2"></i><span data-en="Discount with Premium plan" data-ar="خصم مع الخطة المميزة">Discount with Premium plan</span></li>
-                </ul>
-                <a href="#request" class="mt-auto block w-full text-center bg-primary hover:bg-primary-light text-white py-3 rounded-md font-medium transition duration-300" data-en="Add Snapchat" data-ar="أضف سناب شات">Add Snapchat</a>
-            </div>
+      <!-- Snapchat Add-on -->
+<div class="glass-card p-8 rounded-xl border border-gray pricing-card transition-all duration-300 hover:border-primary/50 animate-on-scroll flex flex-col" style="transition-delay: 200ms">
+    <div class="mb-6">
+        <h3 class="text-xl font-bold mb-2 text-text" data-en="Snapchat Add-on" data-ar="إضافة سناب شات">Snapchat Add-on</h3>
+        <div class="flex items-end">
+            <span class="text-4xl font-bold text-text">12</span>
+            <span class="text-lg text-gray-400 ms-1" data-en="JOD/month" data-ar="دينار/شهر">JOD/month</span>
+        </div>
+        <p class="text-sm text-gray-400" data-en="Optional monthly subscription" data-ar="اشتراك شهري اختياري">Optional monthly subscription</p>
+    </div>
+    <ul class="space-y-3 mb-8 flex-grow">
+        <li class="flex items-center">
+            <i class="fas fa-check-circle text-primary me-2"></i>
+            <span data-en="Monthly subscription" data-ar="اشتراك شهري">Monthly subscription</span>
+        </li>
+        <li class="flex items-center">
+            <i class="fas fa-check-circle text-primary me-2"></i>
+            <span data-en="Optional" data-ar="اختياري">Optional</span>
+        </li>
+        <li class="flex items-center">
+            <i class="fas fa-check-circle text-primary me-2"></i>
+            <span data-en="Fast activation" data-ar="تفعيل سريع">Fast activation</span>
+        </li>
+        <li class="flex items-center">
+            <i class="fas fa-check-circle text-primary me-2"></i>
+            <span data-en="9 JOD/month with Premium plan" data-ar="٩ دنانير/شهر مع الخطة المميزة">9 JOD/month with Premium plan</span>
+        </li>
+    </ul>
+<a href="#request" 
+   class="mt-auto block w-full text-center bg-[#2563EB] hover:bg-[#60A5FA] text-white py-3 rounded-md font-medium transition duration-300" 
+   data-en="Add Snapchat" data-ar="أضف سناب شات">
+   Add Snapchat
+</a>
+</div>
         </div>
     </section>
 
@@ -622,9 +726,9 @@
                 
                 <form id="subscriptionRequestForm" class="space-y-6">
                     <div>
-                        <label for="name" class="block text-sm font-medium mb-1 text-text" data-en="Full Name*" data-ar="الاسم الكامل*">Full Name*</label>
+                        <label for="name" class="block text-sm font-medium mb-1 text-text" data-en="Name*" data-ar="الاسم الكامل*">Name*</label>
                         <input type="text" id="name" name="name" 
-                               placeholder="John Smith" required
+                               placeholder="Full Name (First, Middle, Last)" required
                                minlength="3" maxlength="50"
                                class="w-full px-4 py-3 rounded-lg bg-surface border border-gray focus:ring-2 focus:ring-primary focus:border-transparent">
                         <p class="text-xs text-red-500 mt-1 hidden" id="name-error">Please enter a valid name (3-50 characters)</p>
@@ -633,7 +737,7 @@
                     <div>
                         <label for="email" class="block text-sm font-medium mb-1 text-text" data-en="Email Address*" data-ar="عنوان البريد الإلكتروني*">Email Address*</label>
                         <input type="email" id="email" name="email" 
-                               placeholder="john.smith@example.com" required
+                               placeholder="example@email.com" required
                                class="w-full px-4 py-3 rounded-lg bg-surface border border-gray focus:ring-2 focus:ring-primary focus:border-transparent">
                         <p class="text-xs text-red-500 mt-1 hidden" id="email-error">Please enter a valid email address</p>
                     </div>
@@ -649,9 +753,9 @@
                     </div>
                     
                     <div>
-                        <label for="profession" class="block text-sm font-medium mb-1 text-text" data-en="Profession" data-ar="المهنة">Profession</label>
-                        <input type="text" id="profession" name="profession"
-                               placeholder="Software Engineer"
+                        <label for="UsernameHandle" class="block text-sm font-medium mb-1 text-text" data-en="Username Handle" data-ar="اسم المستخدم">Username Handle</label>
+                        <input type="text" id="UsernameHandle" name="UsernameHandle"
+                               placeholder="@username"
                                minlength="3" maxlength="50"
                                class="w-full px-4 py-3 rounded-lg bg-surface border border-gray focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
@@ -663,7 +767,7 @@
                             <option value="">Select a plan</option>
                             <option value="standard">Standard (9 JOD/year)</option>
                             <option value="premium">Premium (20 JOD/year)</option>
-                            <option value="snapchat">Snapchat Add-on (9 JOD/month)</option>
+                            <option value="snapchat">Snapchat Add-on (12 JOD/month)</option>
                         </select>
                         <p class="text-xs text-red-500 mt-1 hidden" id="plan-error">Please select a plan</p>
                     </div>
@@ -700,99 +804,125 @@
 
     <!-- FAQ Section -->
     <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="text-center mb-16 animate-on-scroll">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-text">
-                <span data-en="Frequently Asked " data-ar="الأسئلة ">Frequently Asked </span>
-                <span class="gradient-text primary-gradient" data-en="Questions" data-ar="الشائعة">Questions</span>
-            </h2>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto" data-en="Everything you need to know about UnityApp subscriptions." 
-               data-ar="كل ما تحتاج لمعرفته حول اشتراكات UnityApp.">
-                Everything you need to know about UnityApp subscriptions.
-            </p>
-        </div>
-        
-        <div class="max-w-3xl mx-auto space-y-4">
-            <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll">
-                <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
-                    <h3 class="text-lg font-medium text-text" data-en="What apps are included in the subscriptions?" data-ar="ما هي التطبيقات المدرجة في الاشتراكات؟">What apps are included in the subscriptions?</h3>
-                    <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                </button>
-                <div class="accordion-content px-6">
-                    <div class="pb-6 text-gray-400">
-                        <p data-en="Our subscriptions provide access to most popular App Store apps including YouTube Premium, Spotify, and many others. The Standard plan excludes Snapchat+, which is available as a separate add-on." 
-                           data-ar="توفر اشتراكاتنا الوصول إلى معظم تطبيقات متجر التطبيقات الشائعة بما في ذلك YouTube Premium وSpotify وغيرها الكثير. تستثني الخطة القياسية Snapchat+، والذي يتوفر كإضافة منفصلة.">
-                            Our subscriptions provide access to most popular App Store apps including YouTube Premium, Spotify, and many others. The Standard plan excludes Snapchat+, which is available as a separate add-on.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll" style="transition-delay: 50ms">
-                <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
-                    <h3 class="text-lg font-medium text-text" data-en="How long does activation take?" data-ar="كم من الوقت يستغرق التفعيل؟">How long does activation take?</h3>
-                    <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                </button>
-                <div class="accordion-content px-6">
-                    <div class="pb-6 text-gray-400">
-                        <p data-en="Activation times vary by plan:" 
-                           data-ar="تختلف أوقات التفعيل حسب الخطة:">
-                            Activation times vary by plan:
-                        </p>
-                        <ul class="list-disc pl-5 mt-2 space-y-1">
-                            <li data-en="Premium: Instant activation" data-ar="المتميز: تفعيل فوري">Premium: Instant activation</li>
-                            <li data-en="Standard: 24-72 hours" data-ar="القياسي: 24-72 ساعة">Standard: 24-72 hours</li>
-                            <li data-en="Snapchat Add-on: Instant with Premium, 24 hours with Standard" data-ar="إضافة سناب شات: فوري مع المتميز، 24 ساعة مع القياسي">Snapchat Add-on: Instant with Premium, 24 hours with Standard</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll" style="transition-delay: 100ms">
-                <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
-                    <h3 class="text-lg font-medium text-text" data-en="Is this service officially licensed by Apple?" data-ar="هل هذه الخدمة مرخصة رسميًا من Apple؟">Is this service officially licensed by Apple?</h3>
-                    <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                </button>
-                <div class="accordion-content px-6">
-                    <div class="pb-6 text-gray-400">
-                        <p data-en="Yes, UnityApp operates as a licensed digital subscription service by Apple, providing authorized access to App Store applications through our annual plans." 
-                           data-ar="نعم، يعمل UnityApp كخدمة اشتراك رقمي مرخصة من Apple، مما يوفر وصولاً مصرحًا به إلى تطبيقات متجر التطبيقات من خلال خططنا السنوية.">
-                            Yes, UnityApp operates as a licensed digital subscription service by Apple, providing authorized access to App Store applications through our annual plans.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll" style="transition-delay: 150ms">
-                <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
-                    <h3 class="text-lg font-medium text-text" data-en="What payment methods do you accept?" data-ar="ما هي طرق الدفع التي تقبلونها؟">What payment methods do you accept?</h3>
-                    <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                </button>
-                <div class="accordion-content px-6">
-                    <div class="pb-6 text-gray-400">
-                        <p data-en="We accept payment via bank transfer, mobile payment apps, or cash on delivery (Amman area only). Payment is required after activation confirmation and before delivery of access credentials." 
-                           data-ar="نقبل الدفع عبر التحويل البنكي أو تطبيقات الدفع عبر الهاتف المحمول أو الدفع عند الاستلام (منطقة عمان فقط). يلزم الدفع بعد تأكيد التفعيل وقبل تسليم بيانات اعتماد الوصول.">
-                            We accept payment via bank transfer, mobile payment apps, or cash on delivery (Amman area only). Payment is required after activation confirmation and before delivery of access credentials.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll" style="transition-delay: 200ms">
-                <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
-                    <h3 class="text-lg font-medium text-text" data-en="What if I have issues with my subscription?" data-ar="ماذا لو واجهت مشاكل في اشتراكي؟">What if I have issues with my subscription?</h3>
-                    <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                </button>
-                <div class="accordion-content px-6">
-                    <div class="pb-6 text-gray-400">
-                        <p data-en="All plans come with technical support. Premium plans include priority fast support. For any issues, contact us via WhatsApp or email and we'll resolve them promptly." 
-                           data-ar="تأتي جميع الخطط مع دعم فني. تتضمن الخطط المميزة دعمًا سريعًا أولويًا. لأي مشاكل، اتصل بنا عبر واتساب أو البريد الإلكتروني وسنحلها على الفور.">
-                            All plans come with technical support. Premium plans include priority fast support. For any issues, contact us via WhatsApp or email and we'll resolve them promptly.
-                        </p>
-                    </div>
+    <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-text">
+            <span data-en="Frequently Asked " data-ar="الأسئلة ">Frequently Asked </span>
+            <span class="gradient-text primary-gradient" data-en="Questions" data-ar="الشائعة">Questions</span>
+        </h2>
+        <p class="text-lg text-gray-400 max-w-3xl mx-auto" data-en="Everything you need to know about UnityApp subscriptions." 
+           data-ar="كل ما تحتاج لمعرفته حول اشتراكات UnityApp.">
+            Everything you need to know about UnityApp subscriptions.
+        </p>
+    </div>
+    
+    <div class="max-w-3xl mx-auto space-y-4">
+        <!-- Updated First Question -->
+        <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll">
+            <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
+                <h3 class="text-lg font-medium text-text" 
+                    data-en="Is Snapchat included with the Unity App subscription? Is Snapchat guaranteed?" 
+                    data-ar="هل يتم تضمين سناب شات مع اشتراك Unity App؟ وهل هو مضمون؟">
+                    Is Snapchat included with the Unity App subscription? Is Snapchat guaranteed?
+                </h3>
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="accordion-content px-6">
+                <div class="pb-6 text-gray-400">
+                    <p data-en="Snapchat is not included in the Standard or Premium plans. It is available as an optional add-on, with a discount for Premium subscribers and no discount for Standard subscribers. Snapchat is not guaranteed, and its availability or performance may be subject to change." 
+                       data-ar="لا يتم تضمين سناب شات في الخطط القياسية أو المميزة. يتوفر كإضافة اختيارية، مع خصم للمشتركين المميزين ودون خصم للمشتركين القياسيين. سناب شات غير مضمون، وقد تكون إتاحته أو أداؤه عرضة للتغيير.">
+                        Snapchat is not included in the Standard or Premium plans. It is available as an optional add-on, with a discount for Premium subscribers and no discount for Standard subscribers. Snapchat is not guaranteed, and its availability or performance may be subject to change.
+                    </p>
                 </div>
             </div>
         </div>
-    </section>
+
+        <!-- Existing Questions -->
+        <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll" style="transition-delay: 50ms">
+            <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
+                <h3 class="text-lg font-medium text-text" data-en="How long does activation take?" data-ar="كم من الوقت يستغرق التفعيل؟">How long does activation take?</h3>
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="accordion-content px-6">
+                <div class="pb-6 text-gray-400">
+                    <p data-en="Activation times vary by plan:" 
+                       data-ar="تختلف أوقات التفعيل حسب الخطة:">
+                        Activation times vary by plan:
+                    </p>
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li data-en="Premium: Instant activation" data-ar="المتميز: تفعيل فوري">Premium: Instant activation</li>
+                        <li data-en="Standard: 24-72 hours" data-ar="القياسي: 24-72 ساعة">Standard: 24-72 hours</li>
+                        <li data-en="Snapchat Add-on: Instant with Premium, 24 hours with Standard" data-ar="إضافة سناب شات: فوري مع المتميز، 24 ساعة مع القياسي">Snapchat Add-on: Instant with Premium, 24 hours with Standard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll" style="transition-delay: 100ms">
+            <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
+                <h3 class="text-lg font-medium text-text" data-en="Is this service officially licensed by Apple?" data-ar="هل هذه الخدمة مرخصة رسميًا من Apple؟">Is this service officially licensed by Apple?</h3>
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="accordion-content px-6">
+                <div class="pb-6 text-gray-400">
+                    <p data-en="Yes, UnityApp operates as a licensed digital subscription service by Apple, providing authorized access to App Store applications through our annual plans." 
+                       data-ar="نعم، يعمل UnityApp كخدمة اشتراك رقمي مرخصة من Apple، مما يوفر وصولاً مصرحًا به إلى تطبيقات متجر التطبيقات من خلال خططنا السنوية.">
+                        Yes, UnityApp operates as a licensed digital subscription service by Apple, providing authorized access to App Store applications through our annual plans.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll" style="transition-delay: 150ms">
+            <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
+                <h3 class="text-lg font-medium text-text" data-en="What payment methods do you accept?" data-ar="ما هي طرق الدفع التي تقبلونها؟">What payment methods do you accept?</h3>
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="accordion-content px-6">
+                <div class="pb-6 text-gray-400">
+                    <p data-en="We accept payment via bank transfer, mobile payment apps, or cash on delivery (Amman area only). Payment is required after activation confirmation and before delivery of access credentials." 
+                       data-ar="نقبل الدفع عبر التحويل البنكي أو تطبيقات الدفع عبر الهاتف المحمول أو الدفع عند الاستلام (منطقة عمان فقط). يلزم الدفع بعد تأكيد التفعيل وقبل تسليم بيانات اعتماد الوصول.">
+                        We accept payment via bank transfer, mobile payment apps, or cash on delivery (Amman area only). Payment is required after activation confirmation and before delivery of access credentials.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll" style="transition-delay: 200ms">
+            <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
+                <h3 class="text-lg font-medium text-text" data-en="What if I have issues with my subscription?" data-ar="ماذا لو واجهت مشاكل في اشتراكي؟">What if I have issues with my subscription?</h3>
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="accordion-content px-6">
+                <div class="pb-6 text-gray-400">
+                    <p data-en="All plans come with technical support. Premium plans include priority fast support. For any issues, contact us via WhatsApp or email and we'll resolve them promptly." 
+                       data-ar="تأتي جميع الخطط مع دعم فني. تتضمن الخطط المميزة دعمًا سريعًا أولويًا. لأي مشاكل، اتصل بنا عبر واتساب أو البريد الإلكتروني وسنحلها على الفور.">
+                        All plans come with technical support. Premium plans include priority fast support. For any issues, contact us via WhatsApp or email and we'll resolve them promptly.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Question: iOS Version Support -->
+        <div class="glass-card rounded-xl border border-gray overflow-hidden animate-on-scroll" style="transition-delay: 250ms">
+            <button class="accordion-toggle w-full flex justify-between items-center p-6 text-left">
+                <h3 class="text-lg font-medium text-text" 
+                    data-en="What iOS versions are supported by Unity App?" 
+                    data-ar="ما هي إصدارات iOS التي يدعمها Unity App؟">
+                    What iOS versions are supported by Unity App?
+                </h3>
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="accordion-content px-6">
+                <div class="pb-6 text-gray-400">
+                    <p data-en="Unity App supports all devices running iOS 12 and above." 
+                       data-ar="يدعم تطبيق Unity جميع الأجهزة التي تعمل بنظام iOS 12 فما فوق.">
+                        Unity App supports all devices running iOS 12 and above.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-dark-section rounded-3xl my-12">
@@ -871,6 +1001,9 @@
                         <li>
                             <a href="javascript:void(0);" @click="showTerms = true" class="text-gray-400 hover:text-primary transition duration-300" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
                         </li>
+                           <li>                         
+                            <a href="javascript:void(0);" @click="showPrivacy = true" class="text-gray-400 hover:text-primary transition duration-300" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+                        </li> 
                     </ul>
                 </div>                
             </div>
