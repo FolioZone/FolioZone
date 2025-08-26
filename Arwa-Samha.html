@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arwa Salah Samha - Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#111827',
+                        darkLight: '#1F2937',
+                        accent: '#F59E0B'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'pulse-slow': 'pulse 3s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #111827;
+            color: #F3F4F6;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #3B82F6, #10B981);
+            border-radius: 3px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #374151;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #3B82F6, #10B981);
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid #3B82F6;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #3B82F6;
+        }
+        
+        .skill-card, .exp-card {
+            transition: all 0.3s ease;
+            border: 1px solid #374151;
+        }
+        
+        .skill-card:hover, .exp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            border-color: #3B82F6;
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .typewriter h1 {
+            overflow: hidden;
+            border-right: .15em solid #3B82F6;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .10em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #3B82F6; }
+        }
+    </style>
+</head>
+<body class="bg-dark text-gray-200">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-darkLight bg-opacity-90 backdrop-blur-sm py-4 px-6 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Arwa Samha</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#experience" class="hover:text-primary transition-colors">Experience</a>
+                <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-darkLight mt-4 py-4 px-6 rounded-lg shadow-xl">
+            <div class="flex flex-col space-y-4">
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#experience" class="hover:text-primary transition-colors">Experience</a>
+                <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-20 pb-12 px-6 bg-gradient-to-br from-dark to-darkLight">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0 animate-slide-up">                
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Arwa Salah Samha</h2>
+                <p class="text-xl text-gray-300 mb-8">Purchasing Manager & Project Coordinator with extensive experience in procurement, team supervision, and data management.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="px-6 py-3 bg-primary rounded-lg font-medium hover:bg-blue-600 transition-colors">Download CV</a>
+                    <a href="#experience" class="px-6 py-3 border border-primary text-primary rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">View Experience</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary floating">
+                    <div class="w-full h-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                        <span class="text-6xl text-white font-bold">AS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-6 bg-darkLight">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 section-title">About Me</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="animate-fade-in">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">Personal Information</h3>
+                    <div class="space-y-3">
+                        <p><span class="font-medium">Date of Birth:</span> 7 November 1988</p>
+                        <p><span class="font-medium">Nationality:</span> Jordanian</p>
+                        <p><span class="font-medium">Location:</span> Amman, Jordan</p>
+                        <p><span class="font-medium">Languages:</span></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Arabic: Native</li>
+                            <li>English: Fluent (Strong Written and Verbal Communication Skills)</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold mt-8 mb-4 text-primary">Education</h3>
+                    <div class="bg-dark p-4 rounded-lg border-l-4 border-secondary">
+                        <h4 class="font-semibold">Bachelor of Sports Science</h4>
+                        <p class="text-gray-400">Hashemite University, Jordan</p>
+                        <p class="text-gray-400">Graduation Year: 2010</p>
+                    </div>
+                </div>
+                <div class="animate-fade-in">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">Professional Summary</h3>
+                    <p class="mb-6">Experienced professional with a diverse background in procurement management, project coordination, customer service, and education. Proven track record of optimizing operations, reducing costs, and improving efficiency across various industries.</p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-dark p-4 rounded-lg text-center">
+                            <div class="text-4xl font-bold text-secondary mb-2">15%</div>
+                            <div class="text-sm">Cost Reduction</div>
+                        </div>
+                        <div class="bg-dark p-4 rounded-lg text-center">
+                            <div class="text-4xl font-bold text-primary mb-2">20%</div>
+                            <div class="text-sm">Inventory Accuracy Improvement</div>
+                        </div>
+                        <div class="bg-dark p-4 rounded-lg text-center">
+                            <div class="text-4xl font-bold text-secondary mb-2">13+</div>
+                            <div class="text-sm">Years Experience</div>
+                        </div>
+                        <div class="bg-dark p-4 rounded-lg text-center">
+                            <div class="text-4xl font-bold text-primary mb-2">4</div>
+                            <div class="text-sm">Sectors Expertise</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 px-6 bg-dark">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 section-title">Professional Experience</h2>
+            
+            <div class="space-y-12">
+                <!-- Experience 1 -->
+                <div class="exp-card bg-darkLight p-6 rounded-lg animate-slide-up">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <h3 class="text-xl font-semibold text-primary">Purchasing Manager & Team Supervisor</h3>
+                        <span class="text-secondary font-medium">2021–2024</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Ibrahim Samha Supermarket (We Market)</p>
+                    <ul class="list-disc list-inside ml-4 space-y-2 mb-4">
+                        <li>Managed procurement operations, negotiating supplier contracts to secure cost-effective deals.</li>
+                        <li>Developed strategies to optimize inventory levels, minimizing waste and boosting profitability.</li>
+                        <li>Supervised and trained employees, fostering teamwork and maintaining high performance standards.</li>
+                    </ul>
+                    <div class="bg-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-secondary mb-2">Achievements:</h4>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Reduced procurement costs through strategic vendor negotiations.</li>
+                            <li>Improved inventory accuracy by reducing stock discrepancies significantly.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Experience 2 -->
+                <div class="exp-card bg-darkLight p-6 rounded-lg animate-slide-up">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <h3 class="text-xl font-semibold text-primary">Customer Data Update Project Coordinator</h3>
+                        <span class="text-secondary font-medium">2013–2021</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Investment Bank</p>
+                    <ul class="list-disc list-inside ml-4 space-y-2 mb-4">
+                        <li>Coordinated large-scale Customer Data Update Projects, ensuring compliance with banking regulations.</li>
+                        <li>Streamlined operations in the Electronic Cards Department and Account Maintenance Division for improved efficiency.</li>
+                        <li>Supported the Compliance Department in implementing electronic data systems, reducing risks and enhancing accuracy.</li>
+                    </ul>
+                    <div class="bg-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-secondary mb-2">Achievements:</h4>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Played a key role in successful data migration projects, improving operational workflows.</li>
+                            <li>Reduced compliance-related errors through staff training and process optimization.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Experience 3 -->
+                <div class="exp-card bg-darkLight p-6 rounded-lg animate-slide-up">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <h3 class="text-xl font-semibold text-primary">Customer Service Representative & Sales Associate</h3>
+                        <span class="text-secondary font-medium">2011–2013</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">FIT FIX GYM</p>
+                    <ul class="list-disc list-inside ml-4 space-y-2">
+                        <li>Delivered exceptional customer service, ensuring client satisfaction and retention.</li>
+                        <li>Promoted gym memberships and fitness programs, consistently meeting sales targets.</li>
+                        <li>Conducted member orientations, introducing new clients to facilities and services.</li>
+                    </ul>
+                </div>
+                
+                <!-- Experience 4 -->
+                <div class="exp-card bg-darkLight p-6 rounded-lg animate-slide-up">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <h3 class="text-xl font-semibold text-primary">School Administrator / Teacher</h3>
+                        <span class="text-secondary font-medium">2010–2011</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Modern Education School</p>
+                    <ul class="list-disc list-inside ml-4 space-y-2">
+                        <li>Contributed to student development through effective teaching methods and a supportive learning environment.</li>
+                        <li>Assisted in curriculum implementation and conducted assessments to track academic progress.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 px-6 bg-darkLight">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 section-title">Skills & Expertise</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Technical Skills -->
+                <div class="animate-fade-in">
+                    <h3 class="text-xl font-semibold mb-6 text-primary">Technical Skills</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Microsoft Office Suite</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>CRM Systems</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Data Management & Analysis</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Inventory Management Software</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Soft Skills -->
+                <div class="animate-fade-in">
+                    <h3 class="text-xl font-semibold mb-6 text-primary">Soft Skills</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="skill-card bg-dark p-4 rounded-lg text-center">
+                            <i class="fas fa-users text-3xl text-primary mb-2"></i>
+                            <h4 class="font-semibold">Leadership</h4>
+                        </div>
+                        <div class="skill-card bg-dark p-4 rounded-lg text-center">
+                            <i class="fas fa-comments text-3xl text-primary mb-2"></i>
+                            <h4 class="font-semibold">Communication</h4>
+                        </div>
+                        <div class="skill-card bg-dark p-4 rounded-lg text-center">
+                            <i class="fas fa-lightbulb text-3xl text-primary mb-2"></i>
+                            <h4 class="font-semibold">Problem-Solving</h4>
+                        </div>
+                        <div class="skill-card bg-dark p-4 rounded-lg text-center">
+                            <i class="fas fa-tasks text-3xl text-primary mb-2"></i>
+                            <h4 class="font-semibold">Organization</h4>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold mt-8 mb-4 text-primary">Languages</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-dark p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-primary mb-2">Arabic</div>
+                            <div class="text-sm text-gray-400">Native</div>
+                        </div>
+                        <div class="bg-dark p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-primary mb-2">English</div>
+                            <div class="text-sm text-gray-400">Fluent</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-6 bg-dark">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 section-title">Get In Touch</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="animate-fade-in">
+                    <p class="mb-8">I'm always interested in new opportunities and connections. Feel free to reach out if you'd like to discuss potential collaborations or just want to say hello!</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-white"></i>
+                            </div>
+                            <div>
+                                <a href="tel:+962796747754" class="text-lg hover:text-primary transition-colors">+962 79 674 7754</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <a href="mailto:arwa.samha@gmail.com" class="text-lg hover:text-primary transition-colors">arwa.samha@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-lg">Amman, Jordan</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4 mt-8">
+                        <a href="https://wa.me/962796747754" target="_blank" class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center hover:bg-green-600 transition-colors">
+                            <i class="fab fa-whatsapp text-white text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center hover:bg-blue-800 transition-colors">
+                            <i class="fab fa-linkedin-in text-white text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="animate-fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="animate-fade-in md:col-span-2 flex flex-col items-center justify-center py-12">
+                    <h3 class="text-xl font-semibold mb-6 text-primary">Download My CV</h3>
+                    <p class="text-gray-300 mb-8 text-center max-w-md">Get a comprehensive overview of my professional experience, skills, and qualifications in PDF format.</p>
+                    <a href="#" class="px-8 py-4 bg-primary rounded-lg font-medium text-lg hover:bg-blue-600 transition-colors flex items-center">
+                        <i class="fas fa-download mr-3"></i>
+                        Download CV
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 bg-darkLight border-t border-gray-800">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400">© 2023 Arwa Salah Samha. All rights reserved.</p>
+            <p class="mt-2 text-gray-500">Powered by <a href="https://folio-zone.com" target="_blank" class="text-primary hover:underline">FolioZone</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+        
+        // Animate progress bars when scrolled into view
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        }
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'skills') {
+                        animateProgressBars();
+                    }
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
