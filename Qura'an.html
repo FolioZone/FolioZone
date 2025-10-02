@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المرجع التفاعلي لسور القرآن الكريم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Soft Gold Accent -->
+    <!-- Application Structure Plan: A dashboard-centric, single-page application. The main view consists of three parts: 1) A header with key statistics (total surahs, Meccan/Medinan counts) for quick insights. 2) An interactive charting section to visualize data distributions (e.g., revelation timeline, type breakdown). 3) A dynamic, filterable, and searchable table listing all 114 surahs. Clicking a surah opens a detailed modal view. This structure was chosen because it allows users to move from a high-level overview (dashboard) to specific details (modal) seamlessly, supporting both casual exploration and focused research within a single, intuitive interface. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1) Surah Counts -> Inform -> Key Stat Cards -> Static Display -> Quick, scannable overview. 2) Revelation Type Distribution -> Compare -> Doughnut Chart (Chart.js/Canvas) -> Hover Tooltips -> Visually intuitive comparison of Meccan vs. Medinan proportions. 3) Surah List -> Organize/Explore -> Interactive HTML Table -> Search & Filter (JS) -> Allows users to easily find specific surahs or group them by attributes like revelation type. 4) Detailed Surah Info -> Inform/Deep Dive -> Modal Window (HTML/CSS/JS) -> Click-to-open -> Presents comprehensive details without cluttering the main view, enabling focused study. All choices prioritize clarity and user-driven exploration. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            background-color: #FDFBF7;
+            color: #4A4A4A;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FDFBF7; }
+        ::-webkit-scrollbar-thumb { background: #D4AF7A; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #BF9B63; }
+        .card {
+            background-color: #FFFFFF;
+            border: 1px solid #EAEAEA;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .modal-content {
+            background-color: #FFFFFF;
+            max-height: 90vh;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-[#BF9B63] mb-2">المرجع التفاعلي لسور القرآن الكريم</h1>
+            <p class="text-lg text-gray-600">استكشف السور بترتيب النزول مع السياق التاريخي والحديثي</p>
+        </header>
+
+        <main>
+            <!-- Statistics Section -->
+            <section id="stats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="card rounded-xl p-6 flex flex-col items-center justify-center text-center">
+                    <h3 class="text-5xl font-bold text-[#4A4A4A]" id="totalSurahs">114</h3>
+                    <p class="text-gray-500 mt-2 text-lg">إجمالي السور</p>
+                </div>
+                <div class="card rounded-xl p-6 flex flex-col items-center justify-center text-center">
+                    <h3 class="text-5xl font-bold text-[#4A4A4A]" id="meccanCount">86</h3>
+                    <p class="text-gray-500 mt-2 text-lg">سورة مكية</p>
+                </div>
+                <div class="card rounded-xl p-6 flex flex-col items-center justify-center text-center">
+                    <h3 class="text-5xl font-bold text-[#4A4A4A]" id="medinanCount">28</h3>
+                    <p class="text-gray-500 mt-2 text-lg">سورة مدنية</p>
+                </div>
+                 <div class="card rounded-xl p-6 flex flex-col items-center justify-center text-center">
+                    <h3 class="text-5xl font-bold text-[#4A4A4A]" id="ayahCount">6236</h3>
+                    <p class="text-gray-500 mt-2 text-lg">إجمالي الآيات</p>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+             <section class="mb-12">
+                <div class="card rounded-xl p-6">
+                     <h2 class="text-2xl font-bold text-center text-[#BF9B63] mb-6">تحليل بصري للوحي</h2>
+                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                         <div class="chart-container mx-auto">
+                            <canvas id="revelationTypeChart"></canvas>
+                         </div>
+                         <div class="w-full">
+                             <div class="chart-container mx-auto" style="max-width: 600px; height: 350px;">
+                                 <canvas id="revelationTimelineChart"></canvas>
+                             </div>
+                         </div>
+                     </div>
+                </div>
+            </section>
+
+            <!-- Surah List Section -->
+            <section class="card rounded-xl p-6">
+                <h2 class="text-2xl font-bold text-[#BF9B63] mb-6">قائمة السور حسب ترتيب النزول</h2>
+                
+                <!-- Filters -->
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <input type="text" id="searchInput" placeholder="ابحث عن سورة..." class="flex-grow p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#D4AF7A] focus:border-transparent transition">
+                    <select id="typeFilter" class="p-3 border border-gray-200 rounded-lg bg-white focus:ring-2 focus:ring-[#D4AF7A] focus:border-transparent transition">
+                        <option value="all">كل الأنواع (مكية ومدنية)</option>
+                        <option value="مكية">مكية</option>
+                        <option value="مدنية">مدنية</option>
+                    </select>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right">
+                        <thead class="border-b-2 border-gray-200">
+                            <tr>
+                                <th class="p-4 font-semibold text-gray-600">النزول</th>
+                                <th class="p-4 font-semibold text-gray-600">السورة</th>
+                                <th class="p-4 font-semibold text-gray-600 hidden md:table-cell">النوع</th>
+                                <th class="p-4 font-semibold text-gray-600 hidden sm:table-cell">الآيات</th>
+                                <th class="p-4 font-semibold text-gray-600 hidden lg:table-cell">سنة النزول</th>
+                            </tr>
+                        </thead>
+                        <tbody id="surahTableBody">
+                            <!-- Rows will be injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="surahModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center p-4 z-50 transition-opacity duration-300">
+        <div class="modal-content rounded-2xl w-full max-w-4xl shadow-2xl overflow-y-auto transform scale-95 transition-transform duration-300">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h2 id="modalTitle" class="text-4xl font-bold text-[#BF9B63]"></h2>
+                        <p id="modalAlternativeNames" class="text-gray-500 mt-1"></p>
+                    </div>
+                    <button id="closeModal" class="text-3xl text-gray-400 hover:text-gray-800 transition">&times;</button>
+                </div>
+                
+                <div class="space-y-8">
+                     <div>
+                        <h3 class="font-bold text-xl text-[#4A4A4A] mb-3 border-b-2 border-[#D4AF7A] pb-2">المقصد الأساسي للسورة</h3>
+                        <p id="modalTheme" class="text-gray-700 leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl text-[#4A4A4A] mb-3 border-b-2 border-[#D4AF7A] pb-2">سبب النزول</h3>
+                        <p id="modalReason" class="text-gray-700 leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl text-[#4A4A4A] mb-3 border-b-2 border-[#D4AF7A] pb-2">أحداث السيرة المرافقة</h3>
+                        <p id="modalSira" class="text-gray-700 leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl text-[#4A4A4A] mb-3 border-b-2 border-[#D4AF7A] pb-2">الحديث الشريف</h3>
+                        <div id="modalHadith" class="text-gray-700 bg-gray-50 p-6 rounded-lg border-r-4 border-[#D4AF7A]">
+                            <p id="hadithText" class="mb-4 leading-loose"></p>
+                            <p class="text-sm">
+                                <span class="font-semibold">الراوي:</span> <span id="hadithNarrator"></span> | 
+                                <span class="font-semibold">المصدر:</span> <span id="hadithSource"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const surahData = [
+            { "revelationOrder": 1, "name": "العلق", "musafOrder": 96, "type": "مكية", "ayahs": 19, "revelationYear": "1 للبعثة", "theme": "الأمر بالقراءة والعلم وبيان أصل خلق الإنسان وتحديه للطغيان.", "altNames": "اقرأ", "reason": "نزول الوحي لأول مرة على النبي صلى الله عليه وسلم في غار حراء.", "siraEvents": "بداية النبوة، فترة التعبد في غار حراء.", "hadith": { "narrator": "عائشة بنت أبي بكر", "text": "أولُ ما بُدِئَ به رسولُ اللهِ صلَّى اللهُ عليه وسلَّم من الوحيِ الرؤيا الصالحةُ في النومِ، فكان لا يَرى رؤيا إلا جاءتْ مثلَ فَلَقِ الصبحِ، ثم حُبِّبَ إليه الخلاءُ، وكان يخلو بغارِ حراءَ فيَتحنَّثُ فيه اللياليَ ذواتِ العددِ قبلَ أن يَنزِعَ إلى أهلِه، ويتزوَّدُ لذلك، ثم يَرجِعُ إلى خديجةَ فيتزوَّدُ لمثلِها، حتى جاءه الحقُّ وهو في غارِ حراءَ، فجاءه الملَكُ فقال: اقرَأْ، قال: ما أنا بقارِئٍ، قال: فأخَذَني فغَطَّني حتى بلَغَ منِّي الجَهْدَ ثم أرسَلَني، فقال: اقرَأْ، قلتُ: ما أنا بقارِئٍ، فأخَذَني فغَطَّني الثانيةَ حتى بلَغَ منِّي الجَهْدَ ثم أرسَلَني، فقال: اقرَأْ، فقلتُ: ما أنا بقارِئٍ، فأخَذَني فغَطَّني الثالثةَ ثم أرسَلَني، فقال: {اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ * خَلَقَ الْإِنْسَانَ مِنْ عَلَقٍ * اقْرَأْ وَرَبُّكَ الْأَكْرَمُ} فرجَعَ بها رسولُ اللهِ صلَّى اللهُ عليه وسلَّم يَرجُفُ فؤادُه...", "source": "صحيح البخاري (3)" } },
+            { "revelationOrder": 2, "name": "القلم", "musafOrder": 68, "type": "مكية", "ayahs": 52, "revelationYear": "1-2 للبعثة", "theme": "تنزيه النبي صلى الله عليه وسلم عن الجنون، وبيان عاقبة الطغاة وحاجز النعمة.", "altNames": "ن والقلم, نون", "reason": "رد على المشركين الذين اتهموا النبي صلى الله عليه وسلم بالجنون.", "siraEvents": "تعرض النبي للاستهزاء من قبل قريش.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 3, "name": "المزمل", "musafOrder": 73, "type": "مكية", "ayahs": 20, "revelationYear": "1-3 للبعثة", "theme": "الإعداد الروحي لحمل الرسالة عن طريق قيام الليل والتفكر في القرآن.", "altNames": "لا يوجد", "reason": "الأمر بقيام الليل كتدريب للنبي والمؤمنين الأوائل.", "siraEvents": "استمرار الدعوة السرية.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 4, "name": "المدثر", "musafOrder": 74, "type": "مكية", "ayahs": 56, "revelationYear": "1-3 للبعثة", "theme": "الأمر بالإنذار، إعلان الدعوة الجهرية، والتحذير من عذاب جهنم.", "altNames": "لا يوجد", "reason": "الأمر بالقيام والإنذار وإعلان الدعوة على الملأ بعد فترة انقطاع الوحي.", "siraEvents": "بداية الدعوة الجهرية.", "hadith": { "narrator": "جابر بن عبد الله", "text": "سمعتُ رسولَ اللهِ صلَّى اللهُ عليه وسلَّم يُحدِّثُ عن فَترةِ الوحيِ، فقال في حديثِه: فبينا أنا أمشي سمعتُ صوتًا من السماءِ، فرفعتُ بصري قِبَلَ السماءِ، فإذا الملَكُ الذي جاءني بحِراءَ، قاعدٌ على كرسيٍّ بين السماءِ والأرضِ، فجَئِثْتُ منه حتى هَويتُ إلى الأرضِ، فجئتُ أهلي فقلتُ: زَمِّلوني زَمِّلوني، فأنزل اللهُ تعالى: {يَا أَيُّهَا الْمُدَّثِّرُ * قُمْ فَأَنْذِرْ}", "source": "صحيح البخاري (4924)" } },
+            { "revelationOrder": 5, "name": "الفاتحة", "musafOrder": 1, "type": "مكية", "ayahs": 7, "revelationYear": "3-5 للبعثة", "theme": "تأسيس العبادة والتوحيد والدعاء، وهي ركن الصلاة.", "altNames": "أم الكتاب, السبع المثاني, الشفاء", "reason": "لتكون ركناً في الصلاة.", "siraEvents": "فرض الصلاة في الفترة الأولى من الجهر بالدعوة.", "hadith": { "narrator": "عبادة بن الصامت", "text": "لا صلاةَ لمن لم يَقرأْ بفاتحةِ الكتابِ.", "source": "صحيح البخاري (756)" } },
+            { "revelationOrder": 6, "name": "المسد", "musafOrder": 111, "type": "مكية", "ayahs": 5, "revelationYear": "4-5 للبعثة", "theme": "بيان هلاك أبي لهب وزوجته جزاءً لمعاداتهما العلنية للنبي.", "altNames": "تبَّت", "reason": "صعد النبيُّ صلَّى اللهُ عليه وسلَّم الصَّفا، فجعل ينادي: يا بني فِهرٍ، يا بني عَدِيٍّ - لبطونِ قريشٍ - حتى اجتمَعوا، فقال: أرأيتَكم لو أخبَرتُكم أنَّ خَيْلًا بالوادي تريدُ أن تُغِيرَ عليكم، أكنتم مُصَدِّقِيَّ؟ قالوا: نعم، ما جَرَّبْنا عليك إلا صِدْقًا. قال: فإنِّي نذيرٌ لكم بين يدَيْ عذابٍ شديدٍ. فقال أبو لهبٍ: تبًّا لك سائرَ اليومِ، ألهذا جمَعْتَنا؟ فنزلت: {تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ * مَا أَغْنَى عَنْهُ مَالُهُ وَمَا كَسَبَ}", "siraEvents": "المواجهة المباشرة بين النبي وعمه أبي لهب عند جبل الصفا.", "hadith": { "narrator": "ابن عباس", "text": "صعد النبيُّ صلَّى اللهُ عليه وسلَّم الصَّفا، فقال أبو لهبٍ: تبًّا لك سائرَ اليومِ، ألهذا جمَعْتَنا؟ فنزلت: {تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ}", "source": "صحيح البخاري (4770)" } },
+            { "revelationOrder": 7, "name": "التكوير", "musafOrder": 81, "type": "مكية", "ayahs": 29, "revelationYear": "5-7 للبعثة", "theme": "تصوير مشاهد يوم القيامة لإثبات وقوع البعث والجزاء.", "altNames": "إذا الشمس كوّرت", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": "ابن عمر", "text": "مَن سرَّهُ أن ينظرَ إلى يومِ القيامةِ كأنَّهُ رأيُ عَينٍ فليقرأ: {إِذَا الشَّمْسُ كُوِّرَتْ} و{إِذَا السَّمَاءُ انْفَطَرَتْ} و{إِذَا السَّمَاءُ انْشَقَّتْ}", "source": "سنن الترمذي (3333) - حسن غريب" } },
+            { "revelationOrder": 8, "name": "الأعلى", "musafOrder": 87, "type": "مكية", "ayahs": 19, "revelationYear": "5-7 للبعثة", "theme": "التذكير بعظمة الخالق وأمره بالتسبيح، وبيان أصول التزكية.", "altNames": "سبِّح", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": "النعمان بن بشير", "text": "كان رسولُ اللهِ صلَّى اللهُ عليه وسلَّم يقرأُ في العِيدينِ، وفي الجُمُعةِ بـ {سَبِّحِ اسْمَ رَبِّكَ الْأَعْلَى} و{هَلْ أَتَاكَ حَدِيثُ الْغَاشِيَةِ}", "source": "صحيح مسلم (878)" } },
+            { "revelationOrder": 9, "name": "الليل", "musafOrder": 92, "type": "مكية", "ayahs": 21, "revelationYear": "5-7 للبعثة", "theme": "المقارنة بين عاقبة الفريقين: البخيل الشقي والمؤمن التقي.", "altNames": "لا يوجد", "reason": "نزلت في أبي بكر الصديق الذي كان يعتق العبيد الضعفاء، وفي أمية بن خلف الذي كان بخيلاً.", "siraEvents": "عتق أبي بكر للعبيد المستضعفين مثل بلال بن رباح.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 10, "name": "الفجر", "musafOrder": 89, "type": "مكية", "ayahs": 30, "revelationYear": "5-7 للبعثة", "theme": "التحذير من عاقبة الطغيان وبيان الجزاء الأبدي.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 11, "name": "الضحى", "musafOrder": 93, "type": "مكية", "ayahs": 11, "revelationYear": "5-7 للبعثة", "theme": "طمأنة النبي وتثبيته بعد انقطاع الوحي، وبيان فضله عليه.", "altNames": "لا يوجد", "reason": "احتبس الوحيُ عن رسولِ اللهِ صلَّى اللهُ عليه وسلَّم، فقالت امرأةٌ من المشركين: أرى صاحبَك قد قلاك. فأنزل اللهُ: {وَالضُّحَى * وَاللَّيْلِ إِذَا سَجَى * مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَى}", "siraEvents": "انقطاع الوحي لفترة قصيرة ثم عودته.", "hadith": { "narrator": "جندب بن عبدالله", "text": "اشتكى النبيُّ صلَّى اللهُ عليه وسلَّم فلم يَقُمْ ليلتينِ أو ثلاثًا، فجاءت امرأةٌ فقالت: يا محمدُ، إني لأرجو أن يكون شيطانُك قد ترَكَك، لم أَرَهُ قَرِبَك منذ ليلتينِ أو ثلاثٍ، فأنزل اللهُ عزَّ وجلَّ: {وَالضُّحَى * وَاللَّيْلِ إِذَا سَجَى * مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَى}", "source": "صحيح البخاري (4950)" } },
+            { "revelationOrder": 12, "name": "الشرح", "musafOrder": 94, "type": "مكية", "ayahs": 8, "revelationYear": "5-7 للبعثة", "theme": "التذكير بنعم الله على النبي وبيان أن بعد العسر يسراً.", "altNames": "ألم نشرح", "reason": "لا يوجد سبب نزول محدد، ولكنها جاءت تتمة لسورة الضحى في طمأنة النبي.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 13, "name": "العصر", "musafOrder": 103, "type": "مكية", "ayahs": 3, "revelationYear": "5-7 للبعثة", "theme": "بيان أن النجاة محصورة في الإيمان والعمل الصالح والتواصي بالحق والصبر.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "قال الشافعي: لو ما أنزل الله حجة على خلقه إلا هذه السورة لكفتهم.", "source": "أثر مشهور" } },
+            { "revelationOrder": 14, "name": "العاديات", "musafOrder": 100, "type": "مكية", "ayahs": 11, "revelationYear": "5-7 للبعثة", "theme": "القسم بالخيل وبيان جحود الإنسان لربه وحبه الشديد للمال.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 15, "name": "الكوثر", "musafOrder": 108, "type": "مكية", "ayahs": 3, "revelationYear": "8 للبعثة", "theme": "تكريم النبي وتبشيره بالخير الكثير، وبيان أن شانئه هو الأبتر.", "altNames": "النحر", "reason": "رداً على العاص بن وائل الذي عاير النبي صلى الله عليه وسلم بانقطاع الذكور من ولده.", "siraEvents": "التعرض للإيذاء اللفظي من زعماء قريش.", "hadith": { "narrator": "أنس بن مالك", "text": "بينا رسولُ اللهِ صلَّى اللهُ عليه وسلَّم ذاتَ يومٍ بين أظهُرِنا إذ أغفى إغفاءةً ثم رفَع رأسَه مُتبسِّمًا، فقلنا: ما أضحَكَك يا رسولَ اللهِ؟ قال: أُنزِلَتْ علَيَّ آنفًا سورةٌ، فقرَأ: بسمِ اللهِ الرَّحمنِ الرَّحيمِ {إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ * فَصَلِّ لِرَبِّكَ وَانْحَرْ * إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ} ثم قال: أتدرون ما الكوثرُ؟ فقلنا: اللهُ ورسولُه أعلَمُ، قال: فإنه نهرٌ وعَدَنيهِ ربِّي عزَّ وجلَّ، عليه خيرٌ كثيرٌ، هو حوضٌ تَرِدُ عليه أُمَّتي يومَ القيامةِ.", "source": "صحيح مسلم (400)" } },
+            { "revelationOrder": 16, "name": "التكاثر", "musafOrder": 102, "type": "مكية", "ayahs": 8, "revelationYear": "8 للبعثة", "theme": "ذم الانشغال بالتكاثر في الدنيا عن الطاعة، والوعيد بالمساءلة.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 17, "name": "الماعون", "musafOrder": 107, "type": "مكية", "ayahs": 7, "revelationYear": "8 للبعثة", "theme": "ذم من يمنع المعونة، وصفات التكذيب بالدين (كترك الصلاة والرياء).", "altNames": "أرايت, اليتيم", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 18, "name": "الكافرون", "musafOrder": 109, "type": "مكية", "ayahs": 6, "revelationYear": "9 للبعثة", "theme": "البراءة التامة والفاصلة من عبادة المشركين وعقائدهم.", "altNames": "المقشقشة", "reason": "طلب المشركين من النبي أن يعبد آلهتهم سنة ويعبدوا إلهه سنة.", "siraEvents": "مساومات قريش للنبي لترك الدعوة.", "hadith": { "narrator": "فروة بن نوفل", "text": "أنَّه أتى النبيَّ صلَّى اللهُ عليه وسلَّم فقال: يا رسولَ اللهِ، عَلِّمْني شيئًا أقولُه إذا أوَيْتُ إلى فِراشي، قال: اقرأْ: {قُلْ يَا أَيُّهَا الْكَافِرُونَ}؛ فإنَّها براءةٌ من الشِّركِ.", "source": "سنن الترمذي (3403) - صحيح" } },
+            { "revelationOrder": 19, "name": "الفيل", "musafOrder": 105, "type": "مكية", "ayahs": 5, "revelationYear": "9 للبعثة", "theme": "تذكير قريش بنعمة الله عليهم عندما حمى البيت من أبرهة.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "تذكير بحادثة عام الفيل (عام ميلاد النبي).", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 20, "name": "الفلق", "musafOrder": 113, "type": "مكية", "ayahs": 5, "revelationYear": "9 للبعثة", "theme": "الاستعاذة بالله من شر المخلوقات عامة وشرور الغيب والسحر خاصة.", "altNames": "المعوذتان (مع الناس)", "reason": "سحر النبي صلى الله عليه وسلم من قبل لبيد بن الأعصم اليهودي.", "siraEvents": "حادثة سحر النبي.", "hadith": { "narrator": "عقبة بن عامر", "text": "ألم تر آياتٍ أُنزِلَتْ اللَّيلةَ لم يُرَ مثلهُنَّ قطُّ: قل أعوذُ بربِّ الفلقِ وقل أعوذُ بربِّ الناسِ.", "source": "صحيح مسلم (814)" } },
+            { "revelationOrder": 21, "name": "الناس", "musafOrder": 114, "type": "مكية", "ayahs": 6, "revelationYear": "9 للبعثة", "theme": "الاستعاذة بالله من شر الوسواس الخناس من الجن والإنس.", "altNames": "المعوذتان (مع الفلق)", "reason": "سحر النبي صلى الله عليه وسلم من قبل لبيد بن الأعصم اليهودي.", "siraEvents": "حادثة سحر النبي.", "hadith": { "narrator": "عقبة بن عامر", "text": "ألم تر آياتٍ أُنزِلَتْ اللَّيلةَ لم يُرَ مثلهُنَّ قطُّ: قل أعوذُ بربِّ الفلقِ وقل أعوذُ بربِّ الناسِ.", "source": "صحيح مسلم (814)" } },
+            { "revelationOrder": 22, "name": "الإخلاص", "musafOrder": 112, "type": "مكية", "ayahs": 4, "revelationYear": "10 للبعثة", "theme": "بيان وتنزيه صفات الله تعالى (التوحيد الخالص).", "altNames": "التوحيد, الأساس", "reason": "سؤال المشركين للنبي: صف لنا ربك، أنسب لنا ربك.", "siraEvents": "ازدياد الأسئلة العقائدية من المشركين وأهل الكتاب.", "hadith": { "narrator": "أبو سعيد الخدري", "text": "أنَّ رجلًا سمِع رجلًا يقرأُ: {قُلْ هُوَ اللَّهُ أَحَدٌ} يُردِّدُها، فلمَّا أصبَح جاء إلى رسولِ اللهِ صلَّى اللهُ عليه وسلَّم فذكَر ذلك له، وكأنَّ الرَّجلَ يَتقالُّها، فقال رسولُ اللهِ صلَّى اللهُ عليه وسلَّم: والذي نفسي بيدِه، إنَّها لَتَعدِلُ ثُلُثَ القرآنِ.", "source": "صحيح البخاري (5013)" } },
+            { "revelationOrder": 23, "name": "النجم", "musafOrder": 53, "type": "مكية", "ayahs": 62, "revelationYear": "4 للبعثة", "theme": "تثبيت الوحي ونبوة النبي، ووصف مشاهد من رحلة المعراج.", "altNames": "لا يوجد", "reason": "حديث النبي عن رؤية جبريل وسدرة المنتهى.", "siraEvents": "أول سورة سجد فيها النبي والمسلمون والمشركون عند سماعها.", "hadith": { "narrator": "ابن مسعود", "text": "أنَّ النبيَّ صلَّى اللهُ عليه وسلَّم قرَأ سورةَ النَّجمِ فسجَد بها، فما بقِي أحَدٌ من القومِ إلَّا سجَد، إلَّا رجلٌ أخَذ كفًّا من حَصًى أو تُرابٍ فرفَعه إلى وَجهِه وقال: يَكْفيني هذا.", "source": "صحيح البخاري (1071)" } },
+            { "revelationOrder": 24, "name": "عبس", "musafOrder": 80, "type": "مكية", "ayahs": 42, "revelationYear": "5 للبعثة", "theme": "آداب الدعوة وبيان فضل الفقراء على الأغنياء.", "altNames": "لا يوجد", "reason": "عبوس النبي في وجه عبد الله بن أم مكتوم الأعمى عندما جاء يسأله وهو منشغل بدعوة كبراء قريش.", "siraEvents": "محاولة النبي إقناع زعماء قريش.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 25, "name": "القدر", "musafOrder": 97, "type": "مكية", "ayahs": 5, "revelationYear": "6-8 للبعثة", "theme": "تعظيم شأن ليلة القدر وبيان فضلها وبركتها.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": "أبو هريرة", "text": "مَن قام ليلةَ القَدْرِ إيمانًا واحتِسابًا غُفِرَ لَهُ ما تقدَّمَ مِن ذنبِهِ.", "source": "صحيح البخاري (1901)" } },
+            { "revelationOrder": 26, "name": "الشمس", "musafOrder": 91, "type": "مكية", "ayahs": 15, "revelationYear": "6-8 للبعثة", "theme": "القسم بأعظم المخلوقات لإثبات تزكية النفس وخيبتها.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 27, "name": "البروج", "musafOrder": 85, "type": "مكية", "ayahs": 22, "revelationYear": "6-8 للبعثة", "theme": "تثبيت المؤمنين عبر قصة أصحاب الأخدود.", "altNames": "لا يوجد", "reason": "تتحدث عن قصة أصحاب الأخدود لبيان صبر المؤمنين على البلاء.", "siraEvents": "اشتداد الاضطهاد والتعذيب للمؤمنين في مكة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 28, "name": "التين", "musafOrder": 95, "type": "مكية", "ayahs": 8, "revelationYear": "6-8 للبعثة", "theme": "القسم بالأماكن المقدسة لبيان كمال خلق الإنسان وقيمته الإيمانية.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 29, "name": "قريش", "musafOrder": 106, "type": "مكية", "ayahs": 4, "revelationYear": "6-8 للبعثة", "theme": "تذكير قريش بنعم الله (الرزق والأمان) ووجوب عبادته.", "altNames": "الإيلاف", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 30, "name": "القارعة", "musafOrder": 101, "type": "مكية", "ayahs": 11, "revelationYear": "6-8 للبعثة", "theme": "تصوير عظيم ليوم القيامة وبيان الميزان الذي يحدد مصير الناس.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 31, "name": "القيامة", "musafOrder": 75, "type": "مكية", "ayahs": 40, "revelationYear": "6-8 للبعثة", "theme": "إثبات البعث والرد على منكريه، ووصف مشاهد الاحتضار والحساب.", "altNames": "لا يوجد", "reason": "كان النبيُّ صلَّى اللهُ عليه وسلَّم إذا نزل عليه الوحيُ حرَّك به لسانَه، يريد أن يحفظَه، فأنزل الله: {لَا تُحَرِّكْ بِهِ لِسَانَكَ لِتَعْجَلَ بِهِ}", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": "ابن عباس", "text": "كان النبيُّ صلَّى اللهُ عليه وسلَّم إذا نزل عليه الوحيُ حرَّك به لسانَه، يريد أن يحفظَه، فأنزل الله: {لَا تُحَرِّكْ بِهِ لِسَانَكَ لِتَعْجَلَ بِهِ}", "source": "صحيح البخاري (4928)" } },
+            { "revelationOrder": 32, "name": "الهمزة", "musafOrder": 104, "type": "مكية", "ayahs": 9, "revelationYear": "6-8 للبعثة", "theme": "التحذير الشديد من الغيبة والطعن والجمع والعد للمال.", "altNames": "لا يوجد", "reason": "نزلت في ذم بعض الكافرين كالأخنس بن شريق الذي كان يطعن في النبي.", "siraEvents": "تكثيف الطعن واللمز من قبل المشركين.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 33, "name": "المرسلات", "musafOrder": 77, "type": "مكية", "ayahs": 50, "revelationYear": "6-8 للبعثة", "theme": "القسم بمظاهر الكون لإثبات البعث وبيان عاقبة المكذبين.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 34, "name": "ق", "musafOrder": 50, "type": "مكية", "ayahs": 45, "revelationYear": "6-8 للبعثة", "theme": "إثبات البعث والتوحيد عبر ذكر دلائل الخلق والأمم السابقة.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 35, "name": "البلد", "musafOrder": 90, "type": "مكية", "ayahs": 20, "revelationYear": "9-10 للبعثة", "theme": "بيان مشقة الحياة وتكاليفها، وتشجيع الإنسان على فعل الخير.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 36, "name": "الطارق", "musafOrder": 86, "type": "مكية", "ayahs": 17, "revelationYear": "9-10 للبعثة", "theme": "القسم بالسماء والطارق لإثبات البعث، وبيان حفظ الله للإنسان.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 37, "name": "القمر", "musafOrder": 54, "type": "مكية", "ayahs": 55, "revelationYear": "5 للبعثة", "theme": "إثبات نبوة النبي عبر آية انشقاق القمر، والتحذير بقصص الأقوام السابقة.", "altNames": "اقتربت الساعة", "reason": "طلب المشركين آية من النبي، فأراهم انشقاق القمر.", "siraEvents": "حادثة انشقاق القمر كتحدٍ للمشركين.", "hadith": { "narrator": "عبد الله بن مسعود", "text": "انشق القمرُ على عهدِ رسولِ اللهِ صلى الله عليه وسلم فرقتينِ، فرقةً فوقَ الجبلِ وفرقةً دونَه، فقال رسولُ اللهِ صلى الله عليه وسلم: اشهَدوا.", "source": "صحيح البخاري (3637)" } },
+            { "revelationOrder": 38, "name": "ص", "musafOrder": 38, "type": "مكية", "ayahs": 88, "revelationYear": "11-13 للبعثة", "theme": "الرد على كبر المشركين، وتثبيت النبي بقصص الأنبياء (داود، سليمان، أيوب).", "altNames": "لا يوجد", "reason": "نزلت في سياق محاججة المشركين.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 39, "name": "الأعراف", "musafOrder": 7, "type": "مكية", "ayahs": 206, "revelationYear": "11-13 للبعثة", "theme": "مقارعة المشركين وإقامة الحجة عليهم بقصص الأنبياء (نوح، هود، صالح، موسى).", "altNames": "لا يوجد", "reason": "نزلت في مقارعة المشركين وبيان قصص الأنبياء.", "siraEvents": "مرحلة التمكين قبل الهجرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 40, "name": "الجن", "musafOrder": 72, "type": "مكية", "ayahs": 28, "revelationYear": "11 للبعثة", "theme": "بيان إيمان الجن بالقرآن وتصديقهم للنبي، وتأكيد التوحيد.", "altNames": "لا يوجد", "reason": "استماع نفر من الجن للقرآن وهم في طريقهم إلى اليمن.", "siraEvents": "مرحلة متقدمة من الدعوة الجهرية.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 41, "name": "يس", "musafOrder": 36, "type": "مكية", "ayahs": 83, "revelationYear": "11-13 للبعثة", "theme": "إثبات صدق الرسالة والبعث، وتسمى قلب القرآن.", "altNames": "قلب القرآن", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": "أنس بن مالك", "text": "إن لكل شيء قلباً وقلب القرآن يس، ومن قرأ يس كتب الله له بقراءتها قراءة القرآن عشر مرات.", "source": "سنن الترمذي (2887) - ضعيف" } },
+            { "revelationOrder": 42, "name": "الفرقان", "musafOrder": 25, "type": "مكية", "ayahs": 77, "revelationYear": "11-13 للبعثة", "theme": "بيان عظمة القرآن وكونه فارقاً بين الحق والباطل، والرد على شبهات المشركين.", "altNames": "لا يوجد", "reason": "نزلت في شبهات المشركين على القرآن.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 43, "name": "فاطر", "musafOrder": 35, "type": "مكية", "ayahs": 45, "revelationYear": "11-13 للبعثة", "theme": "التذكير بآيات الله في الكون، وبيان قدرته على البعث والجزاء.", "altNames": "الملائكة", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 44, "name": "مريم", "musafOrder": 19, "type": "مكية", "ayahs": 98, "revelationYear": "11-13 للبعثة", "theme": "إثبات التوحيد والرد على النصارى، عبر ذكر قصص الأنبياء (زكريا، يحيى، عيسى).", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 45, "name": "طه", "musafOrder": 20, "type": "مكية", "ayahs": 135, "revelationYear": "11-13 للبعثة", "theme": "طمأنة النبي وتثبيته، والتركيز على قصة موسى عليه السلام لتقوية عزيمته.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 46, "name": "الواقعة", "musafOrder": 56, "type": "مكية", "ayahs": 96, "revelationYear": "11-13 للبعثة", "theme": "تفصيل أهوال يوم القيامة وتقسيم الناس إلى ثلاثة أصناف.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "حديث 'من قرأ سورة الواقعة كل ليلة لم تصبه فاقة أبداً' ضعيف ولكن مشهور.", "source": "حديث ضعيف" } },
+            { "revelationOrder": 47, "name": "الشعراء", "musafOrder": 26, "type": "مكية", "ayahs": 227, "revelationYear": "11-13 للبعثة", "theme": "إثبات صدق الوحي ونبوة النبي عبر ذكر قصص سبعة أنبياء.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 48, "name": "النمل", "musafOrder": 27, "type": "مكية", "ayahs": 93, "revelationYear": "11-13 للبعثة", "theme": "بيان إعجاز القرآن وقدرة الله عبر قصة سليمان عليه السلام وملكة سبأ.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 49, "name": "القصص", "musafOrder": 28, "type": "مكية", "ayahs": 88, "revelationYear": "11-13 للبعثة", "theme": "تثبيت النبي ببيان قصة موسى عليه السلام مفصلة، وبيان عاقبة المستكبرين.", "altNames": "لا يوجد", "reason": "نزلت لتثبيت النبي صلى الله عليه وسلم ببيان قصة موسى.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 50, "name": "الإسراء", "musafOrder": 17, "type": "مكية", "ayahs": 111, "revelationYear": "11 للبعثة", "theme": "التذكير بآية الإسراء والمعراج، وتفصيل أصول التشريع والأخلاق.", "altNames": "بني إسرائيل", "reason": "نزلت في حادثة الإسراء والمعراج.", "siraEvents": "حادثة الإسراء والمعراج.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 51, "name": "يونس", "musafOrder": 10, "type": "مكية", "ayahs": 109, "revelationYear": "11-13 للبعثة", "theme": "بيان صدق الوحي والقرآن، وإثبات الوحدة عبر قصة نوح ويونس.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 52, "name": "هود", "musafOrder": 11, "type": "مكية", "ayahs": 123, "revelationYear": "11-13 للبعثة", "theme": "إثبات صدق الوحي والبعث والوعد والوعيد عبر ذكر قصص الأنبياء.", "altNames": "لا يوجد", "reason": "نزلت لتثبيت النبي صلى الله عليه وسلم في مواجهة التكذيب.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": "ابن عباس", "text": "قالَ أبو بكرٍ: يا رسولَ اللَّهِ قد شِبتَ. قالَ: شيَّبتني هودٌ، والواقعةُ، والمرسلاتُ، وعمَّ يتَساءَلونَ، وإذا الشَّمسُ كوِّرت", "source": "سنن الترمذي (3297) - صحيح" } },
+            { "revelationOrder": 53, "name": "يوسف", "musafOrder": 12, "type": "مكية", "ayahs": 111, "revelationYear": "10 للبعثة", "theme": "قصة نبي الله يوسف، وهي سورة التثبيت في الشدائد والمحن.", "altNames": "أحسن القصص", "reason": "نزلت بعد سؤال اليهود عن قصة يوسف.", "siraEvents": "عام الحزن، إسلام عمر بن الخطاب.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 54, "name": "الحجر", "musafOrder": 15, "type": "مكية", "ayahs": 99, "revelationYear": "11-13 للبعثة", "theme": "التأكيد على حفظ القرآن من التبديل والضياع، وبيان خلق الإنسان من طين.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 55, "name": "الأنعام", "musafOrder": 6, "type": "مكية", "ayahs": 165, "revelationYear": "10 للبعثة", "theme": "إثبات التوحيد والرد على المشركين بذكر الأدلة الكونية والعقلية.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "عام الحزن (وفاة أبي طالب وخديجة).", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 56, "name": "الصافات", "musafOrder": 37, "type": "مكية", "ayahs": 182, "revelationYear": "11-13 للبعثة", "theme": "القسم بالملائكة، وإثبات التوحيد، وبيان عاقبة المكذبين والمؤمنين.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 57, "name": "لقمان", "musafOrder": 31, "type": "مكية", "ayahs": 34, "revelationYear": "11-13 للبعثة", "theme": "الحكمة في التربية والدعوة، ونقل وصايا لقمان لابنه.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 58, "name": "سبأ", "musafOrder": 34, "type": "مكية", "ayahs": 54, "revelationYear": "11-13 للبعثة", "theme": "بيان قدرة الله في تسخير الكون لأنبيائه، والتحذير من الغرور بالنعمة.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 59, "name": "الزمر", "musafOrder": 39, "type": "مكية", "ayahs": 75, "revelationYear": "11-13 للبعثة", "theme": "دعوة الناس إلى الإخلاص في العبادة والتوحيد الخالص.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 60, "name": "غافر", "musafOrder": 40, "type": "مكية", "ayahs": 85, "revelationYear": "11-13 للبعثة", "theme": "بيان عظمة الله، وحوار بين أهل الحق والباطل، وبيان عاقبة الطغاة.", "altNames": "المؤمن, الطَّول", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 61, "name": "فصلت", "musafOrder": 41, "type": "مكية", "ayahs": 54, "revelationYear": "11-13 للبعثة", "theme": "الرد على شبهات المشركين حول القرآن، وبيان سنن الله في إهلاك المكذبين.", "altNames": "السجدة, المصابيح", "reason": "نزلت في سياق مواجهة عتبة بن ربيعة للنبي.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 62, "name": "الشورى", "musafOrder": 42, "type": "مكية", "ayahs": 53, "revelationYear": "11-13 للبعثة", "theme": "بيان مصدر الوحي، والتأكيد على ضرورة التزام العدل والشورى.", "altNames": "عسق", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 63, "name": "الزخرف", "musafOrder": 43, "type": "مكية", "ayahs": 89, "revelationYear": "11-13 للبعثة", "theme": "الرد على من زعم أن الملائكة بنات الله، وبيان تهافت مقاييس الكفار.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 64, "name": "الدخان", "musafOrder": 44, "type": "مكية", "ayahs": 59, "revelationYear": "11-13 للبعثة", "theme": "التحذير من العذاب الأليم، وقصة موسى وفرعون.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 65, "name": "الجاثية", "musafOrder": 45, "type": "مكية", "ayahs": 37, "revelationYear": "11-13 للبعثة", "theme": "إثبات البعث والوعد والوعيد، وبيان دلائل قدرة الله في الكون.", "altNames": "الشريعة", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 66, "name": "الأحقاف", "musafOrder": 46, "type": "مكية", "ayahs": 35, "revelationYear": "11-13 للبعثة", "theme": "إنذار المشركين بعذاب الأمم السابقة، وتأييد الجن للنبي.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 67, "name": "الذاريات", "musafOrder": 51, "type": "مكية", "ayahs": 60, "revelationYear": "11-13 للبعثة", "theme": "القسم بالرياح على صدق الوعد والوعيد، ووصف حال المؤمنين والمكذبين.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 68, "name": "الغاشية", "musafOrder": 88, "type": "مكية", "ayahs": 26, "revelationYear": "11-13 للبعثة", "theme": "تصوير عظيم ليوم القيامة وعاقبة أهل النار والجنة.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": "النعمان بن بشير", "text": "كان رسولُ اللهِ صلَّى اللهُ عليه وسلَّم يقرأُ في العِيدينِ، وفي الجُمُعةِ بـ {سَبِّحِ اسْمَ رَبِّكَ الْأَعْلَى} و{هَلْ أَتَاكَ حَدِيثُ الْغَاشِيَةِ}", "source": "صحيح مسلم (878)" } },
+            { "revelationOrder": 69, "name": "الكهف", "musafOrder": 18, "type": "مكية", "ayahs": 110, "revelationYear": "11 للبعثة", "theme": "سورة العصمة من الفتن (الدين، المال، العلم، السلطة) عبر أربع قصص.", "altNames": "لا يوجد", "reason": "سؤال قريش للنبي عن أهل الكهف وذي القرنين والروح بتوجيه من اليهود.", "siraEvents": "تحدي قريش للنبي بأسئلة من أهل الكتاب.", "hadith": { "narrator": "أبو الدرداء", "text": "مَن حفِظ عشرَ آياتٍ مِن أوَّلِ سورةِ الكهفِ، عُصِم مِن الدَّجَّالِ.", "source": "صحيح مسلم (809)" } },
+            { "revelationOrder": 70, "name": "النحل", "musafOrder": 16, "type": "مكية", "ayahs": 128, "revelationYear": "11-13 للبعثة", "theme": "تذكير الناس بنعم الله العظيمة في الكون ووجوب شكره.", "altNames": "النعم", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 71, "name": "نوح", "musafOrder": 71, "type": "مكية", "ayahs": 28, "revelationYear": "11-13 للبعثة", "theme": "قصة نوح عليه السلام ودعوته، والتأكيد على سنن الدعوة.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 72, "name": "إبراهيم", "musafOrder": 14, "type": "مكية", "ayahs": 52, "revelationYear": "11-13 للبعثة", "theme": "بيان أن الرسالة هدفها إخراج الناس من الظلمات إلى النور، ودعاء إبراهيم.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 73, "name": "الأنبياء", "musafOrder": 21, "type": "مكية", "ayahs": 112, "revelationYear": "11-13 للبعثة", "theme": "بيان وحدة عقيدة الأنبياء جميعاً، وأنهم جميعاً بعثوا بالتوحيد.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 74, "name": "المؤمنون", "musafOrder": 23, "type": "مكية", "ayahs": 118, "revelationYear": "11-13 للبعثة", "theme": "بيان صفات المؤمنين التي يستحقون بها الفردوس، وقدرة الله على الخلق والبعث.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 75, "name": "السجدة", "musafOrder": 32, "type": "مكية", "ayahs": 30, "revelationYear": "11-13 للبعثة", "theme": "إثبات صدق القرآن والبعث، ووصف حال الساجدين لله.", "altNames": "ألم تنزيل", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": "جابر بن عبد الله", "text": "أنَّ النبيَّ صلَّى اللهُ عليه وسلَّم كانَ لا ينامُ حتَّى يَقرأَ: الم تنزيلُ السَّجدةِ، وتباركَ الَّذي بيدِهِ المُلكُ.", "source": "سنن الترمذي (2892) - صحيح" } },
+            { "revelationOrder": 76, "name": "الطور", "musafOrder": 52, "type": "مكية", "ayahs": 49, "revelationYear": "11-13 للبعثة", "theme": "القسم بمظاهر القدرة لإثبات العذاب، ووصف حال أهل الجنة.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 77, "name": "الملك", "musafOrder": 67, "type": "مكية", "ayahs": 30, "revelationYear": "11-13 للبعثة", "theme": "إثبات قدرة الله على الملك، والنجاة من عذاب القبر.", "altNames": "المنجية, المانعة", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": "أبو هريرة", "text": "إنَّ سورةً في القرآنِ ثلاثينَ آيةً شَفَعَت لصاحبِها حتَّى غُفِرَ لهُ: تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ.", "source": "سنن أبي داود (1400) - حسن" } },
+            { "revelationOrder": 78, "name": "الحاقة", "musafOrder": 69, "type": "مكية", "ayahs": 52, "revelationYear": "11-13 للبعثة", "theme": "إثبات وقوع يوم القيامة، ووصف أحوال المكذبين في الدنيا والآخرة.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 79, "name": "المعارج", "musafOrder": 70, "type": "مكية", "ayahs": 44, "revelationYear": "11-13 للبعثة", "theme": "وصف عظمة العذاب، وبيان صفات المؤمنين التي تدفع عنهم النار.", "altNames": "سأل سائل", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 80, "name": "النبأ", "musafOrder": 78, "type": "مكية", "ayahs": 40, "revelationYear": "11-13 للبعثة", "theme": "الإجابة على التساؤل عن يوم القيامة وتفصيل مظاهر قدرة الله.", "altNames": "عمّ يتساءلون", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 81, "name": "النازعات", "musafOrder": 79, "type": "مكية", "ayahs": 46, "revelationYear": "11-13 للبعثة", "theme": "القسم بالملائكة على وقوع البعث، وذكر قصة فرعون.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 82, "name": "الانفطار", "musafOrder": 82, "type": "مكية", "ayahs": 19, "revelationYear": "11-13 للبعثة", "theme": "تصوير عظيم لانشقاق السماء والنجوم، وبيان جحود الإنسان.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 83, "name": "الانشقاق", "musafOrder": 84, "type": "مكية", "ayahs": 25, "revelationYear": "11-13 للبعثة", "theme": "تصوير انشقاق السماء والبعث والجزاء، وبيان أحوال أصحاب الكتب.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 84, "name": "الروم", "musafOrder": 30, "type": "مكية", "ayahs": 60, "revelationYear": "10 للبعثة", "theme": "التنبؤ بانتصار الروم على الفرس، وإثبات القدرة الإلهية على البعث.", "altNames": "لا يوجد", "reason": "نزلت بعد غلبة الفرس على الروم، وتحدي المشركين للمؤمنين.", "siraEvents": "الحرب بين الفرس والروم.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 85, "name": "العنكبوت", "musafOrder": 29, "type": "مكية", "ayahs": 69, "revelationYear": "11-13 للبعثة", "theme": "التحدي للمؤمنين بالصبر على الفتنة، والرد على من اتخذوا من دون الله أولياء.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 86, "name": "المطففين", "musafOrder": 83, "type": "مكية", "ayahs": 36, "revelationYear": "قبيل الهجرة", "theme": "التحذير من الغش والتطفيف في المكيال والميزان، وذم السخرية بالمؤمنين.", "altNames": "لا يوجد", "reason": "نزلت في الذين ينقصون الكيل والميزان عند الهجرة للمدينة.", "siraEvents": "الهجرة النبوية وبدء استقرار المجتمع.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 87, "name": "البقرة", "musafOrder": 2, "type": "مدنية", "ayahs": 286, "revelationYear": "1-2 هـ", "theme": "تنظيم شؤون المجتمع والدولة (الحلال والحرام، الجهاد، المال، الأحوال الشخصية).", "altNames": "سنام القرآن, فسطاط القرآن, الزهراء", "reason": "تشريع أحكام الصيام وتحويل القبلة والربا والقصاص.", "siraEvents": "بناء المجتمع الإسلامي، تحويل القبلة، ظهور المنافقين.", "hadith": { "narrator": "أبو هريرة", "text": "لا تَجعَلوا بيوتَكم مَقابِرَ، إنَّ الشَّيطانَ يَنفِرُ منَ البيتِ الَّذي تُقرَأُ فيهِ سورةُ البقرةِ.", "source": "صحيح مسلم (780)" } },
+            { "revelationOrder": 88, "name": "الأنفال", "musafOrder": 8, "type": "مدنية", "ayahs": 75, "revelationYear": "2 هـ", "theme": "أحكام الغنائم والقتال، وبيان أن النصر من عند الله.", "altNames": "بدر", "reason": "نزلت في تقسيم غنائم غزوة بدر الكبرى.", "siraEvents": "غزوة بدر الكبرى.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 89, "name": "آل عمران", "musafOrder": 3, "type": "مدنية", "ayahs": 200, "revelationYear": "3 هـ", "theme": "تثبيت المؤمنين بعد غزوة أحد، وتصحيح مفاهيم النصارى حول عيسى.", "altNames": "الزهراء, الطيبة", "reason": "نزلت في سياق مباهلة وفد نصارى نجران، وتعقيباً على غزوة أحد.", "siraEvents": "غزوة أحد، وفد نصارى نجران.", "hadith": { "narrator": "النواس بن سمعان", "text": "يُؤتَى بالقُرآنِ يومَ القيامةِ وأهلِهِ الذين كانوا يعملونَ بهِ، تَقْدُمهُ سورةُ البقرةِ وآلُ عمرانَ، كأنَّهما غَمامتانِ، أو ظُلَّتانِ سَوداوانِ بينهما شَرْقٌ، أو كأنَّهما حِزْقانِ من طيرٍ صَوافَّ، تُحاجَّانِ عن صاحبِهما.", "source": "صحيح مسلم (805)" } },
+            { "revelationOrder": 90, "name": "الأحزاب", "musafOrder": 33, "type": "مدنية", "ayahs": 73, "revelationYear": "5 هـ", "theme": "أحكام الأسرة (الظهار، التبني)، وبيان تولي الله للمؤمنين في الشدائد.", "altNames": "لا يوجد", "reason": "نزلت في سياق غزوة الأحزاب (الخندق) وزواج النبي بزينب بنت جحش.", "siraEvents": "غزوة الأحزاب (الخندق).", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 91, "name": "الممتحنة", "musafOrder": 60, "type": "مدنية", "ayahs": 13, "revelationYear": "6-8 هـ", "theme": "النهي عن موالاة الكفار، وتوضيح كيفية معاملة النساء المهاجرات.", "altNames": "لا يوجد", "reason": "نزلت في قصة حاطب بن أبي بلتعة الذي أفشى سر المسير لفتح مكة.", "siraEvents": "صلح الحديبية وفتح مكة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 92, "name": "النساء", "musafOrder": 4, "type": "مدنية", "ayahs": 176, "revelationYear": "3-4 هـ", "theme": "تشريع أحكام الأسرة واليتم والمواريث، وحماية حقوق الضعفاء.", "altNames": "لا يوجد", "reason": "نزلت بعد غزوة أحد بسبب كثرة الشهداء والحاجة لأحكام اليتامى والمواريث.", "siraEvents": "تشريع أحكام الأسرة والقتال.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 93, "name": "الزلزلة", "musafOrder": 99, "type": "مدنية", "ayahs": 8, "revelationYear": "4-6 هـ", "theme": "تصوير شدة الزلزال يوم القيامة، وبيان عدل الله في محاسبة الخلق.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": "عبد الله بن عباس", "text": "إذا زلزلت تعدل نصف القرآن", "source": "سنن الترمذي (2894) - ضعيف" } },
+            { "revelationOrder": 94, "name": "الحديد", "musafOrder": 57, "type": "مدنية", "ayahs": 29, "revelationYear": "4-6 هـ", "theme": "الحث على الإنفاق في سبيل الله والجهاد، وبيان أن الملكوت كله بيده.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 95, "name": "محمد", "musafOrder": 47, "type": "مدنية", "ayahs": 38, "revelationYear": "2 هـ", "theme": "الحث على الجهاد والقتال، وبيان الفرق بين المؤمنين والمنافقين.", "altNames": "القتال", "reason": "نزلت في الأمر بالجهاد.", "siraEvents": "أوائل الأمر بالقتال والجهاد بعد الهجرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 96, "name": "الرعد", "musafOrder": 13, "type": "مدنية", "ayahs": 43, "revelationYear": "4 هـ", "theme": "إثبات التوحيد والبعث، وبيان أن الله لا يغير ما بقوم حتى يغيروا ما بأنفسهم.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 97, "name": "الرحمن", "musafOrder": 55, "type": "مدنية", "ayahs": 78, "revelationYear": "5 هـ", "theme": "التذكير بآلاء الله ونعمه التي لا تحصى على الإنس والجن.", "altNames": "عروس القرآن", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 98, "name": "الإنسان", "musafOrder": 76, "type": "مدنية", "ayahs": 31, "revelationYear": "6 هـ", "theme": "بيان خلق الإنسان وتكليفه، ووصف حال الأبرار والنعيم الذي أعد لهم.", "altNames": "الدهر", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 99, "name": "الطلاق", "musafOrder": 65, "type": "مدنية", "ayahs": 12, "revelationYear": "7 هـ", "theme": "تشريع أحكام الطلاق والعدة والنفقة، وبيان أن التقوى أساس الرزق.", "altNames": "لا يوجد", "reason": "نزلت في أحكام الطلاق الشرعية.", "siraEvents": "تشريع أحكام الطلاق.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 100, "name": "البينة", "musafOrder": 98, "type": "مدنية", "ayahs": 8, "revelationYear": "6-8 هـ", "theme": "بيان أن الرسالة المحمدية هي البيان الواضح للناس، والفرق بين أهل الكتاب.", "altNames": "لم يكن", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 101, "name": "الحشر", "musafOrder": 59, "type": "مدنية", "ayahs": 24, "revelationYear": "4 هـ", "theme": "بيان عظمة الله، وحال المنافقين، وبيان إجلاء يهود بني النضير.", "altNames": "بني النضير", "reason": "نزلت في سياق إجلاء يهود بني النضير من المدينة.", "siraEvents": "غزوة بني النضير وإجلائهم.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 102, "name": "النور", "musafOrder": 24, "type": "مدنية", "ayahs": 64, "revelationYear": "6 هـ", "theme": "تشريع الأحكام الاجتماعية (العفة، الحجاب، الاستئذان)، وتبرئة عائشة.", "altNames": "لا يوجد", "reason": "نزلت لتبرئة عائشة رضي الله عنها من الإفك.", "siraEvents": "حادثة الإفك.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 103, "name": "الحج", "musafOrder": 22, "type": "مدنية", "ayahs": 78, "revelationYear": "4-7 هـ", "theme": "الأمر بالجهاد، وبيان أن الله يدافع عن المؤمنين، وتقرير شعيرة الحج.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 104, "name": "المنافقون", "musafOrder": 63, "type": "مدنية", "ayahs": 11, "revelationYear": "5 هـ", "theme": "كشف أقوال وأفعال المنافقين وتحذير المؤمنين منهم.", "altNames": "لا يوجد", "reason": "نزلت في سياق قول عبد الله بن أبي ابن سلول: 'ليخرجن الأعز منها الأذل'.", "siraEvents": "غزوة بني المصطلق وظهور نفاق ابن سلول.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 105, "name": "المجادلة", "musafOrder": 58, "type": "مدنية", "ayahs": 22, "revelationYear": "5 هـ", "theme": "تشريع حكم الظهار، وبيان آداب المجالس والتناجي.", "altNames": "لا يوجد", "reason": "نزلت في شأن خولة بنت ثعلبة وزوجها أوس بن الصامت (الظهار).", "siraEvents": "تشريع حكم الظهار وكفارته.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 106, "name": "الحجرات", "musafOrder": 49, "type": "مدنية", "ayahs": 18, "revelationYear": "9 هـ", "theme": "تشريع الآداب الاجتماعية والسلوكية في التعامل مع النبي والناس.", "altNames": "لا يوجد", "reason": "نزلت في سياق رفع الأصوات فوق صوت النبي، وقصة الوفود.", "siraEvents": "آداب التعامل في المجتمع المدني وعام الوفود.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 107, "name": "التحريم", "musafOrder": 66, "type": "مدنية", "ayahs": 12, "revelationYear": "7 هـ", "theme": "عتاب النبي في حلفه على تحريم ما أحل الله له، وضرب الأمثال لزوجات النبي.", "altNames": "لا يوجد", "reason": "نزلت بعد أن حلف النبي ألا يقرب بعض زوجاته أو تحريمه لشيء أحلّه الله له.", "siraEvents": "غضب بعض زوجات النبي.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 108, "name": "التغابن", "musafOrder": 64, "type": "مدنية", "ayahs": 18, "revelationYear": "5-7 هـ", "theme": "دعوة للإيمان والإنفاق، وبيان أن الأزواج والأولاد قد يكونون فتنة.", "altNames": "لا يوجد", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 109, "name": "الصف", "musafOrder": 61, "type": "مدنية", "ayahs": 14, "revelationYear": "7 هـ", "theme": "الحث على الثبات في الجهاد، وذم التخلف، وذكر قصة الحواريين.", "altNames": "الحواريون", "reason": "لا يوجد سبب نزول محدد.", "siraEvents": "لا توجد أحداث سيرة مباشرة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 110, "name": "الجمعة", "musafOrder": 62, "type": "مدنية", "ayahs": 11, "revelationYear": "2 هـ", "theme": "التذكير بفضل يوم الجمعة ووجوب السعي إليها وترك التجارة.", "altNames": "لا يوجد", "reason": "انصراف بعض الصحابة عن خطبة الجمعة عند قدوم عير تجارية.", "siraEvents": "انشغال بعض الصحابة بالتجارة.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 111, "name": "الفتح", "musafOrder": 48, "type": "مدنية", "ayahs": 29, "revelationYear": "6 هـ", "theme": "البشارة بفتح مكة، وبيان البيعة تحت الشجرة، والثناء على الصحابة.", "altNames": "لا يوجد", "reason": "نزلت بعد صلح الحديبية.", "siraEvents": "صلح الحديبية والبيعة تحت الشجرة.", "hadith": { "narrator": "أنس بن مالك", "text": "لَقَدْ أُنْزِلَتْ عَلَيَّ اللَّيْلَةَ سُورَةٌ أَحَبُّ إِلَيَّ مِمَّا طَلَعَتْ عَلَيْهِ الشَّمْسُ، ثم قرأ: {إِنَّا فَتَحْنَا لَكَ فَتْحًا مُبِينًا}", "source": "صحيح البخاري (4177)" } },
+            { "revelationOrder": 112, "name": "المائدة", "musafOrder": 5, "type": "مدنية", "ayahs": 120, "revelationYear": "9-10 هـ", "theme": "أحكام العقود والعهود، وتحليل الطيبات وتحريم الخبائث، وأحكام أهل الكتاب.", "altNames": "العقود, المنقذة", "reason": "نزلت في سياق أحكام الحل والحرمة وإكمال الدين.", "siraEvents": "حجة الوداع.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 113, "name": "التوبة", "musafOrder": 9, "type": "مدنية", "ayahs": 129, "revelationYear": "9 هـ", "theme": "إعلان البراءة من المشركين والمنافقين، وأحكام الزكاة والجهاد.", "altNames": "براءة, الفاضحة", "reason": "نزلت في سياق غزوة تبوك وفضح المنافقين.", "siraEvents": "غزوة تبوك وإعلان البراءة من المشركين.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
+            { "revelationOrder": 114, "name": "النصر", "musafOrder": 110, "type": "مدنية", "ayahs": 3, "revelationYear": "10 هـ", "theme": "تبشير النبي بفتح مكة ودخول الناس في دين الله، وإشعار النبي بقرب أجله.", "altNames": "التوديع", "reason": "نزلت بعد فتح مكة ودخول الناس في دين الله أفواجاً.", "siraEvents": "فتح مكة وحجة الوداع، وإشعار النبي بقرب الأجل.", "hadith": { "narrator": "ابن عباس", "text": "كان عمرُ يُدخِلُني مع أشياخِ بدرٍ، فقال بعضُهم: لِمَ تُدخِلُ هذا الفتى معنا ولنا أبناءٌ مثلُه؟ فقال: إنَّه ممَّن قد علِمتُم. فدعاهم ذاتَ يومٍ وأدخَلَني معهم، فسألهم: ما تقولونَ في: {إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ}؟ فقال بعضُهم: أمَرَنا أن نحمَدَ اللهَ ونستغفِرَه إذا نصَرَنا وفتَح علينا. وسكت بعضُهم فلم يقُلْ شيئًا. فقال لي: أكذلك تقولُ يا بنَ عباسٍ؟ فقلتُ: لا. قال: فما تقولُ؟ قلتُ: هو أجَلُ رسولِ اللهِ صلَّى اللهُ عليه وسلَّم أعلَمَه له.", "source": "صحيح البخاري (4970)" } }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const surahTableBody = document.getElementById('surahTableBody');
+            const searchInput = document.getElementById('searchInput');
+            const typeFilter = document.getElementById('typeFilter');
+
+            const totalSurahsEl = document.getElementById('totalSurahs');
+            const meccanCountEl = document.getElementById('meccanCount');
+            const medinanCountEl = document.getElementById('medinanCount');
+            const ayahCountEl = document.getElementById('ayahCount');
+            
+            const modal = document.getElementById('surahModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalAlternativeNames = document.getElementById('modalAlternativeNames');
+            const modalTheme = document.getElementById('modalTheme');
+            const modalReason = document.getElementById('modalReason');
+            const modalSira = document.getElementById('modalSira');
+            const modalHadith = document.getElementById('modalHadith');
+            const hadithText = document.getElementById('hadithText');
+            const hadithNarrator = document.getElementById('hadithNarrator');
+            const hadithSource = document.getElementById('hadithSource');
+
+            let filteredData = [...surahData];
+
+            function populateTable(data) {
+                surahTableBody.innerHTML = '';
+                data.forEach(surah => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-amber-50 cursor-pointer transition-colors duration-200';
+                    row.innerHTML = `
+                        <td class="p-4 font-semibold text-[#BF9B63]">${surah.revelationOrder}</td>
+                        <td class="p-4 font-bold text-gray-800">${surah.name}</td>
+                        <td class="p-4 text-gray-600 hidden md:table-cell">${surah.type}</td>
+                        <td class="p-4 text-gray-600 hidden sm:table-cell">${surah.ayahs}</td>
+                        <td class="p-4 text-gray-600 hidden lg:table-cell">${surah.revelationYear}</td>
+                    `;
+                    row.addEventListener('click', () => openModal(surah));
+                    surahTableBody.appendChild(row);
+                });
+            }
+
+            function filterAndRender() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const type = typeFilter.value;
+                
+                filteredData = surahData.filter(surah => {
+                    const nameMatch = surah.name.toLowerCase().includes(searchTerm);
+                    const typeMatch = type === 'all' || surah.type === type;
+                    return nameMatch && typeMatch;
+                });
+                
+                populateTable(filteredData);
+            }
+
+            function openModal(surah) {
+                modalTitle.textContent = surah.name;
+                modalAlternativeNames.textContent = `أسماء أخرى: ${surah.altNames}`;
+                modalTheme.textContent = surah.theme;
+                modalReason.textContent = surah.reason;
+                modalSira.textContent = surah.siraEvents;
+
+                if (surah.hadith && surah.hadith.text !== "لا يوجد حديث صحيح خاص بالفضل.") {
+                    modalHadith.style.display = 'block';
+                    hadithText.textContent = surah.hadith.text;
+                    hadithNarrator.textContent = surah.hadith.narrator || 'غير محدد';
+                    hadithSource.textContent = surah.hadith.source || 'غير محدد';
+                } else {
+                     modalHadith.style.display = 'none';
+                }
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modal.firstElementChild.classList.remove('scale-95');
+                    modal.classList.remove('opacity-0');
+                }, 10);
+            }
+
+            function hideModal() {
+                 modal.firstElementChild.classList.add('scale-95');
+                 modal.classList.add('opacity-0');
+                 setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300);
+            }
+
+            function setupStats() {
+                const meccanCount = surahData.filter(s => s.type === 'مكية').length;
+                const medinanCount = surahData.filter(s => s.type === 'مدنية').length;
+                const totalAyahs = surahData.reduce((sum, s) => sum + s.ayahs, 0);
+
+                totalSurahsEl.textContent = surahData.length;
+                meccanCountEl.textContent = meccanCount;
+                medinanCountEl.textContent = medinanCount;
+                ayahCountEl.textContent = totalAyahs;
+
+                return { meccanCount, medinanCount };
+            }
+
+            function setupCharts({ meccanCount, medinanCount }) {
+                const typeCtx = document.getElementById('revelationTypeChart').getContext('2d');
+                new Chart(typeCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['مكية', 'مدنية'],
+                        datasets: [{
+                            data: [meccanCount, medinanCount],
+                            backgroundColor: ['#D4AF7A', '#4A4A4A'],
+                            borderColor: '#FDFBF7',
+                            borderWidth: 4,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        family: "'Noto Kufi Arabic', sans-serif",
+                                        size: 14,
+                                    },
+                                    color: '#4A4A4A'
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                const timelineCtx = document.getElementById('revelationTimelineChart').getContext('2d');
+                const years = Array.from({length: 23}, (_, i) => i + 1);
+                const surahsPerYear = years.map(year => {
+                    const yearLabel = year <= 13 ? `${year-1} للبعثة` : `${year-13} هـ`;
+                    return surahData.filter(s => {
+                        const sYear = parseInt(s.revelationYear);
+                        if(s.type === 'مكية' && s.revelationYear.includes('لبعثة')) {
+                           const range = s.revelationYear.replace(' للبعثة', '').split('-').map(Number);
+                           return year-1 >= range[0] && year-1 <= (range[1] || range[0]);
+                        }
+                        if(s.type === 'مدنية' && s.revelationYear.includes('هـ')) {
+                           const range = s.revelationYear.replace(' هـ', '').split('-').map(Number);
+                           return year-13 >= range[0] && year-13 <= (range[1] || range[0]);
+                        }
+                        return false;
+                    }).length;
+                });
+
+                const labels = years.map(y => y <= 13 ? `${y-1} بعثة` : `${y-13} هـ`);
+                
+                new Chart(timelineCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'عدد السور النازلة',
+                            data: surahsPerYear,
+                            backgroundColor: '#D4AF7A',
+                            borderColor: '#BF9B63',
+                            borderWidth: 1,
+                            borderRadius: 5,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'عدد السور', font: { family: "'Noto Kufi Arabic', sans-serif" }}
+                            },
+                            x: {
+                                title: { display: true, text: 'السنة (بعثة/هجرة)', font: { family: "'Noto Kufi Arabic', sans-serif" }}
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                titleFont: { family: "'Noto Kufi Arabic', sans-serif" },
+                                bodyFont: { family: "'Noto Kufi Arabic', sans-serif" }
+                            }
+                        }
+                    }
+                });
+
+            }
+            
+            searchInput.addEventListener('input', filterAndRender);
+            typeFilter.addEventListener('change', filterAndRender);
+            closeModal.addEventListener('click', hideModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    hideModal();
+                }
+            });
+
+            const stats = setupStats();
+            setupCharts(stats);
+            populateTable(surahData);
+        });
+    </script>
+</body>
+</html>
