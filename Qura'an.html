@@ -9,22 +9,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutrals with Soft Gold Accent -->
-    <!-- Application Structure Plan: A dashboard-centric, single-page application. The main view consists of three parts: 1) A header with key statistics (total surahs, Meccan/Medinan counts) for quick insights. 2) An interactive charting section to visualize data distributions (e.g., revelation timeline, type breakdown). 3) A dynamic, filterable, and searchable table listing all 114 surahs. Clicking a surah opens a detailed modal view. This structure was chosen because it allows users to move from a high-level overview (dashboard) to specific details (modal) seamlessly, supporting both casual exploration and focused research within a single, intuitive interface. -->
-    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1) Surah Counts -> Inform -> Key Stat Cards -> Static Display -> Quick, scannable overview. 2) Revelation Type Distribution -> Compare -> Doughnut Chart (Chart.js/Canvas) -> Hover Tooltips -> Visually intuitive comparison of Meccan vs. Medinan proportions. 3) Surah List -> Organize/Explore -> Interactive HTML Table -> Search & Filter (JS) -> Allows users to easily find specific surahs or group them by attributes like revelation type. 4) Detailed Surah Info -> Inform/Deep Dive -> Modal Window (HTML/CSS/JS) -> Click-to-open -> Presents comprehensive details without cluttering the main view, enabling focused study. All choices prioritize clarity and user-driven exploration. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
+        /* LIGHT THEME DEFAULTS (All dark theme overrides removed) */
         body {
             font-family: 'Noto Kufi Arabic', sans-serif;
-            background-color: #FDFBF7;
-            color: #4A4A4A;
+            background-color: #FDFBF7; /* Light background */
+            color: #4A4A4A; /* Dark text */
         }
+        
+        /* Custom scrollbar styles */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #FDFBF7; }
         ::-webkit-scrollbar-thumb { background: #D4AF7A; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #BF9B63; }
+        
         .card {
-            background-color: #FFFFFF;
+            background-color: #FFFFFF; /* Light card background */
             border: 1px solid #EAEAEA;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
@@ -32,6 +32,8 @@
             background-color: #FFFFFF;
             max-height: 90vh;
         }
+
+        /* Chart container styles remain responsive */
         .chart-container {
             position: relative;
             width: 100%;
@@ -57,7 +59,6 @@
         </header>
 
         <main>
-            <!-- Statistics Section -->
             <section id="stats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 <div class="card rounded-xl p-6 flex flex-col items-center justify-center text-center">
                     <h3 class="text-5xl font-bold text-[#4A4A4A]" id="totalSurahs">114</h3>
@@ -77,8 +78,7 @@
                 </div>
             </section>
 
-            <!-- Charts Section -->
-             <section class="mb-12">
+            <section class="mb-12">
                 <div class="card rounded-xl p-6">
                      <h2 class="text-2xl font-bold text-center text-[#BF9B63] mb-6">تحليل بصري للوحي</h2>
                      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -94,21 +94,18 @@
                 </div>
             </section>
 
-            <!-- Surah List Section -->
             <section class="card rounded-xl p-6">
                 <h2 class="text-2xl font-bold text-[#BF9B63] mb-6">قائمة السور حسب ترتيب النزول</h2>
                 
-                <!-- Filters -->
                 <div class="flex flex-wrap gap-4 mb-6">
                     <input type="text" id="searchInput" placeholder="ابحث عن سورة..." class="flex-grow p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#D4AF7A] focus:border-transparent transition">
-                    <select id="typeFilter" class="p-3 border border-gray-200 rounded-lg bg-white focus:ring-2 focus:ring-[#D4AF7A] focus:border-transparent transition">
+                    <select id="typeFilter" class="p-3 border border-gray-200 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-[#D4AF7A] focus:border-transparent transition">
                         <option value="all">كل الأنواع (مكية ومدنية)</option>
                         <option value="مكية">مكية</option>
                         <option value="مدنية">مدنية</option>
                     </select>
                 </div>
 
-                <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="w-full text-right">
                         <thead class="border-b-2 border-gray-200">
@@ -121,15 +118,13 @@
                             </tr>
                         </thead>
                         <tbody id="surahTableBody">
-                            <!-- Rows will be injected by JavaScript -->
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- Modal -->
     <div id="surahModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center p-4 z-50 transition-opacity duration-300">
         <div class="modal-content rounded-2xl w-full max-w-4xl shadow-2xl overflow-y-auto transform scale-95 transition-transform duration-300">
             <div class="p-8">
@@ -170,8 +165,13 @@
     </div>
 
     <script>
+        /**
+         * IMPORTANT: The full set of 114 Surahs must be present here to meet the "completed surah set" request.
+         * The structure below contains the complete list of 114 Surahs with their revelation order,
+         * Mus'haf order, type, number of Ayahs, and contextual data (theme, reason, hadith).
+         */
         const surahData = [
-            { "revelationOrder": 1, "name": "العلق", "musafOrder": 96, "type": "مكية", "ayahs": 19, "revelationYear": "1 للبعثة", "theme": "الأمر بالقراءة والعلم وبيان أصل خلق الإنسان وتحديه للطغيان.", "altNames": "اقرأ", "reason": "نزول الوحي لأول مرة على النبي صلى الله عليه وسلم في غار حراء.", "siraEvents": "بداية النبوة، فترة التعبد في غار حراء.", "hadith": { "narrator": "عائشة بنت أبي بكر", "text": "أولُ ما بُدِئَ به رسولُ اللهِ صلَّى اللهُ عليه وسلَّم من الوحيِ الرؤيا الصالحةُ في النومِ، فكان لا يَرى رؤيا إلا جاءتْ مثلَ فَلَقِ الصبحِ، ثم حُبِّبَ إليه الخلاءُ، وكان يخلو بغارِ حراءَ فيَتحنَّثُ فيه اللياليَ ذواتِ العددِ قبلَ أن يَنزِعَ إلى أهلِه، ويتزوَّدُ لذلك، ثم يَرجِعُ إلى خديجةَ فيتزوَّدُ لمثلِها، حتى جاءه الحقُّ وهو في غارِ حراءَ، فجاءه الملَكُ فقال: اقرَأْ، قال: ما أنا بقارِئٍ، قال: فأخَذَني فغَطَّني حتى بلَغَ منِّي الجَهْدَ ثم أرسَلَني، فقال: اقرَأْ، قلتُ: ما أنا بقارِئٍ، فأخَذَني فغَطَّني الثانيةَ حتى بلَغَ منِّي الجَهْدَ ثم أرسَلَني، فقال: اقرَأْ، فقلتُ: ما أنا بقارِئٍ، فأخَذَني فغَطَّني الثالثةَ ثم أرسَلَني، فقال: {اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ * خَلَقَ الْإِنْسَانَ مِنْ عَلَقٍ * اقْرَأْ وَرَبُّكَ الْأَكْرَمُ} فرجَعَ بها رسولُ اللهِ صلَّى اللهُ عليه وسلَّم يَرجُفُ فؤادُه...", "source": "صحيح البخاري (3)" } },
+           { "revelationOrder": 1, "name": "العلق", "musafOrder": 96, "type": "مكية", "ayahs": 19, "revelationYear": "1 للبعثة", "theme": "الأمر بالقراءة والعلم وبيان أصل خلق الإنسان وتحديه للطغيان.", "altNames": "اقرأ", "reason": "نزول الوحي لأول مرة على النبي صلى الله عليه وسلم في غار حراء.", "siraEvents": "بداية النبوة، فترة التعبد في غار حراء.", "hadith": { "narrator": "عائشة بنت أبي بكر", "text": "أولُ ما بُدِئَ به رسولُ اللهِ صلَّى اللهُ عليه وسلَّم من الوحيِ الرؤيا الصالحةُ في النومِ، فكان لا يَرى رؤيا إلا جاءتْ مثلَ فَلَقِ الصبحِ، ثم حُبِّبَ إليه الخلاءُ، وكان يخلو بغارِ حراءَ فيَتحنَّثُ فيه اللياليَ ذواتِ العددِ قبلَ أن يَنزِعَ إلى أهلِه، ويتزوَّدُ لذلك، ثم يَرجِعُ إلى خديجةَ فيتزوَّدُ لمثلِها، حتى جاءه الحقُّ وهو في غارِ حراءَ، فجاءه الملَكُ فقال: اقرَأْ، قال: ما أنا بقارِئٍ، قال: فأخَذَني فغَطَّني حتى بلَغَ منِّي الجَهْدَ ثم أرسَلَني، فقال: اقرَأْ، قلتُ: ما أنا بقارِئٍ، فأخَذَني فغَطَّني الثانيةَ حتى بلَغَ منِّي الجَهْدَ ثم أرسَلَني، فقال: اقرَأْ، فقلتُ: ما أنا بقارِئٍ، فأخَذَني فغَطَّني الثالثةَ ثم أرسَلَني، فقال: {اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ * خَلَقَ الْإِنْسَانَ مِنْ عَلَقٍ * اقْرَأْ وَرَبُّكَ الْأَكْرَمُ} فرجَعَ بها رسولُ اللهِ صلَّى اللهُ عليه وسلَّم يَرجُفُ فؤادُه...", "source": "صحيح البخاري (3)" } },
             { "revelationOrder": 2, "name": "القلم", "musafOrder": 68, "type": "مكية", "ayahs": 52, "revelationYear": "1-2 للبعثة", "theme": "تنزيه النبي صلى الله عليه وسلم عن الجنون، وبيان عاقبة الطغاة وحاجز النعمة.", "altNames": "ن والقلم, نون", "reason": "رد على المشركين الذين اتهموا النبي صلى الله عليه وسلم بالجنون.", "siraEvents": "تعرض النبي للاستهزاء من قبل قريش.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
             { "revelationOrder": 3, "name": "المزمل", "musafOrder": 73, "type": "مكية", "ayahs": 20, "revelationYear": "1-3 للبعثة", "theme": "الإعداد الروحي لحمل الرسالة عن طريق قيام الليل والتفكر في القرآن.", "altNames": "لا يوجد", "reason": "الأمر بقيام الليل كتدريب للنبي والمؤمنين الأوائل.", "siraEvents": "استمرار الدعوة السرية.", "hadith": { "narrator": null, "text": "لا يوجد حديث صحيح خاص بالفضل.", "source": "" } },
             { "revelationOrder": 4, "name": "المدثر", "musafOrder": 74, "type": "مكية", "ayahs": 56, "revelationYear": "1-3 للبعثة", "theme": "الأمر بالإنذار، إعلان الدعوة الجهرية، والتحذير من عذاب جهنم.", "altNames": "لا يوجد", "reason": "الأمر بالقيام والإنذار وإعلان الدعوة على الملأ بعد فترة انقطاع الوحي.", "siraEvents": "بداية الدعوة الجهرية.", "hadith": { "narrator": "جابر بن عبد الله", "text": "سمعتُ رسولَ اللهِ صلَّى اللهُ عليه وسلَّم يُحدِّثُ عن فَترةِ الوحيِ، فقال في حديثِه: فبينا أنا أمشي سمعتُ صوتًا من السماءِ، فرفعتُ بصري قِبَلَ السماءِ، فإذا الملَكُ الذي جاءني بحِراءَ، قاعدٌ على كرسيٍّ بين السماءِ والأرضِ، فجَئِثْتُ منه حتى هَويتُ إلى الأرضِ، فجئتُ أهلي فقلتُ: زَمِّلوني زَمِّلوني، فأنزل اللهُ تعالى: {يَا أَيُّهَا الْمُدَّثِّرُ * قُمْ فَأَنْذِرْ}", "source": "صحيح البخاري (4924)" } },
@@ -287,194 +287,221 @@
             { "revelationOrder": 114, "name": "النصر", "musafOrder": 110, "type": "مدنية", "ayahs": 3, "revelationYear": "10 هـ", "theme": "تبشير النبي بفتح مكة ودخول الناس في دين الله، وإشعار النبي بقرب أجله.", "altNames": "التوديع", "reason": "نزلت بعد فتح مكة ودخول الناس في دين الله أفواجاً.", "siraEvents": "فتح مكة وحجة الوداع، وإشعار النبي بقرب الأجل.", "hadith": { "narrator": "ابن عباس", "text": "كان عمرُ يُدخِلُني مع أشياخِ بدرٍ، فقال بعضُهم: لِمَ تُدخِلُ هذا الفتى معنا ولنا أبناءٌ مثلُه؟ فقال: إنَّه ممَّن قد علِمتُم. فدعاهم ذاتَ يومٍ وأدخَلَني معهم، فسألهم: ما تقولونَ في: {إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ}؟ فقال بعضُهم: أمَرَنا أن نحمَدَ اللهَ ونستغفِرَه إذا نصَرَنا وفتَح علينا. وسكت بعضُهم فلم يقُلْ شيئًا. فقال لي: أكذلك تقولُ يا بنَ عباسٍ؟ فقلتُ: لا. قال: فما تقولُ؟ قلتُ: هو أجَلُ رسولِ اللهِ صلَّى اللهُ عليه وسلَّم أعلَمَه له.", "source": "صحيح البخاري (4970)" } }
         ];
 
+        // Chart data helper function (for Chart.js colors - reverted to light theme colors)
+        function getChartColors() {
+            const accentColor = '#D4AF7A'; // Soft Gold Accent
+            const lightGrey = '#EAEAEA';
+            const chartTextColor = '#4A4A4A'; // Dark text for light mode
+            const gridColor = 'rgba(0, 0, 0, 0.1)'; // Light grid lines
+
+            return {
+                main: accentColor,
+                secondary: lightGrey,
+                text: chartTextColor,
+                grid: gridColor
+            };
+        }
+        
+        // Data processing for charts (remains the same)
+        function setupStats() {
+            let totalSurahs = surahData.length;
+            let meccanCount = surahData.filter(s => s.type === 'مكية').length;
+            let medinanCount = surahData.filter(s => s.type === 'مدنية').length;
+            let ayahCount = surahData.reduce((sum, s) => sum + s.ayahs, 0);
+
+            document.getElementById('totalSurahs').textContent = totalSurahs;
+            document.getElementById('meccanCount').textContent = meccanCount;
+            document.getElementById('medinanCount').textContent = medinanCount;
+            document.getElementById('ayahCount').textContent = ayahCount;
+            
+            return { meccanCount, medinanCount, totalSurahs };
+        }
+        
+        function setupCharts(stats) {
+            const colors = getChartColors();
+            
+            // Revelation Type Chart (Doughnut)
+            const ctx1 = document.getElementById('revelationTypeChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                    labels: ['مكية', 'مدنية'],
+                    datasets: [{
+                        data: [stats.meccanCount, stats.medinanCount],
+                        backgroundColor: [colors.main, colors.secondary],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: "'Noto Kufi Arabic', sans-serif" },
+                                color: colors.text
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'توزيع السور حسب نوع الوحي',
+                            font: { size: 16, family: "'Noto Kufi Arabic', sans-serif" },
+                            color: colors.text
+                        },
+                         tooltip: {
+                            titleFont: { family: "'Noto Kufi Arabic', sans-serif" },
+                            bodyFont: { family: "'Noto Kufi Arabic', sans-serif" }
+                        }
+                    }
+                }
+            });
+
+            // Revelation Timeline Chart (Bar)
+            const timelineData = surahData.reduce((acc, surah) => {
+                const year = surah.revelationYear.split(' ')[0];
+                acc[year] = (acc[year] || 0) + 1;
+                return acc;
+            }, {});
+            
+            const timelineLabels = Object.keys(timelineData).sort((a, b) => {
+                const getSortValue = (year) => {
+                    if (year.includes('-')) {
+                        return parseInt(year.split('-')[0]);
+                    }
+                    return parseInt(year);
+                };
+                return getSortValue(a) - getSortValue(b);
+            });
+            const timelineCounts = timelineLabels.map(label => timelineData[label]);
+            
+            const ctx2 = document.getElementById('revelationTimelineChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: timelineLabels.map(l => `${l} للبعثة/الهجرة`),
+                    datasets: [{
+                        label: 'عدد السور',
+                        data: timelineCounts,
+                        backgroundColor: colors.main,
+                        borderColor: colors.main,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'عدد السور', font: { family: "'Noto Kufi Arabic', sans-serif" }, color: colors.text },
+                            ticks: { color: colors.text },
+                            grid: { color: colors.grid }
+                        },
+                        x: {
+                            title: { display: true, text: 'السنة (بعثة/هجرة)', font: { family: "'Noto Kufi Arabic', sans-serif" }, color: colors.text },
+                            ticks: { color: colors.text },
+                            grid: { color: colors.grid }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            titleFont: { family: "'Noto Kufi Arabic', sans-serif" },
+                            bodyFont: { family: "'Noto Kufi Arabic', sans-serif" }
+                        }
+                    }
+                }
+            });
+
+        }
+
+        // Table rendering and filtering (JS logic)
+        function renderTable(data) {
+            const tableBody = document.getElementById('surahTableBody');
+            tableBody.innerHTML = '';
+            
+            // Light theme only styling
+            const baseTextColor = 'text-gray-800'; 
+            const hoverBgColor = 'hover:bg-gray-50'; 
+
+            data.forEach(surah => {
+                const row = document.createElement('tr');
+                // Applied light theme classes for visibility and hover
+                row.className = `border-b border-gray-100 cursor-pointer transition duration-150 ${hoverBgColor} ${baseTextColor}`;
+                row.setAttribute('data-surah-id', surah.revelationOrder);
+                row.onclick = () => showModal(surah);
+                
+                row.innerHTML = `
+                    <td class="p-4">${surah.revelationOrder}</td>
+                    <td class="p-4 font-semibold text-[#BF9B63]">${surah.name}</td>
+                    <td class="p-4 hidden md:table-cell">${surah.type}</td>
+                    <td class="p-4 hidden sm:table-cell">${surah.ayahs}</td>
+                    <td class="p-4 hidden lg:table-cell">${surah.revelationYear}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // If no results, display a message
+            if (data.length === 0) {
+                 const noResultRow = document.createElement('tr');
+                 noResultRow.innerHTML = `<td colspan="5" class="p-4 text-center text-gray-500">لا توجد نتائج مطابقة لفلتر البحث.</td>`;
+                 tableBody.appendChild(noResultRow);
+            }
+        }
+
+        function filterAndRender() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const typeFilter = document.getElementById('typeFilter').value;
+
+            const filteredData = surahData.filter(surah => {
+                const matchesSearch = surah.name.includes(searchTerm) || (surah.altNames && surah.altNames.includes(searchTerm));
+                const matchesType = typeFilter === 'all' || surah.type === typeFilter;
+                return matchesSearch && matchesType;
+            });
+
+            renderTable(filteredData);
+        }
+        
+        function populateTable(data) {
+            renderTable(data);
+        }
+
+        // Modal functions
+        const modal = document.getElementById('surahModal');
+        const closeModal = document.getElementById('closeModal');
+
+        function showModal(surah) {
+            document.getElementById('modalTitle').textContent = surah.name;
+            document.getElementById('modalAlternativeNames').textContent = surah.altNames ? `(الأسماء الأخرى: ${surah.altNames})` : '';
+            document.getElementById('modalTheme').textContent = surah.theme;
+            document.getElementById('modalReason').textContent = surah.reason || 'لا يوجد سبب نزول محدد.';
+            document.getElementById('modalSira').textContent = surah.siraEvents || 'لا توجد أحداث سيرة مرافقة محددة.';
+            
+            document.getElementById('hadithText').textContent = surah.hadith.text;
+            document.getElementById('hadithNarrator').textContent = surah.hadith.narrator || 'غير متوفر';
+            document.getElementById('hadithSource').textContent = surah.hadith.source || 'غير متوفر';
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modal.querySelector('.modal-content').classList.remove('scale-95');
+            modal.querySelector('.modal-content').classList.add('scale-100');
+        }
+
+        function hideModal() {
+            modal.querySelector('.modal-content').classList.remove('scale-100');
+            modal.querySelector('.modal-content').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Initialization
         document.addEventListener('DOMContentLoaded', () => {
-            const surahTableBody = document.getElementById('surahTableBody');
             const searchInput = document.getElementById('searchInput');
             const typeFilter = document.getElementById('typeFilter');
 
-            const totalSurahsEl = document.getElementById('totalSurahs');
-            const meccanCountEl = document.getElementById('meccanCount');
-            const medinanCountEl = document.getElementById('medinanCount');
-            const ayahCountEl = document.getElementById('ayahCount');
-            
-            const modal = document.getElementById('surahModal');
-            const closeModal = document.getElementById('closeModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalAlternativeNames = document.getElementById('modalAlternativeNames');
-            const modalTheme = document.getElementById('modalTheme');
-            const modalReason = document.getElementById('modalReason');
-            const modalSira = document.getElementById('modalSira');
-            const modalHadith = document.getElementById('modalHadith');
-            const hadithText = document.getElementById('hadithText');
-            const hadithNarrator = document.getElementById('hadithNarrator');
-            const hadithSource = document.getElementById('hadithSource');
-
-            let filteredData = [...surahData];
-
-            function populateTable(data) {
-                surahTableBody.innerHTML = '';
-                data.forEach(surah => {
-                    const row = document.createElement('tr');
-                    row.className = 'hover:bg-amber-50 cursor-pointer transition-colors duration-200';
-                    row.innerHTML = `
-                        <td class="p-4 font-semibold text-[#BF9B63]">${surah.revelationOrder}</td>
-                        <td class="p-4 font-bold text-gray-800">${surah.name}</td>
-                        <td class="p-4 text-gray-600 hidden md:table-cell">${surah.type}</td>
-                        <td class="p-4 text-gray-600 hidden sm:table-cell">${surah.ayahs}</td>
-                        <td class="p-4 text-gray-600 hidden lg:table-cell">${surah.revelationYear}</td>
-                    `;
-                    row.addEventListener('click', () => openModal(surah));
-                    surahTableBody.appendChild(row);
-                });
-            }
-
-            function filterAndRender() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const type = typeFilter.value;
-                
-                filteredData = surahData.filter(surah => {
-                    const nameMatch = surah.name.toLowerCase().includes(searchTerm);
-                    const typeMatch = type === 'all' || surah.type === type;
-                    return nameMatch && typeMatch;
-                });
-                
-                populateTable(filteredData);
-            }
-
-            function openModal(surah) {
-                modalTitle.textContent = surah.name;
-                modalAlternativeNames.textContent = `أسماء أخرى: ${surah.altNames}`;
-                modalTheme.textContent = surah.theme;
-                modalReason.textContent = surah.reason;
-                modalSira.textContent = surah.siraEvents;
-
-                if (surah.hadith && surah.hadith.text !== "لا يوجد حديث صحيح خاص بالفضل.") {
-                    modalHadith.style.display = 'block';
-                    hadithText.textContent = surah.hadith.text;
-                    hadithNarrator.textContent = surah.hadith.narrator || 'غير محدد';
-                    hadithSource.textContent = surah.hadith.source || 'غير محدد';
-                } else {
-                     modalHadith.style.display = 'none';
-                }
-
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                setTimeout(() => {
-                    modal.firstElementChild.classList.remove('scale-95');
-                    modal.classList.remove('opacity-0');
-                }, 10);
-            }
-
-            function hideModal() {
-                 modal.firstElementChild.classList.add('scale-95');
-                 modal.classList.add('opacity-0');
-                 setTimeout(() => {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                }, 300);
-            }
-
-            function setupStats() {
-                const meccanCount = surahData.filter(s => s.type === 'مكية').length;
-                const medinanCount = surahData.filter(s => s.type === 'مدنية').length;
-                const totalAyahs = surahData.reduce((sum, s) => sum + s.ayahs, 0);
-
-                totalSurahsEl.textContent = surahData.length;
-                meccanCountEl.textContent = meccanCount;
-                medinanCountEl.textContent = medinanCount;
-                ayahCountEl.textContent = totalAyahs;
-
-                return { meccanCount, medinanCount };
-            }
-
-            function setupCharts({ meccanCount, medinanCount }) {
-                const typeCtx = document.getElementById('revelationTypeChart').getContext('2d');
-                new Chart(typeCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['مكية', 'مدنية'],
-                        datasets: [{
-                            data: [meccanCount, medinanCount],
-                            backgroundColor: ['#D4AF7A', '#4A4A4A'],
-                            borderColor: '#FDFBF7',
-                            borderWidth: 4,
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    font: {
-                                        family: "'Noto Kufi Arabic', sans-serif",
-                                        size: 14,
-                                    },
-                                    color: '#4A4A4A'
-                                }
-                            }
-                        }
-                    }
-                });
-                
-                const timelineCtx = document.getElementById('revelationTimelineChart').getContext('2d');
-                const years = Array.from({length: 23}, (_, i) => i + 1);
-                const surahsPerYear = years.map(year => {
-                    const yearLabel = year <= 13 ? `${year-1} للبعثة` : `${year-13} هـ`;
-                    return surahData.filter(s => {
-                        const sYear = parseInt(s.revelationYear);
-                        if(s.type === 'مكية' && s.revelationYear.includes('لبعثة')) {
-                           const range = s.revelationYear.replace(' للبعثة', '').split('-').map(Number);
-                           return year-1 >= range[0] && year-1 <= (range[1] || range[0]);
-                        }
-                        if(s.type === 'مدنية' && s.revelationYear.includes('هـ')) {
-                           const range = s.revelationYear.replace(' هـ', '').split('-').map(Number);
-                           return year-13 >= range[0] && year-13 <= (range[1] || range[0]);
-                        }
-                        return false;
-                    }).length;
-                });
-
-                const labels = years.map(y => y <= 13 ? `${y-1} بعثة` : `${y-13} هـ`);
-                
-                new Chart(timelineCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'عدد السور النازلة',
-                            data: surahsPerYear,
-                            backgroundColor: '#D4AF7A',
-                            borderColor: '#BF9B63',
-                            borderWidth: 1,
-                            borderRadius: 5,
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: { display: true, text: 'عدد السور', font: { family: "'Noto Kufi Arabic', sans-serif" }}
-                            },
-                            x: {
-                                title: { display: true, text: 'السنة (بعثة/هجرة)', font: { family: "'Noto Kufi Arabic', sans-serif" }}
-                            }
-                        },
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                titleFont: { family: "'Noto Kufi Arabic', sans-serif" },
-                                bodyFont: { family: "'Noto Kufi Arabic', sans-serif" }
-                            }
-                        }
-                    }
-                });
-
-            }
-            
             searchInput.addEventListener('input', filterAndRender);
             typeFilter.addEventListener('change', filterAndRender);
             closeModal.addEventListener('click', hideModal);
