@@ -213,7 +213,7 @@
         <a href="#contact" class="text-2xl font-medium text-slate-300 hover:text-white transition-colors">Contact</a>
         
         <div class="flex flex-col items-center space-y-4 mt-8">
-            <a href="https://github.com/FolioZone/FolioZone/raw/main/CVs/Ayoub-Abuhamdeh-CV.pdf" download="Ayoub-Abuhamdeh-CV.pdf" class="px-6 py-3 rounded-full border border-slate-700 text-white font-medium hover:bg-slate-800/50 transition-colors">
+            <a href="https://github.com/FolioZone/FolioZone/raw/main/CVs/Ayoub-Abuhamdeh-CV.pdf" download="Ayoub-Abuhamdeh-CV.pdf" class="download-cv-btn px-6 py-3 rounded-full border border-slate-700 text-white font-medium hover:bg-slate-800/50 transition-colors">
                 <i class="fas fa-download mr-2"></i>Download CV
             </a>
             <div class="flex space-x-6">
@@ -252,7 +252,7 @@
                     <a href="#projects" class="px-6 py-3 rounded-full border border-slate-700 text-white font-medium hover:bg-slate-800/50 transition-colors">
                         View Projects
                     </a>
-                    <a href="https://github.com/FolioZone/FolioZone/raw/main/CVs/Ayoub-Abuhamdeh-CV.pdf" download="Ayoub-Abuhamdeh-CV.pdf" class="px-6 py-3 rounded-full border border-slate-700 text-white font-medium hover:bg-slate-800/50 transition-colors">
+                    <a href="https://github.com/FolioZone/FolioZone/raw/main/CVs/Ayoub-Abuhamdeh-CV.pdf" download="Ayoub-Abuhamdeh-CV.pdf" class="download-cv-btn px-6 py-3 rounded-full border border-slate-700 text-white font-medium hover:bg-slate-800/50 transition-colors">
                         <i class="fas fa-download mr-2"></i>Download CV
                     </a>
                 </div>
@@ -541,9 +541,7 @@
                                 <span>Created and customized APIs to match feature enhancements and new business logic requirements.</span>
                             </li>
                             <li class="flex items-start">
-                                <span class=
-
-$0"text-purple-400 mr-2">•</span>
+                                <span class="text-purple-400 mr-2">•</span>
                                 <span>Integrated Firebase services (Authentication, Firestore, Realtime Database, Cloud Messaging, Crashlytics, Analytics) across projects.</span>
                             </li>
                             <li class="flex items-start">
@@ -1325,6 +1323,44 @@ $0"text-purple-400 mr-2">•</span>
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
+                }
+            });
+        });
+        
+        // Force CV download functionality
+        document.querySelectorAll('.download-cv-btn').forEach(btn => {
+            btn.addEventListener('click', async function(e) {
+                e.preventDefault();
+                
+                const cvUrl = this.getAttribute('href');
+                const fileName = this.getAttribute('download') || 'Ayoub-Abuhamdeh-CV.pdf';
+                
+                try {
+                    // Fetch the PDF file
+                    const response = await fetch(cvUrl);
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    
+                    // Convert response to blob
+                    const blob = await response.blob();
+                    
+                    // Create a temporary download link
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = blobUrl;
+                    downloadLink.download = fileName;
+                    downloadLink.style.display = 'none';
+                    
+                    // Trigger download
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    
+                    // Clean up
+                    document.body.removeChild(downloadLink);
+                    window.URL.revokeObjectURL(blobUrl);
+                } catch (error) {
+                    console.error('Download failed:', error);
+                    // Fallback to opening in new tab if download fails
+                    window.open(cvUrl, '_blank');
                 }
             });
         });
