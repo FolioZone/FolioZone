@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Eng. Suhad Khalil Ali Rabaa - Consultant, Trainer & Arbitrator specializing in Engineering Contracts, Municipal Governance & Capacity Building">
+    <title>Eng. Suhad Khalil Ali Rabaa | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+/* ============================================
+   CSS Variables for Dark/Light Mode
+   ============================================ */
+:root {
+    /* Dark Mode (Default) */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #e2e8f0;
+    --text-secondary: #cbd5e1;
+    --accent: #60a5fa;
+    --accent-hover: #3b82f6;
+    --card-bg: #1e293b;
+    --card-border: #334155;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-light: rgba(255, 255, 255, 0.05);
+    --divider: #334155;
+    --overlay: rgba(15, 23, 42, 0.8);
+}
+
+[data-theme="light"] {
+    /* Light Mode */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --card-bg: #ffffff;
+    --card-border: #e0e0e0;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --divider: #e0e0e0;
+    --overlay: rgba(248, 250, 252, 0.9);
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color 0.8s ease, color 0.8s ease;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 80px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+.subsection-title {
+    font-size: 1.75rem;
+    margin: 3rem 0 2rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+/* ============================================
+   Navigation Bar
+   ============================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--card-border);
+    z-index: 999;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px var(--shadow);
+}
+
+.navbar.scrolled {
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--text-primary);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* ============================================
+   Theme Toggle
+   ============================================ */
+.theme-toggle {
+    position: fixed;
+    top: 90px;
+    right: 30px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* ============================================
+   Social Icons
+   ============================================ */
+.social-icons {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-icons a {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 120px 20px 60px;
+    background: var(--bg-primary);
+    margin-top: 70px;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(90deg, transparent 24px, var(--card-border) 25px, var(--card-border) 26px, transparent 27px, transparent 51px, var(--card-border) 52px, var(--card-border) 53px, transparent 54px),
+        linear-gradient(var(--card-border) 24px, transparent 24px);
+    background-size: 55px 55px;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+[data-theme="light"] .hero-background {
+    background-image: 
+        linear-gradient(90deg, transparent 24px, var(--card-border) 25px, var(--card-border) 26px, transparent 27px, transparent 51px, var(--card-border) 52px, var(--card-border) 53px, transparent 54px),
+        linear-gradient(var(--card-border) 24px, transparent 24px);
+    opacity: 0.15;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 1;
+    position: relative;
+    max-width: 900px;
+}
+
+.hero-image-wrapper {
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--accent);
+    box-shadow: 0 10px 30px var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.hero-image:hover {
+    transform: scale(1.05);
+}
+
+.hero-name {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.hero-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.hero-location {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.8s ease 0.5s both;
+}
+
+.hero-location i {
+    margin-right: 8px;
+    color: var(--accent);
+}
+
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 35px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
+    animation: fadeInUp 0.8s ease 0.6s both;
+}
+
+.btn-download:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(96, 165, 250, 0.4);
+    background: var(--accent-hover);
+}
+
+/* ============================================
+   Professional Summary
+   ============================================ */
+.summary-content {
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 20px;
+    border-left: 4px solid var(--accent);
+}
+
+.summary-content p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    text-align: left;
+}
+
+/* ============================================
+   Expertise Grid
+   ============================================ */
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 2rem;
+}
+
+.expertise-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.expertise-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px var(--shadow);
+    border-color: var(--accent);
+}
+
+.expertise-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.expertise-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.expertise-card p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* ============================================
+   Timeline (Experience)
+   ============================================ */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 40px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--divider);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 60px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -40px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+}
+
+.timeline-content {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+    box-shadow: 0 10px 25px var(--shadow);
+    transform: translateX(5px);
+}
+
+.timeline-date {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content h3 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.timeline-org {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-list {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.timeline-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* ============================================
+   Education
+   ============================================ */
+.education-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    transition: all 0.3s ease;
+}
+
+.education-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--shadow);
+}
+
+.education-icon {
+    font-size: 3rem;
+    color: var(--accent);
+}
+
+.education-content h3 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.education-org {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.education-year {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* ============================================
+   Certificates Gallery
+   ============================================ */
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 2rem;
+}
+
+.certificate-thumb {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    background: var(--card-bg);
+}
+
+.certificate-thumb:hover {
+    transform: scale(1.1);
+    border-color: var(--accent);
+    box-shadow: 0 10px 25px var(--shadow);
+}
+
+.certificate-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.certificate-thumb:hover img {
+    transform: scale(1.05);
+}
+
+.certificate-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 15px;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.certificate-thumb:hover .certificate-overlay {
+    opacity: 1;
+}
+
+/* ============================================
+   Certificate Modal
+   ============================================ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 16px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px var(--shadow);
+    animation: slideUp 0.5s ease-out;
+    border: 1px solid var(--card-border);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 40px;
+    text-align: center;
+}
+
+.modal-image {
+    max-width: 80vw;
+    max-height: 60vh;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.modal-info {
+    text-align: center;
+}
+
+.modal-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.modal-issuer {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.modal-year {
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* ============================================
+   Committees
+   ============================================ */
+.committees-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.committees-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.committees-list li {
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.committees-list li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+/* ============================================
+   Languages & Tools
+   ============================================ */
+.languages-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.languages-column h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.badge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.badge:hover {
+    transform: translateX(5px);
+    border-color: var(--accent);
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+.badge-icon {
+    font-size: 1.25rem;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+    border-top: 1px solid var(--divider);
+    padding: 30px 0;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 1024px) {
+    .certificates-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: var(--card-bg);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px var(--shadow);
+        padding: 2rem 0;
+        gap: 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu li {
+        padding: 1rem 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .theme-toggle {
+        top: 85px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .hero {
+        min-height: 60vh;
+        padding: 100px 20px 40px;
+    }
+
+    .hero-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .hero-name {
+        font-size: 2rem;
+    }
+
+    .hero-title {
+        font-size: 1.25rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .expertise-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline {
+        padding-left: 30px;
+    }
+
+    .timeline-item {
+        padding-left: 50px;
+    }
+
+    .timeline-marker {
+        left: -30px;
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .languages-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .social-icons {
+        bottom: 15px;
+        right: 15px;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .social-icons a {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+
+    .education-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-logo {
+        font-size: 1.25rem;
+    }
+
+    .hero {
+        min-height: 50vh;
+        padding: 90px 20px 30px;
+    }
+
+    .hero-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .hero-name {
+        font-size: 1.75rem;
+    }
+
+    .hero-title {
+        font-size: 1.1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .certificates-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-image {
+        max-width: 95vw;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">Eng. Suhad Rabaa</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#summary" class="nav-link">About</a></li>
+                <li><a href="#expertise" class="nav-link">Expertise</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#education" class="nav-link">Certifications</a></li>
+                <li><a href="#committees" class="nav-link">Committees</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Dark/Light Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <!-- Fixed Social Icons -->
+    <div class="social-icons" role="navigation" aria-label="Social media links">
+        <a href="https://wa.me/+970500000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://linkedin.com/in/placeholder" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="mailto:placeholder@example.com" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="tel:+970500000000" aria-label="Phone">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="hero-image-wrapper">
+                <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa.jpeg" alt="Eng. Suhad Khalil Ali Rabaa" class="hero-image">
+            </div>
+            <h1 class="hero-name">Eng. Suhad Khalil Ali Rabaa</h1>
+            <p class="hero-title">Consultant, Trainer & Arbitrator</p>
+            <p class="hero-subtitle">Engineering Contracts | FIDIC | Municipal Governance | Capacity Building</p>
+            <p class="hero-location"><i class="fas fa-map-marker-alt"></i> Palestine</p>
+            <a href="https://raw.githubusercontent.com/FolioZone/FolioZone/main/CVs/Suhad-Rabaa.pdf" target="_blank" rel="noopener noreferrer" class="btn-download">
+                <i class="fas fa-download"></i> Download CV
+            </a>
+        </div>
+    </section>
+
+    <!-- Professional Summary -->
+    <section class="section" id="summary">
+        <div class="container">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="summary-content">
+                <p>Senior engineering professional with over 20 years of leadership in municipal infrastructure development and public sector governance in Palestine. Pioneered systemic improvements as the first female Engineering Department Manager at Ad-Dhahiriya Municipality (2002–2021). Transitioned into private-sector consultancy and training (2021–present), specializing in FIDIC contract administration, dispute resolution, public procurement, and capacity building for engineers and municipal institutions. Proven track record in designing and delivering accredited Training of Trainers (TOT) programs, advising on tender processes, and supporting donor-funded local development initiatives. A recognized expert in translating technical engineering experience into institutional knowledge transfer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Expertise -->
+    <section class="section" id="expertise">
+        <div class="container">
+            <h2 class="section-title">Core Expertise</h2>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <div class="expertise-icon">⚙️</div>
+                    <h3>Engineering Contracts & FIDIC Administration</h3>
+                    <p>Claims, Variations, Disputes</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">🏗️</div>
+                    <h3>Municipal Project Leadership</h3>
+                    <p>Roads, water, public facilities, parks, schools, and urban services</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">📑</div>
+                    <h3>Procurement & Tenders</h3>
+                    <p>Bill of Quantities (BoQ), RFPs, bid evaluation, vendor management, and supervision</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">⚖️</div>
+                    <h3>Arbitration & Mediation</h3>
+                    <p>Commercial/Engineering case preparation, documentation, and settlement frameworks</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">👨‍🏫</div>
+                    <h3>Training & Capacity Building</h3>
+                    <p>TOT-based course design, facilitation, and coaching for senior audiences</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">📊</div>
+                    <h3>Local Development & Policy</h3>
+                    <p>Strategic planning, budgeting, and donor-funded program coordination</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021 – Present</div>
+                        <h3>Consultant, Trainer & Arbitrator</h3>
+                        <p class="timeline-org">Private Sector | Palestine & Regional</p>
+                        <ul class="timeline-list">
+                            <li>Provide expert consultancy on FIDIC contract administration, claims management, variation control, and risk allocation for public and private infrastructure projects.</li>
+                            <li>Design and deliver accredited Training of Trainers (TOT) programs for engineers, municipal staff, and NGOs on procurement, tender evaluation, FIDIC-based project management, and dispute avoidance.</li>
+                            <li>Advise on preparation and evaluation of Bill of Quantities (BoQ), RFPs, and tender documentation; support bid evaluation committees and contract award processes.</li>
+                            <li>Facilitate arbitration and mediation preparation for engineering/commercial disputes, including documentation review, settlement strategy development, and case framing.</li>
+                            <li>Support local development programs through policy advisory, project scoping, monitoring & evaluation frameworks, and donor coordination (e.g., EU, UNDP, World Bank partners).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2002 – 2021</div>
+                        <h3>Engineering Department Manager</h3>
+                        <p class="timeline-org">Ad-Dhahiriya Municipality | Ad-Dhahiriya, Hebron, Palestine</p>
+                        <ul class="timeline-list">
+                            <li>Led the Engineering Department for 19 years, overseeing end-to-end delivery of municipal infrastructure: roads, water networks, public buildings, schools, parks, and urban services.</li>
+                            <li>Served as Secretary of the Local Building & Licensing Committee, managing permitting, inspections, and compliance for all construction activities.</li>
+                            <li>Directed tender processes, contract awarding, and site supervision for 100+ projects, ensuring adherence to technical standards, safety protocols, and budget constraints.</li>
+                            <li>Coordinated with national ministries, international donors, and local councils to secure funding, align projects with development priorities, and prepare technical and financial reports.</li>
+                            <li>Designed and implemented standardized operating procedures (SOPs) for permitting, inspection, recordkeeping, and asset management — significantly improving efficiency and transparency.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certificates -->
+    <section class="section" id="education">
+        <div class="container">
+            <h2 class="section-title">Education & Certifications</h2>
+            
+            <!-- Education -->
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="education-content">
+                    <h3>B.Sc. in Civil Engineering</h3>
+                    <p class="education-org">An-Najah National University | Nablus, Palestine</p>
+                    <p class="education-year">Graduated: 2002</p>
+                </div>
+            </div>
+
+            <!-- Certifications Gallery -->
+            <div class="certificates-section">
+                <h3 class="subsection-title">Selected Certifications</h3>
+                <div class="certificates-grid" id="certificatesGrid" role="list">
+                    <!-- Certificates will be dynamically generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div class="modal" id="certificateModal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Certificate" class="modal-image">
+                <div class="modal-info">
+                    <h3 id="modalTitle" class="modal-title"></h3>
+                    <p id="modalIssuer" class="modal-issuer"></p>
+                    <p id="modalYear" class="modal-year"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Committees & Memberships -->
+    <section class="section" id="committees">
+        <div class="container">
+            <h2 class="section-title">Committees & Professional Memberships</h2>
+            <div class="committees-list">
+                <ul>
+                    <li>Member, General Assembly — Palestinian Chamber of Arbitration (Current)</li>
+                    <li>Former Member, Municipal Technical Committee</li>
+                    <li>Former Secretary, Building & Licensing Committee</li>
+                    <li>Former Member, Local Development Planning Committee</li>
+                    <li>Former Member, Tender Evaluation & Procurement Committee</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Languages & Tools -->
+    <section class="section" id="languages">
+        <div class="container">
+            <h2 class="section-title">Languages & Digital Tools</h2>
+            <div class="languages-grid">
+                <div class="languages-column">
+                    <h3>Languages</h3>
+                    <div class="badge-list">
+                        <span class="badge"><span class="badge-icon">🇵🇸</span> Arabic (Native)</span>
+                        <span class="badge"><span class="badge-icon">🇺🇸</span> English (Professional Working Proficiency)</span>
+                    </div>
+                </div>
+                <div class="languages-column">
+                    <h3>Tools</h3>
+                    <div class="badge-list">
+                        <span class="badge"><span class="badge-icon">💼</span> MS Office (Word, Excel, PowerPoint)</span>
+                        <span class="badge"><span class="badge-icon">🎨</span> Canva (Basic)</span>
+                        <span class="badge"><span class="badge-icon">☁️</span> Google Workspace</span>
+                        <span class="badge"><span class="badge-icon">🔗</span> Online Collaboration Tools</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Powered by FolioZone</p>
+        </div>
+    </footer>
+
+    <script>
+// ============================================
+// Certificate Data
+// ============================================
+const certificates = [
+    {
+        title: "FIDIC Contracts & Claims Management - Advanced Modules",
+        issuingBody: "Palestinian Chamber of Arbitration",
+        year: "2023",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate1.jpeg"
+    },
+    {
+        title: "Commercial/Engineering Arbitration",
+        issuingBody: "Palestinian Chamber of Arbitration",
+        year: "2022",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate2.jpeg"
+    },
+    {
+        title: "Training of Trainers (TOT)",
+        issuingBody: "American Board",
+        year: "2021",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate3.jpeg"
+    },
+    {
+        title: "Training of Trainers (TOT)",
+        issuingBody: "Arab Planning Institute (Kuwait)",
+        year: "2021",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate4.jpeg"
+    },
+    {
+        title: "Mediation & Dispute Resolution for Engineering/Commercial Cases",
+        issuingBody: "Accredited Institution",
+        year: "2022",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate5.jpeg"
+    },
+    {
+        title: "Import/Export & International Trade Procedures",
+        issuingBody: "Accredited Training Provider",
+        year: "2020",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate6.jpeg"
+    },
+    {
+        title: "Real Estate Valuation & Project Feasibility Essentials",
+        issuingBody: "Accredited Institution",
+        year: "2021",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate7.jpeg"
+    },
+    {
+        title: "Best Practices for Real Estate Appraisal",
+        issuingBody: "The Right and Justice Center (State of Palestine)",
+        year: "2025",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate8.jpeg"
+    },
+    {
+        title: "Municipal Governance & Strategic Planning",
+        issuingBody: "Donor-Funded Program (EU/UN-Habitat)",
+        year: "2020",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate9.jpeg"
+    },
+    {
+        title: "FIDIC Contracts - Advanced Module 2",
+        issuingBody: "Palestinian Chamber of Arbitration",
+        year: "2023",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate10.jpeg"
+    },
+    {
+        title: "FIDIC Contracts - Advanced Module 3",
+        issuingBody: "Palestinian Chamber of Arbitration",
+        year: "2023",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate11.jpeg"
+    },
+    {
+        title: "Project Management for Municipal Infrastructure",
+        issuingBody: "Local Development Institute",
+        year: "2021",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate12.jpeg"
+    },
+    {
+        title: "Public Procurement & Tender Management",
+        issuingBody: "Palestinian Ministry of Local Government",
+        year: "2020",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate13.jpeg"
+    },
+    {
+        title: "Engineering Contract Administration",
+        issuingBody: "Palestinian Engineers Association",
+        year: "2022",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate14.jpeg"
+    },
+    {
+        title: "Capacity Building for Municipal Staff",
+        issuingBody: "International Development Organization",
+        year: "2021",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate15.jpeg"
+    },
+    {
+        title: "Dispute Resolution & Arbitration Procedures",
+        issuingBody: "Palestinian Chamber of Arbitration",
+        year: "2022",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate16.jpeg"
+    },
+    {
+        title: "Strategic Planning & Budgeting",
+        issuingBody: "Local Governance Institute",
+        year: "2020",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate17.jpeg"
+    },
+    {
+        title: "Engineering Risk Management",
+        issuingBody: "Professional Development Center",
+        year: "2021",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate18.jpeg"
+    },
+    {
+        title: "Municipal Infrastructure Development",
+        issuingBody: "Urban Planning Institute",
+        year: "2020",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate19.jpeg"
+    },
+    {
+        title: "Advanced Training Techniques",
+        issuingBody: "Educational Excellence Center",
+        year: "2021",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate20.jpeg"
+    },
+    {
+        title: "Contract Law & Legal Framework",
+        issuingBody: "Legal Studies Institute",
+        year: "2022",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate21.jpeg"
+    },
+    {
+        title: "Quality Assurance in Construction Projects",
+        issuingBody: "Engineering Quality Institute",
+        year: "2021",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate22.jpeg"
+    },
+    {
+        title: "Leadership & Management in Public Sector",
+        issuingBody: "Public Administration Institute",
+        year: "2020",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate23.jpeg"
+    },
+    {
+        title: "Sustainable Development & Environmental Planning",
+        issuingBody: "Environmental Studies Center",
+        year: "2021",
+        image: "https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa/Certificate24.jpeg"
+    }
+];
+
+// ============================================
+// Dark/Light Mode Toggle
+// ============================================
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const html = document.documentElement;
+
+// Check for saved theme preference or default to dark mode
+const currentTheme = localStorage.getItem('theme') || 'dark';
+html.setAttribute('data-theme', currentTheme);
+updateThemeIcon(currentTheme);
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+});
+
+function updateThemeIcon(theme) {
+    if (theme === 'dark') {
+        themeIcon.className = 'fas fa-moon';
+    } else {
+        themeIcon.className = 'fas fa-sun';
+    }
+}
+
+// ============================================
+// Intersection Observer for Scroll Animations
+// ============================================
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+// Observe all sections
+document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
+});
+
+// ============================================
+// Certificate Gallery Generation
+// ============================================
+const certificatesGrid = document.getElementById('certificatesGrid');
+
+function generateCertificateThumbs() {
+    certificates.forEach((cert, index) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'certificate-thumb';
+        thumb.setAttribute('role', 'listitem');
+        thumb.setAttribute('tabindex', '0');
+        thumb.setAttribute('aria-label', `View certificate: ${cert.title}`);
+        
+        thumb.innerHTML = `
+            <img src="${cert.image}" alt="${cert.title}" loading="lazy">
+            <div class="certificate-overlay">${cert.title}</div>
+        `;
+        
+        thumb.addEventListener('click', () => openModal(index));
+        thumb.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openModal(index);
+            }
+        });
+        
+        certificatesGrid.appendChild(thumb);
+    });
+}
+
+// Initialize certificate gallery
+generateCertificateThumbs();
+
+// ============================================
+// Certificate Modal
+// ============================================
+const modal = document.getElementById('certificateModal');
+const modalBackdrop = document.getElementById('modalBackdrop');
+const modalClose = document.getElementById('modalClose');
+const modalImage = document.getElementById('modalImage');
+const modalTitle = document.getElementById('modalTitle');
+const modalIssuer = document.getElementById('modalIssuer');
+const modalYear = document.getElementById('modalYear');
+
+function openModal(index) {
+    const cert = certificates[index];
+    
+    modalImage.src = cert.image;
+    modalImage.alt = cert.title;
+    modalTitle.textContent = cert.title;
+    modalIssuer.textContent = cert.issuingBody;
+    modalYear.textContent = cert.year;
+    
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    
+    // Focus management for accessibility
+    modalClose.focus();
+}
+
+function closeModal() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+}
+
+// Close modal events
+modalClose.addEventListener('click', closeModal);
+modalBackdrop.addEventListener('click', closeModal);
+
+// ESC key to close modal
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// ============================================
+// Smooth Scroll for Navigation Links
+// ============================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// ============================================
+// Navigation Bar Functionality
+// ============================================
+const navbar = document.getElementById('navbar');
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+const navLinks = document.querySelectorAll('.nav-link');
+
+// Navbar scroll effect
+if (navbar) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+}
+
+// Mobile menu toggle
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (navbar && !navbar.contains(e.target) && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        }
+    });
+}
+
+// ============================================
+// Initialize on DOM Load
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Add visible class to hero immediately
+    const hero = document.getElementById('hero');
+    if (hero) {
+        hero.style.opacity = '1';
+    }
+    
+    // Ensure first section is visible on load
+    const firstSection = document.querySelector('.section');
+    if (firstSection && window.innerHeight > 0) {
+        const rect = firstSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+            firstSection.classList.add('visible');
+        }
+    }
+});
+    </script>
+</body>
+</html>
