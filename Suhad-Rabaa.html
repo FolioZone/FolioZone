@@ -277,6 +277,46 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
+   Back to Top Button
+   ============================================ */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px) scale(1.1);
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
+}
+
+/* ============================================
    Hero Section
    ============================================ */
 .hero {
@@ -552,6 +592,77 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
+   Key Projects
+   ============================================ */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.3s ease;
+    position: relative;
+    border-left: 4px solid var(--accent);
+}
+
+.project-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px var(--shadow);
+    border-color: var(--accent);
+}
+
+.project-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.project-partners {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+}
+
+.project-role {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.project-value {
+    display: inline-block;
+    background: var(--card-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-left: 8px;
+}
+
+.project-description {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-top: 0.75rem;
+}
+
+/* ============================================
    Education
    ============================================ */
 .education-card {
@@ -768,19 +879,36 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   Committees
+   Committees & Memberships
    ============================================ */
-.committees-list {
-    max-width: 800px;
+.memberships-container {
+    max-width: 900px;
     margin: 0 auto;
 }
 
-.committees-list ul {
+.memberships-section {
+    margin-bottom: 3rem;
+}
+
+.memberships-section:last-child {
+    margin-bottom: 0;
+}
+
+.memberships-section h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    text-align: center;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--divider);
+}
+
+.memberships-list {
     list-style: none;
     padding: 0;
 }
 
-.committees-list li {
+.memberships-list li {
     padding: 15px 20px;
     margin-bottom: 12px;
     background: var(--card-bg);
@@ -789,11 +917,232 @@ h1, h2, h3, h4, h5, h6 {
     border-left: 4px solid var(--accent);
     color: var(--text-primary);
     transition: all 0.3s ease;
+    line-height: 1.6;
 }
 
-.committees-list li:hover {
+.memberships-list li:hover {
     transform: translateX(5px);
     box-shadow: 0 5px 15px var(--shadow);
+}
+
+.memberships-list li::before {
+    content: '•';
+    color: var(--accent);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-right: 0.5em;
+}
+
+/* ============================================
+   Honors & Awards
+   ============================================ */
+.awards-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.award-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--accent);
+    position: relative;
+}
+
+.award-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--shadow);
+    border-color: var(--accent);
+}
+
+.award-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.award-issuer {
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.award-year {
+    display: inline-block;
+    background: var(--card-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.award-description {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-top: 0.75rem;
+}
+
+/* ============================================
+   Professional Certifications & Achievements
+   ============================================ */
+.certifications-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.certification-category {
+    margin-bottom: 4rem;
+}
+
+.certification-category:last-child {
+    margin-bottom: 0;
+}
+
+.certification-category-title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    text-align: left;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--accent);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.certification-category-title::before {
+    font-size: 1.5rem;
+}
+
+/* Different icons for each category */
+.certification-category:nth-child(1) .certification-category-title::before {
+    content: '⚖️';
+}
+
+.certification-category:nth-child(2) .certification-category-title::before {
+    content: '📋';
+}
+
+.certification-category:nth-child(3) .certification-category-title::before {
+    content: '👨‍🏫';
+}
+
+.certification-category:nth-child(4) .certification-category-title::before {
+    content: '🌟';
+}
+
+.certification-category:nth-child(5) .certification-category-title::before {
+    content: '🏠';
+}
+
+.certification-category:nth-child(6) .certification-category-title::before {
+    content: '👥';
+}
+
+.certification-category:nth-child(7) .certification-category-title::before {
+    content: '🏆';
+}
+
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.certification-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--accent);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.certification-item::before {
+    content: '✓';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+.certification-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px var(--shadow);
+    border-color: var(--accent);
+    border-left-width: 5px;
+}
+
+.certification-item:hover::before {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.certification-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.5;
+    padding-right: 40px;
+    margin-bottom: 4px;
+}
+
+.certification-issuer {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.certification-issuer::before {
+    content: '🏢';
+    font-size: 0.875rem;
+}
+
+.certification-details {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 4px;
+    padding: 6px 12px;
+    background: rgba(96, 165, 250, 0.1);
+    border-radius: 20px;
+    width: fit-content;
+}
+
+.certification-details::before {
+    content: '📍';
+    font-size: 0.75rem;
 }
 
 /* ============================================
@@ -852,6 +1201,18 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     color: #94a3b8;
     font-size: 0.875rem;
+}
+
+.footer a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.footer a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
 }
 
 /* ============================================
@@ -964,6 +1325,71 @@ h1, h2, h3, h4, h5, h6 {
         grid-template-columns: 1fr;
     }
 
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .project-card {
+        padding: 24px;
+    }
+
+    .project-title {
+        font-size: 1.25rem;
+    }
+
+    .award-card {
+        padding: 24px;
+    }
+
+    .award-title {
+        font-size: 1.25rem;
+    }
+
+    .certifications-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .certification-category {
+        margin-bottom: 3rem;
+    }
+
+    .certification-category-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .certification-category-title::before {
+        font-size: 1.25rem;
+    }
+
+    .certification-item {
+        padding: 20px;
+    }
+
+    .certification-item::before {
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+        top: 18px;
+        right: 18px;
+    }
+
+    .certification-name {
+        font-size: 1.05rem;
+        padding-right: 35px;
+    }
+
+    .certification-issuer {
+        font-size: 0.9rem;
+    }
+
+    .certification-details {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+
     .timeline {
         padding-left: 30px;
     }
@@ -1041,6 +1467,14 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .social-icons a {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+
+    .back-to-top {
+        bottom: 15px;
+        left: 15px;
         width: 45px;
         height: 45px;
         font-size: 1.1rem;
@@ -1155,8 +1589,11 @@ h1, h2, h3, h4, h5, h6 {
                 <li><a href="#summary" class="nav-link">About</a></li>
                 <li><a href="#expertise" class="nav-link">Expertise</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#education" class="nav-link">Certifications</a></li>
+                <li><a href="#certifications" class="nav-link">Professional Certifications</a></li>
                 <li><a href="#committees" class="nav-link">Committees</a></li>
+                <li><a href="#honors" class="nav-link">Honors & Awards</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span>
@@ -1176,7 +1613,7 @@ h1, h2, h3, h4, h5, h6 {
         <a href="https://wa.me/+970500000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="https://linkedin.com/in/placeholder" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/suhad-rabaa/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <i class="fab fa-linkedin"></i>
         </a>
         <a href="mailto:placeholder@example.com" aria-label="Email">
@@ -1187,6 +1624,11 @@ h1, h2, h3, h4, h5, h6 {
         </a>
     </div>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-background"></div>
@@ -1195,8 +1637,8 @@ h1, h2, h3, h4, h5, h6 {
                 <img src="https://raw.githubusercontent.com/FolioZone/FolioZone/main/Users/Suhad-Rabaa.jpeg" alt="Eng. Suhad Khalil Ali Rabaa" class="hero-image">
             </div>
             <h1 class="hero-name">Eng. Suhad Khalil Ali Rabaa</h1>
-            <p class="hero-title">Consultant, Trainer & Arbitrator</p>
-            <p class="hero-subtitle">Engineering Contracts | FIDIC | Municipal Governance | Capacity Building</p>
+            <p class="hero-title">Civil Engineer | Certified Contracts Arbitrator & Commercial Mediator </p>
+            <p class="hero-subtitle">FIDIC Disputes & Claims Expert | Real Estate Valuation Specialist | Certified Entrepreneurship & TOT Trainer | Former Municipal Engineering Director | Sustainable Development Leader</p>
             <p class="hero-location"><i class="fas fa-map-marker-alt"></i> Palestine</p>
             <a href="https://raw.githubusercontent.com/FolioZone/FolioZone/main/CVs/Suhad-Rabaa.pdf" target="_blank" rel="noopener noreferrer" class="btn-download">
                 <i class="fas fa-download"></i> Download CV
@@ -1209,7 +1651,31 @@ h1, h2, h3, h4, h5, h6 {
         <div class="container">
             <h2 class="section-title">Professional Summary</h2>
             <div class="summary-content">
-                <p>Senior engineering professional with over 20 years of leadership in municipal infrastructure development and public sector governance in Palestine. Pioneered systemic improvements as the first female Engineering Department Manager at Ad-Dhahiriya Municipality (2002–2021). Transitioned into private-sector consultancy and training (2021–present), specializing in FIDIC contract administration, dispute resolution, public procurement, and capacity building for engineers and municipal institutions. Proven track record in designing and delivering accredited Training of Trainers (TOT) programs, advising on tender processes, and supporting donor-funded local development initiatives. A recognized expert in translating technical engineering experience into institutional knowledge transfer.</p>
+                
+                <p style="margin-bottom: 1.5rem;">
+                    Civil Engineer and Municipal Development Leader with over 18 years of experience in urban planning, infrastructure development, and public projects management in complex and resource-constrained environments. I served as the Director of engineering and planning department at Al-Dhahiriya Municipality, and as the first female engineer in the history of both the municipality and the city of Al-Dhahiriya.
+                </p>
+                
+                <p style="margin-bottom: 1.5rem;">
+                    Throughout my career, I led and supervised the delivery of large-scale municipal infrastructure projects with direct socio-economic and developmental impact, including roads, utilities, public buildings, and community facilities. I also served as a member of operational planning committees, contributing to the preparation of execution and sustainability plans that ensured the effective translation of strategic visions into implementable projects.
+                </p>
+                
+                <p style="margin-bottom: 1.5rem;">
+                    I played a key leadership role in the successful implementation of the Historic Centers Revitalization Program, executed in partnership with the Belgian Government, Enabel, and the Palestinian Ministry of Local Government. Serving as the Project Manager for Al-Dhahiriya City, I managed a development project valued at USD 1.25 million, focused on urban heritage revitalization, infrastructure upgrading, and sustainable local development.
+                </p>
+                
+                <p style="margin-bottom: 1.5rem;">
+                    Currently, I am a Certified Engineering Contracts Arbitrator, an engineering and management consultant, and an entrepreneur in sustainable development and capacity building. I hold multiple professional certifications in arbitration, project management, and Training of Trainers (TOT), and I have actively contributed to institutional strengthening and workforce development programs.
+                </p>
+                
+                <p style="margin-bottom: 1.5rem;">
+                    <strong>My career is marked by pioneering leadership, women’s empowerment in engineering and public service, and the ability to transform municipal projects into practical tools for sustainable development.</strong>
+                </p>
+                
+                <p style="margin-bottom: 0;">
+                    <em>I firmly believe that leadership is a responsibility before it is a position, and that true success is measured by long-term, people-centered impact. After an accomplished career in local government, I continue today to contribute through arbitration, consultancy, training, and entrepreneurship, at both national and international levels.</em>
+                </p>
+    
             </div>
         </div>
     </section>
@@ -1281,16 +1747,75 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-date">2002 – 2021</div>
-                        <h3>Engineering Department Manager</h3>
+                        <h3>Director of engineering and planning department</h3>
                         <p class="timeline-org">Ad-Dhahiriya Municipality | Ad-Dhahiriya, Hebron, Palestine</p>
                         <ul class="timeline-list">
-                            <li>Led the Engineering Department for 19 years, overseeing end-to-end delivery of municipal infrastructure: roads, water networks, public buildings, schools, parks, and urban services.</li>
+                            <li>Led the engineering and planning department for 19 years, overseeing end-to-end delivery of municipal infrastructure: roads, water networks, public buildings, schools, parks, and urban services.</li>
                             <li>Served as Secretary of the Local Building & Licensing Committee, managing permitting, inspections, and compliance for all construction activities.</li>
                             <li>Directed tender processes, contract awarding, and site supervision for 100+ projects, ensuring adherence to technical standards, safety protocols, and budget constraints.</li>
                             <li>Coordinated with national ministries, international donors, and local councils to secure funding, align projects with development priorities, and prepare technical and financial reports.</li>
                             <li>Designed and implemented standardized operating procedures (SOPs) for permitting, inspection, recordkeeping, and asset management — significantly improving efficiency and transparency.</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Projects -->
+    <section class="section" id="projects">
+        <div class="container">
+            <h2 class="section-title">Key Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Historic Centers Revitalization Program – Al-Dhahiriya City</h3>
+                    <p class="project-partners">Partners: Belgian Government | Enabel | Palestinian Ministry of Local Government</p>
+                    <span class="project-role">Project Manager</span>
+                    <span class="project-value">Value: USD 1.25 Million</span>
+                    <p class="project-description">Led the full implementation of the program focusing on urban heritage preservation, infrastructure upgrading, and sustainable local economic development in coordination with international donors and government institutions.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Central Halal Market – First of Its Kind in the West Bank</h3>
+                    <p class="project-partners">Partners: Ministry of Agriculture | FAO</p>
+                    <span class="project-role">Director of Engineering & Planning | Project Manager</span>
+                    <p class="project-description">Led the engineering supervision and participated in the operational planning of the first Central Halal Market in the West Bank, supporting food security, regulated livestock trading, and public health standards.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Al-Dhahiriya Public Park & Amusement Park</h3>
+                    <span class="project-role">Director of Engineering & Planning | Project Manager</span>
+                    <p class="project-description">Led the planning, supervision, and implementation of the city's first integrated recreational facility.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">College of Da'wah & Fundamentals of Religion</h3>
+                    <span class="project-role">Director of Engineering & Planning | Project Manager</span>
+                    <p class="project-description">Supervised the planning, licensing, and implementation of the academic facility in compliance with urban planning standards.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Safe Maternity Center – Initial Development Phase</h3>
+                    <span class="project-role">Director of Engineering & Planning</span>
+                    <p class="project-description">Led the concept design and initial planning phase of the Safe Maternity Center to improve maternal healthcare services.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Municipal Roads, Schools & Service Centers Program</h3>
+                    <span class="project-role">Director of Engineering & Planning | Project Manager</span>
+                    <p class="project-description">Led roads, schools, and municipal facilities projects serving over 35,000 residents, including the Tal Al-Hilal Al-Ahmar Center.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Engineering Contracts, Arbitration & FIDIC Disputes Support</h3>
+                    <span class="project-role">Certified Arbitrator & Consultant</span>
+                    <p class="project-description">Provided professional support in FIDIC claims, engineering contract disputes, and commercial mediation.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Entrepreneurship, Leadership & Capacity Building Programs</h3>
+                    <span class="project-role">Certified Trainer & TOT Facilitator</span>
+                    <p class="project-description">Delivered training in entrepreneurship, leadership, communication, and youth & women empowerment.</p>
                 </div>
             </div>
         </div>
@@ -1335,7 +1860,6 @@ h1, h2, h3, h4, h5, h6 {
                 <div class="modal-info">
                     <h3 id="modalTitle" class="modal-title"></h3>
                     <p id="modalIssuer" class="modal-issuer"></p>
-                    <p id="modalYear" class="modal-year"></p>
                 </div>
             </div>
         </div>
@@ -1344,15 +1868,250 @@ h1, h2, h3, h4, h5, h6 {
     <!-- Committees & Memberships -->
     <section class="section" id="committees">
         <div class="container">
-            <h2 class="section-title">Committees & Professional Memberships</h2>
-            <div class="committees-list">
-                <ul>
-                    <li>Member, General Assembly — Palestinian Chamber of Arbitration (Current)</li>
-                    <li>Former Member, Municipal Technical Committee</li>
-                    <li>Former Secretary, Building & Licensing Committee</li>
-                    <li>Former Member, Local Development Planning Committee</li>
-                    <li>Former Member, Tender Evaluation & Procurement Committee</li>
-                </ul>
+            <h2 class="section-title">Professional Memberships & Committees</h2>
+            <div class="memberships-container">
+                <!-- Current Memberships -->
+                <div class="memberships-section">
+                    <h3>Current Memberships</h3>
+                    <ul class="memberships-list">
+                        <li>Active Member – Palestinian Engineers Association (Palestine)</li>
+                        <li>Active Member – Jordan Engineers Association (Jordan)</li>
+                        <li>Founding General Assembly Member – Palestinian International Arbitration Chamber (PIAC), Palestine</li>
+                    </ul>
+                </div>
+
+                <!-- Former Committees & Public Roles -->
+                <div class="memberships-section">
+                    <h3>Former Committees & Public Roles</h3>
+                    <ul class="memberships-list">
+                        <li>Former Member – Strategic Planning Committee, Hebron Governorate – Palestine</li>
+                        <li>Former Member – Employment Council, Hebron Governorate – Palestine</li>
+                        <li>Former Member – Traffic Committee, Hebron Governorate – Palestine</li>
+                        <li>Former Participant – Women & Leadership Community Programs, USAID & Injaz Palestine</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Honors & Awards -->
+    <section class="section" id="honors">
+        <div class="container">
+            <h2 class="section-title">Honors & Awards</h2>
+            <div class="awards-container">
+                <div class="award-card">
+                    <h3 class="award-title">Official Letters of Appreciation – Al-Dhahiriya Municipality</h3>
+                    <p class="award-description">Multiple official recognition letters issued by Al-Dhahiriya Municipality in recognition of outstanding leadership, engineering supervision, and contributions to municipal development, public services, and infrastructure projects.</p>
+                </div>
+
+                <div class="award-card">
+                    <h3 class="award-title">Certificate of Excellence – Arab Planning Institute (Kuwait)</h3>
+                    <p class="award-issuer">Arab Planning Institute</p>
+                    <p class="award-description">Awarded for distinction in the Local Development Policies Program, in recognition of excellence in local development planning, public policy, and sustainable municipal development.</p>
+                </div>
+
+                <div class="award-card">
+                    <h3 class="award-title">Certificate of Appreciation – National Forum for Historic Centers Revitalization</h3>
+                    <p class="award-issuer">National Forum for Historic Centers Revitalization</p>
+                    <span class="award-year">2019</span>
+                    <p class="award-description">Awarded for contributions to the Historic Centers Revitalization Program and efforts in urban heritage preservation and sustainable local development.</p>
+                </div>
+
+                <div class="award-card">
+                    <h3 class="award-title">Recognition – Women & Leadership Programs (USAID & Injaz Palestine)</h3>
+                    <p class="award-issuer">USAID & Injaz Palestine</p>
+                    <p class="award-description">Recognized for active participation and impact in women's leadership, empowerment, and community engagement programs.</p>
+                </div>
+
+                <div class="award-card">
+                    <h3 class="award-title">Professional Recognition – Palestinian International Arbitration Chamber (PIAC)</h3>
+                    <p class="award-issuer">Palestinian International Arbitration Chamber (PIAC)</p>
+                    <p class="award-description">Recognition for contributions to the development and promotion of arbitration and alternative dispute resolution practices in Palestine.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Certifications & Achievements -->
+    <section class="section" id="certifications">
+        <div class="container">
+            <h2 class="section-title">Professional Certifications & Achievements</h2>
+            <div class="certifications-container">
+                
+                <!-- Arbitration & Dispute Resolution -->
+                <div class="certification-category">
+                    <h3 class="certification-category-title">Arbitration & Dispute Resolution</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">
+                            <div class="certification-name">Accredited International Commercial Arbitrator</div>
+                            <div class="certification-issuer">Palestinian International Arbitration Chamber (PIAC)</div>
+                            <div class="certification-details">Palestine</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Domestic & International Arbitration – Basic Module (70 Hours)</div>
+                            <div class="certification-issuer">PIAC</div>
+                            <div class="certification-details">Ramallah (2014)</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Commercial Mediation Program</div>
+                            <div class="certification-issuer">Gulf Finder – Mohammed Abu Awwad</div>
+                            <div class="certification-details">Palestine</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Dispute Resolution in Engineering Contracts (FIDIC)</div>
+                            <div class="certification-issuer">Right & Justice Center</div>
+                            <div class="certification-details">Palestine</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Alternative Dispute Resolution</div>
+                            <div class="certification-issuer">Right & Justice Center</div>
+                            <div class="certification-details">Palestine</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FIDIC & Engineering Contracts -->
+                <div class="certification-category">
+                    <h3 class="certification-category-title">FIDIC & Engineering Contracts</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">
+                            <div class="certification-name">FIDIC – Management of Claims & Dispute Resolution</div>
+                            <div class="certification-issuer">FIDIC / Engineers Association</div>
+                            <div class="certification-details">Ramallah (2013)</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">FIDIC Construction Contracts Management (36 Hours)</div>
+                            <div class="certification-issuer">Right & Justice Center</div>
+                            <div class="certification-details">Palestine (2025)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training, Entrepreneurship & Coaching -->
+                <div class="certification-category">
+                    <h3 class="certification-category-title">Training, Entrepreneurship & Coaching</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">
+                            <div class="certification-name">TOT in Entrepreneurship</div>
+                            <div class="certification-issuer">Arab Planning Institute</div>
+                            <div class="certification-details">Kuwait</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Training of Trainers (TOT) - Professional Trainer</div>
+                            <div class="certification-issuer">American Board for Training & Development</div>
+                            <div class="certification-details">USA</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Certified Professional Trainer (TOT)</div>
+                            <div class="certification-issuer">California College LLC</div>
+                            <div class="certification-details">USA</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Certified Business Trainer</div>
+                            <div class="certification-issuer">California College LLC</div>
+                            <div class="certification-details">USA (2015)</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">NLP Diploma – Neuro Linguistic Programming</div>
+                            <div class="certification-issuer">Smart Mind Center / California College</div>
+                            <div class="certification-details">(2015)</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Life Coach Certificate</div>
+                            <div class="certification-issuer"></div>
+                            <div class="certification-details">(2015)</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Advanced Communication Skills</div>
+                            <div class="certification-issuer"></div>
+                            <div class="certification-details"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leadership & International Development -->
+                <div class="certification-category">
+                    <h3 class="certification-category-title">Leadership & International Development</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">
+                            <div class="certification-name">Business Performance Improvement Workshop</div>
+                            <div class="certification-issuer">USAID / ENASH Project</div>
+                            <div class="certification-details">(2006)</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Leadership Excellence Camp</div>
+                            <div class="certification-issuer">Moataz Mashal</div>
+                            <div class="certification-details">Sharm El-Sheikh</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Women & Leadership Program</div>
+                            <div class="certification-issuer">USAID + Injaz Palestine</div>
+                            <div class="certification-details">Palestine</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real Estate -->
+                <div class="certification-category">
+                    <h3 class="certification-category-title">Real Estate</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">
+                            <div class="certification-name">Best Practices in Real Estate Valuation</div>
+                            <div class="certification-issuer"></div>
+                            <div class="certification-details">Grade: Very Good</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Official Memberships (Former & Current) -->
+                <div class="certification-category">
+                    <h3 class="certification-category-title">Official Memberships (Former & Current)</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">
+                            <div class="certification-name">Founding Administrative Member</div>
+                            <div class="certification-issuer">Palestinian Arbitration Chamber</div>
+                            <div class="certification-details"></div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Strategic Planning Committee</div>
+                            <div class="certification-issuer">Hebron Governorate</div>
+                            <div class="certification-details">Former Member</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Employment Council</div>
+                            <div class="certification-issuer">Hebron Governorate</div>
+                            <div class="certification-details">Former Member</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Traffic Committee</div>
+                            <div class="certification-issuer">Hebron Governorate</div>
+                            <div class="certification-details">Former Member</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Projects & Honors -->
+                <div class="certification-category">
+                    <h3 class="certification-category-title">Key Projects & Honors</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">
+                            <div class="certification-name">Project Manager: Historic Centers Revitalization Program (Al-Dhahiriya)</div>
+                            <div class="certification-issuer">Partners: Belgian Government, Enabel, Ministry of Local Government</div>
+                            <div class="certification-details">Value: $1.25 Million</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Official Appreciation Letters</div>
+                            <div class="certification-issuer">Al-Dhahiriya Municipality</div>
+                            <div class="certification-details">Multiple</div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-name">Certificate of Appreciation</div>
+                            <div class="certification-issuer">National Forum for Historic Centers Revitalization</div>
+                            <div class="certification-details">Palestine (2019)</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1385,7 +2144,7 @@ h1, h2, h3, h4, h5, h6 {
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>Powered by FolioZone</p>
+            <p>Powered by <a href="https://www.folio-zone.com" target="_blank" rel="noopener noreferrer">FolioZone</a></p>
         </div>
     </footer>
 
@@ -1632,7 +2391,6 @@ const modalClose = document.getElementById('modalClose');
 const modalImage = document.getElementById('modalImage');
 const modalTitle = document.getElementById('modalTitle');
 const modalIssuer = document.getElementById('modalIssuer');
-const modalYear = document.getElementById('modalYear');
 
 function openModal(index) {
     const cert = certificates[index];
@@ -1641,7 +2399,6 @@ function openModal(index) {
     modalImage.alt = cert.title;
     modalTitle.textContent = cert.title;
     modalIssuer.textContent = cert.issuingBody;
-    modalYear.textContent = cert.year;
     
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
@@ -1724,6 +2481,30 @@ if (navToggle && navMenu) {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
         }
+    });
+}
+
+// ============================================
+// Back to Top Button
+// ============================================
+const backToTopButton = document.getElementById('backToTop');
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTopButton.classList.add('show');
+    } else {
+        backToTopButton.classList.remove('show');
+    }
+});
+
+// Scroll to top when button is clicked
+if (backToTopButton) {
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 }
 
